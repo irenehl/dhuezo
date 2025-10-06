@@ -84,8 +84,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         accent: palette.accent_color,
         background: palette.background_color,
         text: palette.text_color,
-        muted: palette.muted || '#1f2937',
-        border: palette.border || '#334155',
+        muted: '#1f2937', // Default muted color
+        border: '#334155', // Default border color
       }
     } else {
       console.error('Invalid palette structure:', palette)

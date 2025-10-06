@@ -25,7 +25,7 @@ export function PaletteCard({ palette, index }: PaletteCardProps) {
     applyPalette(palette)
     
     // Track palette application from dropdown
-    trackPaletteApply(palette.id, 'dropdown')
+    trackPaletteApply(palette.id || 'unknown', 'dropdown')
     
     setIsApplied(true)
     toast({ title: '¡Paleta aplicada!', description: `"${palette.prompt}" ahora es tu tema activo` })
