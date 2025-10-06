@@ -11,7 +11,24 @@ export async function createClient() {
       auth: {
         exchangeCodeForSession: () => Promise.resolve({ data: null, error: null }),
         getUser: () => Promise.resolve({ data: { user: null }, error: null })
-      }
+      },
+      from: () => ({
+        select: () => ({
+          eq: () => ({ data: [], error: null, count: 0 }),
+          not: () => ({ data: [], error: null, count: 0 }),
+          ilike: () => ({ data: [], error: null }),
+          order: () => ({ data: [], error: null }),
+          limit: () => ({ data: [], error: null }),
+          range: () => ({ data: [], error: null, count: 0 }),
+          single: () => ({ data: null, error: null }),
+          data: [],
+          error: null,
+          count: 0
+        }),
+        insert: () => ({ select: () => ({ single: () => ({ data: null, error: null }) }) }),
+        update: () => ({ eq: () => ({ select: () => ({ single: () => ({ data: null, error: null }) }) }) }),
+        delete: () => ({ eq: () => ({ data: null, error: null }) }),
+      }),
     } as any
   }
 
@@ -51,7 +68,21 @@ export async function createClient() {
         getUser: () => Promise.resolve({ data: { user: null }, error: null })
       },
       from: () => ({
+        select: () => ({
+          eq: () => ({ data: [], error: null, count: 0 }),
+          not: () => ({ data: [], error: null, count: 0 }),
+          ilike: () => ({ data: [], error: null }),
+          order: () => ({ data: [], error: null }),
+          limit: () => ({ data: [], error: null }),
+          range: () => ({ data: [], error: null, count: 0 }),
+          single: () => ({ data: null, error: null }),
+          data: [],
+          error: null,
+          count: 0
+        }),
         insert: () => ({ select: () => ({ single: () => ({ data: null, error: null }) }) }),
+        update: () => ({ eq: () => ({ select: () => ({ single: () => ({ data: null, error: null }) }) }) }),
+        delete: () => ({ eq: () => ({ data: null, error: null }) }),
       }),
     } as any
   }
