@@ -393,7 +393,9 @@ export function BlogImageCarouselUploader({
           >
             <input
               ref={(el) => {
-                fileInputRef.current = el
+                // Use type assertion to allow assignment
+                const ref = fileInputRef as React.MutableRefObject<HTMLInputElement | null>
+                ref.current = el
                 if (el) {
                   // Explicitly set multiple attribute
                   el.setAttribute('multiple', '')

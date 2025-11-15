@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { visit } from 'unist-util-visit'
-import type { Root, Paragraph, Image } from 'mdast'
+import type { Root, Paragraph, Image as ImageNode } from 'mdast'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Button } from '@/components/ui/button'
@@ -25,7 +25,7 @@ function remarkUnwrapImages() {
         node.children[0].type === 'image'
       ) {
         // Replace paragraph with just the image
-        parent.children[index] = node.children[0] as Image
+        parent.children[index] = node.children[0] as ImageNode
       }
     })
   }
