@@ -47,3 +47,5 @@ export interface SharedImage {
   caption: string | null
   created_at: string
 }
+
+export * from './blog'

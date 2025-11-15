@@ -55,7 +55,7 @@ export function StatsCounter({ stats, animate = true, className = '' }: StatsCou
   }, [isInView, animate, stats])
 
   return (
-    <div ref={ref} className={`grid grid-cols-3 gap-6 ${className}`}>
+    <div ref={ref} className={`grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 ${className}`}>
       {stats.map((stat, index) => (
         <motion.div
           key={stat.label}
@@ -65,7 +65,7 @@ export function StatsCounter({ stats, animate = true, className = '' }: StatsCou
           transition={{ delay: index * 0.1, duration: 0.6 }}
         >
           <motion.div
-            className="text-3xl lg:text-4xl font-bold bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent"
             style={{
               backgroundImage: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))',
             }}
@@ -74,7 +74,7 @@ export function StatsCounter({ stats, animate = true, className = '' }: StatsCou
             {counts[index]}{stat.suffix}
           </motion.div>
           <motion.div
-            className="text-sm text-muted-foreground mt-1"
+            className="text-xs sm:text-sm text-muted-foreground mt-1"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}

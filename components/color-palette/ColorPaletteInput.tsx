@@ -108,7 +108,7 @@ export function ColorPaletteInput() {
 
   return (
     <div className="space-y-4">
-      <form onSubmit={handleGenerate} className="flex gap-2">
+      <form onSubmit={handleGenerate} className="flex flex-col sm:flex-row gap-2">
         <Input
           type="text"
           placeholder={t('colorPalette.promptPlaceholder')}
@@ -117,24 +117,27 @@ export function ColorPaletteInput() {
           disabled={isLoading}
           className="flex-1"
         />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              {t('common.generating')}
-            </>
-          ) : (
-            <>
-              <Sparkles className="mr-2 h-4 w-4" />
-              {t('common.generate')}
-            </>
-          )}
-        </Button>
-        {isCustomTheme && (
-          <Button type="button" variant="outline" onClick={handleReset} disabled={isLoading}>
-            <RotateCcw className="h-4 w-4" />
+        <div className="flex gap-2">
+          <Button type="submit" disabled={isLoading} className="flex-1 sm:flex-none">
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <span className="hidden sm:inline">{t('common.generating')}</span>
+                <span className="sm:hidden">{t('common.generate')}</span>
+              </>
+            ) : (
+              <>
+                <Sparkles className="mr-2 h-4 w-4" />
+                {t('common.generate')}
+              </>
+            )}
           </Button>
-        )}
+          {isCustomTheme && (
+            <Button type="button" variant="outline" onClick={handleReset} disabled={isLoading}>
+              <RotateCcw className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
       </form>
 
       <AnimatePresence>

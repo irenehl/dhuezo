@@ -43,7 +43,7 @@ export function Header() {
           borderBottomColor: isScrolled ? 'hsl(var(--border))' : 'transparent',
         }}
       >
-        <div className="container mx-auto px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Logo />

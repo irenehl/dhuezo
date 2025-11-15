@@ -28,7 +28,7 @@ export function PaletteSearch({ onSearch, onFilterChange, currentFilter }: Palet
   return (
     <div className="space-y-4">
       {/* Search Bar */}
-      <form onSubmit={handleSearch} className="flex gap-2">
+      <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
@@ -48,15 +48,17 @@ export function PaletteSearch({ onSearch, onFilterChange, currentFilter }: Palet
             </button>
           )}
         </div>
-        <Button type="submit">Buscar</Button>
+        <Button type="submit" className="w-full sm:w-auto">Buscar</Button>
       </form>
 
       {/* Filters */}
-      <div className="flex gap-2 items-center">
-        <span className="text-sm text-muted-foreground">Filtrar:</span>
-        <Badge variant={currentFilter === 'all' ? 'default' : 'outline'} className="cursor-pointer" onClick={() => onFilterChange('all')}>Todas</Badge>
-        <Badge variant={currentFilter === 'authenticated' ? 'default' : 'outline'} className="cursor-pointer" onClick={() => onFilterChange('authenticated')}>Usuarios</Badge>
-        <Badge variant={currentFilter === 'anonymous' ? 'default' : 'outline'} className="cursor-pointer" onClick={() => onFilterChange('anonymous')}>Anónimos</Badge>
+      <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+        <span className="text-sm text-muted-foreground whitespace-nowrap">Filtrar:</span>
+        <div className="flex flex-wrap gap-2">
+          <Badge variant={currentFilter === 'all' ? 'default' : 'outline'} className="cursor-pointer" onClick={() => onFilterChange('all')}>Todas</Badge>
+          <Badge variant={currentFilter === 'authenticated' ? 'default' : 'outline'} className="cursor-pointer" onClick={() => onFilterChange('authenticated')}>Usuarios</Badge>
+          <Badge variant={currentFilter === 'anonymous' ? 'default' : 'outline'} className="cursor-pointer" onClick={() => onFilterChange('anonymous')}>Anónimos</Badge>
+        </div>
       </div>
     </div>
   )

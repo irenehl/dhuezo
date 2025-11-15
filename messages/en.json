@@ -27,7 +27,8 @@
     "colorPalette": "Color Palette",
     "about": "Experience",
     "gallery": "Gallery",
-    "events": "Events"
+    "events": "Events",
+    "blog": "Blog"
   },
   "common": {
     "openMenu": "Open menu",
@@ -108,6 +109,15 @@
     "creative": "Creative",
     "minimalist": "Minimalist",
     "vintage": "Vintage"
+  },
+  "blog": {
+    "pageTitle": "Blog",
+    "pageDescription": "Explore our articles and resources",
+    "title": "Blog",
+    "subtitle": "Discover articles, tutorials, and resources about web development, AI, and more",
+    "recentPosts": "Recent Posts",
+    "categoryPosts": "Posts in {category}",
+    "noPosts": "No posts available yet"
   }
 }
 

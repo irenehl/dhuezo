@@ -116,7 +116,31 @@ Reglas:
       throw new Error('No response from OpenAI')
     }
 
-    const palette = JSON.parse(content) as ColorPaletteAI
+    // Try to extract JSON from the response (in case there's extra text)
+    let jsonContent = content.trim()
+    
+    // Remove markdown code blocks if present
+    if (jsonContent.startsWith('```')) {
+      const jsonMatch = jsonContent.match(/```(?:json)?\s*(\{[\s\S]*\})\s*```/)
+      if (jsonMatch) {
+        jsonContent = jsonMatch[1]
+      } else {
+        // Try to find JSON object in the content
+        const jsonObjectMatch = jsonContent.match(/\{[\s\S]*\}/)
+        if (jsonObjectMatch) {
+          jsonContent = jsonObjectMatch[0]
+        }
+      }
+    }
+    
+    // Find the first complete JSON object
+    const jsonStart = jsonContent.indexOf('{')
+    const jsonEnd = jsonContent.lastIndexOf('}')
+    if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+      jsonContent = jsonContent.substring(jsonStart, jsonEnd + 1)
+    }
+
+    const palette = JSON.parse(jsonContent) as ColorPaletteAI
     
     // Apply contrast adjustments to ensure WCAG compliance
     const adjustedPalette = applyContrastAdjustments(palette)

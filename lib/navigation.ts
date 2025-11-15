@@ -20,6 +20,10 @@ export function getNavItems(t: (key: string) => string, locale: Locale): NavItem
       label: t('navigation.colorPalette'),
       href: '/color-palette',
     },
+    {
+      label: t('navigation.blog'),
+      href: '/blog',
+    },
     // {
     //   label: t('navigation.gallery'),
     //   href: '/gallery',

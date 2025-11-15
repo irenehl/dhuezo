@@ -19,7 +19,7 @@ export default async function ColorHistoryPage() {
   const t = await getTranslations()
   return (
     <PageWrapper>
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12">
         {/* Hero Section */}
         <div className="text-center space-y-4 mb-12">
           <div className="flex justify-center">

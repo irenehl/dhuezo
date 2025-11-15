@@ -12,9 +12,9 @@ import { Copyright } from './footer/Copyright'
 export function Footer() {
   return (
     <footer className="bg-muted/50 border-t border-border">
-      <div className="container mx-auto px-6 md:px-8 lg:px-12 xl:px-16 py-8">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <FooterBranding />
           {/* <FooterNavigation /> */}
           <FooterContact />

@@ -43,8 +43,8 @@ export function HeroSection() {
           blur={60}
         />
         
-        <div className="container mx-auto px-6 md:px-8 lg:px-16 xl:px-24 py-20 lg:py-32 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 py-12 sm:py-16 md:py-20 lg:py-32 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center w-full">
             {/* Left Column: Content */}
             <motion.div
               className="space-y-8"
@@ -74,7 +74,7 @@ export function HeroSection() {
             {/* Main Headline */}
             <div className="space-y-4">
               <motion.h1
-                className="text-4xl lg:text-6xl font-bold leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
                 style={{ color: 'hsl(var(--foreground))' }}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -119,7 +119,7 @@ export function HeroSection() {
               </motion.p> */}
 
               <motion.p
-                className="text-base leading-relaxed max-w-xl"
+                className="text-sm sm:text-base leading-relaxed max-w-xl"
                 style={{ color: 'hsl(var(--muted-foreground) / 0.8)' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ export function HeroSection() {
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 0.6 }}
@@ -139,7 +139,7 @@ export function HeroSection() {
               <Button
                 onClick={handleChatClick}
                 size="lg"
-                className="border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full sm:w-auto border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                 style={{
                   background: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))',
                   color: 'hsl(var(--primary-foreground))',
@@ -153,7 +153,7 @@ export function HeroSection() {
                 onClick={handleMeetingClick}
                 variant="outline"
                 size="lg"
-                className="shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full sm:w-auto shadow-lg hover:shadow-xl transition-all duration-300"
                 style={{
                   backgroundColor: 'hsl(var(--background) / 0.1)',
                   color: 'hsl(var(--foreground))',
