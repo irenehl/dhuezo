@@ -1,6 +1,5 @@
 export const siteConfig = {
   name: "Daniela Huezo",
-  description: "Desarrolladora Full Stack",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   links: {
     github: "https://github.com/irenehl",
@@ -11,19 +10,28 @@ export const siteConfig = {
   whatsappLink: "https://wa.me/50370956453", // Para el CTA de whatsapp
 }
 
-export const heroConfig = {
-  greeting: "Hola!👋🏻 ¿Listo para lanzar tu siguiente producto?",
-  name: "Daniela Huezo",
-  role: "Full Stack Developer",
-  tagline: "Una desarrolladora que transforma ideas en productos digitales impactantes — con +5 años de experiencia",
-  description: "Creo experiencias digitales sin complicaciones — combinando diseño limpio con código sólido. Desde startups hasta equipos establecidos, ayudo a transformar ideas ambiciosas en aplicaciones web rápidas, hermosas y escalables.",
-  stats: [
-    { value: 20, label: "Proyectos", suffix: "+" },
-    { value: 6, label: "Países", suffix: "+" },
-    { value: 7, label: "Industrias", suffix: "+" }
-  ],
-  cta: {
-    primary: { text: "Chat en tiempo real", icon: "MessageCircle", action: siteConfig.whatsappLink },
-    secondary: { text: "Agendar una reunión", icon: "Calendar", link: siteConfig.calendarLink }
+export function getSiteConfig(t: (key: string) => string) {
+  return {
+    ...siteConfig,
+    description: t('site.description'),
+  }
+}
+
+export function getHeroConfig(t: (key: string) => string) {
+  return {
+    greeting: t('hero.greeting'),
+    name: t('hero.name'),
+    role: t('hero.role'),
+    tagline: t('hero.tagline'),
+    description: t('hero.description'),
+    stats: [
+      { value: 20, label: t('hero.stats.projects'), suffix: "+" },
+      { value: 6, label: t('hero.stats.countries'), suffix: "+" },
+      { value: 7, label: t('hero.stats.industries'), suffix: "+" }
+    ],
+    cta: {
+      primary: { text: t('hero.cta.chat'), icon: "MessageCircle", action: siteConfig.whatsappLink },
+      secondary: { text: t('hero.cta.meeting'), icon: "Calendar", link: siteConfig.calendarLink }
+    }
   }
 }

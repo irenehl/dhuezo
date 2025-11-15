@@ -1,0 +1,10 @@
+export const locales = ['en', 'es'] as const
+export type Locale = (typeof locales)[number]
+
+export const defaultLocale: Locale = 'es' // Spanish as default to match current site
+
+export const localeNames: Record<Locale, string> = {
+  en: 'English',
+  es: 'Español',
+}
+

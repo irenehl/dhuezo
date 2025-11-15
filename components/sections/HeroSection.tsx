@@ -2,14 +2,17 @@
 
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { MessageCircle, Calendar } from 'lucide-react'
 import { StatsCounter } from './StatsCounter'
 import { AnimatedGradientBackground } from '@/components/ui/AnimatedGradientBackground'
-import { heroConfig } from '@/lib/config'
+import { getHeroConfig } from '@/lib/config'
 
 export function HeroSection() {
+  const t = useTranslations()
+  const heroConfig = getHeroConfig(t)
   const heroRef = useRef<HTMLElement>(null)
   const handleChatClick = () => {
     window.open(heroConfig.cta.primary.action, '_blank')
@@ -77,16 +80,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
               >
-                Donde la{' '}
-                <span 
-                  className="bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))',
-                  }}
-                >
-                  creatividad
-                </span>
-                {' '}se encuentra con el código ideal.
+                {t('hero.headline')}
               </motion.h1>
 
               {/* <motion.div
@@ -183,7 +177,7 @@ export function HeroSection() {
                   className="text-sm"
                   style={{ color: 'hsl(var(--muted-foreground))' }}
                 >
-                  Trabajado con
+                  {t('hero.workedWith')}
                 </span>
                 <motion.div
                   className="w-8 h-px"

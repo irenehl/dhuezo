@@ -1,9 +1,9 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link, usePathname } from '@/i18n/routing'
 import { motion } from 'framer-motion'
-import { navItems } from '@/lib/navigation'
+import { getNavItems } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
 interface NavLinksProps {
@@ -12,7 +12,10 @@ interface NavLinksProps {
 }
 
 export function NavLinks({ isMobile = false, onLinkClick }: NavLinksProps) {
+  const t = useTranslations()
+  const locale = useLocale()
   const pathname = usePathname()
+  const navItems = getNavItems(t, locale as any)
 
   return (
     <>

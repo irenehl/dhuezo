@@ -1,13 +1,15 @@
+import createMiddleware from 'next-intl/middleware'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { routing } from './i18n/routing'
+
+const intlMiddleware = createMiddleware(routing)
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  })
+  // First, handle i18n routing
+  const response = intlMiddleware(request)
 
+  // Then, handle Supabase auth
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
@@ -30,11 +32,6 @@ export async function middleware(request: NextRequest) {
               value,
               ...options,
             })
-            response = NextResponse.next({
-              request: {
-                headers: request.headers,
-              },
-            })
             response.cookies.set({
               name,
               value,
@@ -46,11 +43,6 @@ export async function middleware(request: NextRequest) {
               name,
               value: '',
               ...options,
-            })
-            response = NextResponse.next({
-              request: {
-                headers: request.headers,
-              },
             })
             response.cookies.set({
               name,
@@ -70,6 +62,9 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    // Match all pathnames except for
+    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … the ones containing a dot (e.g. `favicon.ico`)
+    '/((?!api|_next|_vercel|.*\\..*).*)',
   ],
 }

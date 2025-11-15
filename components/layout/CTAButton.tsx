@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Calendar } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -11,6 +12,7 @@ interface CTAButtonProps {
 }
 
 export function CTAButton({ variant = 'default', size = 'default' }: CTAButtonProps) {
+  const t = useTranslations()
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -28,7 +30,7 @@ export function CTAButton({ variant = 'default', size = 'default' }: CTAButtonPr
           rel="noopener noreferrer"
         >
           <Calendar className="mr-2 h-4 w-4 transition-transform group-hover:rotate-12" />
-          Conversemos sobre tu proyecto
+          {t('common.letsTalk')}
         </a>
       </Button>
     </motion.div>

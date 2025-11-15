@@ -16,19 +16,19 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 const defaultPalette: ColorPalette = {
   prompt: 'default',
   colors: {
-    primary: '#3b82f6',
-    secondary: '#8b5cf6',
-    accent: '#ec4899',
-    background: '#0b1220',
-    text: '#e5e7eb',
+    primary: '#9333EA',
+    secondary: '#DC2626',
+    accent: '#EC4899',
+    background: '#0B1220',
+    text: '#E5E7EB',
     muted: '#1f2937',
     border: '#334155',
   },
-  primary_color: '#3b82f6',
-  secondary_color: '#8b5cf6',
-  accent_color: '#ec4899',
-  background_color: '#0b1220',
-  text_color: '#e5e7eb',
+  primary_color: '#9333EA',
+  secondary_color: '#DC2626',
+  accent_color: '#EC4899',
+  background_color: '#0B1220',
+  text_color: '#E5E7EB',
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

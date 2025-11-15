@@ -1,10 +1,15 @@
 'use client'
 
-import Link from 'next/link'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { motion } from 'framer-motion'
-import { navItems } from '@/lib/navigation'
+import { getNavItems } from '@/lib/navigation'
 
 export function FooterNavigation() {
+  const t = useTranslations()
+  const locale = useLocale()
+  const navItems = getNavItems(t, locale as any)
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

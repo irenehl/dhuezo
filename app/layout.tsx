@@ -1,25 +1,22 @@
-import type { Metadata } from "next"
-import { Inter, Caveat } from "next/font/google"
-import "./globals.css"
-import { Toaster } from "@/components/ui/toaster"
-import { ThemeProvider } from "@/lib/context/ThemeContext"
-import { siteConfig } from "@/lib/config"
-import { ClarityScript } from "@/components/analytics/ClarityScript"
+import type { Metadata } from 'next'
+import { Inter, Caveat } from 'next/font/google'
+import './globals.css'
+import { routing } from '@/i18n/routing'
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter'
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 })
 
-const caveat = Caveat({ 
-  subsets: ["latin"],
+const caveat = Caveat({
+  subsets: ['latin'],
   variable: '--font-handwriting',
-  weight: ['400', '700']
+  weight: ['400', '700'],
 })
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
-  description: siteConfig.description,
+  title: 'Daniela Huezo',
+  description: 'Full Stack Developer',
 }
 
 export default function RootLayout({
@@ -28,16 +25,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
-      <body 
+    <html lang={routing.defaultLocale} className="dark" suppressHydrationWarning>
+      <body
         className={`${inter.variable} ${caveat.variable} font-sans`}
         suppressHydrationWarning={true}
       >
-        <ThemeProvider>
-          {children}
-          <Toaster />
-          <ClarityScript />
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   )

@@ -12,7 +12,7 @@ alwaysApply: true
 - **Language:** All code must be written in TypeScript. No JavaScript files allowed.
 - **Styling:** Use Tailwind CSS for all styling. No CSS modules, SCSS, or inline styles.
 - **UI Components:** Use shadcn/ui for all UI primitives and components. Custom components must follow shadcn/ui conventions.
-- **Dark Mode:** The site must support dark mode using Tailwind's dark variant and shadcn/ui theming, no light mode should be generated.
+- **Dark Mode:** The site must support both dark and light modes using Tailwind's dark variant and shadcn/ui theming. Dark mode is the default theme.
 
 ## Project Structure
 
@@ -65,7 +65,9 @@ Consider the following from the root directory:
 
 ## Dark Mode
 
-- Implement dark mode as default, do not use directly `dark:` directive. There is no other theme or mode, just the dark one.
+- Implement both dark and light mode support. Dark mode is the default theme.
+- Use Tailwind's `dark:` variant for dark mode styles.
+- Use `next-themes` for theme management and switching.
 
 ## General Best Practices
 

@@ -1,9 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { siteConfig } from '@/lib/config'
+import { useTranslations } from 'next-intl'
+import { getSiteConfig } from '@/lib/config'
 
 export function FooterBranding() {
+  const t = useTranslations()
+  const siteConfig = getSiteConfig(t)
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

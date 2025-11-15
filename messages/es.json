@@ -1,0 +1,113 @@
+{
+  "site": {
+    "name": "Daniela Huezo",
+    "description": "Desarrolladora Full Stack"
+  },
+  "hero": {
+    "greeting": "Hola!👋🏻 ¿Listo para lanzar tu siguiente producto?",
+    "name": "Daniela Huezo",
+    "role": "Full Stack Developer",
+    "tagline": "Una desarrolladora que transforma ideas en productos digitales impactantes — con +5 años de experiencia",
+    "description": "Creo experiencias digitales sin complicaciones — combinando diseño limpio con código sólido. Desde startups hasta equipos establecidos, ayudo a transformar ideas ambiciosas en aplicaciones web rápidas, hermosas y escalables.",
+    "headline": "Donde la creatividad se encuentra con el código ideal.",
+    "creativity": "creatividad",
+    "workedWith": "Trabajado con",
+    "stats": {
+      "projects": "Proyectos",
+      "countries": "Países",
+      "industries": "Industrias"
+    },
+    "cta": {
+      "chat": "Chat en tiempo real",
+      "meeting": "Agendar una reunión"
+    }
+  },
+  "navigation": {
+    "home": "Inicio",
+    "colorPalette": "Paleta de Colores",
+    "about": "Experiencia",
+    "gallery": "Galería",
+    "events": "Eventos"
+  },
+  "common": {
+    "openMenu": "Abrir menú",
+    "contact": "Contacto",
+    "email": "Email",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "workTogether": "¿Trabajamos juntos?",
+    "scheduleMeeting": "Agenda una reunión y conversemos sobre tu proyecto",
+    "letsTalk": "Conversemos sobre tu proyecto",
+    "copyright": "© {year} {name}.",
+    "madeWith": "Hecho con",
+    "andNextjs": "y Next.js",
+    "error": "Error",
+    "generating": "Generando...",
+    "generate": "Generar"
+  },
+  "colorPalette": {
+    "pageTitle": "Paleta de colores IA",
+    "pageDescription": "Genera paletas de colores personalizadas con inteligencia artificial",
+    "title": "Paleta de colores con IA",
+    "subtitle": "Expresa cómo te sientes y deja que la IA genere una paleta de colores única que transformará todo el sitio",
+    "howItWorks": "¿Cómo funciona?",
+    "step1": {
+      "title": "Escribe un prompt",
+      "description": "Describe tu estado de ánimo, emoción o cualquier concepto"
+    },
+    "step2": {
+      "title": "La IA genera la paleta",
+      "description": "Nuestra IA analiza tu input y crea una paleta armoniosa"
+    },
+    "step3": {
+      "title": "Colores aplicados",
+      "description": "Los colores se aplican instantáneamente a todo el sitio"
+    },
+    "generateTitle": "Generar Paleta",
+    "generateDescription": "Escribe cualquier palabra o frase que represente un sentimiento, emoción o concepto",
+    "promptPlaceholder": "Ej: Estoy feliz, energético, nostálgico...",
+    "promptExamples": "Ejemplos de prompts",
+    "currentPalette": "Paleta Actual",
+    "recentPalettes": "Tus paletas recientes",
+    "recentPalettesDescription": "Accede rápidamente a tus últimas 5 paletas generadas. Haz clic en cualquiera para aplicarla.",
+    "promptRequired": "Por favor escribe algo para generar la paleta",
+    "paletteGenerated": "¡Paleta generada!",
+    "paletteError": "No se pudo generar la paleta. Intenta de nuevo.",
+    "paletteRestored": "Paleta restaurada",
+    "paletteRestoredDescription": "Se ha restaurado la paleta por defecto",
+    "noPalettesYet": "Aún no has generado ninguna paleta. ¡Crea tu primera paleta arriba!",
+    "activePalette": "Paleta Activa",
+    "applyPalette": "Aplicar Paleta",
+    "paletteApplied": "¡Paleta aplicada!",
+    "paletteAppliedDescription": "\"{prompt}\" ahora es tu tema activo"
+  },
+  "colorHistory": {
+    "pageTitle": "Historial de paletas",
+    "pageDescription": "Explora todas las paletas de colores generadas por la comunidad",
+    "title": "Historial de paletas",
+    "subtitle": "Explora todas las paletas de colores generadas por la comunidad y encuentra inspiración",
+    "allPalettes": "Todas las paletas",
+    "myPalettes": "Mis paletas",
+    "howItWorks": "¿Cómo funciona?",
+    "howItWorksDescription": "Cada vez que alguien genera una paleta con IA, se guarda aquí. Puedes explorar las creaciones de otros usuarios, buscar por palabras clave, y aplicar cualquier paleta a tu experiencia en el sitio con solo un click.",
+    "noResults": "No se encontraron paletas con ese criterio",
+    "noPalettesCreated": "Aún no has creado ninguna paleta",
+    "noLocalHistory": "No hay paletas en tu historial local",
+    "historyCleared": "Se ha eliminado el historial local de paletas"
+  },
+  "about": {
+    "title": "Experiencia",
+    "description": "Aquí puedes ver mi experiencia y habilidades como desarrollador."
+  },
+  "promptExamples": {
+    "happy": "Estoy feliz",
+    "nostalgic": "Nostálgico",
+    "energetic": "Energético",
+    "relaxed": "Relajado",
+    "professional": "Profesional",
+    "creative": "Creativo",
+    "minimalist": "Minimalista",
+    "vintage": "Vintage"
+  }
+}
+

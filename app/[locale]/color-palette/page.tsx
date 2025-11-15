@@ -6,13 +6,19 @@ import { PaletteHistoryDropdown } from '@/components/color-palette/PaletteHistor
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { PromptExamples } from '@/components/color-palette/PromptExamples'
 import { Sparkles, Palette, Wand2, Clock } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
+import type { Metadata } from 'next'
 
-export const metadata = {
-  title: 'Paleta de colores IA',
-  description: 'Genera paletas de colores personalizadas con inteligencia artificial',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations()
+  return {
+    title: t('colorPalette.pageTitle'),
+    description: t('colorPalette.pageDescription'),
+  }
 }
 
-export default function ColorPalettePage() {
+export default async function ColorPalettePage() {
+  const t = await getTranslations()
   return (
     <PageWrapper>
       <div className="container mx-auto px-4 py-12">
@@ -22,10 +28,10 @@ export default function ColorPalettePage() {
             <Palette className="h-16 w-16 text-primary" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-            Paleta de colores con IA
+            {t('colorPalette.title')}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Expresa cómo te sientes y deja que la IA genere una paleta de colores única que transformará todo el sitio
+            {t('colorPalette.subtitle')}
           </p>
         </div>
 
@@ -36,7 +42,7 @@ export default function ColorPalettePage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Wand2 className="h-5 w-5" />
-                ¿Cómo funciona?
+                {t('colorPalette.howItWorks')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -45,27 +51,27 @@ export default function ColorPalettePage() {
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-primary font-bold">1</span>
                   </div>
-                  <h3 className="font-semibold">Escribe un prompt</h3>
+                  <h3 className="font-semibold">{t('colorPalette.step1.title')}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Describe tu estado de ánimo, emoción o cualquier concepto
+                    {t('colorPalette.step1.description')}
                   </p>
                 </div>
                 <div className="space-y-2">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-primary font-bold">2</span>
                   </div>
-                  <h3 className="font-semibold">La IA genera la paleta</h3>
+                  <h3 className="font-semibold">{t('colorPalette.step2.title')}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Nuestra IA analiza tu input y crea una paleta armoniosa
+                    {t('colorPalette.step2.description')}
                   </p>
                 </div>
                 <div className="space-y-2">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-primary font-bold">3</span>
                   </div>
-                  <h3 className="font-semibold">Colores aplicados</h3>
+                  <h3 className="font-semibold">{t('colorPalette.step3.title')}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Los colores se aplican instantáneamente a todo el sitio
+                    {t('colorPalette.step3.description')}
                   </p>
                 </div>
               </div>
@@ -75,9 +81,9 @@ export default function ColorPalettePage() {
           {/* Input and Examples Section */}
           <Card>
             <CardHeader>
-              <CardTitle>Generar Paleta</CardTitle>
+              <CardTitle>{t('colorPalette.generateTitle')}</CardTitle>
               <CardDescription>
-                Escribe cualquier palabra o frase que represente un sentimiento, emoción o concepto
+                {t('colorPalette.generateDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -86,7 +92,7 @@ export default function ColorPalettePage() {
               <div className="space-y-3">
                 <h3 className="flex items-center gap-2 text-lg font-semibold">
                   <Sparkles className="h-5 w-5" />
-                  Ejemplos de prompts
+                  {t('colorPalette.promptExamples')}
                 </h3>
                 <PromptExamples />
               </div>
@@ -100,10 +106,10 @@ export default function ColorPalettePage() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Clock className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-bold">Tus paletas recientes</h2>
+              <h2 className="text-2xl font-bold">{t('colorPalette.recentPalettes')}</h2>
             </div>
             <p className="text-muted-foreground">
-              Accede rápidamente a tus últimas 5 paletas generadas. Haz clic en cualquiera para aplicarla.
+              {t('colorPalette.recentPalettesDescription')}
             </p>
             
             {/* Carousel */}
@@ -117,5 +123,4 @@ export default function ColorPalettePage() {
     </PageWrapper>
   )
 }
-
 

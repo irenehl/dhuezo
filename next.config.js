@@ -1,3 +1,7 @@
+const createNextIntlPlugin = require('next-intl/plugin')
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // App Router is enabled by default in Next.js 13+
@@ -36,4 +40,4 @@ const nextConfig = {
   }),
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig)

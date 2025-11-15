@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useTheme } from '@/lib/context/ThemeContext'
@@ -12,6 +13,7 @@ import { localPaletteService } from '@/lib/services/local-palette-service'
 import { trackPaletteGeneration, trackPaletteReset } from '@/lib/analytics/clarity'
 
 export function ColorPaletteInput() {
+  const t = useTranslations()
   const [prompt, setPrompt] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [aiInsights, setAiInsights] = useState<{
@@ -26,8 +28,8 @@ export function ColorPaletteInput() {
 
     if (!prompt.trim()) {
       toast({
-        title: 'Error',
-        description: 'Por favor escribe algo para generar la paleta',
+        title: t('common.error'),
+        description: t('colorPalette.promptRequired'),
         variant: 'destructive',
       })
       return
@@ -60,7 +62,7 @@ export function ColorPaletteInput() {
       // Apply palette
       applyPalette(data.palette)
       setAiInsights(data.aiInsights)
-      toast({ title: '¡Paleta generada!', description: data.aiInsights.mood })
+      toast({ title: t('colorPalette.paletteGenerated'), description: data.aiInsights.mood })
       
       // Track successful palette generation
       trackPaletteGeneration(prompt, true)
@@ -76,8 +78,8 @@ export function ColorPaletteInput() {
       trackPaletteGeneration(prompt, false)
       
       toast({
-        title: 'Error',
-        description: 'No se pudo generar la paleta. Intenta de nuevo.',
+        title: t('common.error'),
+        description: t('colorPalette.paletteError'),
         variant: 'destructive',
       })
     } finally {
@@ -91,7 +93,7 @@ export function ColorPaletteInput() {
     
     resetPalette()
     setAiInsights(null)
-    toast({ title: 'Paleta restaurada', description: 'Se ha restaurado la paleta por defecto' })
+    toast({ title: t('colorPalette.paletteRestored'), description: t('colorPalette.paletteRestoredDescription') })
   }
 
   // Listen to prompt example selections
@@ -109,7 +111,7 @@ export function ColorPaletteInput() {
       <form onSubmit={handleGenerate} className="flex gap-2">
         <Input
           type="text"
-          placeholder="Ej: Estoy feliz, energético, nostálgico..."
+          placeholder={t('colorPalette.promptPlaceholder')}
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           disabled={isLoading}
@@ -119,12 +121,12 @@ export function ColorPaletteInput() {
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Generando...
+              {t('common.generating')}
             </>
           ) : (
             <>
               <Sparkles className="mr-2 h-4 w-4" />
-              Generar
+              {t('common.generate')}
             </>
           )}
         </Button>

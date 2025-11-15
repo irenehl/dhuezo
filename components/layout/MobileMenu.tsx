@@ -1,8 +1,10 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import { NavLinks } from './NavLinks'
 import { CTAButton } from './CTAButton'
+import { ThemeToggle } from './ThemeToggle'
 import { X } from 'lucide-react'
 
 interface MobileMenuProps {
@@ -11,6 +13,7 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const t = useTranslations()
   return (
     <AnimatePresence>
       {isOpen && (
@@ -36,7 +39,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <button
               onClick={onClose}
               className="absolute top-4 right-4 p-2 hover:bg-muted rounded-lg transition-colors"
-              aria-label="Cerrar menú"
+              aria-label={t('common.openMenu')}
             >
               <X size={24} />
             </button>
@@ -46,8 +49,13 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <NavLinks isMobile onLinkClick={onClose} />
             </nav>
 
+            {/* Theme Toggle */}
+            <div className="mt-8 flex justify-center">
+              <ThemeToggle />
+            </div>
+
             {/* CTA */}
-            <div className="mt-8">
+            <div className="mt-4">
               <CTAButton variant="default" size="lg" />
             </div>
           </motion.div>

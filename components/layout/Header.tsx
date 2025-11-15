@@ -3,14 +3,18 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { Logo } from './Logo'
 import { NavLinks } from './NavLinks'
 import { CTAButton } from './CTAButton'
 import { MobileMenu } from './MobileMenu'
 import { AuthButton } from './AuthButton'
+import { ThemeToggle } from './ThemeToggle'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 export function Header() {
+  const t = useTranslations()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -52,6 +56,8 @@ export function Header() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center space-x-4">
               {/* <AuthButton /> */}
+              <LanguageSwitcher />
+              <ThemeToggle />
               <CTAButton />
             </div>
 
@@ -59,7 +65,7 @@ export function Header() {
             <button
               className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Abrir menú"
+              aria-label={t('common.openMenu')}
             >
               <Menu size={24} />
             </button>

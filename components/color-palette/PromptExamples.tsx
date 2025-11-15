@@ -1,17 +1,19 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { trackPromptExample } from '@/lib/analytics/clarity'
 
 export function PromptExamples() {
+  const t = useTranslations()
   const examples = [
-    'Estoy feliz',
-    'Nostálgico',
-    'Energético',
-    'Relajado',
-    'Profesional',
-    'Creativo',
-    'Minimalista',
-    'Vintage',
+    t('promptExamples.happy'),
+    t('promptExamples.nostalgic'),
+    t('promptExamples.energetic'),
+    t('promptExamples.relaxed'),
+    t('promptExamples.professional'),
+    t('promptExamples.creative'),
+    t('promptExamples.minimalist'),
+    t('promptExamples.vintage'),
   ]
 
   const handleClick = (example: string) => {
