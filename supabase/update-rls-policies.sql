@@ -74,3 +74,4 @@ CREATE POLICY "Anyone can view published posts"
   ON blog_posts FOR SELECT
   USING (published = true);
 
+

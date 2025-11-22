@@ -61,9 +61,9 @@ export function RichTextEditor({
           </div>
         </TabsContent>
         <TabsContent value="preview" className="mt-4">
-          <div className="border rounded-lg p-4" style={{ minHeight }}>
+          <div className="border rounded-lg p-4 bg-background" style={{ minHeight }}>
             {value ? (
-              <MarkdownViewer content={value} />
+              <MarkdownViewer content={value} className="min-h-full" />
             ) : (
               <p className="text-muted-foreground">No content to preview</p>
             )}

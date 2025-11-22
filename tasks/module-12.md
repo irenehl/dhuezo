@@ -143,3 +143,4 @@ components/layout/
 - Use Tailwind's `dark:` variant appropriately
 - Remove any console.log statements from production code
 
+

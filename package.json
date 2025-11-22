@@ -23,6 +23,7 @@
     "@radix-ui/react-toast": "^1.2.15",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.45.4",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@uiw/react-md-editor": "^4.0.8",
     "class-variance-authority": "^0.7.1",
@@ -45,6 +46,7 @@
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
+    "unist-util-visit": "^5.0.0",
     "uuid": "^13.0.0"
   },
   "devDependencies": {

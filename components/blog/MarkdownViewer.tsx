@@ -73,7 +73,7 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
           </Button>
         </CopyToClipboard>
       </div>
-      <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-p:text-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-primary prose-pre:bg-muted prose-pre:border">
+      <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-p:text-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-primary prose-pre:bg-muted prose-pre:border prose-ul:list-disc prose-ol:list-decimal prose-li:my-2">
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkUnwrapImages]}
           components={{

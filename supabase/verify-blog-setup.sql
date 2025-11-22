@@ -36,3 +36,4 @@ SELECT id, slug, name_en, name_es FROM blog_categories ORDER BY order_index;
 -- VALUES ('test-post', 'en', 'Test Post', 'This is a test', 'Test content', '00000000-0000-0000-0000-000000000000', false)
 -- RETURNING id, slug, title;
 
+
