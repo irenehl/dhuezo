@@ -49,3 +49,4 @@ export interface SharedImage {
 }
 
 export * from './blog'
+export * from './project'

@@ -51,16 +51,20 @@ export function HeroSection() {
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-100 via-white to-white dark:from-zinc-900 dark:via-black dark:to-black -z-10" />
 
       <div ref={containerRef} className="max-w-4xl text-center space-y-8 relative z-10">
-        {/* Open to Work Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 border border-zinc-300 rounded-full bg-zinc-50/50 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/50">
+        {/* Open to Work Badge - now a clickable button to schedule a meeting */}
+        <a
+          href="https://calendar.app.google/JzJiUGJo3TFqB3pX8"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-3 py-1 border border-zinc-300 rounded-full bg-zinc-50/50 backdrop-blur-sm text-xs font-semibold uppercase tracking-widest text-zinc-600 hover:border-rose-500 hover:bg-rose-500/10 hover:text-rose-600 transition-colors cursor-pointer dark:border-zinc-800 dark:bg-zinc-950/50 dark:text-zinc-400 dark:hover:border-rose-500 dark:hover:text-rose-400"
+          aria-label={t('hero.openToWork')}
+        >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-600" />
           </span>
-          <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-semibold dark:text-zinc-400">
-            {t('hero.openToWork')}
-          </span>
-        </div>
+          <span>{t('hero.openToWork')}</span>
+        </a>
 
         {/* Main Headline */}
         <h1 className="font-header text-5xl md:text-8xl lg:text-9xl text-zinc-900 tracking-tighter uppercase leading-[0.9] mix-blend-exclusion dark:text-zinc-100">

@@ -1,4 +1,3 @@
-import { PageWrapper } from '@/components/layout/PageWrapper'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ProjectsSection } from '@/components/sections/ProjectsSection'
 import { StageSection } from '@/components/sections/StageSection'
@@ -7,7 +6,7 @@ import { AboutSection } from '@/components/sections/AboutSection'
 
 export default function Home() {
   return (
-    <PageWrapper>
+    <>
       <HeroSection />
       <main className="max-w-6xl mx-auto px-6 space-y-32 pb-32">
         <ProjectsSection />
@@ -15,7 +14,7 @@ export default function Home() {
         <TimelineSection />
         <AboutSection />
       </main>
-    </PageWrapper>
+    </>
   )
 }
 

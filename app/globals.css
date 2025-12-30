@@ -131,6 +131,15 @@
   background-position: 0%;
 }
 
+/* Group hover support for reveal-text */
+.group:hover .reveal-text {
+  background-position: 0%;
+}
+
+.dark .group:hover .reveal-text {
+  background-position: 0%;
+}
+
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;

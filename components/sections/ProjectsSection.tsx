@@ -129,12 +129,12 @@ export function ProjectsSection() {
                       rel="noopener noreferrer"
                       className="block group/link"
                     >
-                      <h3 className="font-display text-2xl text-zinc-100 hover-glitch mb-1 dark:text-zinc-100 group-hover/link:text-rose-600 transition-colors">
+                      <h3 className="font-display text-2xl text-zinc-100 mb-1 reveal-text dark:text-zinc-100">
                         {project.title}
                       </h3>
                     </a>
                   ) : (
-                    <h3 className="font-display text-2xl text-zinc-100 hover-glitch mb-1 dark:text-zinc-100">
+                    <h3 className="font-display text-2xl text-zinc-100 mb-1 reveal-text dark:text-zinc-100">
                       {project.title}
                     </h3>
                   )}

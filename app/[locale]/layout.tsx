@@ -3,8 +3,6 @@ import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { Toaster } from '@/components/ui/toaster'
-import { ThemeProvider } from '@/lib/context/ThemeContext'
-import { ThemeProviderWrapper } from '@/components/providers/ThemeProviderWrapper'
 import { ClarityScript } from '@/components/analytics/ClarityScript'
 import { AppwritePing } from '@/components/appwrite/AppwritePing'
 
@@ -32,18 +30,10 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <ThemeProviderWrapper
-        attribute="class"
-        defaultTheme="dark"
-        enableSystem={false}
-      >
-        <ThemeProvider>
-          {children}
-          <Toaster />
-          <ClarityScript />
-          <AppwritePing />
-        </ThemeProvider>
-      </ThemeProviderWrapper>
+      {children}
+      <Toaster />
+      <ClarityScript />
+      <AppwritePing />
     </NextIntlClientProvider>
   )
 }
