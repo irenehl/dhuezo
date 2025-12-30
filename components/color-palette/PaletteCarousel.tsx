@@ -10,7 +10,6 @@ import { useTheme } from '@/lib/context/ThemeContext'
 import { useToast } from '@/components/ui/use-toast'
 import { localPaletteService } from '@/lib/services/local-palette-service'
 import { paletteService } from '@/lib/services/palette-service'
-import { useAuth } from '@/lib/auth/use-auth'
 import { trackPaletteApply, trackCarouselNavigation } from '@/lib/analytics/clarity'
 
 export function PaletteCarousel() {
@@ -20,7 +19,6 @@ export function PaletteCarousel() {
   const [loading, setLoading] = useState(true)
   const { applyPalette, currentPalette } = useTheme()
   const { toast } = useToast()
-  const { user } = useAuth()
 
   const cardsPerView = {
     mobile: 1,
@@ -52,15 +50,12 @@ export function PaletteCarousel() {
     const fetchPalettes = async () => {
       setLoading(true)
       try {
+        // Only use local palettes - Supabase removed
+        const sessionId = localStorage.getItem('anonymousSessionId')
         let serverPalettes: ColorPalette[] = []
         
-        if (user) {
-          serverPalettes = await paletteService.getUserPalettes(user.id)
-        } else {
-          const sessionId = localStorage.getItem('anonymousSessionId')
-          if (sessionId) {
-            serverPalettes = await paletteService.getAnonymousPalettes(sessionId)
-          }
+        if (sessionId) {
+          serverPalettes = await paletteService.getAnonymousPalettes(sessionId)
         }
 
         const localPalettes = localPaletteService.getAllLocalPalettes()
@@ -89,7 +84,7 @@ export function PaletteCarousel() {
 
     window.addEventListener('paletteGenerated', handlePaletteGenerated)
     return () => window.removeEventListener('paletteGenerated', handlePaletteGenerated)
-  }, [user])
+  }, [])
 
   const handleApply = (palette: ColorPalette) => {
     applyPalette(palette)

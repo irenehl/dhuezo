@@ -9,7 +9,6 @@ import type { SharedImage } from '@/types/shared-image'
 import { formatDate } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useAuth } from '@/lib/auth/use-auth'
 import { imageService } from '@/lib/services/image-service'
 import { useToast } from '@/components/ui/use-toast'
 
@@ -20,12 +19,11 @@ interface ImageCardProps {
 }
 
 export function ImageCard({ image, index, onDelete }: ImageCardProps) {
-  const { user } = useAuth()
   const { toast } = useToast()
   const [deleting, setDeleting] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
 
-  const isOwner = user?.id === image.user_id
+  const isOwner = false // Auth disabled - Supabase removed
 
   const handleDelete = async () => {
     if (!confirm('¿Estás seguro de que quieres eliminar esta imagen?')) return

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useAuth } from '@/lib/auth/use-auth'
 import { paletteService } from '@/lib/services/palette-service'
 import type { ColorPalette } from '@/types/color-palette'
 import { PaletteCard } from './PaletteCard'
@@ -9,27 +8,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Loader2, Palette } from 'lucide-react'
 
 export function MyPalettes() {
-  const { user } = useAuth()
   const [palettes, setPalettes] = useState<ColorPalette[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchUserPalettes = async () => {
-      if (user) {
-        const data = await paletteService.getUserPalettes(user.id)
+      // Only use anonymous session - Supabase removed
+      const sessionId = localStorage.getItem('anonymousSessionId')
+      if (sessionId) {
+        const data = await paletteService.getAnonymousPalettes(sessionId)
         setPalettes(data)
-      } else {
-        const sessionId = localStorage.getItem('anonymousSessionId')
-        if (sessionId) {
-          const data = await paletteService.getAnonymousPalettes(sessionId)
-          setPalettes(data)
-        }
       }
       setLoading(false)
     }
 
     fetchUserPalettes()
-  }, [user])
+  }, [])
 
   if (loading) {
     return (
@@ -49,7 +43,7 @@ export function MyPalettes() {
           Mis Paletas
         </CardTitle>
         <CardDescription>
-          {user ? 'Paletas que has creado con tu cuenta' : 'Paletas que has creado en esta sesión'}
+          Paletas que has creado en esta sesión
         </CardDescription>
       </CardHeader>
       <CardContent>

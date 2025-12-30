@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
 import { generateColorPalette } from '@/lib/ai/openai-service'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -17,13 +16,11 @@ export async function POST(request: NextRequest) {
     // Generar paleta con IA
     const aiPalette = await generateColorPalette(prompt)
 
-    // Obtener usuario si está autenticado (usa mock si envs inválidos)
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    // Preparar datos para guardar
+    // Preparar datos para devolver (sin guardar en base de datos)
     const paletteData = {
-      user_id: user?.id || null,
+      id: uuidv4(),
+      created_at: new Date().toISOString(),
+      user_id: null,
       prompt: prompt.trim(),
       colors: aiPalette,
       primary_color: aiPalette.primary,
@@ -31,44 +28,13 @@ export async function POST(request: NextRequest) {
       accent_color: aiPalette.accent,
       background_color: aiPalette.background,
       text_color: aiPalette.text,
-      is_anonymous: !user,
-      anonymous_session_id: user ? null : anonymousSessionId,
-    }
-
-    // Guardar en base de datos, si hay Supabase real configurado; si no, devolver sin guardar
-    let savedPalette = null as any
-    try {
-      const { data, error } = await supabase
-        .from('color_palettes')
-        .insert(paletteData)
-        .select()
-        .single()
-      if (error) throw error
-      savedPalette = data
-    } catch {
-      savedPalette = {
-        id: uuidv4(),
-        created_at: new Date().toISOString(),
-        ...paletteData,
-      }
+      is_anonymous: true,
+      anonymous_session_id: anonymousSessionId || null,
     }
 
     return NextResponse.json({
       success: true,
-      palette: savedPalette || {
-        id: uuidv4(),
-        created_at: new Date().toISOString(),
-        user_id: user?.id || null,
-        prompt: prompt.trim(),
-        colors: aiPalette,
-        primary_color: aiPalette.primary,
-        secondary_color: aiPalette.secondary,
-        accent_color: aiPalette.accent,
-        background_color: aiPalette.background,
-        text_color: aiPalette.text,
-        is_anonymous: !user,
-        anonymous_session_id: user ? null : anonymousSessionId,
-      },
+      palette: paletteData,
       aiInsights: {
         mood: aiPalette.mood,
         reasoning: aiPalette.reasoning,

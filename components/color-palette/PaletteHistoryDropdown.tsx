@@ -10,7 +10,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { PaletteCard } from '@/components/color-history/PaletteCard'
 import { localPaletteService } from '@/lib/services/local-palette-service'
 import { paletteService } from '@/lib/services/palette-service'
-import { useAuth } from '@/lib/auth/use-auth'
 import { useToast } from '@/components/ui/use-toast'
 import { trackHistoryDropdownToggle, trackPaletteApply } from '@/lib/analytics/clarity'
 
@@ -24,21 +23,17 @@ export function PaletteHistoryDropdown({ showOnlyWhenMoreThan = 8 }: PaletteHist
   const [filteredPalettes, setFilteredPalettes] = useState<ColorPalette[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const [loading, setLoading] = useState(false)
-  const { user } = useAuth()
   const { toast } = useToast()
 
   const fetchAllPalettes = async () => {
     setLoading(true)
     try {
+      // Only use local palettes - Supabase removed
+      const sessionId = localStorage.getItem('anonymousSessionId')
       let serverPalettes: ColorPalette[] = []
-
-      if (user) {
-        serverPalettes = await paletteService.getUserPalettes(user.id)
-      } else {
-        const sessionId = localStorage.getItem('anonymousSessionId')
-        if (sessionId) {
-          serverPalettes = await paletteService.getAnonymousPalettes(sessionId)
-        }
+      
+      if (sessionId) {
+        serverPalettes = await paletteService.getAnonymousPalettes(sessionId)
       }
 
       const localPalettes = localPaletteService.getAllLocalPalettes()
@@ -160,11 +155,9 @@ export function PaletteHistoryDropdown({ showOnlyWhenMoreThan = 8 }: PaletteHist
                     className="pl-10"
                   />
                 </div>
-                {!user && (
-                  <Button variant="outline" size="icon" onClick={handleClearHistory} title="Limpiar historial local">
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                )}
+                <Button variant="outline" size="icon" onClick={handleClearHistory} title="Limpiar historial local">
+                  <Trash2 className="h-4 w-4" />
+                </Button>
               </div>
 
               {/* Loading State */}
@@ -189,18 +182,9 @@ export function PaletteHistoryDropdown({ showOnlyWhenMoreThan = 8 }: PaletteHist
                   <p className="text-muted-foreground">
                     {searchQuery
                       ? 'No se encontraron paletas con ese criterio'
-                      : user
-                      ? 'Aún no has creado ninguna paleta'
                       : 'No hay paletas en tu historial local'}
                   </p>
                 </div>
-              )}
-
-              {/* Info Text */}
-              {!user && palettes.length > 0 && (
-                <p className="text-xs text-muted-foreground text-center">
-                  💡 Inicia sesión para guardar tu historial de forma permanente
-                </p>
               )}
             </CardContent>
           </motion.div>
