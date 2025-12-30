@@ -1,9 +1,10 @@
 import createMiddleware from 'next-intl/middleware'
 import { routing } from './i18n/routing'
+import type { NextRequest } from 'next/server'
 
 const intlMiddleware = createMiddleware(routing)
 
-export async function middleware(request: Request) {
+export async function middleware(request: NextRequest) {
   // Handle i18n routing only (Supabase auth removed)
   return intlMiddleware(request)
 }

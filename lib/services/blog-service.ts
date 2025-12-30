@@ -17,6 +17,11 @@ export const blogService = {
     return null
   },
 
+  // Get all posts (for admin)
+  async getAllPosts(): Promise<BlogPost[]> {
+    return []
+  },
+
   // Get published posts
   async getPublishedPosts(
     locale: string,
@@ -48,5 +53,23 @@ export const blogService = {
   // Get post images
   async getPostImages(postId: string): Promise<BlogPostImage[]> {
     return []
+  },
+
+  // Delete post - Client Action
+  async deletePost(id: string): Promise<boolean> {
+    return false
+  },
+
+  // Upload multiple post images - Client Action
+  async uploadPostImages(
+    files: File[],
+    postId: string
+  ): Promise<BlogPostImage[]> {
+    return []
+  },
+
+  // Delete post image - Client Action
+  async deletePostImage(imageId: string): Promise<boolean> {
+    return false
   },
 }

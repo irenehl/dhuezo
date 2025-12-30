@@ -18,6 +18,19 @@ export const blogServiceServer = {
     return null
   },
 
+  // Get all posts (for admin) - Server Component
+  async getAllPosts(locale?: string): Promise<BlogPost[]> {
+    return []
+  },
+
+  // Get stage entries (posts with stage_type) - Server Component
+  async getStageEntries(
+    locale: string,
+    limit = 10
+  ): Promise<BlogPost[]> {
+    return []
+  },
+
   // Get published posts - Server Component
   async getPublishedPosts(
     locale: string,

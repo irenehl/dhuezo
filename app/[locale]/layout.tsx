@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { ThemeProvider } from '@/lib/context/ThemeContext'
 import { ThemeProviderWrapper } from '@/components/providers/ThemeProviderWrapper'
 import { ClarityScript } from '@/components/analytics/ClarityScript'
+import { AppwritePing } from '@/components/appwrite/AppwritePing'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -40,6 +41,7 @@ export default async function LocaleLayout({
           {children}
           <Toaster />
           <ClarityScript />
+          <AppwritePing />
         </ThemeProvider>
       </ThemeProviderWrapper>
     </NextIntlClientProvider>
