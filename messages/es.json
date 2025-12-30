@@ -4,31 +4,21 @@
     "description": "Desarrolladora Full Stack"
   },
   "hero": {
-    "greeting": "Hola!👋🏻 ¿Listo para lanzar tu siguiente producto?",
-    "name": "Daniela Huezo",
-    "role": "Full Stack Developer",
-    "tagline": "Una desarrolladora que transforma ideas en productos digitales impactantes — con +5 años de experiencia",
-    "description": "Creo experiencias digitales sin complicaciones — combinando diseño limpio con código sólido. Desde startups hasta equipos establecidos, ayudo a transformar ideas ambiciosas en aplicaciones web rápidas, hermosas y escalables.",
-    "headline": "Donde la creatividad se encuentra con el código ideal.",
-    "creativity": "creatividad",
-    "workedWith": "Trabajado con",
-    "stats": {
-      "projects": "Proyectos",
-      "countries": "Países",
-      "industries": "Industrias"
-    },
+    "headline": "Reputation",
+    "subheadline": "Rebuilt",
+    "description": "La arquitectura antigua no puede venir al teléfono ahora mismo. ¿Por qué? Porque está muerta. Ingeniera full-stack construyendo sistemas resilientes e interfaces dramáticas.",
+    "openToWork": "Halemos",
+    "scroll": "Desplazar",
     "cta": {
-      "chat": "Chat en tiempo real",
-      "meeting": "Agendar una reunión"
+      "viewProjects": "Ver Proyectos",
+      "readStory": "Leer la Historia"
     }
   },
   "navigation": {
-    "home": "Inicio",
-    "colorPalette": "Paleta de Colores",
-    "about": "Experiencia",
-    "gallery": "Galería",
-    "events": "Eventos",
-    "blog": "Blog"
+    "projects": "Proyectos",
+    "stage": "El Escenario",
+    "timeline": "Línea de Tiempo",
+    "about": "Acerca de"
   },
   "common": {
     "openMenu": "Abrir menú",
@@ -96,9 +86,79 @@
     "noLocalHistory": "No hay paletas en tu historial local",
     "historyCleared": "Se ha eliminado el historial local de paletas"
   },
+  "projects": {
+    "title": "Gran Reputación",
+    "subtitle": "Trabajos seleccionados y caos ingenieril.\n2020 — Presente",
+    "viewArchive": "Ver Archivo",
+    "project1": {
+      "title": "Obsidian CMS",
+      "description": "Un sistema de gestión de contenido headless diseñado para equipos editoriales de alta frecuencia. Colaboración en tiempo real sin fallos.",
+      "tag1": "Next.js",
+      "tag2": "Supabase"
+    },
+    "project2": {
+      "title": "Viper Analytics",
+      "description": "Motor de análisis centrado en la privacidad que procesa millones de eventos. Visualizado como una topología de datos 3D.",
+      "tag1": "WebGL",
+      "tag2": "Rust"
+    },
+    "project3": {
+      "title": "Echo Generator",
+      "description": "Paisajes de audio generativos basados en análisis de sentimientos de feeds de noticias en vivo.",
+      "tag1": "AI/LLM",
+      "tag2": "Python"
+    }
+  },
+  "stage": {
+    "title": "El Escenario",
+    "subtitle": "Conferencias, Charlas y Editoriales.",
+    "empty": "Aún no hay entradas.",
+    "type": {
+      "talk": "Charla",
+      "article": "Blog",
+      "slide": "Diapositivas"
+    }
+  },
+  "timeline": {
+    "title": "Las Eras",
+    "exp1": {
+      "title": "Ingeniera Frontend Senior",
+      "company": "TechCorp Inc.",
+      "period": "2021 — PRESENTE",
+      "bullet1": "Lideré la migración del panel principal a Next.js App Router, mejorando LCP en un 40%.",
+      "bullet2": "Arquitecturé un sistema de diseño usado por más de 15 equipos internos, aplicando estándares de accesibilidad.",
+      "bullet3": "Mentoricé desarrolladores junior, fomentando una cultura de calidad de código y propiedad.",
+      "tag1": "React",
+      "tag2": "TypeScript",
+      "tag3": "GraphQL"
+    },
+    "exp2": {
+      "title": "Desarrolladora de Software",
+      "company": "Creative Agency Ltd.",
+      "period": "2018 — 2021",
+      "bullet1": "Desarrollé sitios de marketing de alto impacto para clientes Fortune 500 con animaciones complejas.",
+      "bullet2": "Implementé soluciones de CMS headless para empoderar editores no técnicos.",
+      "tag1": "Vue.js",
+      "tag2": "GSAP",
+      "tag3": "Shopify"
+    }
+  },
   "about": {
-    "title": "Experiencia",
-    "description": "Aquí puedes ver mi experiencia y habilidades como desarrollador."
+    "title": "Llámelo Como Quiera",
+    "description1": "Creo en código estético y diseño brutalista. Mi viaje ha sido sobre reinvención—moviéndome del diseño a la ingeniería, y de vuelta a la intersección de ambos.",
+    "description2": "Actualmente basada en el vacío digital, creando experiencias que perduran.",
+    "quote": "Juro que no amo el drama, él me ama a mí.",
+    "cta": "Halemos",
+    "email": "hello@example.com",
+    "social": {
+      "github": "https://github.com",
+      "linkedin": "https://linkedin.com",
+      "twitter": "https://twitter.com"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} REPUTATION. TODOS LOS DERECHOS RESERVADOS.",
+    "designed": "Diseñado en la oscuridad"
   },
   "promptExamples": {
     "happy": "Estoy feliz",

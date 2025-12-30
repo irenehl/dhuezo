@@ -1,206 +1,130 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { MessageCircle, Calendar } from 'lucide-react'
-import { StatsCounter } from './StatsCounter'
-import { AnimatedGradientBackground } from '@/components/ui/AnimatedGradientBackground'
-import { getHeroConfig } from '@/lib/config'
+import { ChevronDown } from 'lucide-react'
+import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { useRef, useEffect } from 'react'
 
 export function HeroSection() {
   const t = useTranslations()
-  const heroConfig = getHeroConfig(t)
-  const heroRef = useRef<HTMLElement>(null)
-  const handleChatClick = () => {
-    window.open(heroConfig.cta.primary.action, '_blank')
-  }
-
-  const handleMeetingClick = () => {
-    if (heroConfig.cta.secondary.link) {
-      window.open(heroConfig.cta.secondary.link, '_blank')
+  const containerRef = useRef<HTMLDivElement>(null)
+  const scrollProgress = useMotionValue(0)
+  
+  // Update scroll progress on scroll
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      if (!containerRef.current) return
+      
+      const rect = containerRef.current.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      const elementTop = rect.top
+      const elementHeight = rect.height
+      
+      // Progress from 0 to 1 as element scrolls from top to out of view
+      const progress = Math.max(0, Math.min(1, (windowHeight - elementTop) / (windowHeight + elementHeight)))
+      scrollProgress.set(progress)
     }
-  }
+    
+    updateScrollProgress()
+    window.addEventListener('scroll', updateScrollProgress, { passive: true })
+    window.addEventListener('resize', updateScrollProgress, { passive: true })
+    
+    return () => {
+      window.removeEventListener('scroll', updateScrollProgress)
+      window.removeEventListener('resize', updateScrollProgress)
+    }
+  }, [scrollProgress])
+
+  // More dramatic scroll-based transforms
+  const headlineY = useTransform(scrollProgress, [0, 1], [0, -150])
+  const headlineOpacity = useTransform(scrollProgress, [0, 0.4], [1, 0])
+  const headlineScale = useTransform(scrollProgress, [0, 1], [1, 0.85])
+  
+  const subheadlineX = useTransform(scrollProgress, [0, 1], [0, -200])
+  const subheadlineOpacity = useTransform(scrollProgress, [0, 0.4], [1, 0])
+  const subheadlineScale = useTransform(scrollProgress, [0, 1], [1, 0.85])
 
   return (
-    <>
-      <section 
-        ref={heroRef}
-        className="flex-grow w-full flex items-center relative overflow-hidden"
-        style={{
-          background: 'hsl(var(--background))',
-        }}
-      >
-        {/* Full Screen Animated Gradient Background */}
-        <AnimatedGradientBackground 
-          className="absolute inset-0 w-full h-full z-99"
-          position="full"
-          intensity="medium"
-          speed="normal"
-          complexity="medium"
-          blur={60}
-        />
-        
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 py-12 sm:py-16 md:py-20 lg:py-32 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center w-full">
-            {/* Left Column: Content */}
-            <motion.div
-              className="space-y-8"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            >
-            {/* Greeting Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <Badge 
-                variant="secondary" 
-                className="px-4 py-2 text-sm font-medium"
-                style={{
-                  backgroundColor: 'hsl(var(--primary) / 0.2)',
-                  color: 'hsl(var(--primary))',
-                  borderColor: 'hsl(var(--primary) / 0.3)',
-                }}
-              >
-                {heroConfig.greeting}
-              </Badge>
-            </motion.div>
+    <header className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20">
+      {/* Background Layers */}
+      <div className="fixed inset-0 bg-noise opacity-40 pointer-events-none z-50 mix-blend-overlay" />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-100 via-white to-white dark:from-zinc-900 dark:via-black dark:to-black -z-10" />
 
-            {/* Main Headline */}
-            <div className="space-y-4">
-              <motion.h1
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-                style={{ color: 'hsl(var(--foreground))' }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                {t('hero.headline')}
-              </motion.h1>
+      <div ref={containerRef} className="max-w-4xl text-center space-y-8 relative z-10">
+        {/* Open to Work Badge */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 border border-zinc-300 rounded-full bg-zinc-50/50 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/50">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-600" />
+          </span>
+          <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-semibold dark:text-zinc-400">
+            {t('hero.openToWork')}
+          </span>
+        </div>
 
-              {/* <motion.div
-                className="flex flex-col sm:flex-row sm:items-center gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-              >
-                <h2 
-                  className="text-3xl lg:text-3xl font-bold"
-                  style={{ color: 'hsl(var(--foreground))' }}
-                >
-                  {heroConfig.name}
-                </h2>
-                <Badge 
-                  variant="outline" 
-                  className="px-3 py-1 text-sm"
-                  style={{
-                    backgroundColor: 'hsl(var(--primary) / 0.1)',
-                    color: 'hsl(var(--primary))',
-                    borderColor: 'hsl(var(--primary) / 0.3)',
-                  }}
-                >
-                  {heroConfig.role}
-                </Badge>
-              </motion.div> */}
+        {/* Main Headline */}
+        <h1 className="font-header text-5xl md:text-8xl lg:text-9xl text-zinc-900 tracking-tighter uppercase leading-[0.9] mix-blend-exclusion dark:text-zinc-100">
+          <motion.span
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: '-100px' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            style={{ 
+              y: headlineY, 
+              opacity: headlineOpacity,
+              scale: headlineScale,
+            }}
+            className="inline-block"
+          >
+            {t('hero.headline')}
+          </motion.span>
+          <br />
+          <motion.span
+            className="text-zinc-300 stroke-text dark:text-zinc-800 inline-block"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{ 
+              x: subheadlineX, 
+              opacity: subheadlineOpacity,
+              scale: subheadlineScale,
+            }}
+          >
+            {t('hero.subheadline')}
+          </motion.span>
+        </h1>
 
-              {/* <motion.p
-                className="text-lg lg:text-xl leading-relaxed max-w-2xl"
-                style={{ color: 'hsl(var(--muted-foreground))' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
-                {heroConfig.tagline}
-              </motion.p> */}
+        {/* Description */}
+        <p className="max-w-lg mx-auto text-sm md:text-base text-zinc-600 font-light leading-relaxed tracking-wide dark:text-zinc-400">
+          {t('hero.description')}
+        </p>
 
-              <motion.p
-                className="text-sm sm:text-base leading-relaxed max-w-xl"
-                style={{ color: 'hsl(var(--muted-foreground) / 0.8)' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.0, duration: 0.6 }}
-              >
-                {heroConfig.description}
-              </motion.p>
-            </div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-            >
-              <Button
-                onClick={handleChatClick}
-                size="lg"
-                className="w-full sm:w-auto border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))',
-                  color: 'hsl(var(--primary-foreground))',
-                }}
-              >
-                <MessageCircle className="w-5 h-5 mr-2" />
-                {heroConfig.cta.primary.text}
-              </Button>
-              
-              <Button
-                onClick={handleMeetingClick}
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto shadow-lg hover:shadow-xl transition-all duration-300"
-                style={{
-                  backgroundColor: 'hsl(var(--background) / 0.1)',
-                  color: 'hsl(var(--foreground))',
-                  borderColor: 'hsl(var(--border))',
-                }}
-              >
-                <Calendar className="w-5 h-5 mr-2" />
-                {heroConfig.cta.secondary.text}
-              </Button>
-            </motion.div>
-
-            {/* Stats Counter */}
-            <motion.div
-              className="pt-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4, duration: 0.6 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <span 
-                  className="text-sm"
-                  style={{ color: 'hsl(var(--muted-foreground))' }}
-                >
-                  {t('hero.workedWith')}
-                </span>
-                <motion.div
-                  className="w-8 h-px"
-                  style={{
-                    background: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)))',
-                  }}
-                  initial={{ width: 0 }}
-                  animate={{ width: 32 }}
-                  transition={{ delay: 1.6, duration: 0.8 }}
-                />
-              </div>
-              <StatsCounter stats={heroConfig.stats} />
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column: Empty space for content balance */}
-          <div className="hidden lg:block">
-            {/* This space is now filled by the full-screen gradient background */}
-          </div>
+        {/* CTAs */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-center gap-4">
+          <a
+            href="#projects"
+            className="group relative px-8 py-3 bg-zinc-100 text-black text-xs font-bold uppercase tracking-widest hover:bg-rose-600 hover:text-white transition-all duration-300 overflow-hidden dark:bg-zinc-100 dark:text-black dark:hover:bg-rose-600 dark:hover:text-white"
+          >
+            <span className="relative z-10">{t('hero.cta.viewProjects')}</span>
+            <div className="absolute inset-0 bg-rose-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out" />
+          </a>
+          <a
+            href="#about"
+            className="px-8 py-3 border border-zinc-400 text-zinc-700 text-xs font-bold uppercase tracking-widest hover:border-zinc-900 hover:text-zinc-900 transition-colors dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-100 dark:hover:text-white"
+          >
+            {t('hero.cta.readStory')}
+          </a>
         </div>
       </div>
 
-    </section>
-    </>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
+        <span className="text-[10px] uppercase tracking-widest text-zinc-600 dark:text-zinc-500">
+          {t('hero.scroll')}
+        </span>
+        <ChevronDown className="w-4 h-4 text-zinc-600 dark:text-zinc-500" />
+      </div>
+    </header>
   )
 }

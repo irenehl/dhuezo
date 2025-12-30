@@ -3,7 +3,6 @@
 import { useLocale } from 'next-intl'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { locales } from '@/i18n/config'
-import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher() {
@@ -16,22 +15,20 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1 border border-border rounded-md p-1">
+    <div className="flex items-center gap-1 border border-zinc-800 rounded-md p-1 dark:border-zinc-800">
       {locales.map((loc) => (
-        <Button
+        <button
           key={loc}
-          variant="ghost"
-          size="sm"
           onClick={() => handleLocaleChange(loc)}
           className={cn(
-            'h-7 px-3 text-xs font-medium transition-colors',
+            'h-7 px-3 text-xs font-medium transition-colors uppercase tracking-wider',
             locale === loc
-              ? 'bg-primary text-primary-foreground'
-              : 'hover:bg-muted'
+              ? 'bg-zinc-800 text-zinc-100 dark:bg-zinc-800 dark:text-zinc-100'
+              : 'text-zinc-500 hover:text-zinc-100 dark:text-zinc-500 dark:hover:text-zinc-100'
           )}
         >
           {loc.toUpperCase()}
-        </Button>
+        </button>
       ))}
     </div>
   )

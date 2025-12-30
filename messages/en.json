@@ -4,31 +4,21 @@
     "description": "Full Stack Developer"
   },
   "hero": {
-    "greeting": "Hello!👋🏻 Ready to launch your next product?",
-    "name": "Daniela Huezo",
-    "role": "Full Stack Developer",
-    "tagline": "A developer who transforms ideas into impactful digital products — with +5 years of experience",
-    "description": "I create digital experiences without complications — combining clean design with solid code. From startups to established teams, I help transform ambitious ideas into fast, beautiful, and scalable web applications.",
-    "headline": "Where creativity meets ideal code.",
-    "creativity": "creativity",
-    "workedWith": "Worked with",
-    "stats": {
-      "projects": "Projects",
-      "countries": "Countries",
-      "industries": "Industries"
-    },
+    "headline": "Reputation",
+    "subheadline": "Rebuilt",
+    "description": "The old architecture can't come to the phone right now. Why? Because it's dead. Full-stack engineer building resilient systems and dramatic interfaces.",
+    "openToWork": "Open to work",
+    "scroll": "Scroll",
     "cta": {
-      "chat": "Real-time chat",
-      "meeting": "Schedule a meeting"
+      "viewProjects": "View Projects",
+      "readStory": "Read the Story"
     }
   },
   "navigation": {
-    "home": "Home",
-    "colorPalette": "Color Palette",
-    "about": "Experience",
-    "gallery": "Gallery",
-    "events": "Events",
-    "blog": "Blog"
+    "projects": "Projects",
+    "stage": "The Stage",
+    "timeline": "Timeline",
+    "about": "About"
   },
   "common": {
     "openMenu": "Open menu",
@@ -96,9 +86,79 @@
     "noLocalHistory": "No palettes in your local history",
     "historyCleared": "Local palette history has been cleared"
   },
+  "projects": {
+    "title": "Big Reputation",
+    "subtitle": "Selected works & engineered chaos.\n2020 — Present",
+    "viewArchive": "View Archive",
+    "project1": {
+      "title": "Obsidian CMS",
+      "description": "A headless content management system designed for high-frequency editorial teams. Glitch-free real-time collaboration.",
+      "tag1": "Next.js",
+      "tag2": "Supabase"
+    },
+    "project2": {
+      "title": "Viper Analytics",
+      "description": "Privacy-first analytics engine processing millions of events. Visualized as a 3D data topology.",
+      "tag1": "WebGL",
+      "tag2": "Rust"
+    },
+    "project3": {
+      "title": "Echo Generator",
+      "description": "Generative audio landscapes based on sentiment analysis of live news feeds.",
+      "tag1": "AI/LLM",
+      "tag2": "Python"
+    }
+  },
+  "stage": {
+    "title": "The Stage",
+    "subtitle": "Conferences, Talks, and Editorials.",
+    "empty": "No entries yet.",
+    "type": {
+      "talk": "Talk",
+      "article": "Blog",
+      "slide": "Slides"
+    }
+  },
+  "timeline": {
+    "title": "The Eras",
+    "exp1": {
+      "title": "Senior Frontend Engineer",
+      "company": "TechCorp Inc.",
+      "period": "2021 — PRESENT",
+      "bullet1": "Led the migration of the core dashboard to Next.js App Router, improving LCP by 40%.",
+      "bullet2": "Architected a design system used by 15+ internal teams, enforcing accessibility standards.",
+      "bullet3": "Mentored junior developers, fostering a culture of code quality and ownership.",
+      "tag1": "React",
+      "tag2": "TypeScript",
+      "tag3": "GraphQL"
+    },
+    "exp2": {
+      "title": "Software Developer",
+      "company": "Creative Agency Ltd.",
+      "period": "2018 — 2021",
+      "bullet1": "Developed high-impact marketing sites for Fortune 500 clients with complex animations.",
+      "bullet2": "Implemented headless CMS solutions to empower non-technical editors.",
+      "tag1": "Vue.js",
+      "tag2": "GSAP",
+      "tag3": "Shopify"
+    }
+  },
   "about": {
-    "title": "Experience",
-    "description": "Here you can see my experience and skills as a developer."
+    "title": "Call It What You Want",
+    "description1": "I believe in aesthetic code and brutalist design. My journey has been about reinvention—moving from design to engineering, and back again to the intersection of both.",
+    "description2": "Currently based in the digital void, creating experiences that stick.",
+    "quote": "I swear I don't love the drama, it loves me.",
+    "cta": "Get in touch",
+    "email": "hello@example.com",
+    "social": {
+      "github": "https://github.com",
+      "linkedin": "https://linkedin.com",
+      "twitter": "https://twitter.com"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} REPUTATION. ALL RIGHTS RESERVED.",
+    "designed": "Designed in the dark"
   },
   "promptExamples": {
     "happy": "I'm happy",

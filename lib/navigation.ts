@@ -4,33 +4,30 @@ export interface NavItem {
   label: string
   href: string
   icon?: string
+  isAnchor?: boolean
 }
 
 export function getNavItems(t: (key: string) => string, locale: Locale): NavItem[] {
   return [
     {
-      label: t('navigation.home'),
-      href: '/',
-    },
-    // {
-    //   label: t('navigation.about'),
-    //   href: '/about',
-    // },
-    {
-      label: t('navigation.colorPalette'),
-      href: '/color-palette',
+      label: t('navigation.projects'),
+      href: '#projects',
+      isAnchor: true,
     },
     {
-      label: t('navigation.blog'),
-      href: '/blog',
+      label: t('navigation.stage'),
+      href: '#stage',
+      isAnchor: true,
     },
-    // {
-    //   label: t('navigation.gallery'),
-    //   href: '/gallery',
-    // },
-    // {
-    //   label: t('navigation.events'),
-    //   href: '/events',
-    // },
+    {
+      label: t('navigation.timeline'),
+      href: '#timeline',
+      isAnchor: true,
+    },
+    {
+      label: t('navigation.about'),
+      href: '#about',
+      isAnchor: true,
+    },
   ]
 }

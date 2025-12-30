@@ -1,43 +1,23 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Separator } from '@/components/ui/separator'
-import { FooterBranding } from './footer/FooterBranding'
-import { FooterNavigation } from './footer/FooterNavigation'
-import { FooterContact } from './footer/FooterContact'
-import { FooterCTA } from './footer/FooterCTA'
-import { SocialLinks } from './footer/SocialLinks'
-import { Copyright } from './footer/Copyright'
+import { useTranslations } from 'next-intl'
+import { Zap } from 'lucide-react'
 
 export function Footer() {
+  const t = useTranslations()
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="bg-muted/50 border-t border-border">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <FooterBranding />
-          {/* <FooterNavigation /> */}
-          <FooterContact />
-          <FooterCTA />
+    <footer className="border-t border-zinc-900 bg-black py-12 dark:border-zinc-900 dark:bg-black">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="text-xs text-zinc-600 font-mono dark:text-zinc-600">
+          {t('footer.copyright', { year: currentYear })}
         </div>
-
-        <Separator className="my-8" />
-
-        {/* Bottom Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <Copyright />
-          <SocialLinks />
+        <div className="flex items-center gap-1 text-zinc-700 text-xs uppercase tracking-widest dark:text-zinc-700">
+          <span>{t('footer.designed')}</span>
+          <Zap className="w-3 h-3 text-yellow-600 dark:text-yellow-600" />
         </div>
       </div>
-
-      {/* Decorative Bottom Line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, ease: "easeInOut" }}
-        className="h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500"
-      />
     </footer>
   )
 }

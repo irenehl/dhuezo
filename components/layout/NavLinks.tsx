@@ -1,8 +1,7 @@
 'use client'
 
 import { useTranslations, useLocale } from 'next-intl'
-import { Link, usePathname } from '@/i18n/routing'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { getNavItems } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
@@ -14,42 +13,67 @@ interface NavLinksProps {
 export function NavLinks({ isMobile = false, onLinkClick }: NavLinksProps) {
   const t = useTranslations()
   const locale = useLocale()
-  const pathname = usePathname()
   const navItems = getNavItems(t, locale as any)
+  const [activeHash, setActiveHash] = useState<string>('')
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash)
+    }
+    
+    handleHashChange()
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState(null, '', href)
+        setActiveHash(href)
+      }
+    }
+    onLinkClick?.()
+  }
+
+  if (isMobile) {
+    return (
+      <>
+        {navItems.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            onClick={(e) => handleAnchorClick(e, item.href)}
+            className={cn(
+              'block text-lg py-3 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors',
+              activeHash === item.href && 'text-rose-600 dark:text-rose-600'
+            )}
+          >
+            {item.label}
+          </a>
+        ))}
+      </>
+    )
+  }
 
   return (
     <>
-      {navItems.map((item, index) => {
-        const isActive = pathname === item.href
-
-        return (
-          <motion.div
+      {navItems.map((item) => (
+          <a
             key={item.href}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            href={item.href}
+            onClick={(e) => handleAnchorClick(e, item.href)}
+            className={cn(
+              'hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors text-zinc-500 dark:text-zinc-500',
+              activeHash === item.href && 'text-zinc-900 dark:text-zinc-100'
+            )}
           >
-            <Link
-              href={item.href}
-              onClick={onLinkClick}
-              className={cn(
-                'relative px-3 py-2 text-sm font-medium transition-colors hover:text-primary',
-                isActive ? 'text-primary' : 'text-muted-foreground',
-                isMobile && 'block text-lg py-3'
-              )}
-            >
-              {item.label}
-              {isActive && (
-                <motion.div
-                  layoutId={isMobile ? 'mobile-active-nav' : 'desktop-active-nav'}
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                  initial={false}
-                />
-              )}
-            </Link>
-          </motion.div>
-        )
-      })}
+            {item.label}
+          </a>
+      ))}
     </>
   )
 }

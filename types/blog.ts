@@ -26,6 +26,12 @@ export interface BlogPost {
   published_at: string | null
   created_at: string
   updated_at: string
+  // Stage-specific fields
+  stage_type?: 'talk' | 'article' | 'slide' | null
+  event_location?: string | null
+  event_date?: string | null
+  cta_label?: string | null
+  cta_url?: string | null
   categories?: BlogCategory[]
   author?: {
     email: string
@@ -55,6 +61,11 @@ export interface CreateBlogPostParams {
   pdf_preview_images?: string[]
   category_ids?: string[]
   published?: boolean
+  stage_type?: 'talk' | 'article' | 'slide' | null
+  event_location?: string | null
+  event_date?: string | null
+  cta_label?: string | null
+  cta_url?: string | null
 }
 
 export interface UpdateBlogPostParams {
@@ -67,6 +78,11 @@ export interface UpdateBlogPostParams {
   pdf_preview_images?: string[]
   category_ids?: string[]
   published?: boolean
+  stage_type?: 'talk' | 'article' | 'slide' | null
+  event_location?: string | null
+  event_date?: string | null
+  cta_label?: string | null
+  cta_url?: string | null
 }
 
 export interface UploadImageParams {

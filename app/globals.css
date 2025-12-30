@@ -58,19 +58,77 @@
   }
 }
 
-/* Glassmorphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Custom Font Assignments */
+.font-display {
+  font-family: var(--font-cinzel), serif;
 }
 
-.glass-dark {
-  background: rgba(0, 0, 0, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.font-header {
+  font-family: var(--font-playfair), serif;
+}
+
+.font-body {
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Custom Noise Texture */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Glitch Animation Keyframes */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.hover-glitch:hover {
+  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  color: #e11d48; /* rose-600 */
+}
+
+/* Smooth Text Reveal */
+.reveal-text {
+  background: linear-gradient(to right, #fff 50%, #52525b 50%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: background-position 0.5s ease-out;
+}
+
+.reveal-text:hover {
+  background-position: 0%;
+}
+
+.dark .reveal-text {
+  background: linear-gradient(to right, #fafafa 50%, #52525b 50%);
+  background-size: 200% 100%;
+  background-position: 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .reveal-text:hover {
+  background-position: 0%;
 }
 
 /* Smooth scroll */
@@ -78,7 +136,22 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Handwriting font */
-.font-handwriting {
-  font-family: var(--font-handwriting);
+/* Light mode adjustments */
+:root {
+  --bg-noise-opacity: 0.05;
+}
+
+.dark {
+  --bg-noise-opacity: 0.05;
+}
+
+/* Ensure body background works in both modes */
+body {
+  @apply bg-black dark:bg-black;
+}
+
+@media (prefers-color-scheme: light) {
+  body:not(.dark) {
+    @apply bg-white text-zinc-900;
+  }
 }

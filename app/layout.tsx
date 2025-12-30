@@ -1,17 +1,24 @@
 import type { Metadata } from 'next'
-import { Inter, Caveat } from 'next/font/google'
+import { Inter, Cinzel, Playfair_Display_SC } from 'next/font/google'
 import './globals.css'
 import { routing } from '@/i18n/routing'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  weight: ['300', '400', '500', '600'],
 })
 
-const caveat = Caveat({
+const cinzel = Cinzel({
   subsets: ['latin'],
-  variable: '--font-handwriting',
-  weight: ['400', '700'],
+  variable: '--font-cinzel',
+  weight: ['400', '600', '800'],
+})
+
+const playfairDisplaySC = Playfair_Display_SC({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  weight: ['700'],
 })
 
 export const metadata: Metadata = {
@@ -25,9 +32,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang={routing.defaultLocale} className="dark" suppressHydrationWarning>
+    <html lang={routing.defaultLocale} className="dark scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${caveat.variable} font-sans`}
+        className={`${inter.variable} ${cinzel.variable} ${playfairDisplaySC.variable} font-body`}
         suppressHydrationWarning={true}
       >
         {children}

@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { NavLinks } from './NavLinks'
-import { CTAButton } from './CTAButton'
 import { ThemeToggle } from './ThemeToggle'
+import { LanguageSwitcher } from './LanguageSwitcher'
 import { X } from 'lucide-react'
 
 interface MobileMenuProps {
@@ -24,7 +24,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
           />
 
           {/* Menu Panel */}
@@ -33,12 +33,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 20 }}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-background border-l border-border z-50 p-4 sm:p-6 overflow-y-auto"
+            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-black border-l border-zinc-900 z-50 p-4 sm:p-6 overflow-y-auto"
           >
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 hover:bg-muted rounded-lg transition-colors"
+              className="absolute top-4 right-4 p-2 hover:bg-zinc-900 rounded-lg transition-colors text-zinc-400 hover:text-white"
               aria-label={t('common.openMenu')}
             >
               <X size={24} />
@@ -49,14 +49,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <NavLinks isMobile onLinkClick={onClose} />
             </nav>
 
-            {/* Theme Toggle */}
-            <div className="mt-8 flex justify-center">
+            {/* Theme Toggle & Language Switcher */}
+            <div className="mt-8 flex items-center justify-center gap-4">
+              <LanguageSwitcher />
               <ThemeToggle />
-            </div>
-
-            {/* CTA */}
-            <div className="mt-4">
-              <CTAButton variant="default" size="lg" />
             </div>
           </motion.div>
         </>

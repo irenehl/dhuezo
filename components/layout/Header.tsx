@@ -1,15 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { Menu } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { Logo } from './Logo'
 import { NavLinks } from './NavLinks'
-import { CTAButton } from './CTAButton'
 import { MobileMenu } from './MobileMenu'
-import { AuthButton } from './AuthButton'
 import { ThemeToggle } from './ThemeToggle'
 import { LanguageSwitcher } from './LanguageSwitcher'
 
@@ -28,52 +25,38 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+      <nav
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          'fixed top-0 w-full z-40 border-b transition-all duration-300',
           isScrolled
-            ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm'
-            : 'bg-transparent'
+            ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md border-zinc-200 dark:border-zinc-900'
+            : 'bg-transparent border-transparent'
         )}
-        style={{
-          backgroundColor: isScrolled ? 'hsl(var(--background) / 0.8)' : 'transparent',
-          borderBottomColor: isScrolled ? 'hsl(var(--border))' : 'transparent',
-        }}
       >
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
-            <Logo />
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Logo />
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-1">
-              <NavLinks />
-            </nav>
+          <div className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-widest uppercase text-zinc-500">
+            <NavLinks />
+          </div>
 
-            {/* Desktop CTA */}
-            <div className="hidden md:flex items-center space-x-4">
-              {/* <AuthButton /> */}
-              <LanguageSwitcher />
-              <ThemeToggle />
-              <CTAButton />
-            </div>
-
-            {/* Mobile Menu Button */}
+          <div className="flex items-center gap-4">
             <button
-              className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
+              className="text-zinc-900 dark:text-zinc-100 hover:text-rose-600 transition-colors md:hidden"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label={t('common.openMenu')}
             >
-              <Menu size={24} />
+              <Menu className="w-5 h-5" />
             </button>
+
+            <div className="hidden md:flex items-center gap-4">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
-      </motion.header>
+      </nav>
 
-      {/* Mobile Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}

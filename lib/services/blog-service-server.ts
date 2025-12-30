@@ -294,5 +294,43 @@ export const blogServiceServer = {
       return []
     }
   }),
+
+  // Get Stage entries - Server Component
+  async getStageEntries(
+    locale: string,
+    limit = 10
+  ): Promise<BlogPost[]> {
+    try {
+      const supabase = await createClient()
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select(
+          `
+          *,
+          blog_post_categories(
+            blog_categories(*)
+          )
+        `
+        )
+        .eq('published', true)
+        .eq('locale', locale)
+        .not('stage_type', 'is', null)
+        .order('event_date', { ascending: false, nullsFirst: false })
+        .order('published_at', { ascending: false })
+        .limit(limit)
+
+      if (error) throw error
+
+      const posts = (data as any[]) || []
+      return posts.map((post) => ({
+        ...post,
+        categories:
+          post.blog_post_categories?.map((pc: any) => pc.blog_categories) ||
+          [],
+      })) as BlogPost[]
+    } catch {
+      return []
+    }
+  },
 }
 
