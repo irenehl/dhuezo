@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter, Cinzel, Playfair_Display_SC } from 'next/font/google'
+
 import './globals.css'
 import { routing } from '@/i18n/routing'
+import { ThemeProvider } from '@/components/layout/ThemeProvider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,12 +34,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang={routing.defaultLocale} className="dark scroll-smooth" suppressHydrationWarning>
+    <html
+      lang={routing.defaultLocale}
+      className="scroll-smooth"
+      suppressHydrationWarning
+    >
       <body
         className={`${inter.variable} ${cinzel.variable} ${playfairDisplaySC.variable} font-body`}
         suppressHydrationWarning={true}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

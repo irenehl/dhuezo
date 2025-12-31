@@ -175,9 +175,31 @@
     "pageDescription": "Explore our articles and resources",
     "title": "Blog",
     "subtitle": "Discover articles, tutorials, and resources about web development, AI, and more",
+    "header": {
+      "eyebrow": "Reputation log",
+      "title": "Blog",
+      "description": "Architecture notes, post-mortems, and essays from real projects. Read this if you're deciding whether to trust me with the hard problems.",
+      "meta": {
+        "posts": "{count} entries in the archive",
+        "updated": "Last updated {date}"
+      },
+      "backHome": "Back to home",
+      "titleSuffix": "Blog",
+      "nav": {
+        "home": "Home",
+        "blog": "Blog"
+      }
+    },
     "recentPosts": "Recent Posts",
     "categoryPosts": "Posts in {category}",
-    "noPosts": "No posts available yet"
+    "noPosts": "No posts available yet",
+    "list": {
+      "noPosts": "No posts available yet"
+    },
+    "post": {
+      "backToBlog": "← Blog",
+      "backToBlogFooter": "← Back to Blog"
+    }
   }
 }
 

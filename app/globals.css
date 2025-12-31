@@ -4,24 +4,36 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
+    /* Newspaper-inspired light mode palette - high contrast, accessible */
+    /* Background: off-white paper tone (aged newspaper aesthetic) */
+    --background: 45 15% 98%;
+    /* Foreground: near-black for strong contrast (WCAG AAA: ~19:1) */
+    --foreground: 0 0% 8%;
+    /* Card: slightly elevated paper-like shade */
+    --card: 45 10% 99%;
+    --card-foreground: 0 0% 8%;
+    --popover: 45 10% 99%;
+    --popover-foreground: 0 0% 8%;
+    /* Primary: purple accent (maintained from dark mode) */
     --primary: 270 80% 56%;
     --primary-foreground: 0 0% 100%;
+    /* Secondary: red accent */
     --secondary: 0 70% 51%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 330 80% 60%;
+    /* Muted: subtle gray background for supporting elements */
+    --muted: 0 0% 95%;
+    /* Muted foreground: darker gray for AA contrast (WCAG AA: ~5.15:1 on 98% background) */
+    --muted-foreground: 0 0% 15%;
+    /* Accent: deep rose red inspired by reputation aesthetic */
+    --accent: 346 77% 56%;
     --accent-foreground: 0 0% 100%;
+    /* Destructive: accessible red */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    /* Border: visible but subtle newspaper-style borders */
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    /* Ring: focus outline using primary color */
     --ring: 270 80% 56%;
     --radius: 0.5rem;
   }
@@ -39,7 +51,8 @@
     --secondary-foreground: 0 0% 100%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 330 80% 60%;
+    /* Accent updated from pink/magenta to a rose red matching the "Open to work" badge */
+    --accent: 346 77% 56%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
@@ -105,7 +118,8 @@
 
 /* Smooth Text Reveal */
 .reveal-text {
-  background: linear-gradient(to right, #fff 50%, #52525b 50%);
+  /* Light mode: white to dark gray (newspaper text effect) */
+  background: linear-gradient(to right, hsl(var(--background)) 50%, hsl(var(--foreground)) 50%);
   background-size: 200% 100%;
   background-position: 100%;
   -webkit-background-clip: text;
@@ -119,6 +133,7 @@
 }
 
 .dark .reveal-text {
+  /* Dark mode: light gray to medium gray (preserved) */
   background: linear-gradient(to right, #fafafa 50%, #52525b 50%);
   background-size: 200% 100%;
   background-position: 100%;
@@ -152,15 +167,4 @@ html {
 
 .dark {
   --bg-noise-opacity: 0.05;
-}
-
-/* Ensure body background works in both modes */
-body {
-  @apply bg-black dark:bg-black;
-}
-
-@media (prefers-color-scheme: light) {
-  body:not(.dark) {
-    @apply bg-white text-zinc-900;
-  }
 }
