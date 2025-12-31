@@ -6,15 +6,21 @@ import { StageSection } from '@/components/sections/StageSection'
 import { TimelineSectionServer } from '@/components/sections/TimelineSectionServer'
 import { AboutSection } from '@/components/sections/AboutSection'
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+
   return (
     <>
       <SiteHeader />
       <HeroSection />
       <main className="max-w-6xl mx-auto px-6 space-y-32 pb-32">
-        <ProjectsSectionServer />
-        <StageSection />
-        <TimelineSectionServer />
+        <ProjectsSectionServer locale={locale} />
+        <StageSection locale={locale} />
+        <TimelineSectionServer locale={locale} />
         <AboutSection />
       </main>
       <Footer />

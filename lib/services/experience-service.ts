@@ -1,4 +1,10 @@
 import path from 'path'
+import fs from 'fs/promises'
+import matter from 'gray-matter'
+import { remark } from 'remark'
+import remarkGfm from 'remark-gfm'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
 import type { Experience } from '@/types/experience'
 import {
   parseMarkdownFile,
@@ -10,6 +16,83 @@ import type {
 } from '@/lib/markdown/types'
 
 const CONTENT_DIR = path.join(process.cwd(), 'content/experience')
+
+/**
+ * Parse a file that contains multiple frontmatter blocks (multiple experiences)
+ * Pattern: ---\nfrontmatter\n---\ncontent\n---\nfrontmatter\n---\ncontent...
+ */
+async function parseMultipleExperiencesFromFile(
+  filePath: string
+): Promise<Array<{
+  frontmatter: ExperienceFrontmatter
+  content: string
+  contentHtml: string
+}>> {
+  const fileContents = await fs.readFile(filePath, 'utf-8')
+  
+  // Match pattern: ---\n(frontmatter)\n---\n(content)\n---
+  // Use regex to find all experience blocks
+  const experienceRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*?)(?=\n---|$)/gm
+  const matches = Array.from(fileContents.matchAll(experienceRegex))
+  
+  const experiences: Array<{
+    frontmatter: ExperienceFrontmatter
+    content: string
+    contentHtml: string
+  }> = []
+
+  for (const match of matches) {
+    const frontmatterText = match[1]?.trim()
+    const contentText = match[2]?.trim() || ''
+
+    if (!frontmatterText) continue
+
+    try {
+      // Parse frontmatter (add `---` delimiters for gray-matter)
+      const frontmatterBlock = `---\n${frontmatterText}\n---`
+      const parsed = matter(frontmatterBlock)
+
+      if (parsed.data && Object.keys(parsed.data).length > 0) {
+        // Convert Markdown to HTML
+        const processor = remark().use(remarkGfm).use(remarkRehype).use(rehypeStringify)
+        const result = await processor.process(contentText)
+        let contentHtml = String(result)
+
+        // Add IDs to headings
+        contentHtml = contentHtml.replace(
+          /<h([1-6])([^>]*)>(.*?)<\/h[1-6]>/gi,
+          (match, level, attrs, text) => {
+            const textContent = text.replace(/<[^>]*>/g, '').trim()
+            const id = textContent
+              .toLowerCase()
+              .replace(/\s+/g, '-')
+              .replace(/[^a-z0-9-]/g, '')
+              .replace(/-+/g, '-')
+              .replace(/^-|-$/g, '')
+            
+            if (attrs && attrs.includes('id=')) {
+              return match
+            }
+            
+            return `<h${level}${attrs} id="${id}">${text}</h${level}>`
+          }
+        )
+
+        experiences.push({
+          frontmatter: parsed.data as ExperienceFrontmatter,
+          content: contentText,
+          contentHtml,
+        })
+      }
+    } catch (error) {
+      // If parsing fails, skip this experience
+      console.warn(`Failed to parse experience in ${filePath}:`, error)
+      continue
+    }
+  }
+
+  return experiences
+}
 
 function mapMarkdownToExperience(
   parsed: {
@@ -48,24 +131,43 @@ export const experienceService = {
   // Get all experiences
   async getAllExperiences(locale: string): Promise<MarkdownExperience[]> {
     const files = await getMarkdownFilesInDir(CONTENT_DIR)
-    const experiences = await Promise.all(
-      files.map(async (filePath) => {
-        const parsed = await parseMarkdownFile<ExperienceFrontmatter>(filePath)
-        // Filter by locale during parsing
-        if (parsed.frontmatter.locale !== locale) {
-          return null
-        }
-        return mapMarkdownToExperience(parsed, filePath)
-      })
-    )
+    const allExperiences: MarkdownExperience[] = []
 
-    // Filter out null values
-    const filtered = experiences.filter(
-      (exp): exp is MarkdownExperience => exp !== null
-    )
+    for (const filePath of files) {
+      try {
+        // Try parsing as multiple experiences first (for files with multiple frontmatter blocks)
+        const multipleExperiences = await parseMultipleExperiencesFromFile(filePath)
+        
+        if (multipleExperiences.length > 0) {
+          // File contains multiple experiences
+          for (const parsed of multipleExperiences) {
+            if (parsed.frontmatter.locale === locale) {
+              allExperiences.push(mapMarkdownToExperience(parsed, filePath))
+            }
+          }
+        } else {
+          // Fallback to single experience parsing
+          const parsed = await parseMarkdownFile<ExperienceFrontmatter>(filePath)
+          if (parsed.frontmatter.locale === locale) {
+            allExperiences.push(mapMarkdownToExperience(parsed, filePath))
+          }
+        }
+      } catch (error) {
+        console.error(`Error parsing experience file ${filePath}:`, error)
+        // Try fallback parsing
+        try {
+          const parsed = await parseMarkdownFile<ExperienceFrontmatter>(filePath)
+          if (parsed.frontmatter.locale === locale) {
+            allExperiences.push(mapMarkdownToExperience(parsed, filePath))
+          }
+        } catch (fallbackError) {
+          console.error(`Fallback parsing also failed for ${filePath}:`, fallbackError)
+        }
+      }
+    }
 
     // Sort by orderIndex or startDate
-    return filtered.sort((a, b) => {
+    return allExperiences.sort((a, b) => {
       if (a.order_index !== b.order_index) {
         return a.order_index - b.order_index
       }

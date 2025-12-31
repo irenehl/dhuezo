@@ -11,22 +11,22 @@ export function getNavItems(t: (key: string) => string, locale: Locale): NavItem
   return [
     {
       label: t('navigation.projects'),
-      href: '#projects',
+      href: `/${locale}#projects`,
       isAnchor: true,
     },
     {
       label: t('navigation.stage'),
-      href: '#stage',
+      href: `/${locale}#stage`,
       isAnchor: true,
     },
     {
       label: t('navigation.timeline'),
-      href: '#timeline',
+      href: `/${locale}#timeline`,
       isAnchor: true,
     },
     {
       label: t('navigation.about'),
-      href: '#about',
+      href: `/${locale}#about`,
       isAnchor: true,
     },
   ]

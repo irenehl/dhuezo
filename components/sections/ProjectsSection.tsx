@@ -54,7 +54,7 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
   }
 
   return (
-    <section id="projects" className="space-y-16">
+    <section id="projects" className="space-y-16 scroll-mt-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 pb-6 dark:border-zinc-900">
         <h2 className="font-header text-4xl md:text-6xl text-zinc-900 uppercase tracking-tighter dark:text-zinc-100">
           {t('projects.title')}
@@ -175,12 +175,14 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
       </div>
 
       <div className="flex justify-center pt-8">
-        <I18nLink
-          href="/blog"
+        <a
+          href="https://github.com/irenehl"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-rose-600 transition-colors dark:text-zinc-400 dark:hover:text-rose-600"
         >
           {t('projects.viewArchive')} <ArrowRight className="w-4 h-4" />
-        </I18nLink>
+        </a>
       </div>
     </section>
   )

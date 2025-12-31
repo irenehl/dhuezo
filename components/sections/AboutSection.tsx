@@ -1,13 +1,14 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Github, Linkedin, Twitter, Quote } from 'lucide-react'
+import { Github, Linkedin, Quote } from 'lucide-react'
+import { XIcon } from '@/components/icons/XIcon'
 
 export function AboutSection() {
   const t = useTranslations()
 
   return (
-    <section id="about" className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 border-t border-zinc-200 dark:border-zinc-900">
+    <section id="about" className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 border-t border-zinc-200 dark:border-zinc-900 scroll-mt-20">
       <div className="space-y-6">
         <h2 className="font-header text-4xl text-zinc-900 uppercase tracking-tighter dark:text-zinc-100">
           {t('about.title')}
@@ -58,13 +59,13 @@ export function AboutSection() {
             <Linkedin className="w-5 h-5" />
           </a>
           <a
-            href={t('about.social.twitter')}
+            href={t('about.social.x')}
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 border border-zinc-200 rounded-full hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all text-zinc-600 dark:border-zinc-700 dark:hover:bg-zinc-100 dark:hover:text-black dark:hover:border-zinc-100"
-            aria-label="Twitter"
+            aria-label="X"
           >
-            <Twitter className="w-5 h-5" />
+            <XIcon className="w-5 h-5" />
           </a>
         </div>
       </div>

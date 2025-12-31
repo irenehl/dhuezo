@@ -58,3 +58,4 @@ export async function getPostsByStageType(
   return allPosts.filter((post) => post.stage_type === stageType)
 }
 
+

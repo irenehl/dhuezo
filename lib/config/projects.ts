@@ -53,3 +53,4 @@ export function getFeaturedProjects(): ProjectConfig[] {
   return projectsConfig.filter((project) => project.featured !== false)
 }
 
+

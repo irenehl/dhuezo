@@ -26,7 +26,7 @@ export default async function BlogPage(): Promise<JSX.Element> {
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
-      <main className="flex-1 max-w-4xl mx-auto px-6 py-12 w-full">
+      <main className="flex-1 max-w-4xl mx-auto px-6 pt-20 pb-12 w-full">
         <section className="mb-8 space-y-6 animate-in fade-in-50 duration-500">
           <header className="space-y-3">
             <h1 className="font-header text-4xl md:text-5xl tracking-tight text-foreground">

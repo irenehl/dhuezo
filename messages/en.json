@@ -124,6 +124,7 @@
     "title": "The Eras",
     "subtitle": "Timeline of Experience & Milestones.",
     "loadArchive": "Load Full Archive",
+    "showLess": "Show Less",
     "exp1": {
       "title": "Senior Frontend Engineer",
       "company": "TechCorp Inc.",
@@ -154,9 +155,9 @@
     "cta": "Get in touch",
     "email": "hello@example.com",
     "social": {
-      "github": "https://github.com",
-      "linkedin": "https://linkedin.com",
-      "twitter": "https://twitter.com"
+      "github": "https://github.com/irenehl",
+      "linkedin": "https://www.linkedin.com/in/irenehl",
+      "x": "https://x.com/irenehl26__"
     }
   },
   "footer": {

@@ -35,3 +35,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# project images (keep local, don't track in repo)
+content/projects/*.jpg
+content/projects/*.png
+public/projects/*.jpg
+public/projects/*.png

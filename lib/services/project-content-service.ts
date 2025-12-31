@@ -11,6 +11,25 @@ import type {
 
 const CONTENT_DIR = path.join(process.cwd(), 'content/projects')
 
+function normalizeImageUrl(url: string | undefined): string {
+  if (!url) return ''
+  
+  // If it's already a full URL, return as-is
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  
+  // If it starts with /, it's already a valid public path
+  if (url.startsWith('/')) {
+    return url
+  }
+  
+  // If it's a relative path like "content/projects/image.jpg", convert to public path
+  // Remove "content/" prefix if present and add leading slash
+  const normalized = url.replace(/^content\//, '/')
+  return normalized.startsWith('/') ? normalized : `/${normalized}`
+}
+
 function mapMarkdownToProject(
   parsed: {
     frontmatter: ProjectFrontmatter
@@ -30,7 +49,7 @@ function mapMarkdownToProject(
     project_id: frontmatter.projectId,
     locale: frontmatter.locale,
     order_index: frontmatter.orderIndex,
-    preview_image_url: frontmatter.previewImageUrl,
+    preview_image_url: normalizeImageUrl(frontmatter.previewImageUrl),
     deployed_url: frontmatter.deployedUrl || null,
     repo_url: frontmatter.repoUrl || null,
     featured: frontmatter.featured,

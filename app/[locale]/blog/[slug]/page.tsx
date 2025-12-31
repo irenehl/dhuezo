@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
-      <main className="flex-1 max-w-4xl mx-auto px-6 py-12 w-full">
+      <main className="flex-1 max-w-4xl mx-auto px-6 pt-20 pb-12 w-full">
         <article className="space-y-10 animate-in fade-in-50 duration-500" id="blog-post">
           <header className="space-y-4">
             <div className="flex items-center justify-between">

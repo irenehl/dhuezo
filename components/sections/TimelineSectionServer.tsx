@@ -1,9 +1,7 @@
-import { getLocale } from 'next-intl/server'
 import { experienceService } from '@/lib/services/experience-service'
 import { TimelineSection } from './TimelineSection'
 
-export async function TimelineSectionServer() {
-  const locale = await getLocale()
+export async function TimelineSectionServer({ locale }: { locale: string }) {
   try {
     const experiences = await experienceService.getAllExperiences(locale)
     // Only use Markdown experiences if we have any

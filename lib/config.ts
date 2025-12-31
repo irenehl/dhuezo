@@ -3,7 +3,8 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   links: {
     github: "https://github.com/irenehl",
-    linkedin: "https://www.linkedin.com/in/irenehl/",
+    linkedin: "https://www.linkedin.com/in/irenehl",
+    x: "https://x.com/irenehl26__",
     email: "dhuezodev26@gmail.com",
   },
   calendarLink: "https://calendar.app.google/jmaEeJNsbMWnj6jcA", // Para el CTA de reunión

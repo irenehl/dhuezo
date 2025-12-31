@@ -1,4 +1,3 @@
-import { getLocale } from 'next-intl/server'
 import { StageSectionClient } from './StageSectionClient'
 import { getPostsByStageType } from '@/lib/services/blog-helpers'
 import { formatDate } from '@/lib/blog'
@@ -14,8 +13,7 @@ interface StageEntry {
   ctaUrl?: string
 }
 
-export async function StageSection() {
-  const locale = await getLocale()
+export async function StageSection({ locale }: { locale: string }) {
   
   // Get all stage types of posts
   const talks = await getPostsByStageType(locale, 'talk')

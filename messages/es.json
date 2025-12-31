@@ -124,6 +124,7 @@
     "title": "Las Eras",
     "subtitle": "Línea de Tiempo de Experiencia y Hitos.",
     "loadArchive": "Cargar Archivo Completo",
+    "showLess": "Mostrar Menos",
     "exp1": {
       "title": "Ingeniera Frontend Senior",
       "company": "TechCorp Inc.",
@@ -154,9 +155,9 @@
     "cta": "Halemos",
     "email": "hello@example.com",
     "social": {
-      "github": "https://github.com",
-      "linkedin": "https://linkedin.com",
-      "twitter": "https://twitter.com"
+      "github": "https://github.com/irenehl",
+      "linkedin": "https://www.linkedin.com/in/irenehl",
+      "x": "https://x.com/irenehl26__"
     }
   },
   "footer": {

@@ -1,9 +1,7 @@
-import { getLocale } from 'next-intl/server'
 import { projectContentService } from '@/lib/services/project-content-service'
 import { ProjectsSection } from './ProjectsSection'
 
-export async function ProjectsSectionServer() {
-  const locale = await getLocale()
+export async function ProjectsSectionServer({ locale }: { locale: string }) {
   try {
     const projects = await projectContentService.getFeaturedProjects(locale)
     // Only use Markdown projects if we have any
