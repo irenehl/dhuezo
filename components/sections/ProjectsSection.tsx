@@ -84,6 +84,7 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      unoptimized
                     />
                     <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors z-10 dark:bg-zinc-950/20" />
                   </div>
