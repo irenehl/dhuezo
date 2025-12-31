@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { Toaster } from '@/components/ui/toaster'
 import { ClarityScript } from '@/components/analytics/ClarityScript'
-import { AppwritePing } from '@/components/appwrite/AppwritePing'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -33,7 +32,6 @@ export default async function LocaleLayout({
       {children}
       <Toaster />
       <ClarityScript />
-      <AppwritePing />
     </NextIntlClientProvider>
   )
 }

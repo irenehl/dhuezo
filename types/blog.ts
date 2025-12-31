@@ -21,6 +21,8 @@ export interface BlogPost {
   featured_image_url: string | null
   pdf_url: string | null
   pdf_preview_images: string[]
+  // Images metadata stored in the post document (files are in Storage bucket)
+  images?: BlogPostImage[]
   author_id: string
   published: boolean
   published_at: string | null
@@ -41,10 +43,9 @@ export interface BlogPost {
 }
 
 export interface BlogPostImage {
-  id: string
-  post_id: string
-  image_url: string
-  storage_path: string
+  file_id: string // Storage file ID
+  image_url: string // Public URL from Storage
+  storage_path: string // Path in Storage bucket
   alt_text: string | null
   order_index: number
   created_at: string
@@ -59,6 +60,7 @@ export interface CreateBlogPostParams {
   featured_image_url?: string | null
   pdf_url?: string | null
   pdf_preview_images?: string[]
+  images?: BlogPostImage[] // Images metadata
   category_ids?: string[]
   published?: boolean
   stage_type?: 'talk' | 'article' | 'slide' | null
@@ -76,6 +78,7 @@ export interface UpdateBlogPostParams {
   featured_image_url?: string | null
   pdf_url?: string | null
   pdf_preview_images?: string[]
+  images?: BlogPostImage[] // Images metadata
   category_ids?: string[]
   published?: boolean
   stage_type?: 'talk' | 'article' | 'slide' | null
