@@ -40,7 +40,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${inter.variable} ${cinzel.variable} ${playfairDisplaySC.variable} font-body`}
+        className={`${inter.variable} ${cinzel.variable} ${playfairDisplaySC.variable} font-body min-h-screen antialiased overflow-x-hidden bg-zinc-50 text-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 selection:bg-rose-200 selection:text-rose-900 dark:selection:bg-rose-900 dark:selection:text-rose-200`}
         suppressHydrationWarning={true}
       >
         <ThemeProvider>{children}</ThemeProvider>

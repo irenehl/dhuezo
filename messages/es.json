@@ -113,6 +113,7 @@
     "title": "El Escenario",
     "subtitle": "Conferencias, Charlas y Editoriales.",
     "empty": "Aún no hay entradas.",
+    "loadArchive": "Cargar Archivo Completo",
     "type": {
       "talk": "Charla",
       "article": "Blog",
@@ -121,6 +122,8 @@
   },
   "timeline": {
     "title": "Las Eras",
+    "subtitle": "Línea de Tiempo de Experiencia y Hitos.",
+    "loadArchive": "Cargar Archivo Completo",
     "exp1": {
       "title": "Ingeniera Frontend Senior",
       "company": "TechCorp Inc.",
@@ -158,7 +161,8 @@
   },
   "footer": {
     "copyright": "© {year} REPUTATION. TODOS LOS DERECHOS RESERVADOS.",
-    "designed": "Diseñado en la oscuridad"
+    "designedLight": "Diseñado en la luz",
+    "designedDark": "Diseñado en la oscuridad"
   },
   "promptExamples": {
     "happy": "Estoy feliz",

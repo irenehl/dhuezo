@@ -1,56 +1,42 @@
  'use client'
 
-import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { Sun, Moon } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import { siteConfig } from '@/lib/config'
 
 export const Footer = (): JSX.Element => {
   const tCommon = useTranslations('common')
   const tFooter = useTranslations('footer')
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const isDark = mounted ? theme === 'dark' : true
+  const designedText = isDark ? tFooter('designedDark') : tFooter('designedLight')
 
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-border bg-card dark:border-zinc-800 dark:bg-zinc-950">
-      {/* subtle animated line at the top edge */}
-      <div className="h-px w-full bg-gradient-to-r from-border via-muted-foreground/30 to-border animate-pulse dark:from-zinc-900 dark:via-zinc-600 dark:to-zinc-900" />
-
-      <div className="mx-auto flex max-w-4xl flex-col gap-4 px-6 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between dark:text-zinc-400">
-        <div className="flex flex-col gap-1.5">
-          <p className="font-mono text-foreground dark:text-zinc-100">
-            {tCommon('copyright', {
-              year,
-              name: siteConfig.name,
-            })}
-          </p>
-          <p className="font-mono text-[0.7rem] text-muted-foreground dark:text-zinc-500">
-            {tFooter('designed')}
-          </p>
+    <footer className="border-t border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="text-xs text-zinc-400 font-mono font-medium dark:text-zinc-500">
+          {tCommon('copyright', {
+            year,
+            name: siteConfig.name,
+          })}
         </div>
-
-        <div className="flex items-center gap-4">
-          <Link
-            className="font-mono text-[0.7rem] text-muted-foreground transition-colors hover:text-foreground dark:text-zinc-400 dark:hover:text-zinc-100"
-            href={siteConfig.links.github}
-            rel="noreferrer"
-            target="_blank"
-          >
-            GitHub
-          </Link>
-          <Link
-            className="font-mono text-[0.7rem] text-muted-foreground transition-colors hover:text-foreground dark:text-zinc-400 dark:hover:text-zinc-100"
-            href={siteConfig.links.linkedin}
-            rel="noreferrer"
-            target="_blank"
-          >
-            LinkedIn
-          </Link>
-          <Link
-            className="font-mono text-[0.7rem] text-muted-foreground transition-colors hover:text-foreground dark:text-zinc-400 dark:hover:text-zinc-100"
-            href={`mailto:${siteConfig.links.email}`}
-          >
-            Email
-          </Link>
+        <div className="flex items-center gap-1 text-zinc-500 text-xs uppercase tracking-widest font-semibold dark:text-zinc-400">
+          <span>{designedText}</span>
+          {isDark ? (
+            <Moon className="w-3 h-3 text-zinc-400" />
+          ) : (
+            <Sun className="w-3 h-3 text-amber-500" />
+          )}
         </div>
       </div>
     </footer>

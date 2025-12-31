@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { Toaster } from '@/components/ui/toaster'
 import { ClarityScript } from '@/components/analytics/ClarityScript'
+import { BackgroundLayers } from '@/components/layout/BackgroundLayers'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -29,6 +30,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
+      <BackgroundLayers />
       {children}
       <Toaster />
       <ClarityScript />

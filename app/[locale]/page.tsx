@@ -1,3 +1,5 @@
+import { SiteHeader } from '@/components/layout/SiteHeader'
+import { Footer } from '@/components/layout/Footer'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ProjectsSectionServer } from '@/components/sections/ProjectsSectionServer'
 import { StageSection } from '@/components/sections/StageSection'
@@ -7,6 +9,7 @@ import { AboutSection } from '@/components/sections/AboutSection'
 export default function Home() {
   return (
     <>
+      <SiteHeader />
       <HeroSection />
       <main className="max-w-6xl mx-auto px-6 space-y-32 pb-32">
         <ProjectsSectionServer />
@@ -14,6 +17,7 @@ export default function Home() {
         <TimelineSectionServer />
         <AboutSection />
       </main>
+      <Footer />
     </>
   )
 }

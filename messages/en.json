@@ -113,6 +113,7 @@
     "title": "The Stage",
     "subtitle": "Conferences, Talks, and Editorials.",
     "empty": "No entries yet.",
+    "loadArchive": "Load Full Archive",
     "type": {
       "talk": "Talk",
       "article": "Blog",
@@ -121,6 +122,8 @@
   },
   "timeline": {
     "title": "The Eras",
+    "subtitle": "Timeline of Experience & Milestones.",
+    "loadArchive": "Load Full Archive",
     "exp1": {
       "title": "Senior Frontend Engineer",
       "company": "TechCorp Inc.",
@@ -158,7 +161,8 @@
   },
   "footer": {
     "copyright": "© {year} REPUTATION. ALL RIGHTS RESERVED.",
-    "designed": "Designed in the dark"
+    "designedLight": "Designed in the light",
+    "designedDark": "Designed in the dark"
   },
   "promptExamples": {
     "happy": "I'm happy",

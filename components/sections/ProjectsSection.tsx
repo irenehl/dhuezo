@@ -55,11 +55,11 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
 
   return (
     <section id="projects" className="space-y-16">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border pb-6 dark:border-zinc-900">
-        <h2 className="font-header text-4xl md:text-6xl text-foreground uppercase tracking-tighter dark:text-zinc-100">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 pb-6 dark:border-zinc-900">
+        <h2 className="font-header text-4xl md:text-6xl text-zinc-900 uppercase tracking-tighter dark:text-zinc-100">
           {t('projects.title')}
         </h2>
-        <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold text-right max-w-xs dark:text-zinc-500">
+        <p className="text-xs text-zinc-500 uppercase tracking-widest font-semibold text-right max-w-xs dark:text-zinc-500">
           {t('projects.subtitle')}
         </p>
       </div>
@@ -72,9 +72,9 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
           return (
             <article
               key={project.id}
-              className="group md:mt-16 first:mt-0 md:first:mt-0 md:[&:nth-child(2)]:mt-16"
+              className="group cursor-pointer md:mt-16 first:mt-0 md:first:mt-0 md:[&:nth-child(2)]:mt-16"
             >
-              <div className="relative aspect-[4/3] bg-card border border-border overflow-hidden mb-6 dark:bg-zinc-900 dark:border-zinc-800">
+              <div className="relative aspect-[4/3] bg-white border border-zinc-200 overflow-hidden mb-6 shadow-sm group-hover:shadow-md transition-shadow dark:bg-zinc-900 dark:border-zinc-800">
                 {/* Preview Image */}
                 {project.previewImage ? (
                   <div className="relative w-full h-full">
@@ -90,9 +90,9 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
                 ) : (
                   <>
                     {/* Fallback: Abstract Representation */}
-                    <div className="w-full h-full bg-[linear-gradient(45deg,transparent_25%,rgba(60,60,60,.1)_50%,transparent_75%,transparent_100%)] bg-[length:10px_10px] opacity-20" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
-                      <span className="font-header text-8xl text-muted-foreground group-hover:text-foreground dark:text-zinc-800 dark:group-hover:text-zinc-600">
+                    <div className="w-full h-full bg-[linear-gradient(45deg,transparent_25%,rgba(200,200,200,.2)_50%,transparent_75%,transparent_100%)] bg-[length:10px_10px]" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+                      <span className="font-header text-8xl text-zinc-200 group-hover:text-zinc-300 dark:text-zinc-800 dark:group-hover:text-zinc-600">
                         {project.number}
                       </span>
                     </div>
@@ -104,7 +104,7 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 text-[10px] font-medium bg-background/80 backdrop-blur-sm border border-border text-muted-foreground uppercase tracking-wider dark:bg-zinc-950/80 dark:border-zinc-800 dark:text-zinc-400"
+                      className="px-2 py-1 text-[10px] font-semibold bg-white border border-zinc-200 text-zinc-600 uppercase tracking-wider shadow-sm dark:bg-zinc-950/80 dark:border-zinc-800 dark:text-zinc-400"
                     >
                       {tag}
                     </span>
@@ -152,21 +152,21 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
                       rel="noopener noreferrer"
                       className="block group/link"
                     >
-                      <h3 className="font-display text-2xl text-foreground mb-1 reveal-text dark:text-zinc-100">
+                      <h3 className="font-display text-2xl text-zinc-900 hover-glitch mb-1 font-semibold dark:text-zinc-100">
                         {project.title}
                       </h3>
                     </a>
                   ) : (
-                    <h3 className="font-display text-2xl text-foreground mb-1 reveal-text dark:text-zinc-100">
+                    <h3 className="font-display text-2xl text-zinc-900 hover-glitch mb-1 font-semibold dark:text-zinc-100">
                       {project.title}
                     </h3>
                   )}
-                  <p className="text-sm text-muted-foreground leading-relaxed max-w-sm dark:text-zinc-500">
+                  <p className="text-sm text-zinc-600 leading-relaxed max-w-sm dark:text-zinc-500">
                     {project.description}
                   </p>
                 </div>
                 {hasLinks && (
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-colors dark:text-zinc-600 dark:group-hover:text-rose-600 flex-shrink-0 ml-4" />
+                  <ArrowUpRight className="w-5 h-5 text-zinc-400 group-hover:text-rose-600 transition-colors dark:text-zinc-600 dark:group-hover:text-rose-600 flex-shrink-0 ml-4" />
                 )}
               </div>
             </article>
@@ -177,7 +177,7 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
       <div className="flex justify-center pt-8">
         <I18nLink
           href="/blog"
-          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors dark:text-zinc-400 dark:hover:text-rose-600"
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-rose-600 transition-colors dark:text-zinc-400 dark:hover:text-rose-600"
         >
           {t('projects.viewArchive')} <ArrowRight className="w-4 h-4" />
         </I18nLink>

@@ -84,8 +84,12 @@
   font-family: var(--font-inter), sans-serif;
 }
 
-/* Custom Noise Texture */
+/* Custom Noise Texture - Light Mode */
 .bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+.dark .bg-noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
@@ -116,10 +120,14 @@
   color: #e11d48; /* rose-600 */
 }
 
-/* Smooth Text Reveal */
+.dark .hover-glitch:hover {
+  color: #e11d48; /* rose-600 */
+}
+
+/* Smooth Text Reveal - Light Mode */
 .reveal-text {
-  /* Light mode: white to dark gray (newspaper text effect) */
-  background: linear-gradient(to right, hsl(var(--background)) 50%, hsl(var(--foreground)) 50%);
+  /* Light mode: dark to light gray */
+  background: linear-gradient(to right, #18181b 50%, #a1a1aa 50%);
   background-size: 200% 100%;
   background-position: 100%;
   -webkit-background-clip: text;
@@ -160,11 +168,24 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Light mode adjustments */
-:root {
-  --bg-noise-opacity: 0.05;
+/* Stroke Text Effect for Light Mode Only */
+.stroke-text {
+  -webkit-text-stroke: 1px #18181b;
+  color: transparent;
 }
 
-.dark {
-  --bg-noise-opacity: 0.05;
+.dark .stroke-text {
+  -webkit-text-stroke: 0;
+  color: inherit;
+}
+
+/* Selection Colors - Light Mode */
+::selection {
+  background-color: rgb(254 205 211); /* rose-200 */
+  color: rgb(127 29 29); /* rose-900 */
+}
+
+.dark ::selection {
+  background-color: rgb(127 29 29); /* rose-900 */
+  color: rgb(254 205 211); /* rose-200 */
 }
