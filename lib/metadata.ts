@@ -27,13 +27,14 @@ export function generateMetadata({
     description ||
     'Full Stack Developer building resilient systems and dramatic interfaces.'
   const siteUrl = url || `${siteConfig.url}/${locale}`
+  // Use relative path when metadataBase is set, or absolute URL for external images
   const siteImage = image
-    ? image.startsWith('http') || image.startsWith('/')
-      ? image.startsWith('http')
-        ? image
-        : `${siteConfig.url}${image}`
-      : `${siteConfig.url}/${image}`
-    : `${siteConfig.url}/og-image.png` // Default OG image - add og-image.png to public folder
+    ? image.startsWith('http')
+      ? image // External absolute URL
+      : image.startsWith('/')
+      ? image // Relative path - will be resolved by metadataBase
+      : `/${image}` // Make it relative if it's not already
+    : '/og-image.png' // Default OG image - relative path resolved by metadataBase
 
   const metadata: Metadata = {
     title: siteTitle,
