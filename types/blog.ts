@@ -88,13 +88,6 @@ export interface UpdateBlogPostParams {
   cta_url?: string | null
 }
 
-export interface UploadImageParams {
-  file: File
-  alt_text?: string
-}
 
-export interface UploadPDFParams {
-  file: File
-}
 
 
