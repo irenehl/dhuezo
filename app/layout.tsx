@@ -24,8 +24,57 @@ const playfairDisplaySC = Playfair_Display_SC({
 })
 
 export const metadata: Metadata = {
-  title: 'Daniela Huezo',
-  description: 'Full Stack Developer',
+  title: {
+    default: 'Daniela Huezo',
+    template: '%s | Daniela Huezo',
+  },
+  description: 'Full Stack Developer building resilient systems and dramatic interfaces.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  keywords: [
+    'Full Stack Developer',
+    'Web Developer',
+    'Software Engineer',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Daniela Huezo',
+  ],
+  authors: [{ name: 'Daniela Huezo' }],
+  creator: 'Daniela Huezo',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    siteName: 'Daniela Huezo',
+    title: 'Daniela Huezo - Full Stack Developer',
+    description: 'Full Stack Developer building resilient systems and dramatic interfaces.',
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Daniela Huezo - Full Stack Developer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Daniela Huezo - Full Stack Developer',
+    description: 'Full Stack Developer building resilient systems and dramatic interfaces.',
+    creator: '@irenehl26__',
+    images: [`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/og-image.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({

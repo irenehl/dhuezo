@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const postUrl = `${siteConfig.url}/${locale}/blog/${slug}`
   const description = post.description || `Read ${post.title}`
+  const image = post.featured_image_url || `${siteConfig.url}/og-image.png`
 
   return {
     title: post.title,
@@ -56,11 +57,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: postUrl,
       type: 'article',
       publishedTime: post.created_at,
+      modifiedTime: post.updated_at,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      siteName: siteConfig.name,
+      locale: locale,
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: post.title,
       description,
+      images: [image],
+      creator: '@irenehl26__',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   }
 }

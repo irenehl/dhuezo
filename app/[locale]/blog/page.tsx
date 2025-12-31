@@ -6,10 +6,20 @@ import { Footer } from '@/components/layout/Footer'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { formatDate } from '@/lib/blog'
 import { getPublishedPostsWithMeta } from '@/lib/services/blog-helpers'
+import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
+import { siteConfig } from '@/lib/config'
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Thoughts on software engineering, web development, and technology.',
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  const blogUrl = `${siteConfig.url}/${locale}/blog`
+  
+  return generateSiteMetadata({
+    locale,
+    title: 'Blog - Daniela Huezo',
+    description:
+      'Architecture notes, post-mortems, and essays from real projects. Read this if you\'re deciding whether to trust me with the hard problems.',
+    url: blogUrl,
+  })
 }
 
 export default async function BlogPage(): Promise<JSX.Element> {
