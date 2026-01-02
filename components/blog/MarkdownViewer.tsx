@@ -123,6 +123,7 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
                         height={800}
                         className="w-full h-auto rounded-lg"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                        unoptimized
                       />
                     )}
                   </div>

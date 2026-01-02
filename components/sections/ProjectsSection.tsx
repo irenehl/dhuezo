@@ -1,7 +1,6 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import { Link as I18nLink } from '@/i18n/routing'
 import { ArrowUpRight, ArrowRight, ExternalLink, Github } from 'lucide-react'
 import { getFeaturedProjects, type ProjectConfig } from '@/lib/config/projects'
@@ -78,13 +77,11 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
                 {/* Preview Image */}
                 {project.previewImage ? (
                   <div className="relative w-full h-full">
-                    <Image
+                    <img
                       src={project.previewImage}
                       alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      unoptimized
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors z-10 dark:bg-zinc-950/20" />
                   </div>
