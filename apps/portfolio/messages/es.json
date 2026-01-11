@@ -1,0 +1,212 @@
+{
+  "site": {
+    "name": "Daniela Huezo",
+    "description": "Desarrolladora Full Stack"
+  },
+  "hero": {
+    "headline": "Silenciosamente",
+    "subheadline": "intencional.",
+    "description": "La arquitectura antigua no puede venir al teléfono ahora mismo. ¿Por qué? Porque está muerta. Ingeniera full-stack construyendo sistemas resilientes e interfaces dramáticas.",
+    "openToWork": "Halemos",
+    "scroll": "Desplazar",
+    "cta": {
+      "viewProjects": "Ver Proyectos",
+      "readStory": "Leer la Historia"
+    }
+  },
+  "navigation": {
+    "projects": "Proyectos",
+    "stage": "El Escenario",
+    "timeline": "Línea de Tiempo",
+    "about": "Acerca de"
+  },
+  "common": {
+    "openMenu": "Abrir menú",
+    "contact": "Contacto",
+    "email": "Email",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "workTogether": "¿Trabajamos juntos?",
+    "scheduleMeeting": "Agenda una reunión y conversemos sobre tu proyecto",
+    "letsTalk": "Conversemos sobre tu proyecto",
+    "copyright": "© {year} {name}.",
+    "madeWith": "Hecho con",
+    "andNextjs": "y Next.js",
+    "error": "Error",
+    "generating": "Generando...",
+    "generate": "Generar"
+  },
+  "colorPalette": {
+    "pageTitle": "Paleta de colores IA",
+    "pageDescription": "Genera paletas de colores personalizadas con inteligencia artificial",
+    "title": "Paleta de colores con IA",
+    "subtitle": "Expresa cómo te sientes y deja que la IA genere una paleta de colores única que transformará todo el sitio",
+    "howItWorks": "¿Cómo funciona?",
+    "step1": {
+      "title": "Escribe un prompt",
+      "description": "Describe tu estado de ánimo, emoción o cualquier concepto"
+    },
+    "step2": {
+      "title": "La IA genera la paleta",
+      "description": "Nuestra IA analiza tu input y crea una paleta armoniosa"
+    },
+    "step3": {
+      "title": "Colores aplicados",
+      "description": "Los colores se aplican instantáneamente a todo el sitio"
+    },
+    "generateTitle": "Generar Paleta",
+    "generateDescription": "Escribe cualquier palabra o frase que represente un sentimiento, emoción o concepto",
+    "promptPlaceholder": "Ej: Estoy feliz, energético, nostálgico...",
+    "promptExamples": "Ejemplos de prompts",
+    "currentPalette": "Paleta Actual",
+    "recentPalettes": "Tus paletas recientes",
+    "recentPalettesDescription": "Accede rápidamente a tus últimas 5 paletas generadas. Haz clic en cualquiera para aplicarla.",
+    "promptRequired": "Por favor escribe algo para generar la paleta",
+    "paletteGenerated": "¡Paleta generada!",
+    "paletteError": "No se pudo generar la paleta. Intenta de nuevo.",
+    "paletteRestored": "Paleta restaurada",
+    "paletteRestoredDescription": "Se ha restaurado la paleta por defecto",
+    "noPalettesYet": "Aún no has generado ninguna paleta. ¡Crea tu primera paleta arriba!",
+    "activePalette": "Paleta Activa",
+    "applyPalette": "Aplicar Paleta",
+    "paletteApplied": "¡Paleta aplicada!",
+    "paletteAppliedDescription": "\"{prompt}\" ahora es tu tema activo"
+  },
+  "colorHistory": {
+    "pageTitle": "Historial de paletas",
+    "pageDescription": "Explora todas las paletas de colores generadas por la comunidad",
+    "title": "Historial de paletas",
+    "subtitle": "Explora todas las paletas de colores generadas por la comunidad y encuentra inspiración",
+    "allPalettes": "Todas las paletas",
+    "myPalettes": "Mis paletas",
+    "howItWorks": "¿Cómo funciona?",
+    "howItWorksDescription": "Cada vez que alguien genera una paleta con IA, se guarda aquí. Puedes explorar las creaciones de otros usuarios, buscar por palabras clave, y aplicar cualquier paleta a tu experiencia en el sitio con solo un click.",
+    "noResults": "No se encontraron paletas con ese criterio",
+    "noPalettesCreated": "Aún no has creado ninguna paleta",
+    "noLocalHistory": "No hay paletas en tu historial local",
+    "historyCleared": "Se ha eliminado el historial local de paletas"
+  },
+  "projects": {
+    "title": "Gran Reputación",
+    "subtitle": "Trabajos seleccionados y caos ingenieril.",
+    "viewArchive": "Ver Archivo",
+    "project1": {
+      "title": "Obsidian CMS",
+      "description": "Un sistema de gestión de contenido headless diseñado para equipos editoriales de alta frecuencia. Colaboración en tiempo real sin fallos.",
+      "tag1": "Next.js",
+      "tag2": "TypeScript"
+    },
+    "project2": {
+      "title": "Viper Analytics",
+      "description": "Motor de análisis centrado en la privacidad que procesa millones de eventos. Visualizado como una topología de datos 3D.",
+      "tag1": "WebGL",
+      "tag2": "Rust"
+    },
+    "project3": {
+      "title": "Echo Generator",
+      "description": "Paisajes de audio generativos basados en análisis de sentimientos de feeds de noticias en vivo.",
+      "tag1": "AI/LLM",
+      "tag2": "Python"
+    }
+  },
+  "stage": {
+    "title": "El Escenario",
+    "subtitle": "Conferencias, Charlas y Editoriales.",
+    "empty": "Aún no hay entradas.",
+    "loadArchive": "Cargar Archivo Completo",
+    "type": {
+      "talk": "Charla",
+      "article": "Blog",
+      "slide": "Diapositivas"
+    }
+  },
+  "timeline": {
+    "title": "Las Eras",
+    "subtitle": "Línea de Tiempo de Experiencia y Hitos.",
+    "loadArchive": "Cargar Archivo Completo",
+    "showLess": "Mostrar Menos",
+    "exp1": {
+      "title": "Ingeniera Frontend Senior",
+      "company": "TechCorp Inc.",
+      "period": "2021 — PRESENTE",
+      "bullet1": "Lideré la migración del panel principal a Next.js App Router, mejorando LCP en un 40%.",
+      "bullet2": "Arquitecturé un sistema de diseño usado por más de 15 equipos internos, aplicando estándares de accesibilidad.",
+      "bullet3": "Mentoricé desarrolladores junior, fomentando una cultura de calidad de código y propiedad.",
+      "tag1": "React",
+      "tag2": "TypeScript",
+      "tag3": "GraphQL"
+    },
+    "exp2": {
+      "title": "Desarrolladora de Software",
+      "company": "Creative Agency Ltd.",
+      "period": "2018 — 2021",
+      "bullet1": "Desarrollé sitios de marketing de alto impacto para clientes Fortune 500 con animaciones complejas.",
+      "bullet2": "Implementé soluciones de CMS headless para empoderar editores no técnicos.",
+      "tag1": "Vue.js",
+      "tag2": "GSAP",
+      "tag3": "Shopify"
+    }
+  },
+  "about": {
+    "title": "Llámelo Como Quiera",
+    "description1": "Creo en código estético y diseño brutalista. Mi viaje ha sido sobre reinvención—moviéndome del diseño a la ingeniería, y de vuelta a la intersección de ambos.",
+    "description2": "Actualmente basada en el vacío digital, creando experiencias que perduran.",
+    "quote": "Juro que no amo el drama, él me ama a mí.",
+    "cta": "Halemos",
+    "email": "hello@example.com",
+    "social": {
+      "github": "https://github.com/irenehl",
+      "linkedin": "https://www.linkedin.com/in/irenehl",
+      "x": "https://x.com/irenehl26__"
+    },
+    "inspiration": "Construido escuchando",
+    "album": "reputation"
+  },
+  "footer": {
+    "copyright": "© {year} REPUTATION. TODOS LOS DERECHOS RESERVADOS.",
+    "designedLight": "Diseñado en la luz",
+    "designedDark": "Diseñado en la oscuridad"
+  },
+  "promptExamples": {
+    "happy": "Estoy feliz",
+    "nostalgic": "Nostálgico",
+    "energetic": "Energético",
+    "relaxed": "Relajado",
+    "professional": "Profesional",
+    "creative": "Creativo",
+    "minimalist": "Minimalista",
+    "vintage": "Vintage"
+  },
+  "blog": {
+    "pageTitle": "Blog",
+    "pageDescription": "Explora nuestros artículos y recursos",
+    "title": "Blog",
+    "subtitle": "Descubre artículos, tutoriales y recursos sobre desarrollo web, IA y más",
+    "header": {
+      "eyebrow": "Registro de reputación",
+      "title": "Blog",
+      "description": "Notas de arquitectura, post-mortems y ensayos de proyectos reales. Lee esto si estás decidiendo si confiarme tus problemas difíciles.",
+      "meta": {
+        "posts": "{count} entradas en el archivo",
+        "updated": "Última actualización {date}"
+      },
+      "backHome": "Volver al inicio",
+      "titleSuffix": "Blog",
+      "nav": {
+        "home": "Inicio",
+        "blog": "Blog"
+      }
+    },
+    "recentPosts": "Publicaciones Recientes",
+    "categoryPosts": "Publicaciones en {category}",
+    "noPosts": "No hay publicaciones disponibles aún",
+    "list": {
+      "noPosts": "No hay publicaciones disponibles aún"
+    },
+    "post": {
+      "backToBlog": "← Blog",
+      "backToBlogFooter": "← Volver al Blog"
+    }
+  }
+}
+

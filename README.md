@@ -1,184 +1,167 @@
-# Portfolio - Paginita v2
+# Dhuezo Monorepo
 
-Un portfolio moderno construido con Next.js 15, TypeScript, Tailwind CSS y Supabase.
+A monorepo containing multiple Next.js landing pages and shared packages.
 
-## 🚀 Características
-
-- **Framework**: Next.js 15 con App Router
-- **Lenguaje**: TypeScript
-- **Estilos**: Tailwind CSS con shadcn/ui
-- **Autenticación**: Supabase Auth (Google OAuth, Magic Link, OTP)
-- **Animaciones**: Framer Motion
-- **Base de datos**: Supabase
-- **Modo oscuro**: Implementado por defecto
-
-## 📁 Estructura del Proyecto
+## 📁 Structure
 
 ```
-├── app/                    # App Router de Next.js
-│   ├── auth/              # Rutas de autenticación
-│   ├── experience/        # Página de experiencia
-│   ├── color-palette/     # Página de paleta de colores
-│   ├── gallery/           # Galería de imágenes
-│   └── events/            # Página de eventos
-├── components/            # Componentes React
-│   ├── ui/               # Componentes de shadcn/ui
-│   ├── layout/           # Componentes de layout
-│   ├── auth/             # Componentes de autenticación
-│   └── experience/       # Componentes de experiencia
-├── lib/                  # Utilidades y servicios
-│   ├── supabase/         # Cliente de Supabase
-│   ├── auth/             # Servicios de autenticación
-│   └── services/         # Otros servicios
-├── types/                # Tipos TypeScript
-└── public/               # Archivos estáticos
+├── apps/
+│   ├── portfolio/          # Main portfolio landing page
+│   └── ai-landing/         # AI services landing page
+├── packages/
+│   ├── ui/                 # Shared UI components (Button, ThemeProvider, etc.)
+│   └── core/               # Shared utilities (cn, etc.)
+└── package.json            # Root workspace configuration
 ```
 
-## 🛠️ Instalación
+## 🚀 Getting Started
 
-1. **Clonar el repositorio**
-   ```bash
-   git clone <repository-url>
-   cd paginita-v2
-   ```
+### Installation
 
-2. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-
-3. **Configurar variables de entorno**
-   ```bash
-   cp env.example .env.local
-   ```
-   
-   Editar `.env.local` con tus credenciales:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=tu_proyecto_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
-   SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
-   NEXT_PUBLIC_SITE_URL=http://localhost:3000
-   OPENAI_API_KEY=tu_openai_key
-   ```
-
-4. **Configurar Supabase**
-   - Crear un proyecto en [Supabase](https://supabase.com)
-   - Ejecutar el SQL de configuración (ver sección de Base de Datos)
-   - Configurar Google OAuth en Authentication > Providers
-
-5. **Ejecutar el proyecto**
-   ```bash
-   npm run dev
-   ```
-
-## 🗄️ Base de Datos
-
-### Tabla de Experiencias
-```sql
-CREATE TABLE IF NOT EXISTS experiences (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  title TEXT NOT NULL,
-  company TEXT NOT NULL,
-  description TEXT NOT NULL,
-  long_description TEXT,
-  technologies TEXT[] DEFAULT '{}',
-  start_date DATE NOT NULL,
-  end_date DATE,
-  image_url TEXT,
-  company_logo TEXT,
-  location TEXT,
-  type TEXT,
-  featured BOOLEAN DEFAULT false,
-  order_index INTEGER DEFAULT 0,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### Tabla de Perfiles
-```sql
-CREATE TABLE IF NOT EXISTS profiles (
-  id UUID REFERENCES auth.users(id) PRIMARY KEY,
-  email TEXT,
-  full_name TEXT,
-  avatar_url TEXT,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-## 🎨 Componentes Principales
-
-### Header
-- Logo animado con gradiente
-- Navegación responsive
-- Botón CTA para agendar reunión
-- Menú móvil con animaciones
-- Efecto glassmorphism al hacer scroll
-
-### Footer
-- Información de contacto
-- Links de redes sociales
-- Navegación rápida
-- CTA para agendar reunión
-- Línea decorativa con gradiente
-
-### Autenticación
-- Google OAuth
-- Magic Link por email
-- OTP por SMS
-- Avatar de usuario con dropdown
-
-### Experiencia
-- Tarjetas flotantes con animaciones
-- Modal de detalles
-- Filtros por tecnología
-- Imágenes optimizadas
-
-## 🚀 Scripts Disponibles
+Install dependencies for all workspaces:
 
 ```bash
-npm run dev      # Servidor de desarrollo
-npm run build    # Construir para producción
-npm run start    # Servidor de producción
-npm run lint     # Linter ESLint
+npm install
 ```
 
-## 📱 Responsive Design
+This will install dependencies for all apps and packages in the monorepo.
 
-El proyecto está optimizado para:
-- 📱 Móviles (320px+)
-- 📱 Tablets (768px+)
-- 💻 Desktop (1024px+)
-- 🖥️ Large screens (1280px+)
+### Development
 
-## 🎯 Próximas Características
+Run a specific app in development mode:
 
-- [ ] Página de paleta de colores con IA
-- [ ] Galería de imágenes compartidas
-- [ ] Página de eventos
-- [ ] Historial de colores
-- [ ] Dashboard de administración
-- [ ] Sistema de comentarios
+```bash
+# Run portfolio app
+npm run dev:portfolio
 
-## 🤝 Contribuir
+# Run AI landing app
+npm run dev:ai
+```
 
-1. Fork el proyecto
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
+Each app runs on its own port:
+- Portfolio: `http://localhost:3000`
+- AI Landing: `http://localhost:3001` (or next available port)
 
-## 📄 Licencia
+### Building
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Build a specific app:
 
-## 📞 Contacto
+```bash
+# Build portfolio
+npm run build:portfolio
 
-- Email: tu@email.com
-- LinkedIn: [tu-linkedin](https://linkedin.com/in/tuusuario)
-- GitHub: [tu-github](https://github.com/tuusuario)
+# Build AI landing
+npm run build:ai
 
----
+# Build all apps
+npm run build:all
+```
 
-Hecho con ❤️ y Next.js
+### Linting
+
+Lint all workspaces:
+
+```bash
+npm run lint:all
+```
+
+## 📦 Workspaces
+
+### Apps
+
+#### `apps/portfolio`
+The main portfolio landing page with:
+- Next.js 15 with App Router
+- TypeScript
+- Tailwind CSS + shadcn/ui
+- Internationalization (i18n) with next-intl
+- Dark mode support
+- Blog functionality
+- Project showcase
+
+#### `apps/ai-landing`
+A new AI-focused landing page with:
+- Next.js 15 with App Router
+- TypeScript
+- Tailwind CSS + shadcn/ui
+- Dark mode support
+- Uses shared packages from `packages/`
+
+### Packages
+
+#### `packages/ui`
+Shared UI components that can be used across all apps:
+- `Button` component
+- `ThemeProvider` component
+- More components can be added here
+
+#### `packages/core`
+Shared utilities and helpers:
+- `cn` utility function for className merging
+
+## 🌐 Deployment on Vercel
+
+This monorepo is configured to deploy each app separately on Vercel.
+
+### Setup
+
+1. **Create Vercel Projects**:
+   - Create a project for `portfolio` in Vercel dashboard
+   - Create a project for `ai-landing` in Vercel dashboard
+
+2. **Configure Root Directory**:
+   - For the `portfolio` project: Set **Root Directory** to `apps/portfolio`
+   - For the `ai-landing` project: Set **Root Directory** to `apps/ai-landing`
+
+3. **Domain Configuration**:
+   - Attach your main domain (e.g., `yourdomain.com`) to the `portfolio` project
+   - Attach subdomains (e.g., `ai.yourdomain.com`) to the `ai-landing` project
+   - **Note**: Subdomains work on Vercel's free Hobby plan - no Pro plan required!
+
+### Vercel Configuration Files
+
+Each app has its own `vercel.json` with the correct root directory:
+- `apps/portfolio/vercel.json`
+- `apps/ai-landing/vercel.json`
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15+
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Package Management**: npm workspaces
+- **Deployment**: Vercel
+
+## 📝 Adding a New App
+
+1. Create a new directory under `apps/`:
+   ```bash
+   mkdir apps/new-landing
+   ```
+
+2. Initialize a Next.js app in that directory
+
+3. Add a `package.json` with the app name following `@dhuezo/` convention
+
+4. Update root `package.json` scripts to include dev/build commands for the new app
+
+5. Create a Vercel project pointing to `apps/new-landing`
+
+## 🔧 Shared Code
+
+To share code between apps:
+
+1. **UI Components**: Add to `packages/ui/src/components/`
+2. **Utilities**: Add to `packages/core/src/`
+3. **Import**: Use `@dhuezo/ui` or `@dhuezo/core` in your app
+
+Example:
+```typescript
+import { Button } from '@dhuezo/ui'
+import { cn } from '@dhuezo/core'
+```
+
+## 📄 License
+
+MIT

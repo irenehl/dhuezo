@@ -1,20 +1,13 @@
 {
-  "name": "dhuezo-monorepo",
+  "name": "@dhuezo/portfolio",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
-    "dev:portfolio": "npm run dev --workspace apps/portfolio",
-    "dev:ai": "npm run dev --workspace apps/ai-landing",
-    "build:portfolio": "npm run build --workspace apps/portfolio",
-    "build:ai": "npm run build --workspace apps/ai-landing",
-    "build:all": "npm run build --workspaces --if-present",
-    "lint:all": "npm run lint --workspaces --if-present",
-    "dev:food-dice": "npm run dev --workspace apps/food-dice",
-    "build:food-dice": "npm run build --workspace apps/food-dice"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
