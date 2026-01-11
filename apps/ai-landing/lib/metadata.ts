@@ -66,15 +66,15 @@ export function generateMetadata({
           alt: siteTitle,
         },
       ],
-      ...(publishedTime && { publishedTime }),
-      ...(modifiedTime && { modifiedTime }),
+      ...(publishedTime ? { publishedTime } : {}),
+      ...(modifiedTime ? { modifiedTime } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: siteTitle,
       description: siteDescription,
       images: [siteImage],
-      ...(siteConfig.twitterHandle && { creator: siteConfig.twitterHandle }),
+      ...(siteConfig.twitterHandle ? { creator: siteConfig.twitterHandle } : {}),
     },
     robots: {
       index: isProd,
@@ -82,11 +82,11 @@ export function generateMetadata({
       googleBot: {
         index: isProd,
         follow: isProd,
-        ...(isProd && {
+        ...(isProd ? {
           'max-video-preview': -1,
           'max-image-preview': 'large',
           'max-snippet': -1,
-        }),
+        } : {}),
       },
     },
   }
