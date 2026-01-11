@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { siteConfig } from './config'
+import { locales } from '@/i18n/config'
 
 interface GenerateMetadataOptions {
   title?: string
@@ -10,6 +11,13 @@ interface GenerateMetadataOptions {
   type?: 'website' | 'article'
   publishedTime?: string
   modifiedTime?: string
+}
+
+function isProduction(): boolean {
+  return (
+    process.env.VERCEL_ENV === 'production' ||
+    (process.env.VERCEL_ENV === undefined && process.env.NODE_ENV === 'production')
+  )
 }
 
 export function generateMetadata({
@@ -27,6 +35,17 @@ export function generateMetadata({
     description ||
     'Full Stack Developer building resilient systems and dramatic interfaces.'
   const siteUrl = url || `${siteConfig.url}/${locale}`
+  
+  // Generate dynamic OG image URL with query params
+  const generateOgImageUrl = (ogTitle: string, ogDescription: string, ogLocale: string) => {
+    const params = new URLSearchParams({
+      title: ogTitle,
+      description: ogDescription,
+      locale: ogLocale,
+    })
+    return `/api/og?${params.toString()}`
+  }
+
   // Use relative path when metadataBase is set, or absolute URL for external images
   const siteImage = image
     ? image.startsWith('http')
@@ -34,7 +53,21 @@ export function generateMetadata({
       : image.startsWith('/')
       ? image // Relative path - will be resolved by metadataBase
       : `/${image}` // Make it relative if it's not already
-    : '/og-image.png' // Default OG image - relative path resolved by metadataBase
+    : generateOgImageUrl(siteTitle, siteDescription, locale) // Dynamic OG image - relative path resolved by metadataBase
+
+  const isProd = isProduction()
+
+  // Generate language alternates for all supported locales
+  const languageAlternates: Record<string, string> = {}
+  locales.forEach((loc) => {
+    if (loc !== locale) {
+      // Replace locale in URL if it exists, otherwise append
+      const alternateUrl = siteUrl.includes(`/${locale}`)
+        ? siteUrl.replace(`/${locale}`, `/${loc}`)
+        : `${siteConfig.url}/${loc}`
+      languageAlternates[loc] = alternateUrl
+    }
+  })
 
   const metadata: Metadata = {
     title: siteTitle,
@@ -42,6 +75,7 @@ export function generateMetadata({
     metadataBase: new URL(siteConfig.url),
     alternates: {
       canonical: siteUrl,
+      languages: languageAlternates,
     },
     openGraph: {
       type: type,
@@ -69,14 +103,16 @@ export function generateMetadata({
       creator: '@irenehl26__',
     },
     robots: {
-      index: true,
-      follow: true,
+      index: isProd,
+      follow: isProd,
       googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        index: isProd,
+        follow: isProd,
+        ...(isProd && {
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        }),
       },
     },
   }

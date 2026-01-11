@@ -9,6 +9,7 @@ import { Footer } from '@/components/layout/Footer'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { formatDate, getAllPosts, getPostBySlug } from '@/lib/blog'
 import { siteConfig } from '@/lib/config'
+import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 import { getPublishedPostsWithMeta } from '@/lib/services/blog-helpers'
 
 type Props = {
@@ -36,58 +37,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(slug, locale as 'en' | 'es')
 
   if (!post) {
-    return {
+    return generateSiteMetadata({
+      locale,
       title: `Post Not Found | ${siteConfig.name}`,
-    }
+    })
   }
 
   const postUrl = `${siteConfig.url}/${locale}/blog/${slug}`
   const description = post.description || `Read ${post.title}`
-  const image = post.featured_image_url || `${siteConfig.url}/og-image.png`
+  
+  // Use featured image if available, otherwise let the helper generate dynamic OG image
+  const image = post.featured_image_url || undefined
 
-  return {
+  return generateSiteMetadata({
+    locale,
     title: post.title,
     description,
-    alternates: {
-      canonical: postUrl,
-    },
-    openGraph: {
-      title: post.title,
-      description,
-      url: postUrl,
-      type: 'article',
-      publishedTime: post.created_at,
-      modifiedTime: post.updated_at,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
-      siteName: siteConfig.name,
-      locale: locale,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description,
-      images: [image],
-      creator: '@irenehl26__',
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-  }
+    url: postUrl,
+    type: 'article',
+    publishedTime: post.created_at,
+    modifiedTime: post.updated_at,
+    image, // Will use dynamic OG if undefined
+  })
 }
 
 export default async function BlogPostPage({ params }: Props) {

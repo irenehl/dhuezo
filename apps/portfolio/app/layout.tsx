@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     description: 'Full Stack Developer building resilient systems and dramatic interfaces.',
     images: [
       {
-        url: '/og-image.png', // Relative path - resolved by metadataBase
+        url: '/api/og?title=Daniela%20Huezo&description=Full%20Stack%20Developer%20building%20resilient%20systems%20and%20dramatic%20interfaces.&locale=en', // Dynamic OG image - relative path resolved by metadataBase
         width: 1200,
         height: 630,
         alt: 'Daniela Huezo - Full Stack Developer',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'Daniela Huezo - Full Stack Developer',
     description: 'Full Stack Developer building resilient systems and dramatic interfaces.',
     creator: '@irenehl26__',
-    images: ['/og-image.png'], // Relative path - resolved by metadataBase
+    images: ['/api/og?title=Daniela%20Huezo&description=Full%20Stack%20Developer%20building%20resilient%20systems%20and%20dramatic%20interfaces.&locale=en'], // Dynamic OG image - relative path resolved by metadataBase
   },
   robots: {
     index: true,

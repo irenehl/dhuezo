@@ -7,6 +7,7 @@ import { StageSection } from '@/components/sections/StageSection'
 import { TimelineSectionServer } from '@/components/sections/TimelineSectionServer'
 import { AboutSection } from '@/components/sections/AboutSection'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
+import { SiteJsonLd } from '@/components/seo/SiteJsonLd'
 
 export async function generateMetadata({
   params,
@@ -31,6 +32,7 @@ export default async function Home({
 
   return (
     <>
+      <SiteJsonLd locale={locale} />
       <SiteHeader />
       <HeroSection />
       <main className="max-w-6xl mx-auto px-6 space-y-32 pb-32">
