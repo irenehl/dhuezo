@@ -3,7 +3,7 @@ projectId: food-dice
 locale: en
 orderIndex: 1
 previewImageUrl: /projects/food-dice-preview.jpg
-deployedUrl: https://github.com/irenehl/nameless
+deployedUrl: https://food-dice.dhuezo.dev
 repoUrl: https://github.com/irenehl/nameless
 featured: true
 title: Food Dice

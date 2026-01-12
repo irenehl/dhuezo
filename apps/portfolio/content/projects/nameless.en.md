@@ -3,7 +3,7 @@ projectId: nameless-mindfulness-app
 locale: en
 orderIndex: 1
 previewImageUrl: /projects/nameless.jpg
-deployedUrl: https://github.com/irenehl/nameless
+deployedUrl: https://nameless.dhuezo.dev/
 repoUrl: https://github.com/irenehl/nameless
 featured: true
 title: Nameless - Mindfulness & Calm Activities

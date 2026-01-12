@@ -14,34 +14,20 @@ const CONTENT_DIR = path.join(process.cwd(), 'content/projects')
 function normalizeImageUrl(url: string | undefined): string {
   if (!url) return ''
   
-  // #region agent log
-  const logData = { originalUrl: url, timestamp: Date.now(), sessionId: 'debug-session', runId: 'run1', hypothesisId: 'A' };
-  // #endregion
-  
   // If it's already a full URL, return as-is
   if (url.startsWith('http://') || url.startsWith('https://')) {
-    // #region agent log
-    fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...logData,location:'project-content-service.ts:18',message:'normalizeImageUrl: external URL',data:{normalized:url,reason:'external'}})}).catch(()=>{});
-    // #endregion
     return url
   }
   
   // If it starts with /, it's already a valid public path
   if (url.startsWith('/')) {
-    // #region agent log
-    fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...logData,location:'project-content-service.ts:24',message:'normalizeImageUrl: already absolute',data:{normalized:url,reason:'already_absolute'}})}).catch(()=>{});
-    // #endregion
     return url
   }
   
   // If it's a relative path like "content/projects/image.jpg", convert to public path
   // Remove "content/" prefix if present and add leading slash
   const normalized = url.replace(/^content\//, '/')
-  const result = normalized.startsWith('/') ? normalized : `/${normalized}`
-  // #region agent log
-  fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...logData,location:'project-content-service.ts:31',message:'normalizeImageUrl: normalized relative',data:{normalized:result,reason:'relative_normalized'}})}).catch(()=>{});
-  // #endregion
-  return result
+  return normalized.startsWith('/') ? normalized : `/${normalized}`
 }
 
 function mapMarkdownToProject(

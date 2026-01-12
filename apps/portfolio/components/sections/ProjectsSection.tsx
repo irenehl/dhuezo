@@ -1,8 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { Link as I18nLink } from '@/i18n/routing'
 import { ArrowUpRight, ArrowRight, ExternalLink, Github } from 'lucide-react'
 import { getFeaturedProjects, type ProjectConfig } from '@/lib/config/projects'
 import type { MarkdownProject } from '@/lib/markdown/types'
@@ -19,11 +19,7 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionProps = {}) {
   const t = useTranslations()
-  
-  // #region agent log
-  fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProjectsSection.tsx:20',message:'ProjectsSection render start',data:{markdownProjectsCount:markdownProjects?.length||0,markdownProjects:markdownProjects?.map(p=>({id:p.project_id,preview_image_url:p.preview_image_url}))||[]},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-  console.log('[DEBUG] ProjectsSection render:', { markdownProjectsCount: markdownProjects?.length || 0, previewImages: markdownProjects?.map(p => p.preview_image_url) || [] });
-  // #endregion
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set())
   
   // Use Markdown projects if provided, otherwise fall back to config
   let projects: Project[]
@@ -31,7 +27,7 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
   if (markdownProjects && markdownProjects.length > 0) {
     // Map MarkdownProject to Project format
     projects = markdownProjects.map((project) => {
-      const mapped = {
+      return {
         id: project.project_id,
         number: String(project.order_index).padStart(2, '0'),
         previewImage: project.preview_image_url,
@@ -41,12 +37,7 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
         title: project.title,
         description: project.description,
         tags: project.tags,
-      };
-      // #region agent log
-      fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProjectsSection.tsx:31',message:'Project mapped',data:{projectId:project.project_id,originalPreviewImage:project.preview_image_url,mappedPreviewImage:mapped.previewImage,isAbsolute:mapped.previewImage?.startsWith('/'),isExternal:mapped.previewImage?.startsWith('http')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      console.log('[DEBUG] Project mapped:', { projectId: project.project_id, originalPreviewImage: project.preview_image_url, mappedPreviewImage: mapped.previewImage });
-      // #endregion
-      return mapped;
+      }
     })
   } else {
     // Fallback to config-based projects
@@ -88,11 +79,8 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
             >
               <div className="relative aspect-[4/3] bg-white border border-zinc-200 overflow-hidden mb-6 shadow-sm group-hover:shadow-md transition-shadow dark:bg-zinc-900 dark:border-zinc-800">
                 {/* Preview Image */}
-                {project.previewImage ? (
+                {project.previewImage && !imageErrors.has(project.id) ? (
                   <div className="relative w-full h-full">
-                    {/* #region agent log */}
-                    {(()=>{fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProjectsSection.tsx:81',message:'Image component render',data:{projectId:project.id,imageSrc:project.previewImage,windowLocation:typeof window!=='undefined'?window.location.href:'server',pathname:typeof window!=='undefined'?window.location.pathname:'server'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});return null})()}
-                    {/* #endregion */}
                     <Image
                       src={project.previewImage}
                       alt={project.title}
@@ -100,17 +88,8 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 50vw"
                       unoptimized
-                      onError={(e) => {
-                        // #region agent log
-                        fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProjectsSection.tsx:88',message:'Image onError fired',data:{projectId:project.id,imageSrc:project.previewImage,errorTargetSrc:(e.target as HTMLImageElement)?.src||'unknown'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-                        // #endregion
-                        console.error('[DEBUG] Image load error:', { projectId: project.id, imageSrc: project.previewImage, targetSrc: (e.target as HTMLImageElement)?.src });
-                      }}
-                      onLoad={() => {
-                        // #region agent log
-                        fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ProjectsSection.tsx:94',message:'Image onLoad fired',data:{projectId:project.id,imageSrc:project.previewImage},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-                        // #endregion
-                        console.log('[DEBUG] Image loaded successfully:', { projectId: project.id, imageSrc: project.previewImage });
+                      onError={() => {
+                        setImageErrors((prev) => new Set(prev).add(project.id))
                       }}
                     />
                     <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors z-10 dark:bg-zinc-950/20" />
