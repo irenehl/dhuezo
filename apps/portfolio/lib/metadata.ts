@@ -47,6 +47,7 @@ export function generateMetadata({
   }
 
   // Use relative path when metadataBase is set, or absolute URL for external images
+  // For OG images, ensure they're properly formatted relative paths that will be resolved by metadataBase
   const siteImage = image
     ? image.startsWith('http')
       ? image // External absolute URL
@@ -89,6 +90,7 @@ export function generateMetadata({
           width: 1200,
           height: 630,
           alt: siteTitle,
+          type: 'image/png', // Explicitly set image type for better recognition
         },
       ],
       locale: locale,

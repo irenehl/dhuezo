@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ArrowUpRight, ArrowRight, ExternalLink, Github } from 'lucide-react'
 import { getFeaturedProjects, type ProjectConfig } from '@/lib/config/projects'
 import type { MarkdownProject } from '@/lib/markdown/types'
@@ -19,6 +20,7 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionProps = {}) {
   const t = useTranslations()
+  const locale = useLocale()
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set())
   
   // Use Markdown projects if provided, otherwise fall back to config
@@ -70,14 +72,15 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
         {projects.map((project, index) => {
           const hasLinks = project.deployedUrl || project.repoUrl
-          const primaryLink = project.deployedUrl || project.repoUrl
           
           return (
-            <article
+            <Link
               key={project.id}
-              className="group cursor-pointer md:mt-16 first:mt-0 md:first:mt-0 md:[&:nth-child(2)]:mt-16"
+              href={`/${locale}/projects/${project.id}`}
+              className="group cursor-pointer md:mt-16 first:mt-0 md:first:mt-0 md:[&:nth-child(2)]:mt-16 block"
             >
-              <div className="relative aspect-[4/3] bg-white border border-zinc-200 overflow-hidden mb-6 shadow-sm group-hover:shadow-md transition-shadow dark:bg-zinc-900 dark:border-zinc-800">
+              <article>
+                <div className="relative aspect-[4/3] bg-white border border-zinc-200 overflow-hidden mb-6 shadow-sm group-hover:shadow-md transition-shadow dark:bg-zinc-900 dark:border-zinc-800">
                 {/* Preview Image */}
                 {project.previewImage && !imageErrors.has(project.id) ? (
                   <div className="relative w-full h-full">
@@ -152,31 +155,17 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
               {/* Project Info */}
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  {primaryLink ? (
-                    <a
-                      href={primaryLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block group/link"
-                    >
-                      <h3 className="font-display text-2xl text-zinc-900 hover-glitch mb-1 font-semibold dark:text-zinc-100">
-                        {project.title}
-                      </h3>
-                    </a>
-                  ) : (
-                    <h3 className="font-display text-2xl text-zinc-900 hover-glitch mb-1 font-semibold dark:text-zinc-100">
-                      {project.title}
-                    </h3>
-                  )}
+                  <h3 className="font-display text-2xl text-zinc-900 hover-glitch mb-1 font-semibold dark:text-zinc-100">
+                    {project.title}
+                  </h3>
                   <p className="text-sm text-zinc-600 leading-relaxed max-w-sm dark:text-zinc-500">
                     {project.description}
                   </p>
                 </div>
-                {hasLinks && (
-                  <ArrowUpRight className="w-5 h-5 text-zinc-400 group-hover:text-rose-600 transition-colors dark:text-zinc-600 dark:group-hover:text-rose-600 flex-shrink-0 ml-4" />
-                )}
+                <ArrowUpRight className="w-5 h-5 text-zinc-400 group-hover:text-rose-600 transition-colors dark:text-zinc-600 dark:group-hover:text-rose-600 flex-shrink-0 ml-4" />
               </div>
             </article>
+            </Link>
           )
         })}
       </div>
