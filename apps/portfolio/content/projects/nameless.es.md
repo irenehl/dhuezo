@@ -23,6 +23,16 @@ Una aplicación móvil React Native bellamente diseñada que proporciona activid
 
 Nameless es una aplicación móvil de mindfulness construida con React Native y Expo, que ofrece una colección de actividades calmantes diseñadas para reducir el estrés y promover la concentración. La aplicación cuenta con una interfaz limpia y minimalista con temas y paletas de colores personalizables, creando una experiencia personalizada para cada usuario.
 
+## El Desafío y la Solución
+
+El desafío era crear una herramienta digital de mindfulness que se sienta genuinamente calmante en lugar de agregar estrés digital. La mayoría de las aplicaciones en este espacio son demasiado gamificadas (creando presión) o demasiado pasivas (perdiendo compromiso). Los usuarios necesitaban actividades que promuevan enfoque y calma sin sentirse como trabajo o competencia.
+
+La solución fue diseñar actividades suaves e interactivas que requieren enfoque pero no tienen presión de tiempo o sistemas de puntuación. Actividades como "Counting Calm" y "Connect the Dots" involucran la mente de manera meditativa, similar a prácticas tradicionales de mindfulness como contar respiraciones o dibujar mandalas.
+
+Los desafíos técnicos incluyeron crear animaciones fluidas que se sientan calmantes en lugar de bruscas, implementar retroalimentación háptica que mejore en lugar de distraer, y asegurar que la aplicación funcione bien para usuarios con sensibilidad al movimiento. La aplicación incluye características de accesibilidad como opciones de movimiento reducido y paletas de colores personalizables para acomodar diferentes necesidades.
+
+La arquitectura prioriza el rendimiento y las interacciones fluidas, usando Lottie para animaciones y optimizando el renderizado para mantener 60fps incluso durante interacciones complejas. La gestión de estado asegura que las preferencias del usuario persistan entre sesiones, creando una experiencia personalizada que se adapta a las necesidades de cada usuario.
+
 ## Tecnologías Utilizadas
 
 - **React Native 0.81.5** - Framework móvil multiplataforma

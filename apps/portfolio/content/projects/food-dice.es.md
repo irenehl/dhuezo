@@ -24,6 +24,16 @@ Una aplicación móvil desarrollada con Expo que te ayuda a encontrar restaurant
 
 Food Dice es una aplicación móvil desarrollada con React Native que resuelve el dilema de "¿dónde deberíamos comer?" seleccionando aleatoriamente restaurantes basados en las preferencias del usuario. Los usuarios pueden ingresar múltiples tipos de comida que les gustaría probar, establecer un radio de búsqueda en kilómetros, y usar su ubicación actual o ingresar una dirección manualmente. La aplicación luego busca restaurantes usando Google Maps Places API y selecciona aleatoriamente uno de los resultados.
 
+## El Desafío y la Solución
+
+El desafío era resolver la fatiga de decisión al elegir dónde comer—un problema común que lleva a un desplazamiento interminable a través de reseñas de restaurantes e indecisión. Los usuarios necesitaban una forma rápida y divertida de descubrir nuevos lugares sin la parálisis por análisis que viene con demasiadas opciones.
+
+La solución combina Google Maps Places API con un algoritmo simple de selección aleatoria. La aplicación busca múltiples tipos de comida simultáneamente, filtra los resultados por el radio especificado por el usuario, y selecciona aleatoriamente de las opciones filtradas. Este enfoque asegura variedad mientras respeta las preferencias del usuario y las restricciones de ubicación.
+
+Los desafíos técnicos clave incluyeron manejar permisos de ubicación de manera elegante, gestionar límites de tasa de API, y proporcionar una experiencia de usuario fluida en iOS y Android. La aplicación usa los servicios de ubicación de Expo con respaldo a entrada manual de dirección, asegurando que funcione incluso cuando GPS no está disponible. El manejo de errores proporciona mensajes claros y amigables para el usuario en inglés y español, haciendo la aplicación accesible para una audiencia más amplia.
+
+La arquitectura permite escalabilidad y maneja casos límite como no encontrar resultados o fallos de API. La UI proporciona retroalimentación inmediata y estados de error claros, asegurando que los usuarios siempre entiendan qué está pasando y qué acciones pueden tomar.
+
 ## Tecnologías Utilizadas
 
 - **Expo** (~51.0.0) - Framework para desarrollo móvil

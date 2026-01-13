@@ -12,7 +12,7 @@ import { Copy, Check } from 'lucide-react'
 import { useToast } from '@/components/ui/use-toast'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
+import { ScrollRevealImage } from '@/components/ui/ScrollRevealImage'
 
 // Remark plugin to unwrap images from paragraphs
 function remarkUnwrapImages() {
@@ -105,23 +105,23 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
               
               return (
                 <div className="my-6 flex justify-center">
-                  <div className="relative w-full max-w-4xl rounded-lg overflow-hidden">
+                  <div className="relative w-full max-w-4xl aspect-video rounded-lg overflow-hidden">
                     {isExternal ? (
-                      // Use regular img for external URLs
+                      // Use regular img for external URLs with scroll reveal effect
                       <img
                         src={src}
                         alt={alt || 'Content image'}
-                        className="w-full h-auto rounded-lg"
+                        className="w-full h-full object-cover rounded-lg"
                         loading="lazy"
+                        style={{ filter: 'grayscale(100%)' }}
                       />
                     ) : (
-                      // Use Next.js Image for internal URLs
-                      <Image
+                      // Use ScrollRevealImage for internal URLs
+                      <ScrollRevealImage
                         src={src}
                         alt={alt || 'Content image'}
-                        width={1200}
-                        height={800}
-                        className="w-full h-auto rounded-lg"
+                        fill
+                        className="object-cover rounded-lg"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                       />
                     )}

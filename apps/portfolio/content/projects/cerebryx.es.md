@@ -27,6 +27,14 @@ Cerebryx proporciona un entorno enfocado y libre de distracciones para estudiar 
 
 La aplicación cuenta con una hermosa interfaz en modo oscuro, seguimiento completo del historial de sesiones, y soporta tanto experiencias de usuario anónimas como autenticadas. Los usuarios registrados pueden guardar documentos, establecer objetivos de lectura y rastrear su progreso a lo largo del tiempo.
 
+## El Desafío y la Solución
+
+El desafío principal era crear una herramienta de estudio que transforme la lectura pasiva en aprendizaje activo sin abrumar a los usuarios. Los métodos de estudio tradicionales a menudo conducen a tasas de retención pobres, y las herramientas existentes carecen de evaluación potenciada por IA o requieren configuración compleja. La solución fue construir una aplicación basada en navegador que funciona completamente del lado del cliente para usuarios anónimos mientras ofrece características mejoradas para usuarios registrados.
+
+Los desafíos clave incluyeron procesar PDFs completamente en el navegador, generar preguntas de cuestionario contextualmente relevantes usando IA, y mantener una interfaz libre de distracciones. La arquitectura permite escalabilidad hasta 100k usuarios concurrentes. Utilizamos un enfoque de microservicios para asegurar que si un componente falla, el resto del sistema permanece operacional. La UI se actualiza de manera optimista, proporcionando una experiencia ágil incluso en conexiones de red más lentas.
+
+La aplicación maneja el análisis de PDF del lado del cliente usando PDF.js, eliminando la necesidad de procesamiento del lado del servidor y asegurando la privacidad del usuario. La generación de cuestionarios con IA utiliza prompts cuidadosamente diseñados para crear preguntas variadas y apropiadas que prueban la comprensión en múltiples niveles de dificultad. El sistema de temporizador funciona de manera confiable en segundo plano, incluso cuando la pestaña del navegador está inactiva, asegurando un seguimiento preciso del tiempo de lectura.
+
 ## Tecnologías Utilizadas
 
 - **Next.js 15** - Framework moderno de React con App Router y componentes del servidor

@@ -27,6 +27,14 @@ Cerebryx provides a focused, distraction-free environment for studying written c
 
 The application features a beautiful dark-mode interface, comprehensive session history tracking, and supports both anonymous and authenticated user experiences. Registered users can save documents, set reading goals, and track their progress over time.
 
+## The Challenge & Solution
+
+The primary challenge was creating a study tool that transforms passive reading into active learning without overwhelming users. Traditional study methods often lead to poor retention rates, and existing tools either lack AI-powered assessment or require complex setup. The solution was to build a seamless, browser-based application that works entirely client-side for anonymous users while offering enhanced features for registered users.
+
+Key challenges included processing PDFs entirely in the browser, generating contextually relevant quiz questions using AI, and maintaining a distraction-free interface. The architecture allows for scalability up to 100k concurrent users. We utilized a microservices approach to ensure that if one component fails, the rest of the system remains operational. The UI updates optimistically, providing a snappy experience even on slower network connections.
+
+The application handles PDF parsing client-side using PDF.js, eliminating the need for server-side processing and ensuring user privacy. AI quiz generation uses carefully engineered prompts to create varied, appropriate questions that test comprehension at multiple difficulty levels. The timer system runs reliably in the background, even when the browser tab is inactive, ensuring accurate reading time tracking.
+
 ## Technologies Used
 
 - **Next.js 15** - Modern React framework with App Router and server components
