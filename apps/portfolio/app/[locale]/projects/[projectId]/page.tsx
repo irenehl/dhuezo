@@ -43,14 +43,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const projectUrl = `${siteConfig.url}/${locale}/projects/${projectId}`
   const description = project.description || `View ${project.title} project`
-  
-  // Generate OG image using the API instead of static preview image
-  // The OG image API will generate a dynamic image based on project title and description
-  const ogImageUrl = `/api/og?${new URLSearchParams({
-    title: project.title,
-    description: project.description,
-    locale: locale,
-  }).toString()}`
 
   return generateSiteMetadata({
     locale,
@@ -58,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     url: projectUrl,
     type: 'website',
-    image: ogImageUrl, // Use dynamic OG image instead of static preview image
+    projectId: projectId, // Pass projectId to use project-specific OG image
   })
 }
 

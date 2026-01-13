@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, ArrowRight, ExternalLink, Github } from 'lucide-react'
 import { getFeaturedProjects, type ProjectConfig } from '@/lib/config/projects'
 import type { MarkdownProject } from '@/lib/markdown/types'
+import type { XArticle } from '@/lib/config/x-articles'
+import { XIcon } from '@/components/icons/XIcon'
 
 interface Project extends ProjectConfig {
   title: string
@@ -16,9 +18,10 @@ interface Project extends ProjectConfig {
 
 interface ProjectsSectionProps {
   projects?: MarkdownProject[]
+  xArticles?: XArticle[]
 }
 
-export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionProps = {}) {
+export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: ProjectsSectionProps = {}) {
   const t = useTranslations()
   const locale = useLocale()
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set())
@@ -58,6 +61,12 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
     })
   }
 
+  useEffect(() => {
+    // #region agent log
+    fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H5',location:'apps/portfolio/components/sections/ProjectsSection.tsx:ProjectsSection',message:'ProjectsSection computed projects',data:{locale,source:markdownProjects && markdownProjects.length>0?'markdown':'config',projectCount:projects.length,projects:projects.slice(0,6).map((p)=>({id:p.id,previewImage:(p.previewImage||'').slice(0,160)}))},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion agent log
+  }, [locale, markdownProjects, projects.length])
+
   return (
     <section id="projects" className="space-y-16 scroll-mt-20">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 pb-6 dark:border-zinc-900">
@@ -92,6 +101,9 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
                       sizes="(max-width: 768px) 100vw, 50vw"
                       unoptimized
                       onError={() => {
+                        // #region agent log
+                        fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H6',location:'apps/portfolio/components/sections/ProjectsSection.tsx:Image.onError',message:'Preview image failed to load',data:{projectId:project.id,src:(project.previewImage||'').slice(0,200)},timestamp:Date.now()})}).catch(()=>{});
+                        // #endregion agent log
                         setImageErrors((prev) => new Set(prev).add(project.id))
                       }}
                     />
@@ -125,28 +137,32 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
                 {hasLinks && (
                   <div className="absolute top-4 right-4 flex gap-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
                     {project.deployedUrl && (
-                      <a
-                        href={project.deployedUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                          window.open(project.deployedUrl, '_blank', 'noopener,noreferrer')
+                        }}
                         className="p-2 bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:text-accent hover:border-accent transition-colors dark:bg-zinc-950/80 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-rose-600 dark:hover:border-rose-600"
                         aria-label={`Visit ${project.title}`}
                       >
                         <ExternalLink className="w-4 h-4" />
-                      </a>
+                      </button>
                     )}
                     {project.repoUrl && (
-                      <a
-                        href={project.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                          window.open(project.repoUrl, '_blank', 'noopener,noreferrer')
+                        }}
                         className="p-2 bg-background/80 backdrop-blur-sm border border-border text-muted-foreground hover:text-accent hover:border-accent transition-colors dark:bg-zinc-950/80 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-rose-600 dark:hover:border-rose-600"
                         aria-label={`View ${project.title} repository`}
                       >
                         <Github className="w-4 h-4" />
-                      </a>
+                      </button>
                     )}
                   </div>
                 )}
@@ -180,6 +196,87 @@ export function ProjectsSection({ projects: markdownProjects }: ProjectsSectionP
           {t('projects.viewArchive')} <ArrowRight className="w-4 h-4" />
         </a>
       </div>
+
+      {/* X Articles Subsection */}
+      {xArticles.length > 0 && (
+        <div className="space-y-8 pt-16 border-t border-zinc-200 dark:border-zinc-900">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <XIcon className="w-8 h-8 text-zinc-900 dark:text-zinc-100" />
+              <h3 className="font-header text-2xl md:text-3xl text-zinc-900 uppercase tracking-tighter dark:text-zinc-100">
+                {t('projects.xArticles.title')}
+              </h3>
+            </div>
+            <p className="text-xs text-zinc-500 uppercase tracking-widest font-semibold text-right max-w-xs dark:text-zinc-500">
+              {t('projects.xArticles.subtitle')}
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {xArticles.map((article) => (
+              <a
+                key={article.id}
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden bg-white dark:bg-zinc-900 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+              >
+                <div className="flex flex-col sm:flex-row">
+                  {/* Preview Image */}
+                  <div className="relative w-full sm:w-48 h-48 sm:h-auto bg-zinc-100 dark:bg-zinc-800 flex-shrink-0 overflow-hidden">
+                    {article.previewImageUrl ? (
+                      <Image
+                        src={article.previewImageUrl}
+                        alt={article.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, 192px"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <XIcon className="w-16 h-16 text-zinc-300 dark:text-zinc-700" />
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex-1 p-5 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <XIcon className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />
+                        <span className="text-xs text-zinc-600 dark:text-zinc-400 font-medium">
+                          irene (@irenehl26__) on X
+                        </span>
+                      </div>
+                      <h4 className="font-display font-semibold text-lg text-foreground transition-colors group-hover:text-accent mb-2 line-clamp-2">
+                        {article.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                        {article.description}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                      <span className="text-xs text-zinc-500 dark:text-zinc-500 font-mono">
+                        x.com
+                      </span>
+                      {article.date && (
+                        <>
+                          <span className="h-2.5 w-px bg-border/60" />
+                          <time className="font-mono text-xs text-muted-foreground/60">
+                            {article.date}
+                          </time>
+                        </>
+                      )}
+                      <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-rose-600 transition-colors dark:text-zinc-600 dark:group-hover:text-rose-600 ml-auto" />
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   )
 }

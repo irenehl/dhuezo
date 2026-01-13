@@ -20,6 +20,24 @@ function isProduction(): boolean {
   )
 }
 
+/**
+ * Get the static OG image path for a project based on projectId
+ * Returns the default OG image if no project-specific image exists
+ */
+function getProjectOgImage(projectId?: string): string {
+  if (!projectId) {
+    return '/og-image.png'
+  }
+
+  const projectOgImages: Record<string, string> = {
+    'food-dice': '/og-image-food-dice.webp',
+    'nameless-mindfulness-app': '/og-image-nameless.webp',
+    // Add more project-specific OG images here as needed
+  }
+
+  return projectOgImages[projectId] || '/og-image.png'
+}
+
 export function generateMetadata({
   title,
   description,
@@ -29,32 +47,23 @@ export function generateMetadata({
   type = 'website',
   publishedTime,
   modifiedTime,
-}: GenerateMetadataOptions = {}): Metadata {
+  projectId,
+}: GenerateMetadataOptions & { projectId?: string } = {}): Metadata {
   const siteTitle = title || siteConfig.name
   const siteDescription =
     description ||
     'Full Stack Developer building resilient systems and dramatic interfaces.'
   const siteUrl = url || `${siteConfig.url}/${locale}`
-  
-  // Generate dynamic OG image URL with query params
-  const generateOgImageUrl = (ogTitle: string, ogDescription: string, ogLocale: string) => {
-    const params = new URLSearchParams({
-      title: ogTitle,
-      description: ogDescription,
-      locale: ogLocale,
-    })
-    return `/api/og?${params.toString()}`
-  }
 
-  // Use relative path when metadataBase is set, or absolute URL for external images
-  // For OG images, ensure they're properly formatted relative paths that will be resolved by metadataBase
+  // Use static OG images from /public directory
+  // If image is explicitly provided, use it; otherwise use project-specific or default OG image
   const siteImage = image
     ? image.startsWith('http')
       ? image // External absolute URL
       : image.startsWith('/')
       ? image // Relative path - will be resolved by metadataBase
       : `/${image}` // Make it relative if it's not already
-    : generateOgImageUrl(siteTitle, siteDescription, locale) // Dynamic OG image - relative path resolved by metadataBase
+    : getProjectOgImage(projectId) // Use static OG image based on projectId or default
 
   const isProd = isProduction()
 
@@ -90,7 +99,7 @@ export function generateMetadata({
           width: 1200,
           height: 630,
           alt: siteTitle,
-          type: 'image/png', // Explicitly set image type for better recognition
+          type: siteImage.endsWith('.webp') ? 'image/webp' : 'image/png', // Set image type based on file extension
         },
       ],
       locale: locale,

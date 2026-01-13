@@ -90,6 +90,11 @@
     "title": "Big Reputation",
     "subtitle": "Selected works & engineered chaos.",
     "viewArchive": "View Archive",
+    "xArticles": {
+      "title": "Articles",
+      "subtitle": "Thoughts, insights, and updates.",
+      "readMore": "Read on X"
+    },
     "project1": {
       "title": "Obsidian CMS",
       "description": "A headless content management system designed for high-frequency editorial teams. Glitch-free real-time collaboration.",

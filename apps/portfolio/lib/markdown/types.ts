@@ -38,7 +38,7 @@ export interface ProjectFrontmatter {
   projectId: string
   locale: 'en' | 'es'
   orderIndex: number
-  previewImageUrl: string
+  previewImageUrl?: string
   deployedUrl?: string | null
   repoUrl?: string | null
   featured: boolean

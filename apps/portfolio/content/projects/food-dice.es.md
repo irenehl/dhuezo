@@ -2,7 +2,7 @@
 projectId: food-dice
 locale: es
 orderIndex: 1
-previewImageUrl: /projects/food-dice-preview.jpg
+previewImage: /og-image-food-dice.webp
 deployedUrl: https://food-dice.dhuezo.dev
 repoUrl: https://github.com/irenehl/nameless
 featured: true

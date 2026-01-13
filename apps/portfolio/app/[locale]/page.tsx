@@ -20,6 +20,7 @@ export async function generateMetadata({
     title: 'Daniela Huezo - Full Stack Developer',
     description:
       'Full-stack engineer building resilient systems and dramatic interfaces. Explore my projects, talks, and experience.',
+    image: '/og-image.png', // Use static OG image for home page
   })
 }
 

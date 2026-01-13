@@ -90,6 +90,11 @@
     "title": "Gran Reputación",
     "subtitle": "Trabajos seleccionados y caos ingenieril.",
     "viewArchive": "Ver Archivo",
+    "xArticles": {
+      "title": "Artículos en X",
+      "subtitle": "Pensamientos, ideas y actualizaciones.",
+      "readMore": "Leer en X"
+    },
     "project1": {
       "title": "Obsidian CMS",
       "description": "Un sistema de gestión de contenido headless diseñado para equipos editoriales de alta frecuencia. Colaboración en tiempo real sin fallos.",

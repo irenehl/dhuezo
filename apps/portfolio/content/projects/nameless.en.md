@@ -2,7 +2,7 @@
 projectId: nameless-mindfulness-app
 locale: en
 orderIndex: 1
-previewImageUrl: /projects/nameless.jpg
+previewImageUrl: /og-image-nameless.webp
 deployedUrl: https://nameless.dhuezo.dev/
 repoUrl: https://github.com/irenehl/nameless
 featured: true
