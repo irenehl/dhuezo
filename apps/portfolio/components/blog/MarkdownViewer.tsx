@@ -78,17 +78,16 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
           remarkPlugins={[remarkGfm, remarkUnwrapImages]}
           components={{
             code(props) {
-              const { className, children, ...rest } = props
+              const { className, children } = props
               const match = /language-(\w+)/.exec(className || '')
               // In react-markdown v10+, inline code doesn't have a language class
               const isInline = !match
               return !isInline && match ? (
                 <SyntaxHighlighter
-                  style={vscDarkPlus}
+                  style={vscDarkPlus as Record<string, React.CSSProperties>}
                   language={match[1]}
                   PreTag="div"
                   className="rounded-lg"
-                  {...props}
                 >
                   {String(children).replace(/\n$/, '')}
                 </SyntaxHighlighter>
