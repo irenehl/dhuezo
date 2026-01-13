@@ -26,13 +26,7 @@ Food Dice is a React Native mobile app that solves the "where should we eat?" di
 
 ## The Challenge & Solution
 
-The challenge was solving decision fatigue when choosing where to eat—a common problem that leads to endless scrolling through restaurant reviews and indecision. Users needed a quick, fun way to discover new places without the analysis paralysis that comes with too many options.
-
-The solution combines Google Maps Places API with a simple random selection algorithm. The app searches for multiple food types simultaneously, filters results by user-specified radius, and randomly selects from the filtered options. This approach ensures variety while respecting user preferences and location constraints.
-
-Key technical challenges included handling location permissions gracefully, managing API rate limits, and providing a smooth user experience across iOS and Android. The app uses Expo's location services with fallback to manual address input, ensuring it works even when GPS is unavailable. Error handling provides clear, user-friendly messages in both English and Spanish, making the app accessible to a broader audience.
-
-The architecture allows for scalability and handles edge cases like no results found or API failures. The UI provides immediate feedback and clear error states, ensuring users always understand what's happening and what actions they can take.
+Food Dice tackles decision fatigue in choosing where to eat by letting users enter food preferences, set a radius, and quickly get a random nearby restaurant. It uses Google Maps Places API and a random selection algorithm to make choices fun and easy. The app gracefully handles location permissions, allows manual address input, supports English and Spanish, and provides clear error messages. Scalable architecture ensures smooth use, even if location or API issues arise.
 
 ## Technologies Used
 

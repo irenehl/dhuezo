@@ -90,8 +90,17 @@
     "title": "Gran Reputación",
     "subtitle": "Trabajos seleccionados y caos ingenieril.",
     "viewArchive": "Ver Archivo",
+    "modal": {
+      "overview": "Resumen",
+      "challengeSolution": "El Desafío y la Solución",
+      "visitWebsite": "Visitar Sitio Web",
+      "viewRepository": "Ver Repositorio",
+      "privateRepo": "El acceso al repositorio privado puede requerir autorización.",
+      "readFullStory": "Leer historia completa",
+      "viewCaseStudy": "VER CASO DE ESTUDIO"
+    },
     "xArticles": {
-      "title": "Artículos en X",
+      "title": "Artículos",
       "subtitle": "Pensamientos, ideas y actualizaciones.",
       "readMore": "Leer en X"
     },

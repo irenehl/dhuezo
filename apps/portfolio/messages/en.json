@@ -90,6 +90,15 @@
     "title": "Big Reputation",
     "subtitle": "Selected works & engineered chaos.",
     "viewArchive": "View Archive",
+    "modal": {
+      "overview": "Overview",
+      "challengeSolution": "The Challenge & Solution",
+      "visitWebsite": "Visit Website",
+      "viewRepository": "View Repository",
+      "privateRepo": "Private repository access may require authorization.",
+      "readFullStory": "Read full story",
+      "viewCaseStudy": "VIEW CASE STUDY"
+    },
     "xArticles": {
       "title": "Articles",
       "subtitle": "Thoughts, insights, and updates.",

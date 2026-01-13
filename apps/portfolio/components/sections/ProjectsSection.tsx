@@ -169,7 +169,7 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                     {/* Hover Overlay Text */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 z-10">
                       <div className="bg-black/40 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10 text-white text-xs font-medium tracking-wide dark:bg-black/60 dark:border-white/20">
-                        VIEW CASE STUDY
+                        {t('projects.modal.viewCaseStudy')}
                       </div>
                     </div>
                   </>
@@ -207,7 +207,7 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] uppercase tracking-wider text-zinc-500 border border-neutral-800 px-2 py-1 rounded bg-neutral-950/50 dark:text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950/50"
+                      className="text-[10px] uppercase tracking-wider text-zinc-500 border border-neutral-500 px-2 py-1 rounded bg-zinc-100/50 dark:text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950/50"
                     >
                       {tag}
                     </span>
@@ -234,24 +234,9 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
               </button>
 
               {/* Left Side (Visuals & High Level) */}
-              <div className="w-full md:w-5/12 lg:w-1/3 h-[40vh] md:h-full relative border-r border-white/5 bg-neutral-900/20 dark:border-zinc-800 dark:bg-zinc-900/20">
-                <div className="absolute inset-0">
-                  {activeProject.previewImage && !imageErrors.has(activeProject.id) ? (
-                    <>
-                      <ScrollRevealImage
-                        src={activeProject.previewImage}
-                        alt={activeProject.title}
-                        fill
-                        className="object-cover opacity-40 mix-blend-overlay grayscale"
-                        sizes="33vw"
-                        unoptimized
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-50 via-zinc-50/60 to-transparent dark:from-zinc-950 dark:via-zinc-950/60" />
-                    </>
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-50 via-zinc-50/60 to-transparent dark:from-zinc-950 dark:via-zinc-950/60" />
-                  )}
-                </div>
+              <div className="w-full md:w-5/12 lg:w-1/3 h-[40vh] md:h-full relative border-r border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
+                <div className="absolute inset-0 bg-smooth-pattern" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-50/30 via-zinc-50/10 to-transparent dark:from-zinc-950/50 dark:via-zinc-950/20" />
 
                 <div className="relative h-full flex flex-col justify-end p-8 md:p-12 space-y-6">
                   <div className="space-y-4">
@@ -259,7 +244,7 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                       {activeProject.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 rounded border border-white/10 bg-white/5 text-[10px] uppercase tracking-wider text-zinc-300 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-zinc-300"
+                          className="px-2 py-0.5 rounded border border-zinc-300/30 bg-zinc-100/50 text-[10px] uppercase tracking-wider text-zinc-700 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-zinc-300"
                         >
                           {tag}
                         </span>
@@ -279,14 +264,14 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                     {/* Overview Section */}
                     <div className="space-y-6">
                       <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest block border-b border-white/10 pb-4 mb-6 dark:text-zinc-500 dark:border-zinc-800">
-                        Overview
+                        {t('projects.modal.overview')}
                       </span>
                       {extractOverview(activeProject.content) ? (
-                        <p className="text-lg md:text-xl text-zinc-200 leading-relaxed font-light dark:text-zinc-200">
+                        <p className="text-lg md:text-xl text-zinc-700 leading-relaxed font-light dark:text-zinc-200">
                           {extractOverview(activeProject.content)}
                         </p>
                       ) : (
-                        <p className="text-lg md:text-xl text-zinc-200 leading-relaxed font-light dark:text-zinc-200">
+                        <p className="text-lg md:text-xl text-zinc-300 leading-relaxed font-light dark:text-zinc-200">
                           {activeProject.description}
                         </p>
                       )}
@@ -296,7 +281,7 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                     {extractChallengeSolution(activeProject.content) && (
                       <div className="space-y-6">
                         <span className="text-xs font-semibold text-zinc-500 uppercase tracking-widest block border-b border-white/10 pb-4 mb-6 dark:text-zinc-500 dark:border-zinc-800">
-                          The Challenge & Solution
+                          {t('projects.modal.challengeSolution')}
                         </span>
                         <p className="text-zinc-400 leading-8 text-sm md:text-base font-light dark:text-zinc-400">
                           {extractChallengeSolution(activeProject.content)}
@@ -315,7 +300,7 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                               rel="noopener noreferrer"
                               className="flex-1 group flex items-center justify-center gap-3 bg-white text-black px-6 py-4 rounded-sm font-medium text-sm hover:bg-neutral-200 transition-all duration-200 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
                             >
-                              <span>Visit Website</span>
+                              <span>{t('projects.modal.visitWebsite')}</span>
                               <ArrowUpRight className="w-4 h-4 stroke-[1.5] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                             </a>
                           )}
@@ -327,12 +312,12 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                               className="flex-1 group flex items-center justify-center gap-3 bg-neutral-900 border border-neutral-800 text-white px-6 py-4 rounded-sm font-medium text-sm hover:bg-neutral-800 hover:border-neutral-700 transition-all duration-200 dark:bg-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800"
                             >
                               <Github className="w-4 h-4 stroke-[1.5]" />
-                              <span>View Repository</span>
+                              <span>{t('projects.modal.viewRepository')}</span>
                             </a>
                           )}
                         </div>
                         <p className="text-center text-xs text-zinc-600 mt-6 font-medium dark:text-zinc-500">
-                          Private repository access may require authorization.
+                          {t('projects.modal.privateRepo')}
                         </p>
                       </div>
                     )}
@@ -343,7 +328,7 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                         href={`/${locale}/projects/${activeProject.id}`}
                         className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors"
                       >
-                        Read full story <ArrowRight className="w-4 h-4" />
+                        {t('projects.modal.readFullStory')} <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
                   </div>

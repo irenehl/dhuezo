@@ -25,13 +25,7 @@ Nameless es una aplicación móvil de mindfulness construida con React Native y 
 
 ## El Desafío y la Solución
 
-El desafío era crear una herramienta digital de mindfulness que se sienta genuinamente calmante en lugar de agregar estrés digital. La mayoría de las aplicaciones en este espacio son demasiado gamificadas (creando presión) o demasiado pasivas (perdiendo compromiso). Los usuarios necesitaban actividades que promuevan enfoque y calma sin sentirse como trabajo o competencia.
-
-La solución fue diseñar actividades suaves e interactivas que requieren enfoque pero no tienen presión de tiempo o sistemas de puntuación. Actividades como "Counting Calm" y "Connect the Dots" involucran la mente de manera meditativa, similar a prácticas tradicionales de mindfulness como contar respiraciones o dibujar mandalas.
-
-Los desafíos técnicos incluyeron crear animaciones fluidas que se sientan calmantes en lugar de bruscas, implementar retroalimentación háptica que mejore en lugar de distraer, y asegurar que la aplicación funcione bien para usuarios con sensibilidad al movimiento. La aplicación incluye características de accesibilidad como opciones de movimiento reducido y paletas de colores personalizables para acomodar diferentes necesidades.
-
-La arquitectura prioriza el rendimiento y las interacciones fluidas, usando Lottie para animaciones y optimizando el renderizado para mantener 60fps incluso durante interacciones complejas. La gestión de estado asegura que las preferencias del usuario persistan entre sesiones, creando una experiencia personalizada que se adapta a las necesidades de cada usuario.
+El reto era diseñar una app de mindfulness genuinamente calmante, evitando la presión de la gamificación y la pasividad de las apps típicas. Se crearon actividades meditativas e interactivas como "Counting Calm" y "Connect the Dots", sin tiempos ni puntajes, para promover enfoque y calma. Se priorizó la accesibilidad (movimiento reducido, paletas personalizables), animaciones fluidas y rendimiento óptimo, garantizando una experiencia personalizable y relajante.
 
 ## Tecnologías Utilizadas
 
