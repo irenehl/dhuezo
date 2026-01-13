@@ -77,8 +77,8 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkUnwrapImages]}
           components={{
-            code(props: any) {
-              const { node, className, children, ...rest } = props
+            code(props) {
+              const { className, children, ...rest } = props
               const match = /language-(\w+)/.exec(className || '')
               // In react-markdown v10+, inline code doesn't have a language class
               const isInline = !match
@@ -107,7 +107,6 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
                 <div className="my-6 flex justify-center">
                   <div className="relative w-full max-w-4xl aspect-video rounded-lg overflow-hidden">
                     {isExternal ? (
-                      // Use regular img for external URLs with scroll reveal effect
                       <img
                         src={src}
                         alt={alt || 'Content image'}
@@ -116,7 +115,6 @@ export function MarkdownViewer({ content, className }: MarkdownViewerProps) {
                         style={{ filter: 'grayscale(100%)' }}
                       />
                     ) : (
-                      // Use ScrollRevealImage for internal URLs
                       <ScrollRevealImage
                         src={src}
                         alt={alt || 'Content image'}

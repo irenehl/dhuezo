@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
 import { ArrowUpRight, ArrowRight, ExternalLink, Github, X } from 'lucide-react'
@@ -119,11 +119,6 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
     return ''
   }
 
-  useEffect(() => {
-    // #region agent log
-    fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H5',location:'apps/portfolio/components/sections/ProjectsSection.tsx:ProjectsSection',message:'ProjectsSection computed projects',data:{locale,source:markdownProjects && markdownProjects.length>0?'markdown':'config',projectCount:projects.length,projects:projects.slice(0,6).map((p)=>({id:p.id,previewImage:(p.previewImage||'').slice(0,160)}))},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion agent log
-  }, [locale, markdownProjects, projects.length])
 
   return (
     <section id="projects" className="space-y-16 scroll-mt-20">

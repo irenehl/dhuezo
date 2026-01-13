@@ -13,10 +13,6 @@ const CONTENT_DIR = path.join(process.cwd(), 'content/projects')
 
 function normalizeImageUrl(url: string | undefined): string {
   if (!url) return ''
-  
-  // #region agent log
-  fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'post-fix',hypothesisId:'H2',location:'apps/portfolio/lib/services/project-content-service.ts:normalizeImageUrl',message:'normalizeImageUrl input',data:{urlPreview:url.slice(0,160),startsWithSlash:url.startsWith('/'),startsWithHttp:url.startsWith('http://')||url.startsWith('https://'),hasAppsPublicPrefix:url.includes('apps/portfolio/public'),hasPublicSegment:url.includes('/public/')},timestamp:Date.now()})}).catch(()=>{});
-  // #endregion agent log
 
   // If it's already a full URL, return as-is
   if (url.startsWith('http://') || url.startsWith('https://')) {
@@ -26,11 +22,7 @@ function normalizeImageUrl(url: string | undefined): string {
   // Handle filesystem paths that include "apps/portfolio/public/" prefix
   // Convert "apps/portfolio/public/og-image.webp" -> "/og-image.webp"
   if (url.includes('apps/portfolio/public/')) {
-    const result = url.replace(/^.*\/public\//, '/')
-    // #region agent log
-    fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'post-fix',hypothesisId:'H2',location:'apps/portfolio/lib/services/project-content-service.ts:normalizeImageUrl',message:'normalizeImageUrl output (filesystem path converted)',data:{resultPreview:result.slice(0,160)},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion agent log
-    return result
+    return url.replace(/^.*\/public\//, '/')
   }
   
   // If it starts with /, it's already a valid public path
@@ -41,13 +33,7 @@ function normalizeImageUrl(url: string | undefined): string {
   // If it's a relative path like "content/projects/image.jpg", convert to public path
   // Remove "content/" prefix if present and add leading slash
   const normalized = url.replace(/^content\//, '/')
-  const result = normalized.startsWith('/') ? normalized : `/${normalized}`
-
-  // #region agent log
-  fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'post-fix',hypothesisId:'H2',location:'apps/portfolio/lib/services/project-content-service.ts:normalizeImageUrl',message:'normalizeImageUrl output',data:{resultPreview:result.slice(0,160)},timestamp:Date.now()})}).catch(()=>{});
-  // #endregion agent log
-
-  return result
+  return normalized.startsWith('/') ? normalized : `/${normalized}`
 }
 
 function mapMarkdownToProject(
@@ -64,19 +50,12 @@ function mapMarkdownToProject(
   // Generate a stable ID from projectId and locale
   const id = `${frontmatter.projectId}-${frontmatter.locale}`
 
-  // #region agent log
-  const legacyPreviewImage = (frontmatter as unknown as { previewImage?: string }).previewImage
-  // Use previewImageUrl if available, otherwise fall back to legacy previewImage field
-  const imageUrl = frontmatter.previewImageUrl || legacyPreviewImage
-  fetch('http://127.0.0.1:7246/ingest/4716d069-a486-46d4-9cfe-1b3c1d3447eb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'post-fix',hypothesisId:'H1',location:'apps/portfolio/lib/services/project-content-service.ts:mapMarkdownToProject',message:'mapMarkdownToProject frontmatter image fields',data:{file:path.basename(filePath),projectId:frontmatter.projectId,locale:frontmatter.locale,previewImageUrlPreview:(frontmatter.previewImageUrl||'').slice(0,160),legacyPreviewImagePreview:(legacyPreviewImage||'').slice(0,160),finalImageUrlPreview:(imageUrl||'').slice(0,160)},timestamp:Date.now()})}).catch(()=>{});
-  // #endregion agent log
-
   return {
     id,
     project_id: frontmatter.projectId,
     locale: frontmatter.locale,
     order_index: frontmatter.orderIndex,
-    preview_image_url: normalizeImageUrl(imageUrl),
+    preview_image_url: normalizeImageUrl(frontmatter.previewImageUrl),
     deployed_url: frontmatter.deployedUrl || null,
     repo_url: frontmatter.repoUrl || null,
     featured: frontmatter.featured,
