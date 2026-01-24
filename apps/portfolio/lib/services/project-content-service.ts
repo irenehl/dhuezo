@@ -1,3 +1,4 @@
+import fs from 'fs/promises'
 import path from 'path'
 import type { Project } from '@/types/project'
 import {
@@ -42,10 +43,9 @@ function mapMarkdownToProject(
     content: string
     contentHtml: string
   },
-  filePath: string
+  fileTimestamps: { createdAt: string; updatedAt: string }
 ): MarkdownProject {
   const { frontmatter, contentHtml } = parsed
-  const now = new Date().toISOString()
 
   // Generate a stable ID from projectId and locale
   const id = `${frontmatter.projectId}-${frontmatter.locale}`
@@ -62,8 +62,8 @@ function mapMarkdownToProject(
     title: frontmatter.title,
     description: frontmatter.description,
     tags: frontmatter.tags,
-    created_at: now,
-    updated_at: now,
+    created_at: fileTimestamps.createdAt,
+    updated_at: fileTimestamps.updatedAt,
     contentHtml,
     content: parsed.content,
   }
@@ -76,7 +76,11 @@ export const projectContentService = {
     const projects = await Promise.all(
       files.map(async (filePath) => {
         const parsed = await parseMarkdownFile<ProjectFrontmatter>(filePath)
-        return mapMarkdownToProject(parsed, filePath)
+        const stat = await fs.stat(filePath)
+        return mapMarkdownToProject(parsed, {
+          createdAt: stat.birthtime.toISOString(),
+          updatedAt: stat.mtime.toISOString(),
+        })
       })
     )
 
@@ -114,13 +118,17 @@ export const projectContentService = {
     }
 
     const parsed = await parseMarkdownFile<ProjectFrontmatter>(matchingFile)
+    const stat = await fs.stat(matchingFile)
     
     // Verify projectId and locale match
     if (parsed.frontmatter.projectId !== projectId || parsed.frontmatter.locale !== locale) {
       return null
     }
 
-    return mapMarkdownToProject(parsed, matchingFile)
+    return mapMarkdownToProject(parsed, {
+      createdAt: stat.birthtime.toISOString(),
+      updatedAt: stat.mtime.toISOString(),
+    })
   },
 }
 

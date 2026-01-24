@@ -152,12 +152,16 @@ export default async function ProjectPage({ params }: Props) {
             name: project.title,
             description: project.description,
             url: projectUrl,
-            ...(project.deployed_url && { url: project.deployed_url }),
+            ...(project.deployed_url && { sameAs: [project.deployed_url] }),
             ...(project.repo_url && { codeRepository: project.repo_url }),
             creator: {
               '@type': 'Person',
               name: siteConfig.name,
               url: siteConfig.url,
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': projectUrl,
             },
           }),
         }}
