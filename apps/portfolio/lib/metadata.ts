@@ -20,6 +20,21 @@ function isProduction(): boolean {
   )
 }
 
+function toAbsoluteUrl(input: string, base: string): string {
+  try {
+    return new URL(input).toString()
+  } catch {
+    return new URL(input, base).toString()
+  }
+}
+
+function stripLeadingLocale(pathname: string, locale: string): string {
+  const prefix = `/${locale}`
+  if (pathname === prefix) return ''
+  if (pathname.startsWith(`${prefix}/`)) return pathname.slice(prefix.length)
+  return pathname
+}
+
 /**
  * Get the static OG image path for a project based on projectId
  * Returns the default OG image if no project-specific image exists
@@ -30,6 +45,7 @@ function getProjectOgImage(projectId?: string): string {
   }
 
   const projectOgImages: Record<string, string> = {
+    cerebryx: '/og-image-cerebryx.webp',
     'food-dice': '/og-image-food-dice.webp',
     'nameless-mindfulness-app': '/og-image-nameless.webp',
     // Add more project-specific OG images here as needed
@@ -53,7 +69,7 @@ export function generateMetadata({
   const siteDescription =
     description ||
     'Full Stack Developer building resilient systems and dramatic interfaces.'
-  const siteUrl = url || `${siteConfig.url}/${locale}`
+  const canonicalUrl = toAbsoluteUrl(url ?? `/${locale}`, siteConfig.url)
 
   // Use static OG images from /public directory
   // If image is explicitly provided, use it; otherwise use project-specific or default OG image
@@ -67,29 +83,44 @@ export function generateMetadata({
 
   const isProd = isProduction()
 
-  // Generate language alternates for all supported locales
+  const canonicalPathname = new URL(canonicalUrl).pathname
+  const pathWithoutLocale = stripLeadingLocale(canonicalPathname, locale)
+
+  // Generate language alternates for all supported locales (hreflang)
   const languageAlternates: Record<string, string> = {}
+  const alternateLocales: string[] = []
   locales.forEach((loc) => {
-    if (loc !== locale) {
-      // Replace locale in URL if it exists, otherwise append
-      const alternateUrl = siteUrl.includes(`/${locale}`)
-        ? siteUrl.replace(`/${locale}`, `/${loc}`)
-        : `${siteConfig.url}/${loc}`
-      languageAlternates[loc] = alternateUrl
-    }
+    if (loc === locale) return
+    const altPath = `/${loc}${pathWithoutLocale}`
+    languageAlternates[loc] = toAbsoluteUrl(altPath, siteConfig.url)
+    alternateLocales.push(loc === 'es' ? 'es_ES' : 'en_US')
   })
+
+  const openGraphLocale = locale === 'es' ? 'es_ES' : 'en_US'
 
   const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
+    keywords: [
+      'Full Stack Developer',
+      'Software Engineer',
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'shadcn/ui',
+    ],
+    authors: [{ name: siteConfig.name }],
+    creator: siteConfig.name,
+    publisher: siteConfig.name,
     metadataBase: new URL(siteConfig.url),
     alternates: {
-      canonical: siteUrl,
+      canonical: canonicalUrl,
       languages: languageAlternates,
     },
     openGraph: {
       type: type,
-      url: siteUrl,
+      url: canonicalUrl,
       title: siteTitle,
       description: siteDescription,
       siteName: siteConfig.name,
@@ -102,7 +133,8 @@ export function generateMetadata({
           type: siteImage.endsWith('.webp') ? 'image/webp' : 'image/png', // Set image type based on file extension
         },
       ],
-      locale: locale,
+      locale: openGraphLocale,
+      ...(alternateLocales.length > 0 ? { alternateLocale: alternateLocales } : {}),
       ...(publishedTime && { publishedTime }),
       ...(modifiedTime && { modifiedTime }),
     },

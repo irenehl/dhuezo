@@ -18,6 +18,14 @@ function isProduction(): boolean {
   )
 }
 
+function toAbsoluteUrl(input: string, base: string): string {
+  try {
+    return new URL(input).toString()
+  } catch {
+    return new URL(input, base).toString()
+  }
+}
+
 export function generateMetadata({
   title,
   description,
@@ -29,7 +37,7 @@ export function generateMetadata({
 }: GenerateMetadataOptions = {}): Metadata {
   const siteTitle = title || siteConfig.defaultTitle
   const siteDescription = description || siteConfig.defaultDescription
-  const siteUrl = url || siteConfig.url
+  const canonicalUrl = toAbsoluteUrl(url ?? siteConfig.url, siteConfig.url)
   const siteImage = image
     ? image.startsWith('http')
       ? image
@@ -47,13 +55,16 @@ export function generateMetadata({
     },
     description: siteDescription,
     keywords: siteConfig.keywords,
+    authors: [{ name: siteConfig.name }],
+    creator: siteConfig.name,
+    publisher: siteConfig.name,
     metadataBase: new URL(siteConfig.url),
     alternates: {
-      canonical: siteUrl,
+      canonical: canonicalUrl,
     },
     openGraph: {
       type,
-      url: siteUrl,
+      url: canonicalUrl,
       title: siteTitle,
       description: siteDescription,
       siteName: siteConfig.name,

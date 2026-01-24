@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { siteConfig } from '@/lib/config'
 import { getAllPosts } from '@/lib/blog'
 import { locales } from '@/i18n/config'
+import { projectContentService } from '@/lib/services/project-content-service'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url
@@ -35,9 +36,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority: 0.6,
         })
       }
-    } catch (error) {
+    } catch {
       // If blog posts can't be loaded, continue without them
-      console.error(`Failed to load blog posts for locale ${locale}:`, error)
+    }
+
+    // Add all projects for each locale
+    try {
+      const projects = await projectContentService.getAllProjects(locale)
+      for (const project of projects) {
+        entries.push({
+          url: `${baseUrl}/${locale}/projects/${project.project_id}`,
+          lastModified: new Date(project.updated_at || project.created_at),
+          changeFrequency: 'monthly',
+          priority: 0.7,
+        })
+      }
+    } catch {
+      // If projects can't be loaded, continue without them
     }
   }
 
