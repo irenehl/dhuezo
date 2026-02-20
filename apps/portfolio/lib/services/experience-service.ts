@@ -1,14 +1,11 @@
 import path from 'path'
 import fs from 'fs/promises'
 import matter from 'gray-matter'
-import { remark } from 'remark'
-import remarkGfm from 'remark-gfm'
-import remarkRehype from 'remark-rehype'
-import rehypeStringify from 'rehype-stringify'
 import type { Experience } from '@/types/experience'
 import {
   parseMarkdownFile,
   getMarkdownFilesInDir,
+  renderMarkdownToHtml,
 } from '@/lib/markdown/md'
 import type {
   ExperienceFrontmatter,
@@ -53,30 +50,7 @@ async function parseMultipleExperiencesFromFile(
       const parsed = matter(frontmatterBlock)
 
       if (parsed.data && Object.keys(parsed.data).length > 0) {
-        // Convert Markdown to HTML
-        const processor = remark().use(remarkGfm).use(remarkRehype).use(rehypeStringify)
-        const result = await processor.process(contentText)
-        let contentHtml = String(result)
-
-        // Add IDs to headings
-        contentHtml = contentHtml.replace(
-          /<h([1-6])([^>]*)>(.*?)<\/h[1-6]>/gi,
-          (match, level, attrs, text) => {
-            const textContent = text.replace(/<[^>]*>/g, '').trim()
-            const id = textContent
-              .toLowerCase()
-              .replace(/\s+/g, '-')
-              .replace(/[^a-z0-9-]/g, '')
-              .replace(/-+/g, '-')
-              .replace(/^-|-$/g, '')
-            
-            if (attrs && attrs.includes('id=')) {
-              return match
-            }
-            
-            return `<h${level}${attrs} id="${id}">${text}</h${level}>`
-          }
-        )
+        const contentHtml = await renderMarkdownToHtml(contentText)
 
         experiences.push({
           frontmatter: parsed.data as ExperienceFrontmatter,

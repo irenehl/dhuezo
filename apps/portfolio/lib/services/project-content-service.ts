@@ -11,6 +11,24 @@ import type {
 
 const CONTENT_DIR = path.join(process.cwd(), 'content/projects')
 
+function sanitizeExternalUrl(url: string | undefined): string | null {
+  if (!url) return null
+
+  const trimmedUrl = url.trim()
+  if (!trimmedUrl) return null
+
+  try {
+    const parsed = new URL(trimmedUrl)
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+      return parsed.toString()
+    }
+  } catch {
+    return null
+  }
+
+  return null
+}
+
 function normalizeImageUrl(url: string | undefined): string {
   if (!url) return ''
 
@@ -56,8 +74,8 @@ function mapMarkdownToProject(
     locale: frontmatter.locale,
     order_index: frontmatter.orderIndex,
     preview_image_url: normalizeImageUrl(frontmatter.previewImageUrl),
-    deployed_url: frontmatter.deployedUrl || null,
-    repo_url: frontmatter.repoUrl || null,
+    deployed_url: sanitizeExternalUrl(frontmatter.deployedUrl),
+    repo_url: sanitizeExternalUrl(frontmatter.repoUrl),
     featured: frontmatter.featured,
     title: frontmatter.title,
     description: frontmatter.description,
