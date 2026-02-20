@@ -11,7 +11,7 @@ import type {
 
 const CONTENT_DIR = path.join(process.cwd(), 'content/projects')
 
-function sanitizeExternalUrl(url: string | undefined): string | null {
+function sanitizeExternalUrl(url: string | null | undefined): string | null {
   if (!url) return null
 
   const trimmedUrl = url.trim()
