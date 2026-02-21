@@ -1,130 +1,158 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { ChevronDown } from 'lucide-react'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
-import { useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 export function HeroSection() {
   const t = useTranslations()
-  const containerRef = useRef<HTMLDivElement>(null)
-  const scrollProgress = useMotionValue(0)
-  
-  // Update scroll progress on scroll
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      if (!containerRef.current) return
-      
-      const rect = containerRef.current.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-      const elementTop = rect.top
-      const elementHeight = rect.height
-      
-      // Progress from 0 to 1 as element scrolls from top to out of view
-      const progress = Math.max(0, Math.min(1, (windowHeight - elementTop) / (windowHeight + elementHeight)))
-      scrollProgress.set(progress)
-    }
-    
-    updateScrollProgress()
-    window.addEventListener('scroll', updateScrollProgress, { passive: true })
-    window.addEventListener('resize', updateScrollProgress, { passive: true })
-    
-    return () => {
-      window.removeEventListener('scroll', updateScrollProgress)
-      window.removeEventListener('resize', updateScrollProgress)
-    }
-  }, [scrollProgress])
-
-  // More dramatic scroll-based transforms
-  const headlineY = useTransform(scrollProgress, [0, 1], [0, -150])
-  const headlineOpacity = useTransform(scrollProgress, [0, 0.4], [1, 0])
-  const headlineScale = useTransform(scrollProgress, [0, 1], [1, 0.85])
-  
-  const subheadlineX = useTransform(scrollProgress, [0, 1], [0, -200])
-  const subheadlineOpacity = useTransform(scrollProgress, [0, 0.4], [1, 0])
-  const subheadlineScale = useTransform(scrollProgress, [0, 1], [1, 0.85])
 
   return (
-    <header className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20">
+    <header className="relative min-h-screen flex items-center px-6 lg:px-16 pt-32 pb-16">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Left Column - Content */}
+          <div className="space-y-6">
+            {/* Status Badge */}
+            <a
+              href="https://calendar.app.google/JzJiUGJo3TFqB3pX8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-card border-2 border-border rounded-full text-sm font-medium transition-all hover:border-primary cursor-pointer"
+              aria-label={t('hero.openToWork')}
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-pulse-glow absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-600" />
+              </span>
+              <span>{t('hero.openToWork')}</span>
+            </a>
 
-      <div ref={containerRef} className="max-w-9xl text-center space-y-8 relative z-10">
-        {/* Open to Work Badge */}
-        <a
-          href="https://calendar.app.google/JzJiUGJo3TFqB3pX8"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-3 py-1 border border-zinc-200 rounded-full bg-white shadow-sm text-[10px] uppercase tracking-widest text-zinc-600 font-semibold hover:border-zinc-300 transition-colors cursor-pointer dark:border-zinc-800 dark:bg-zinc-950/50 dark:text-zinc-400 dark:hover:border-rose-500 dark:hover:text-rose-400"
-          aria-label={t('hero.openToWork')}
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-600" />
-          </span>
-          <span>{t('hero.openToWork')}</span>
-        </a>
+            {/* Main Headline */}
+            <motion.h1
+              className="font-display text-5xl md:text-6xl lg:text-7xl leading-tight text-foreground"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Building things that{' '}
+              <span className="font-accent text-6xl md:text-7xl lg:text-8xl text-primary">
+                just work
+              </span>
+            </motion.h1>
 
-        {/* Main Headline */}
-        <h1 className="font-header text-5xl md:text-8xl lg:text-9xl text-zinc-950 tracking-tighter uppercase leading-[0.9] dark:text-zinc-100 w-full">
-          <motion.span
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: '-100px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              y: headlineY,
-              opacity: headlineOpacity,
-              scale: headlineScale,
-            }}
-            className="inline-block w-full break-words"
-          >
-            {t('hero.headline')}
-          </motion.span>
-          <br />
-          <motion.span
-            className="stroke-text inline-block w-full break-words dark:text-zinc-800"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, margin: '-100px' }}
+            {/* Subtitle */}
+            <motion.p
+              className="text-xl md:text-2xl font-medium text-deep-rose"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {t('hero.subtitle')}
+            </motion.p>
+
+            {/* Description with Easter Eggs */}
+            <motion.p
+              className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              I craft resilient systems and delightful interfaces. Currently leading teams at Agora Partnerships,{' '}
+              <span
+                className="relative group cursor-help border-b border-dotted border-primary"
+                data-secret="powered by coffee & late-night coding sessions"
+              >
+                shipping platforms from scratch
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-2 bg-primary text-primary-foreground px-3 py-2 rounded-lg text-sm font-accent whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  powered by coffee & late-night coding sessions ☕
+                </span>
+              </span>
+              , and occasionally{' '}
+              <span
+                className="relative group cursor-help border-b border-dotted border-primary"
+                data-secret="my island is called Serenity"
+              >
+                debugging in my cozy corner
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-2 bg-primary text-primary-foreground px-3 py-2 rounded-lg text-sm font-accent whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  my island is called Serenity 🏝️
+                </span>
+              </span>
+              .
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 pt-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <a
+                href="#projects"
+                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-base transition-all hover:bg-deep-rose hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+              >
+                {t('hero.cta.viewProjects')}
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-foreground border-2 border-border rounded-full font-semibold text-base transition-all hover:bg-card hover:border-secondary hover:-translate-y-0.5"
+              >
+                {t('hero.cta.contact', { default: "Let's Chat" })}
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right Column - Coffee Mug Visual */}
+          <motion.div
+            className="relative h-[500px] md:h-[600px] flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              x: subheadlineX,
-              opacity: subheadlineOpacity,
-              scale: subheadlineScale,
-            }}
           >
-            {t('hero.subheadline')}
-          </motion.span>
-        </h1>
+            {/* Coffee Mug */}
+            <div className="relative w-[280px] h-[320px] bg-gradient-to-br from-gentle-beige to-burlap rounded-b-[100px] border-8 border-pressed-brown shadow-2xl shadow-pressed-brown/20 animate-steam-rise">
+              {/* Mug Handle */}
+              <div className="absolute -right-[60px] top-1/2 -translate-y-1/2 w-[80px] h-[120px] border-8 border-pressed-brown border-l-0 rounded-r-[60px]" />
 
-        {/* Description */}
-        <p className="max-w-lg mx-auto text-sm md:text-base text-zinc-600 font-normal leading-relaxed tracking-wide dark:text-zinc-400">
-          {t('hero.description')}
-        </p>
+              {/* Coffee Surface */}
+              <div className="absolute top-[40px] left-2 right-2 h-[60px] rounded-full overflow-hidden bg-gradient-to-br from-pressed-brown to-[#6b5845]">
+                {/* Latte Art */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] bg-gentle-beige rounded-full opacity-90"
+                  style={{ borderRadius: '50% 50% 50% 0', transform: 'translate(-50%, -50%) rotate(-45deg)' }}
+                />
+              </div>
 
-        {/* CTAs */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-center gap-4">
-          <a
-            href="#projects"
-            className="group relative px-8 py-3 bg-zinc-900 text-white text-xs font-bold uppercase tracking-widest hover:bg-rose-600 transition-all duration-300 overflow-hidden shadow-md dark:bg-zinc-100 dark:text-black dark:hover:bg-rose-600 dark:hover:text-white"
-          >
-            <span className="relative z-10">{t('hero.cta.viewProjects')}</span>
-            <div className="absolute inset-0 bg-rose-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out dark:bg-rose-600" />
-          </a>
-          <a
-            href="#about"
-            className="px-8 py-3 border border-zinc-300 text-zinc-800 text-xs font-bold uppercase tracking-widest hover:border-zinc-900 hover:bg-zinc-100 transition-all bg-white dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-100 dark:hover:text-white dark:bg-zinc-900"
-          >
-            {t('hero.cta.readStory')}
-          </a>
+              {/* Steam */}
+              <div className="absolute bottom-full left-[50%] w-1 h-[60px] bg-gradient-to-t from-warm-cream/60 to-transparent rounded-full animate-steam" />
+              <div className="absolute bottom-full left-[40%] w-1 h-[60px] bg-gradient-to-t from-warm-cream/60 to-transparent rounded-full animate-steam [animation-delay:0.5s]" />
+              <div className="absolute bottom-full left-[60%] w-1 h-[60px] bg-gradient-to-t from-warm-cream/60 to-transparent rounded-full animate-steam [animation-delay:1s]" />
+            </div>
+
+            {/* Floating Leaves */}
+            <svg
+              className="absolute top-[10%] right-[15%] w-10 h-10 opacity-30 animate-float"
+              viewBox="0 0 40 40"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M 20 5 Q 10 15, 15 30 Q 18 25, 20 35 Q 22 25, 25 30 Q 30 15, 20 5 Z"
+                fill="currentColor"
+                className="text-pressed-brown"
+              />
+            </svg>
+            <svg
+              className="absolute bottom-[20%] left-[10%] w-9 h-9 opacity-25 animate-float [animation-delay:2s]"
+              viewBox="0 0 40 40"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M 20 5 Q 10 15, 15 30 Q 18 25, 20 35 Q 22 25, 25 30 Q 30 15, 20 5 Z"
+                fill="currentColor"
+                className="text-pressed-brown"
+              />
+            </svg>
+          </motion.div>
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
-        <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold dark:text-zinc-500">
-          {t('hero.scroll')}
-        </span>
-        <ChevronDown className="w-4 h-4 text-zinc-500 dark:text-zinc-500" />
       </div>
     </header>
   )

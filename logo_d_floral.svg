@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <!-- Burlap texture pattern -->
+    <pattern id="burlap" patternUnits="userSpaceOnUse" width="8" height="8">
+      <rect width="8" height="8" fill="#c4b199"/>
+      <line x1="0" y1="0" x2="8" y2="0" stroke="#a89578" stroke-width="0.5" opacity="0.4"/>
+      <line x1="0" y1="2" x2="8" y2="2" stroke="#a89578" stroke-width="0.5" opacity="0.3"/>
+      <line x1="0" y1="4" x2="8" y2="4" stroke="#a89578" stroke-width="0.5" opacity="0.4"/>
+      <line x1="0" y1="6" x2="8" y2="6" stroke="#a89578" stroke-width="0.5" opacity="0.3"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#9d8468" stroke-width="0.5" opacity="0.4"/>
+      <line x1="2" y1="0" x2="2" y2="8" stroke="#9d8468" stroke-width="0.5" opacity="0.3"/>
+      <line x1="4" y1="0" x2="4" y2="8" stroke="#9d8468" stroke-width="0.5" opacity="0.4"/>
+      <line x1="6" y1="0" x2="6" y2="8" stroke="#9d8468" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+    
+    <!-- Subtle shadow -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="1" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Burlap background -->
+  <rect width="400" height="500" fill="url(#burlap)"/>
+  
+  <!-- Letter D - chunky, cozy and VERY rounded -->
+  <path d="M 145 120 
+           Q 125 120, 125 140
+           L 125 360
+           Q 125 380, 145 380
+           L 200 380 
+           C 270 380, 310 330, 310 250 
+           C 310 170, 270 120, 200 120 
+           Z
+           M 175 165
+           L 200 165
+           C 240 165, 265 200, 265 250
+           C 265 300, 240 335, 200 335
+           L 175 335
+           Z" 
+        fill="#f4ede1" 
+        filter="url(#softShadow)"/>
+  
+  <!-- PRESSED FLOWERS AND LEAVES - Traced from original -->
+  
+  <!-- Large brown/tan leaf cluster (bottom left of D) -->
+  <g opacity="0.85">
+    <!-- Main large leaf -->
+    <path d="M 140 310 Q 120 325, 125 345 Q 130 355, 145 350 Q 155 345, 150 330 Q 145 315, 140 310 Z" 
+          fill="#8b7355" opacity="0.7"/>
+    <path d="M 140 310 L 145 330 L 150 350" stroke="#6b5845" stroke-width="1" fill="none" opacity="0.5"/>
+    
+    <!-- Second brown leaf (overlapping) -->
+    <path d="M 155 305 Q 165 315, 170 330 Q 172 340, 165 348 Q 158 350, 152 342 Q 148 330, 155 305 Z" 
+          fill="#7a6449" opacity="0.7"/>
+    <path d="M 155 305 L 160 325 L 165 345" stroke="#5a4839" stroke-width="0.8" fill="none" opacity="0.5"/>
+    
+    <!-- Third smaller brown leaf -->
+    <path d="M 128 285 Q 120 295, 122 310 Q 127 318, 135 315 Q 138 308, 135 295 Q 132 288, 128 285 Z" 
+          fill="#9d8468" opacity="0.65"/>
+  </g>
+  
+  <!-- Large PINK flower (main focal point - middle left) -->
+  <g opacity="0.9">
+    <!-- 4 main petals - slightly translucent pink -->
+    <ellipse cx="130" cy="240" rx="18" ry="25" fill="#d4a5c4" transform="rotate(-25 130 240)" opacity="0.85"/>
+    <ellipse cx="165" cy="235" rx="18" ry="25" fill="#d4a5c4" transform="rotate(25 165 235)" opacity="0.85"/>
+    <ellipse cx="162" cy="270" rx="18" ry="25" fill="#d8aac8" transform="rotate(95 162 270)" opacity="0.85"/>
+    <ellipse cx="128" cy="268" rx="18" ry="25" fill="#d8aac8" transform="rotate(-95 128 268)" opacity="0.85"/>
+    
+    <!-- Center of flower - darker -->
+    <circle cx="145" cy="253" r="8" fill="#b8859e" opacity="0.8"/>
+    <circle cx="145" cy="253" r="4" fill="#a87588" opacity="0.9"/>
+  </g>
+  
+  <!-- Smaller PINK flower with delicate petals (lower middle) -->
+  <g opacity="0.85">
+    <ellipse cx="170" cy="295" rx="8" ry="12" fill="#e8b8d8" transform="rotate(-20 170 295)"/>
+    <ellipse cx="185" cy="293" rx="8" ry="12" fill="#e8b8d8" transform="rotate(20 185 293)"/>
+    <ellipse cx="183" cy="307" rx="8" ry="12" fill="#e8b8d8" transform="rotate(85 183 307)"/>
+    <ellipse cx="172" cy="308" rx="8" ry="12" fill="#e8b8d8" transform="rotate(-85 172 308)"/>
+    <circle cx="177" cy="300" r="4" fill="#d4a5c4"/>
+    
+    <!-- Tiny stamens -->
+    <circle cx="177" cy="300" r="1.5" fill="#a87588"/>
+  </g>
+  
+  <!-- Small beige/cream flower (top of arrangement) -->
+  <g opacity="0.75">
+    <ellipse cx="135" cy="175" rx="7" ry="10" fill="#e8dcc8" transform="rotate(-30 135 175)"/>
+    <ellipse cx="148" cy="173" rx="7" ry="10" fill="#e8dcc8" transform="rotate(30 148 173)"/>
+    <ellipse cx="146" cy="185" rx="7" ry="10" fill="#ead8c4" transform="rotate(80 146 185)"/>
+    <ellipse cx="137" cy="186" rx="7" ry="10" fill="#ead8c4" transform="rotate(-80 137 186)"/>
+    <circle cx="141" cy="179" r="3.5" fill="#d4c4a8"/>
+  </g>
+  
+  <!-- Delicate small pink flower (upper left) -->
+  <g opacity="0.8">
+    <ellipse cx="125" cy="200" rx="5" ry="8" fill="#f0c8d8" transform="rotate(-35 125 200)"/>
+    <ellipse cx="135" cy="198" rx="5" ry="8" fill="#f0c8d8" transform="rotate(35 135 198)"/>
+    <ellipse cx="133" cy="208" rx="5" ry="8" fill="#f0c8d8" transform="rotate(90 133 208)"/>
+    <ellipse cx="127" cy="209" rx="5" ry="8" fill="#f0c8d8" transform="rotate(-90 127 209)"/>
+    <circle cx="130" cy="203" r="2.5" fill="#d8aac8"/>
+  </g>
+  
+  <!-- Green/brown stems and smaller leaves -->
+  <g opacity="0.7">
+    <!-- Main stem from large pink flower -->
+    <path d="M 145 253 Q 142 270, 140 290" stroke="#7a6449" stroke-width="2" fill="none"/>
+    <path d="M 145 253 Q 138 230, 135 210" stroke="#7a6449" stroke-width="1.5" fill="none"/>
+    
+    <!-- Small leaf near top -->
+    <path d="M 135 210 Q 128 215, 130 223 Q 133 220, 135 210 Z" fill="#9d8468" opacity="0.6"/>
+    <path d="M 135 210 L 130 217" stroke="#6b5845" stroke-width="0.5" fill="none"/>
+    
+    <!-- Another small stem detail -->
+    <path d="M 140 225 Q 145 230, 148 235" stroke="#8b7355" stroke-width="1" fill="none"/>
+  </g>
+  
+  <!-- Additional small brown leaves for authenticity -->
+  <g opacity="0.7">
+    <path d="M 160 220 Q 166 228, 165 238 Q 162 240, 158 235 Q 156 228, 160 220 Z" 
+          fill="#8b7355" opacity="0.6"/>
+    <path d="M 160 220 L 163 230 L 165 238" stroke="#5a4839" stroke-width="0.6" fill="none" opacity="0.5"/>
+  </g>
+  
+  <!-- Tiny scattered details for realism -->
+  <circle cx="118" cy="223" r="1.5" fill="#d8aac8" opacity="0.6"/>
+  <circle cx="175" cy="280" r="1" fill="#e8dcc8" opacity="0.5"/>
+  <path d="M 150 205 L 152 208" stroke="#7a6449" stroke-width="0.8" opacity="0.5"/>
+</svg>

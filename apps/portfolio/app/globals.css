@@ -4,61 +4,61 @@
 
 @layer base {
   :root {
-    /* Newspaper-inspired light mode palette - high contrast, accessible */
-    /* Background: off-white paper tone (aged newspaper aesthetic) */
-    --background: 45 15% 98%;
-    /* Foreground: near-black for strong contrast (WCAG AAA: ~19:1) */
-    --foreground: 0 0% 8%;
-    /* Card: slightly elevated paper-like shade */
-    --card: 45 10% 99%;
-    --card-foreground: 0 0% 8%;
-    --popover: 45 10% 99%;
-    --popover-foreground: 0 0% 8%;
-    /* Primary: purple accent (maintained from dark mode) */
-    --primary: 270 80% 56%;
-    --primary-foreground: 0 0% 100%;
-    /* Secondary: red accent */
-    --secondary: 0 70% 51%;
-    --secondary-foreground: 0 0% 100%;
-    /* Muted: subtle gray background for supporting elements */
-    --muted: 0 0% 95%;
-    /* Muted foreground: darker gray for AA contrast (WCAG AA: ~5.15:1 on 98% background) */
-    --muted-foreground: 0 0% 15%;
-    /* Accent: deep rose red inspired by reputation aesthetic */
-    --accent: 346 77% 56%;
-    --accent-foreground: 0 0% 100%;
-    /* Destructive: accessible red */
+    /* Cozy Portfolio Color Palette - Light Mode */
+    /* Core brand colors */
+    --sage-blue: 182 15% 55%;        /* #7B9B9E */
+    --dusty-rose: 310 31% 71%;       /* #D4A5C4 */
+    --warm-cream: 39 44% 93%;        /* #F4EDE1 */
+    --burlap: 36 20% 68%;            /* #C4B199 */
+    --pressed-brown: 28 25% 45%;     /* #8B7355 */
+    --soft-pink: 310 53% 81%;        /* #E8B8D8 */
+    --gentle-beige: 42 38% 84%;      /* #E8DCC8 */
+    --deep-rose: 343 23% 59%;        /* #A87588 */
+
+    /* Semantic colors - Light mode */
+    --background: var(--warm-cream);
+    --foreground: var(--pressed-brown);
+    --card: var(--gentle-beige);
+    --card-foreground: var(--pressed-brown);
+    --popover: var(--gentle-beige);
+    --popover-foreground: var(--pressed-brown);
+    --primary: var(--dusty-rose);
+    --primary-foreground: var(--warm-cream);
+    --secondary: var(--sage-blue);
+    --secondary-foreground: var(--warm-cream);
+    --muted: var(--gentle-beige);
+    --muted-foreground: 28 15% 50%;
+    --accent: var(--dusty-rose);
+    --accent-foreground: var(--warm-cream);
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    /* Border: visible but subtle newspaper-style borders */
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
-    /* Ring: focus outline using primary color */
-    --ring: 270 80% 56%;
-    --radius: 0.5rem;
+    --border: 28 25% 45% / 0.15;
+    --input: 28 25% 45% / 0.15;
+    --ring: var(--dusty-rose);
+    --radius: 1.25rem;
   }
 
   .dark {
-    --background: 222.2 47.4% 8%;
-    --foreground: 210 20% 90%;
-    --card: 222.2 47.4% 8%;
-    --card-foreground: 210 20% 90%;
-    --popover: 222.2 47.4% 8%;
-    --popover-foreground: 210 20% 90%;
-    --primary: 270 80% 56%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 70% 51%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    /* Accent updated from pink/magenta to a rose red matching the "Open to work" badge */
-    --accent: 346 77% 56%;
-    --accent-foreground: 0 0% 100%;
+    /* Dark mode palette */
+    --background: 25 22% 15%;         /* #2a2420 */
+    --foreground: var(--warm-cream);
+    --card: 26 17% 22%;               /* #3a3229 */
+    --card-foreground: var(--warm-cream);
+    --popover: 26 17% 22%;
+    --popover-foreground: var(--warm-cream);
+    --primary: var(--dusty-rose);
+    --primary-foreground: var(--warm-cream);
+    --secondary: var(--sage-blue);
+    --secondary-foreground: var(--warm-cream);
+    --muted: 26 17% 22%;
+    --muted-foreground: var(--burlap);
+    --accent: var(--dusty-rose);
+    --accent-foreground: var(--warm-cream);
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 270 80% 56%;
+    --border: 39 44% 93% / 0.15;
+    --input: 39 44% 93% / 0.15;
+    --ring: var(--dusty-rose);
   }
 }
 
@@ -73,15 +73,19 @@
 
 /* Custom Font Assignments */
 .font-display {
-  font-family: var(--font-cinzel), serif;
+  font-family: var(--font-lora), serif;
 }
 
 .font-header {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-lora), serif;
 }
 
 .font-body {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-dm-sans), sans-serif;
+}
+
+.font-accent {
+  font-family: var(--font-caveat), cursive;
 }
 
 /* Custom Noise Texture - Light Mode */

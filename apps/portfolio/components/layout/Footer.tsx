@@ -1,46 +1,45 @@
- 'use client'
+'use client'
 
-import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { Sun, Moon } from 'lucide-react'
-import { useTheme } from 'next-themes'
 import { siteConfig } from '@/lib/config'
 
 export const Footer = (): JSX.Element => {
   const tCommon = useTranslations('common')
   const tFooter = useTranslations('footer')
-  const { theme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  const isDark = mounted ? theme === 'dark' : true
-  const designedText = isDark ? tFooter('designedDark') : tFooter('designedLight')
-
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="text-xs text-zinc-400 font-mono font-medium dark:text-zinc-500">
-          {tCommon('copyright', {
-            year,
-            name: siteConfig.name,
-          })}
-        </div>
-        <div className="flex items-center gap-1 text-zinc-500 text-xs uppercase tracking-widest font-semibold dark:text-zinc-400">
-          <span>{designedText}</span>
-          {isDark ? (
-            <Moon className="w-3 h-3 text-zinc-400" />
-          ) : (
-            <Sun className="w-3 h-3 text-amber-500" />
-          )}
+    <footer className="border-t-2 border-border bg-card py-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Left Side - Cozy Message */}
+          <div className="font-accent text-lg md:text-xl text-muted-foreground text-center md:text-left">
+            {tFooter('cozyMessage', { default: 'Built with coffee, flowers, and way too many Taylor Swift songs' })}
+          </div>
+
+          {/* Right Side - Links */}
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <a href="#hero" className="hover:text-primary transition-colors">
+              {tFooter('top', { default: 'Top' })}
+            </a>
+            <span>•</span>
+            <span>© {year} {siteConfig.name}</span>
+            <span className="hidden sm:inline">•</span>
+            <button
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  const html = document.documentElement
+                  html.classList.toggle('dark')
+                  localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light')
+                }
+              }}
+              className="hover:text-primary transition-colors hidden sm:block"
+            >
+              {tFooter('toggleTheme', { default: 'Toggle Theme' })}
+            </button>
+          </div>
         </div>
       </div>
     </footer>
   )
 }
-
-

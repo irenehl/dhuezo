@@ -6,6 +6,7 @@ import { routing } from '@/i18n/routing'
 import { Toaster } from '@/components/ui/toaster'
 import { ClarityScript } from '@/components/analytics/ClarityScript'
 import { BackgroundLayers } from '@/components/layout/BackgroundLayers'
+import { DecorativeElements } from '@/components/layout/DecorativeElements'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 
 export function generateStaticParams() {
@@ -42,6 +43,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
       <BackgroundLayers />
+      <DecorativeElements />
       {children}
       <Toaster />
       <ClarityScript />

@@ -6,12 +6,14 @@
   "hero": {
     "headline": "Quietly",
     "subheadline": "intentional.",
+    "subtitle": "Tech Lead & Full-Stack Developer",
     "description": "The old architecture can't come to the phone right now. Why? Because it's dead. Full-stack engineer building resilient systems and dramatic interfaces.",
-    "openToWork": "Open to work",
+    "openToWork": "Available for opportunities",
     "scroll": "Scroll",
     "cta": {
       "viewProjects": "View Projects",
-      "readStory": "Read the Story"
+      "readStory": "Read the Story",
+      "contact": "Let's Chat"
     }
   },
   "navigation": {
@@ -87,9 +89,10 @@
     "historyCleared": "Local palette history has been cleared"
   },
   "projects": {
-    "title": "Big Reputation",
-    "subtitle": "Selected works & engineered chaos.",
-    "viewArchive": "View Archive",
+    "title": "Projects",
+    "subtitle": "Selected Work",
+    "description": "A collection of projects I've built, from AI-powered platforms to mobile apps and full-stack systems.",
+    "viewArchive": "View More Projects",
     "modal": {
       "overview": "Overview",
       "challengeSolution": "The Challenge & Solution",
@@ -124,14 +127,33 @@
     }
   },
   "stage": {
-    "title": "The Stage",
-    "subtitle": "Conferences, Talks, and Editorials.",
-    "empty": "No entries yet.",
+    "title": "Writing",
+    "subtitle": "Latest Thoughts",
+    "description": "Insights on development, leadership, and lessons learned along the way.",
+    "empty": "No posts yet. Check back soon!",
     "loadArchive": "Load Full Archive",
     "type": {
       "talk": "Talk",
-      "article": "Blog",
+      "article": "Article",
       "slide": "Slides"
+    }
+  },
+  "experience": {
+    "title": "The Eras",
+    "subtitle": "Career Journey",
+    "description": "Each chapter brought new lessons, challenges, and growth. From building systems to leading teams, here's the journey so far.",
+    "responsibilities": "Key Responsibilities",
+    "filters": {
+      "all": "All Eras",
+      "fullTime": "Full-Time",
+      "freelance": "Freelance",
+      "leadership": "Leadership"
+    },
+    "stats": {
+      "years": "Years Experience",
+      "companies": "Companies & Projects",
+      "technologies": "Technologies Mastered",
+      "problems": "Problems Solved"
     }
   },
   "timeline": {
@@ -162,24 +184,51 @@
     }
   },
   "about": {
-    "title": "Call It What You Want",
-    "description1": "I believe in aesthetic code and brutalist design. My journey has been about reinvention—moving from design to engineering, and back again to the intersection of both.",
-    "description2": "Currently based in the digital void, creating experiences that stick.",
+    "title": "About",
+    "subtitle": "Get to Know Me",
+    "description1": "I'm a Tech Lead and Full-Stack Developer from El Salvador, currently building resilient systems at Agora Partnerships. I believe in writing code that's both elegant and functional—the kind that makes the next developer's life easier, not harder.",
+    "description2": "My approach combines technical expertise with strategic thinking. Whether I'm architecting a new platform, leading a development team, or optimizing existing systems, I focus on sustainable solutions that scale.",
+    "description3": "Beyond code, I've built technical communities and helped women across Central America navigate tech through Academia Colmena. When I'm not at the keyboard, you'll find me exploring new restaurants, staying active, or unwinding with my favorite games.",
     "quote": "I swear I don't love the drama, it loves me.",
-    "cta": "Get in touch",
-    "email": "hello@example.com",
+    "cta": "Let's Connect",
+    "email": "hello@dhuezo.dev",
     "social": {
       "github": "https://github.com/irenehl",
-      "linkedin": "https://www.linkedin.com/in/irenehl",
+      "linkedin": "https://linkedin.com/in/danielahuezo",
       "x": "https://x.com/irenehl26__"
+    },
+    "favorites": {
+      "title": "Currently Into",
+      "animalCrossing": "Animal Crossing",
+      "pokemon": "Pokémon",
+      "ramen": "Ramen spots",
+      "fitness": "Fitness",
+      "taylorSwift": "Taylor Swift",
+      "marketing": "Marketing strategy"
     },
     "inspiration": "Built while listening to",
     "album": "reputation"
   },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "Technical Expertise",
+    "frontend": {
+      "title": "Frontend Development"
+    },
+    "backend": {
+      "title": "Backend & Databases"
+    },
+    "tools": {
+      "title": "Tools & Design"
+    }
+  },
   "footer": {
     "copyright": "© {year} REPUTATION. ALL RIGHTS RESERVED.",
     "designedLight": "Designed in the light",
-    "designedDark": "Designed in the dark"
+    "designedDark": "Designed in the dark",
+    "cozyMessage": "Built with coffee, flowers, and way too many Taylor Swift songs",
+    "top": "Top",
+    "toggleTheme": "Toggle Theme"
   },
   "promptExamples": {
     "happy": "I'm happy",

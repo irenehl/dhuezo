@@ -8,7 +8,6 @@ import { LocaleToggle } from './LocaleToggle'
 import { ThemeToggle } from './ThemeToggle'
 import { MobileMenu } from './MobileMenu'
 import { getNavItems } from '@/lib/navigation'
-import { siteConfig } from '@/lib/config'
 
 export function SiteHeader(): JSX.Element {
   const t = useTranslations()
@@ -18,35 +17,44 @@ export function SiteHeader(): JSX.Element {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-40 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav className="fixed top-0 w-full z-40 border-b-2 border-border bg-background/85 backdrop-blur-xl transition-all">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16 h-20 flex items-center justify-between">
+          {/* Logo */}
           <Link
             href="/"
-            className="text-lg tracking-widest text-zinc-900 hover:text-rose-600 transition-colors uppercase font-display font-semibold dark:text-zinc-100 dark:hover:text-rose-400"
+            className="flex items-center gap-3 group"
           >
-            {siteConfig.name.split(' ').map((n) => n[0]).join('. ')}
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-display font-bold text-lg">
+              D
+            </div>
+            <span className="font-display text-lg font-semibold text-foreground group-hover:text-primary transition-colors hidden sm:block">
+              Daniela Huezo
+            </span>
           </Link>
 
-          <div className="hidden md:flex items-center space-x-8 text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-400">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="hover:text-zinc-900 transition-colors dark:hover:text-zinc-100"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors relative group"
               >
                 {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
               </a>
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* Right Side Controls */}
+          <div className="flex items-center gap-3">
             <div className="hidden md:block">
               <LocaleToggle />
             </div>
             <ThemeToggle />
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="text-zinc-900 hover:text-rose-600 transition-colors md:hidden dark:text-zinc-100 dark:hover:text-rose-400"
+              className="text-foreground hover:text-primary transition-colors md:hidden p-2"
               aria-label={t('common.openMenu')}
             >
               <Menu className="w-5 h-5" />
@@ -58,5 +66,3 @@ export function SiteHeader(): JSX.Element {
     </>
   )
 }
-
-

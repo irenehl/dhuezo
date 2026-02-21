@@ -1,26 +1,30 @@
 import type { Metadata } from 'next'
-import { Inter, Cinzel, Playfair_Display_SC } from 'next/font/google'
+import { Lora, DM_Sans, Caveat } from 'next/font/google'
 
 import './globals.css'
 import { routing } from '@/i18n/routing'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 
-const inter = Inter({
+// Display/Headers font
+const lora = Lora({
   subsets: ['latin'],
-  variable: '--font-inter',
-  weight: ['300', '400', '500', '600'],
+  variable: '--font-lora',
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 })
 
-const cinzel = Cinzel({
+// Body font
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-cinzel',
-  weight: ['400', '600', '800'],
+  variable: '--font-dm-sans',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
-const playfairDisplaySC = Playfair_Display_SC({
+// Accent/Cursive font
+const caveat = Caveat({
   subsets: ['latin'],
-  variable: '--font-playfair',
-  weight: ['700'],
+  variable: '--font-caveat',
+  weight: ['400', '600'],
 })
 
 export const metadata: Metadata = {
@@ -89,7 +93,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${inter.variable} ${cinzel.variable} ${playfairDisplaySC.variable} font-body min-h-screen antialiased overflow-x-hidden bg-zinc-50 text-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 selection:bg-rose-200 selection:text-rose-900 dark:selection:bg-rose-900 dark:selection:text-rose-200`}
+        className={`${lora.variable} ${dmSans.variable} ${caveat.variable} font-body min-h-screen antialiased overflow-x-hidden bg-[#F4EDE1] text-[#8B7355] dark:bg-[#2a2420] dark:text-[#F4EDE1] selection:bg-rose-200 selection:text-rose-900 dark:selection:bg-rose-900 dark:selection:text-rose-200`}
         suppressHydrationWarning={true}
       >
         <ThemeProvider>{children}</ThemeProvider>

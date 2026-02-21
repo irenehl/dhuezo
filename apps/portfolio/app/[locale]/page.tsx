@@ -3,6 +3,7 @@ import { SiteHeader } from '@/components/layout/SiteHeader'
 import { Footer } from '@/components/layout/Footer'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { ProjectsSectionServer } from '@/components/sections/ProjectsSectionServer'
+import { SkillsSection } from '@/components/sections/SkillsSection'
 import { StageSection } from '@/components/sections/StageSection'
 import { TimelineSectionServer } from '@/components/sections/TimelineSectionServer'
 import { AboutSection } from '@/components/sections/AboutSection'
@@ -36,10 +37,11 @@ export default async function Home({
       <SiteJsonLd locale={locale} />
       <SiteHeader />
       <HeroSection />
+      <ProjectsSectionServer locale={locale} />
+      <SkillsSection />
       <main className="max-w-6xl mx-auto px-6 space-y-32 pb-32">
-        <ProjectsSectionServer locale={locale} />
-        <StageSection locale={locale} />
         <TimelineSectionServer locale={locale} />
+        <StageSection locale={locale} />
         <AboutSection />
       </main>
       <Footer />

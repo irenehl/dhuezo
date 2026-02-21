@@ -1,244 +1,263 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations, useLocale } from 'next-intl'
-import { Plus, Minus } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
 import type { MarkdownExperience } from '@/lib/markdown/types'
+import { cn } from '@/lib/utils'
 
 interface Experience {
   id: string
   title: string
   company: string
   period: string
-  bullets: string[]
-  tags: string[]
-  isActive?: boolean
+  description: string
+  responsibilities: string[]
+  technologies: string[]
+  type: 'full-time' | 'freelance' | 'contract'
+  featured: boolean
+  eraName: string
+  eraStyle: string
 }
 
 interface TimelineSectionProps {
   experiences?: MarkdownExperience[]
 }
 
-function formatPeriod(startDate: string, endDate: string | null): string {
-  const start = new Date(startDate).getFullYear()
-  const end = endDate ? new Date(endDate).getFullYear() : 'PRESENT'
+function formatPeriod(startDate: string, endDate: string | null, locale: string): string {
+  const options: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' }
+  const start = new Date(startDate).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', options)
+  const end = endDate
+    ? new Date(endDate).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', options)
+    : (locale === 'es' ? 'Presente' : 'Present')
   return `${start} — ${end}`
-}
-
-// Individual experience item component with its own scroll animation
-function ExperienceItem({ 
-  exp, 
-  opacityOverride 
-}: { 
-  exp: Experience
-  opacityOverride?: number
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: false, margin: '-20%', amount: 0.2 })
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: opacityOverride ?? 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      className="relative pl-8 md:pl-12 group"
-      variants={itemVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-    >
-      <div className="absolute -left-[5px] top-6 w-[9px] h-[9px] bg-white border border-zinc-400 group-hover:bg-rose-600 group-hover:border-rose-500 transition-colors shadow-sm rotate-45 rounded-[1px] dark:bg-zinc-900 dark:border-zinc-600 dark:group-hover:bg-rose-600 dark:group-hover:border-rose-500" />
-
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-        <h3 className="text-2xl font-display text-zinc-900 font-semibold dark:text-zinc-100">
-          {exp.title}
-        </h3>
-        <span className="text-xs font-mono text-zinc-500 font-medium dark:text-zinc-500">
-          {exp.period}
-        </span>
-      </div>
-      <div
-        className={`text-sm font-bold uppercase tracking-wider mb-4 ${
-          exp.isActive ? 'text-rose-700 dark:text-rose-700' : 'text-zinc-500 dark:text-zinc-500'
-        }`}
-      >
-        {exp.company}
-      </div>
-
-      <ul className="space-y-2 text-sm text-zinc-600 font-normal list-disc list-inside marker:text-zinc-400 dark:text-zinc-400 dark:marker:text-zinc-700">
-        {exp.bullets.map((bullet, idx) => (
-          <li key={idx}>{bullet}</li>
-        ))}
-      </ul>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {exp.tags.map((tag) => (
-          <span
-            key={tag}
-            className="text-[10px] text-zinc-600 border border-zinc-300 px-2 py-0.5 rounded-full uppercase tracking-wide bg-white dark:text-zinc-600 dark:border-zinc-800"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  )
 }
 
 export function TimelineSection({ experiences: markdownExperiences }: TimelineSectionProps = {}) {
   const t = useTranslations()
-  const locale = useLocale()
-  const [showAll, setShowAll] = useState(false)
+  const [activeFilter, setActiveFilter] = useState<string>('all')
 
-  // Use Markdown experiences if provided, otherwise fall back to translations
+  // Era names mapping
+  const eraNames: Record<number, string> = {
+    1: 'Tech Lead Era',
+    2: 'Performance Era',
+    3: 'E-Commerce Era',
+    4: 'Civic Tech Era',
+    5: 'Automation Era',
+    6: 'API Architecture Era',
+    7: 'React Mastery Era',
+    8: 'Innovation Era',
+    9: 'Security & Performance Era',
+    10: 'Foundation Era',
+  }
+
+  const eraStyles: Record<string, string> = {
+    'Tech Lead Era': 'from-dusty-rose to-deep-rose',
+    'Performance Era': 'from-sage-blue to-burlap',
+    'E-Commerce Era': 'from-soft-pink to-dusty-rose',
+    'Civic Tech Era': 'from-gentle-beige to-burlap',
+    'Automation Era': 'from-pressed-brown to-burlap',
+    'API Architecture Era': 'from-dusty-rose to-deep-rose',
+    'React Mastery Era': 'from-sage-blue to-deep-rose',
+    'Innovation Era': 'from-soft-pink to-gentle-beige',
+    'Security & Performance Era': 'from-deep-rose to-pressed-brown',
+    'Foundation Era': 'from-burlap to-gentle-beige',
+  }
+
   let experiences: Experience[]
-  
+
   if (markdownExperiences && markdownExperiences.length > 0) {
-    // Map MarkdownExperience to Experience format
     experiences = markdownExperiences.map((exp) => {
-      // Use longDescription split by newlines, or fallback to description
-      let bullets: string[] = []
-      if (exp.longDescription) {
-        bullets = exp.longDescription.split('\n').filter(Boolean).map((line) => line.trim())
-      }
-      if (bullets.length === 0) {
-        bullets = [exp.description]
-      }
-      
+      const eraName = eraNames[exp.order_index] || 'Era'
+      const responsibilities = exp.content
+        ? exp.content.match(/(?:##\s*Responsibilities)([\s\S]*?)(?=##|$)/i)?.[1]
+            ?.split('\n')
+            .filter(line => line.trim().startsWith('-'))
+            .map(line => line.replace(/^-\s*/, '').replace(/\[cite.*?\]/g, '').trim())
+            .filter(Boolean) || []
+        : []
+
       return {
         id: exp.id,
         title: exp.title,
         company: exp.company,
-        period: formatPeriod(exp.start_date, exp.end_date),
-        bullets,
-        tags: exp.technologies,
-        isActive: !exp.end_date,
+        period: formatPeriod(exp.start_date, exp.end_date, 'en'),
+        description: exp.long_description || exp.description,
+        responsibilities,
+        technologies: exp.technologies,
+        type: exp.type as 'full-time' | 'freelance' | 'contract',
+        featured: exp.featured,
+        eraName,
+        eraStyle: eraStyles[eraName] || 'from-dusty-rose to-deep-rose',
       }
     })
   } else {
-    // Fallback to translation-based experiences
-    experiences = [
-      {
-        id: '1',
-        title: t('timeline.exp1.title'),
-        company: t('timeline.exp1.company'),
-        period: t('timeline.exp1.period'),
-        bullets: [
-          t('timeline.exp1.bullet1'),
-          t('timeline.exp1.bullet2'),
-          t('timeline.exp1.bullet3'),
-        ],
-        tags: [t('timeline.exp1.tag1'), t('timeline.exp1.tag2'), t('timeline.exp1.tag3')],
-        isActive: true,
-      },
-      {
-        id: '2',
-        title: t('timeline.exp2.title'),
-        company: t('timeline.exp2.company'),
-        period: t('timeline.exp2.period'),
-        bullets: [
-          t('timeline.exp2.bullet1'),
-          t('timeline.exp2.bullet2'),
-        ],
-        tags: [t('timeline.exp2.tag1'), t('timeline.exp2.tag2'), t('timeline.exp2.tag3')],
-      },
-    ]
+    experiences = []
   }
 
-  // Determine how many items to show initially (show first 2, rest hidden)
-  const initialVisibleCount = 2
-  const visibleExperiences = showAll ? experiences : experiences.slice(0, initialVisibleCount)
-  const hasMore = experiences.length > initialVisibleCount
+  const filters = [
+    { id: 'all', label: t('experience.filters.all', { default: 'All Eras' }) },
+    { id: 'full-time', label: t('experience.filters.fullTime', { default: 'Full-Time' }) },
+    { id: 'freelance', label: t('experience.filters.freelance', { default: 'Freelance' }) },
+    { id: 'leadership', label: t('experience.filters.leadership', { default: 'Leadership' }) },
+  ]
+
+  const filteredExperiences = experiences.filter((exp) => {
+    if (activeFilter === 'all') return true
+    if (activeFilter === 'leadership') return exp.featured
+    return exp.type === activeFilter
+  })
+
+  // Calculate stats
+  const yearsOfExperience = experiences.length > 0
+    ? new Date().getFullYear() - new Date(markdownExperiences?.[markdownExperiences.length - 1]?.start_date || '2021').getFullYear()
+    : 4
+  const companiesCount = experiences.length
+  const technologiesCount = Array.from(new Set(experiences.flatMap(e => e.technologies))).length
 
   return (
-    <section id="timeline" className="space-y-16 relative scroll-mt-20">
-      <div className="border-b border-zinc-200 pb-4 mb-8 dark:border-zinc-800">
-        <h2 className="font-header text-4xl md:text-5xl text-zinc-900 uppercase tracking-tighter mb-2 dark:text-zinc-100">
-          {t('timeline.title')}
-        </h2>
-        <p className="text-zinc-500 text-sm font-medium dark:text-zinc-500">
-          {t('timeline.subtitle')}
-        </p>
-      </div>
-
-      {/* Container with fade-out effect */}
-      <div className="relative">
-        {/* The Content List */}
-        <div className={`relative border-l border-zinc-300 ml-3 md:ml-6 space-y-12 py-4 dark:border-zinc-800 ${!showAll && hasMore ? 'pb-24' : ''}`}>
-          {visibleExperiences.map((exp, index) => {
-            // Apply opacity to last few entries for fade effect (only when not showing all)
-            const isLastVisible = index === visibleExperiences.length - 1
-            const isSecondLast = index === visibleExperiences.length - 2
-            const opacityOverride = !showAll && hasMore 
-              ? (isLastVisible ? 0.5 : isSecondLast ? 0.8 : undefined)
-              : undefined
-            
-            return (
-              <ExperienceItem
-                key={`${locale}-${exp.id}-${index}`}
-                exp={exp}
-                opacityOverride={opacityOverride}
-              />
-            )
-          })}
+    <section id="experience" className="py-24 bg-card scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+        {/* Section Header */}
+        <div className="mb-12">
+          <div className="font-accent text-xl md:text-2xl text-primary mb-2">
+            {t('experience.subtitle', { default: 'Career Journey' })}
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
+            {t('experience.title', { default: 'The Eras' })}
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl">
+            {t('experience.description', { default: 'Each chapter brought new lessons, challenges, and growth. From building systems to leading teams, here\'s the journey so far.' })}
+          </p>
         </div>
 
-        {/* The "Difuminate" (Fade Out) Overlay - only show when there are more items and not showing all */}
-        {!showAll && hasMore && (
-          <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-zinc-50 via-zinc-50/90 to-transparent flex flex-col items-center justify-end pb-8 z-10 pointer-events-none dark:from-zinc-950 dark:via-zinc-950/90">
-            {/* Button needs pointer-events-auto since the parent is none */}
+        {/* Filters */}
+        <div className="flex flex-wrap gap-3 mb-12">
+          {filters.map((filter) => (
             <button
-              onClick={() => {
-                setShowAll(true)
-                // Scroll to timeline section smoothly
-                setTimeout(() => {
-                  document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }, 100)
-              }}
-              className="pointer-events-auto group flex items-center gap-3 px-6 py-3 rounded-full border border-zinc-300 bg-white shadow-sm hover:border-rose-600 hover:text-rose-600 transition-all hover:-translate-y-1 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-rose-600 dark:hover:text-rose-600"
+              key={filter.id}
+              onClick={() => setActiveFilter(filter.id)}
+              className={cn(
+                'px-5 py-2.5 rounded-full text-sm font-medium transition-all',
+                activeFilter === filter.id
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-transparent text-foreground border-2 border-border hover:bg-background hover:border-primary'
+              )}
             >
-              <Plus className="w-4 h-4" />
-              <span className="text-xs font-bold uppercase tracking-widest">
-                {t('timeline.loadArchive')}
-              </span>
+              {filter.label}
             </button>
-          </div>
-        )}
+          ))}
+        </div>
 
-        {/* Show Less button - appears when all items are shown */}
-        {showAll && hasMore && (
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={() => {
-                setShowAll(false)
-                // Scroll to timeline section smoothly
-                setTimeout(() => {
-                  document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }, 100)
-              }}
-              className="group flex items-center gap-3 px-6 py-3 rounded-full border border-zinc-300 bg-white shadow-sm hover:border-rose-600 hover:text-rose-600 transition-all hover:-translate-y-1 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-rose-600 dark:hover:text-rose-600"
+        {/* Timeline */}
+        <div className="space-y-8">
+          {filteredExperiences.map((exp, index) => (
+            <motion.div
+              key={exp.id}
+              className="group relative bg-background rounded-3xl p-8 border-2 border-border overflow-hidden transition-all hover:translate-x-2 hover:shadow-xl hover:shadow-pressed-brown/10"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Minus className="w-4 h-4" />
-              <span className="text-xs font-bold uppercase tracking-widest">
-                {t('timeline.showLess')}
-              </span>
-            </button>
+              {/* Colored left border that expands on hover */}
+              <div className={cn(
+                'absolute left-0 top-0 w-1.5 h-full bg-gradient-to-b transition-all group-hover:w-2.5',
+                exp.eraStyle
+              )} />
+
+              {/* Header */}
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4 pl-4">
+                <div className="flex-1">
+                  <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">
+                    {exp.eraName}
+                  </h3>
+                  <p className="text-lg font-semibold text-deep-rose mb-1">
+                    {exp.company}
+                  </p>
+                  <span className="inline-block px-3 py-1 bg-card text-muted-foreground text-xs rounded-full border border-border">
+                    {exp.type === 'full-time' ? 'Full-Time' : exp.type === 'freelance' ? 'Freelance' : 'Contract'}
+                    {exp.featured && ' • Leadership'}
+                  </span>
+                </div>
+                <div className="font-accent text-lg md:text-xl text-primary whitespace-nowrap">
+                  {exp.period}
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className="text-muted-foreground leading-relaxed mb-6 pl-4">
+                {exp.description}
+              </p>
+
+              {/* Responsibilities */}
+              {exp.responsibilities.length > 0 && (
+                <div className="mb-6 pl-4">
+                  <h4 className="font-display text-base font-semibold text-foreground mb-3">
+                    {t('experience.responsibilities', { default: 'Key Responsibilities' })}
+                  </h4>
+                  <ul className="space-y-2">
+                    {exp.responsibilities.map((resp, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <span className="text-primary mt-1">→</span>
+                        <span>{resp}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Technologies */}
+              <div className="flex flex-wrap gap-2 pl-4">
+                {exp.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 bg-card text-deep-rose text-xs rounded-xl border border-border"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-16 border-t-2 border-border">
+          <div className="text-center p-6 bg-background rounded-2xl border-2 border-border">
+            <div className="font-display text-4xl md:text-5xl text-primary mb-2">
+              {yearsOfExperience}+
+            </div>
+            <div className="text-sm text-muted-foreground">
+              {t('experience.stats.years', { default: 'Years Experience' })}
+            </div>
           </div>
-        )}
+          <div className="text-center p-6 bg-background rounded-2xl border-2 border-border">
+            <div className="font-display text-4xl md:text-5xl text-primary mb-2">
+              {companiesCount}+
+            </div>
+            <div className="text-sm text-muted-foreground">
+              {t('experience.stats.companies', { default: 'Companies & Projects' })}
+            </div>
+          </div>
+          <div className="text-center p-6 bg-background rounded-2xl border-2 border-border">
+            <div className="font-display text-4xl md:text-5xl text-primary mb-2">
+              {technologiesCount}+
+            </div>
+            <div className="text-sm text-muted-foreground">
+              {t('experience.stats.technologies', { default: 'Technologies Mastered' })}
+            </div>
+          </div>
+          <div className="text-center p-6 bg-background rounded-2xl border-2 border-border">
+            <div className="font-display text-4xl md:text-5xl text-primary mb-2">
+              ∞
+            </div>
+            <div className="text-sm text-muted-foreground">
+              {t('experience.stats.problems', { default: 'Problems Solved' })}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
 }
-

@@ -1,89 +1,165 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Github, Linkedin, Quote } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 import { XIcon } from '@/components/icons/XIcon'
 
 export function AboutSection() {
   const t = useTranslations()
 
+  const favorites = [
+    {
+      name: t('about.favorites.animalCrossing', { default: 'Animal Crossing' }),
+      icon: (
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+        </svg>
+      ),
+    },
+    {
+      name: t('about.favorites.pokemon', { default: 'Pokémon' }),
+      icon: (
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="4"></circle>
+        </svg>
+      ),
+    },
+    {
+      name: t('about.favorites.ramen', { default: 'Ramen spots' }),
+      icon: (
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+        </svg>
+      ),
+    },
+    {
+      name: t('about.favorites.fitness', { default: 'Fitness' }),
+      icon: (
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7"></path>
+        </svg>
+      ),
+    },
+    {
+      name: t('about.favorites.taylorSwift', { default: 'Taylor Swift' }),
+      icon: (
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="10 8 16 12 10 16 10 8"></polygon>
+        </svg>
+      ),
+    },
+    {
+      name: t('about.favorites.marketing', { default: 'Marketing strategy' }),
+      icon: (
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+      ),
+    },
+  ]
+
   return (
-    <section id="about" className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 border-t border-zinc-200 dark:border-zinc-900 scroll-mt-20">
-      <div className="space-y-6">
-        <h2 className="font-header text-4xl text-zinc-900 uppercase tracking-tighter dark:text-zinc-100">
-          {t('about.title')}
-        </h2>
-        <p className="text-zinc-600 text-sm leading-relaxed font-normal dark:text-zinc-400">
-          {t('about.description1')}
-        </p>
-        <p className="text-zinc-600 text-sm leading-relaxed font-normal dark:text-zinc-400">
-          {t('about.description2')}
-        </p>
-
-        <div className="pt-8">
-          <a
-            href={`mailto:${t('about.email')}`}
-            className="inline-block border-b-2 border-rose-600 text-2xl font-display text-zinc-900 hover:text-rose-600 transition-all pb-1 font-semibold dark:text-zinc-100 dark:hover:text-rose-600 dark:border-rose-600"
-          >
-            {t('about.cta')}
-          </a>
-        </div>
-      </div>
-
-      <div className="relative bg-white p-8 border border-zinc-200 flex flex-col justify-between min-h-[300px] shadow-sm dark:bg-zinc-900/30 dark:border-zinc-800">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]" />
-        <div className="relative z-10">
-          <Quote className="w-8 h-8 text-zinc-300 mb-4 rotate-180 dark:text-zinc-700" />
-          <p className="text-lg font-serif italic text-zinc-800 dark:text-zinc-300">
-            &ldquo;{t('about.quote')}&rdquo;
-          </p>
+    <section id="about" className="py-24 bg-card scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+        {/* Section Header */}
+        <div className="mb-12">
+          <div className="font-accent text-xl md:text-2xl text-primary mb-2">
+            {t('about.subtitle', { default: 'Get to Know Me' })}
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground">
+            {t('about.title', { default: 'About' })}
+          </h2>
         </div>
 
-        <div className="relative z-10 flex gap-4 mt-8">
-          <a
-            href={t('about.social.github')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 border border-zinc-200 rounded-full hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all text-zinc-600 dark:border-zinc-700 dark:hover:bg-zinc-100 dark:hover:text-black dark:hover:border-zinc-100"
-            aria-label="GitHub"
-          >
-            <Github className="w-5 h-5" />
-          </a>
-          <a
-            href={t('about.social.linkedin')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 border border-zinc-200 rounded-full hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all text-zinc-600 dark:border-zinc-700 dark:hover:bg-zinc-100 dark:hover:text-black dark:hover:border-zinc-100"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="w-5 h-5" />
-          </a>
-          <a
-            href={t('about.social.x')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 border border-zinc-200 rounded-full hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all text-zinc-600 dark:border-zinc-700 dark:hover:bg-zinc-100 dark:hover:text-black dark:hover:border-zinc-100"
-            aria-label="X"
-          >
-            <XIcon className="w-5 h-5" />
-          </a>
-        </div>
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+          {/* Left Column - About Text */}
+          <div className="lg:col-span-2 space-y-6">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              {t('about.description1', {
+                default: "I'm a Tech Lead and Full-Stack Developer from El Salvador, currently building resilient systems at Agora Partnerships. I believe in writing code that's both elegant and functional—the kind that makes the next developer's life easier, not harder."
+              })}
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              {t('about.description2', {
+                default: "My approach combines technical expertise with strategic thinking. Whether I'm architecting a new platform, leading a development team, or optimizing existing systems, I focus on sustainable solutions that scale."
+              })}
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              {t('about.description3', {
+                default: "Beyond code, I've built technical communities and helped women across Central America navigate tech through Academia Colmena. When I'm not at the keyboard, you'll find me exploring new restaurants, staying active, or unwinding with my favorite games."
+              })}
+            </p>
 
-        <div className="relative z-10 mt-8 pt-8 border-t border-zinc-200/50 dark:border-zinc-800/50">
-          <p className="text-xs text-zinc-500 dark:text-zinc-500 font-mono">
-            {t('about.inspiration')}{' '}
-            <a
-              href="https://open.spotify.com/album/6DEjYFkNZh67HP7R9PSZvv"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="italic underline decoration-zinc-400 underline-offset-2 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
-            >
-              {t('about.album')}
-            </a>
-          </p>
+            {/* Contact CTA */}
+            <div className="pt-8">
+              <a
+                href={`mailto:${t('about.email', { default: 'hello@dhuezo.dev' })}`}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-base transition-all hover:bg-deep-rose hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+              >
+                <Mail className="w-5 h-5" />
+                {t('about.cta', { default: "Let's Connect" })}
+              </a>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex gap-4 pt-4">
+              <a
+                href={t('about.social.github', { default: 'https://github.com/irenehl' })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 border-2 border-border rounded-full hover:bg-pressed-brown hover:text-warm-cream hover:border-pressed-brown transition-all"
+                aria-label="GitHub"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href={t('about.social.linkedin', { default: 'https://linkedin.com/in/danielahuezo' })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 border-2 border-border rounded-full hover:bg-pressed-brown hover:text-warm-cream hover:border-pressed-brown transition-all"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href={t('about.social.x', { default: 'https://x.com/irenehl26__' })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 border-2 border-border rounded-full hover:bg-pressed-brown hover:text-warm-cream hover:border-pressed-brown transition-all"
+                aria-label="X"
+              >
+                <XIcon className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column - Currently Into */}
+          <div className="bg-background p-8 rounded-3xl border-2 border-border h-fit">
+            <h3 className="font-display text-2xl text-foreground mb-6">
+              {t('about.favorites.title', { default: 'Currently Into' })}
+            </h3>
+            <div className="space-y-4">
+              {favorites.map((favorite, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-4 p-3 rounded-2xl transition-all hover:bg-card hover:translate-x-1"
+                >
+                  <div className="text-primary flex-shrink-0">
+                    {favorite.icon}
+                  </div>
+                  <span className="text-foreground font-medium">
+                    {favorite.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
-
