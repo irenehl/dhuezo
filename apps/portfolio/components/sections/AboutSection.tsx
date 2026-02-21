@@ -2,7 +2,9 @@
 
 import { useTranslations } from 'next-intl'
 import { Github, Linkedin, Mail } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { XIcon } from '@/components/icons/XIcon'
+import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export function AboutSection() {
   const t = useTranslations()
@@ -65,19 +67,21 @@ export function AboutSection() {
     <section id="about" className="py-24 bg-card scroll-mt-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         {/* Section Header */}
-        <div className="mb-12">
-          <div className="font-accent text-xl md:text-2xl text-primary mb-2">
-            {t('about.subtitle', { default: 'Get to Know Me' })}
+        <AnimatedSection>
+          <div className="mb-12">
+            <div className="font-accent text-xl md:text-2xl text-primary mb-2">
+              {t('about.subtitle', { default: 'Get to Know Me' })}
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground">
+              {t('about.title', { default: 'About' })}
+            </h2>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground">
-            {t('about.title', { default: 'About' })}
-          </h2>
-        </div>
+        </AnimatedSection>
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           {/* Left Column - About Text */}
-          <div className="lg:col-span-2 space-y-6">
+          <AnimatedSection className="lg:col-span-2 space-y-6" direction="left">
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               {t('about.description1', {
                 default: "I'm a Tech Lead and Full-Stack Developer from El Salvador, currently building resilient systems at Agora Partnerships. I believe in writing code that's both elegant and functional—the kind that makes the next developer's life easier, not harder."
@@ -135,10 +139,10 @@ export function AboutSection() {
                 <XIcon className="w-5 h-5" />
               </a>
             </div>
-          </div>
+          </AnimatedSection>
 
           {/* Right Column - Currently Into */}
-          <div className="bg-background p-8 rounded-3xl border-2 border-border h-fit">
+          <AnimatedSection className="bg-background p-8 rounded-3xl border-2 border-border h-fit" direction="right" delay={0.2}>
             <h3 className="font-display text-2xl text-foreground mb-6">
               {t('about.favorites.title', { default: 'Currently Into' })}
             </h3>
@@ -157,7 +161,7 @@ export function AboutSection() {
                 </div>
               ))}
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>

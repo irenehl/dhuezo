@@ -6,12 +6,14 @@
   "hero": {
     "headline": "Silenciosamente",
     "subheadline": "intencional.",
+    "subtitle": "Tech Lead & Desarrolladora Full-Stack",
     "description": "La arquitectura antigua no puede venir al teléfono ahora mismo. ¿Por qué? Porque está muerta. Ingeniera full-stack construyendo sistemas resilientes e interfaces dramáticas.",
     "openToWork": "Halemos",
     "scroll": "Desplazar",
     "cta": {
       "viewProjects": "Ver Proyectos",
-      "readStory": "Leer la Historia"
+      "readStory": "Leer la Historia",
+      "contact": "Hablemos"
     }
   },
   "navigation": {
@@ -89,6 +91,7 @@
   "projects": {
     "title": "Gran Reputación",
     "subtitle": "Trabajos seleccionados y caos ingenieril.",
+    "description": "Una colección de proyectos que he construido, desde plataformas impulsadas por IA hasta aplicaciones móviles y sistemas full-stack.",
     "viewArchive": "Ver Archivo",
     "modal": {
       "overview": "Resumen",
@@ -126,12 +129,31 @@
   "stage": {
     "title": "El Escenario",
     "subtitle": "Conferencias, Charlas y Editoriales.",
+    "description": "Perspectivas sobre desarrollo, liderazgo y lecciones aprendidas en el camino.",
     "empty": "Aún no hay entradas.",
     "loadArchive": "Cargar Archivo Completo",
     "type": {
       "talk": "Charla",
       "article": "Blog",
       "slide": "Diapositivas"
+    }
+  },
+  "experience": {
+    "title": "Las Eras",
+    "subtitle": "Trayectoria Profesional",
+    "description": "Cada capítulo trajo nuevas lecciones, desafíos y crecimiento. Desde construir sistemas hasta liderar equipos, aquí está el viaje hasta ahora.",
+    "responsibilities": "Responsabilidades Clave",
+    "filters": {
+      "all": "Todas las Eras",
+      "fullTime": "Tiempo Completo",
+      "freelance": "Freelance",
+      "leadership": "Liderazgo"
+    },
+    "stats": {
+      "years": "Años de Experiencia",
+      "companies": "Empresas y Proyectos",
+      "technologies": "Tecnologías Dominadas",
+      "problems": "Problemas Resueltos"
     }
   },
   "timeline": {
@@ -163,23 +185,50 @@
   },
   "about": {
     "title": "Llámelo Como Quiera",
+    "subtitle": "Conóceme",
     "description1": "Creo en código estético y diseño brutalista. Mi viaje ha sido sobre reinvención—moviéndome del diseño a la ingeniería, y de vuelta a la intersección de ambos.",
     "description2": "Actualmente basada en el vacío digital, creando experiencias que perduran.",
+    "description3": "Más allá del código, he construido comunidades técnicas y ayudado a mujeres en Centroamérica a navegar la tecnología a través de Academia Colmena. Cuando no estoy en el teclado, me encontrarás explorando nuevos restaurantes, manteniéndome activa, o relajándome con mis juegos favoritos.",
     "quote": "Juro que no amo el drama, él me ama a mí.",
     "cta": "Halemos",
-    "email": "hello@example.com",
+    "email": "hello@dhuezo.dev",
     "social": {
       "github": "https://github.com/irenehl",
-      "linkedin": "https://www.linkedin.com/in/irenehl",
+      "linkedin": "https://linkedin.com/in/danielahuezo",
       "x": "https://x.com/irenehl26__"
+    },
+    "favorites": {
+      "title": "Actualmente En",
+      "animalCrossing": "Animal Crossing",
+      "pokemon": "Pokémon",
+      "ramen": "Lugares de ramen",
+      "fitness": "Fitness",
+      "taylorSwift": "Taylor Swift",
+      "marketing": "Estrategia de marketing"
     },
     "inspiration": "Construido escuchando",
     "album": "reputation"
   },
+  "skills": {
+    "title": "Habilidades",
+    "subtitle": "Experiencia Técnica",
+    "frontend": {
+      "title": "Desarrollo Frontend"
+    },
+    "backend": {
+      "title": "Backend y Bases de Datos"
+    },
+    "tools": {
+      "title": "Herramientas y Diseño"
+    }
+  },
   "footer": {
     "copyright": "© {year} REPUTATION. TODOS LOS DERECHOS RESERVADOS.",
     "designedLight": "Diseñado en la luz",
-    "designedDark": "Diseñado en la oscuridad"
+    "designedDark": "Diseñado en la oscuridad",
+    "cozyMessage": "Construido con café, flores y demasiadas canciones de Taylor Swift",
+    "top": "Arriba",
+    "toggleTheme": "Cambiar Tema"
   },
   "promptExamples": {
     "happy": "Estoy feliz",

@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { Menu } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { LocaleToggle } from './LocaleToggle'
 import { ThemeToggle } from './ThemeToggle'
 import { MobileMenu } from './MobileMenu'
@@ -14,10 +15,27 @@ export function SiteHeader(): JSX.Element {
   const locale = useLocale()
   const navItems = getNavItems(t, locale as any)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { scrollY } = useScroll()
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const unsubscribe = scrollY.on('change', (latest) => {
+      setIsScrolled(latest > 50)
+    })
+    return () => unsubscribe()
+  }, [scrollY])
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-40 border-b-2 border-border bg-background/85 backdrop-blur-xl transition-all">
+      <motion.nav
+        className="fixed top-0 w-full z-40 border-b-2 border-border bg-background/85 backdrop-blur-xl transition-all"
+        initial={{ y: -100 }}
+        animate={{
+          y: 0,
+          backgroundColor: isScrolled ? 'hsl(var(--background) / 0.95)' : 'hsl(var(--background) / 0.85)',
+        }}
+        transition={{ duration: 0.3 }}
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-16 h-20 flex items-center justify-between">
           {/* Logo */}
           <Link
@@ -61,7 +79,7 @@ export function SiteHeader(): JSX.Element {
             </button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
     </>
   )

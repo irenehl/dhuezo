@@ -39,11 +39,9 @@ export default async function Home({
       <HeroSection />
       <ProjectsSectionServer locale={locale} />
       <SkillsSection />
-      <main className="max-w-6xl mx-auto px-6 space-y-32 pb-32">
-        <TimelineSectionServer locale={locale} />
-        <StageSection locale={locale} />
-        <AboutSection />
-      </main>
+      <TimelineSectionServer locale={locale} />
+      <StageSection locale={locale} />
+      <AboutSection />
       <Footer />
     </>
   )

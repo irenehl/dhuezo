@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import Link from 'next/link'
 import { ArrowUpRight, ExternalLink, Github } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { getFeaturedProjects, type ProjectConfig } from '@/lib/config/projects'
 import type { MarkdownProject } from '@/lib/markdown/types'
 import type { XArticle } from '@/lib/config/x-articles'
+import { AnimatedSection, StaggerContainer, staggerItemVariants } from '@/components/ui/AnimatedSection'
 import { cn } from '@/lib/utils'
 
 interface Project extends ProjectConfig {
@@ -98,17 +100,19 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
     <section id="projects" className="py-24 bg-card scroll-mt-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         {/* Section Header */}
-        <div className="mb-12">
-          <div className="font-accent text-xl md:text-2xl text-primary mb-2">
-            {t('projects.subtitle', { default: 'Selected Work' })}
+        <AnimatedSection>
+          <div className="mb-12">
+            <div className="font-accent text-xl md:text-2xl text-primary mb-2">
+              {t('projects.subtitle', { default: 'Selected Work' })}
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
+              {t('projects.title')}
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              {t('projects.description', { default: 'A collection of projects I\'ve built, from AI-powered platforms to mobile apps and full-stack systems.' })}
+            </p>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
-            {t('projects.title')}
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            {t('projects.description', { default: 'A collection of projects I\'ve built, from AI-powered platforms to mobile apps and full-stack systems.' })}
-          </p>
-        </div>
+        </AnimatedSection>
 
         {/* Filters */}
         <div className="flex flex-wrap gap-3 mb-12">
@@ -129,13 +133,16 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" staggerDelay={0.15}>
           {filteredProjects.map((project, index) => (
-            <Link
+            <motion.div
               key={project.id}
-              href={`/${locale}/projects/${project.id}`}
-              className="group bg-background rounded-3xl overflow-hidden border-2 border-border transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-pressed-brown/10 hover:border-primary"
+              variants={staggerItemVariants}
             >
+              <Link
+                href={`/${locale}/projects/${project.id}`}
+                className="group bg-background rounded-3xl overflow-hidden border-2 border-border transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-pressed-brown/10 hover:border-primary block"
+              >
               {/* Project Image/Visual */}
               <div className={cn(
                 'w-full h-48 bg-gradient-to-br flex items-center justify-center text-6xl border-b-2 border-border relative',
@@ -173,9 +180,10 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                   ))}
                 </div>
               </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* View Archive Link */}
         <div className="flex justify-center pt-12">

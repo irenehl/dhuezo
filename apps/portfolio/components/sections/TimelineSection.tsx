@@ -223,40 +223,79 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-16 border-t-2 border-border">
-          <div className="text-center p-6 bg-background rounded-2xl border-2 border-border">
-            <div className="font-display text-4xl md:text-5xl text-primary mb-2">
-              {yearsOfExperience}+
-            </div>
-            <div className="text-sm text-muted-foreground">
-              {t('experience.stats.years', { default: 'Years Experience' })}
-            </div>
-          </div>
-          <div className="text-center p-6 bg-background rounded-2xl border-2 border-border">
-            <div className="font-display text-4xl md:text-5xl text-primary mb-2">
-              {companiesCount}+
-            </div>
-            <div className="text-sm text-muted-foreground">
-              {t('experience.stats.companies', { default: 'Companies & Projects' })}
-            </div>
-          </div>
-          <div className="text-center p-6 bg-background rounded-2xl border-2 border-border">
-            <div className="font-display text-4xl md:text-5xl text-primary mb-2">
-              {technologiesCount}+
-            </div>
-            <div className="text-sm text-muted-foreground">
-              {t('experience.stats.technologies', { default: 'Technologies Mastered' })}
-            </div>
-          </div>
-          <div className="text-center p-6 bg-background rounded-2xl border-2 border-border">
-            <div className="font-display text-4xl md:text-5xl text-primary mb-2">
-              ∞
-            </div>
-            <div className="text-sm text-muted-foreground">
-              {t('experience.stats.problems', { default: 'Problems Solved' })}
-            </div>
-          </div>
-        </div>
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-16 border-t-2 border-border"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+        >
+          {[
+            { value: `${yearsOfExperience}+`, label: t('experience.stats.years', { default: 'Years Experience' }) },
+            { value: `${companiesCount}+`, label: t('experience.stats.companies', { default: 'Companies & Projects' }) },
+            { value: `${technologiesCount}+`, label: t('experience.stats.technologies', { default: 'Technologies Mastered' }) },
+            { value: '∞', label: t('experience.stats.problems', { default: 'Problems Solved' }), isInfinity: true },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              className="text-center p-6 bg-background rounded-2xl border-2 border-border group cursor-default transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  y: 20,
+                  scale: 0.95,
+                },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    duration: 0.6,
+                    ease: [0.21, 0.47, 0.32, 0.98],
+                  },
+                },
+              }}
+            >
+              <motion.div
+                className="font-display text-4xl md:text-5xl text-primary mb-2"
+                animate={
+                  stat.isInfinity
+                    ? {
+                        scale: [1, 1.05, 1],
+                        opacity: [1, 0.9, 1],
+                      }
+                    : {}
+                }
+                transition={
+                  stat.isInfinity
+                    ? {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }
+                    : {}
+                }
+              >
+                {stat.value}
+              </motion.div>
+              <motion.div
+                className="text-sm text-muted-foreground"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
+              >
+                {stat.label}
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )

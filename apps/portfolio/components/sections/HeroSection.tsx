@@ -59,21 +59,23 @@ export function HeroSection() {
             >
               I craft resilient systems and delightful interfaces. Currently leading teams at Agora Partnerships,{' '}
               <span
-                className="relative group cursor-help border-b border-dotted border-primary"
+                tabIndex={0}
+                className="relative group cursor-help border-b border-dotted border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
                 data-secret="powered by coffee & late-night coding sessions"
               >
                 shipping platforms from scratch
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-2 bg-primary text-primary-foreground px-3 py-2 rounded-lg text-sm font-accent whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-2 bg-background/95 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-lg text-sm font-body whitespace-normal max-w-xs shadow-lg border-2 border-border z-50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none">
                   powered by coffee & late-night coding sessions ☕
                 </span>
               </span>
               , and occasionally{' '}
               <span
-                className="relative group cursor-help border-b border-dotted border-primary"
+                tabIndex={0}
+                className="relative group cursor-help border-b border-dotted border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
                 data-secret="my island is called Serenity"
               >
                 debugging in my cozy corner
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-2 bg-primary text-primary-foreground px-3 py-2 rounded-lg text-sm font-accent whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-2 bg-background/95 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-lg text-sm font-body whitespace-normal max-w-xs shadow-lg border-2 border-border z-50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none">
                   my island is called Serenity 🏝️
                 </span>
               </span>

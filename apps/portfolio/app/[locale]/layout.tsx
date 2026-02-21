@@ -7,6 +7,9 @@ import { Toaster } from '@/components/ui/toaster'
 import { ClarityScript } from '@/components/analytics/ClarityScript'
 import { BackgroundLayers } from '@/components/layout/BackgroundLayers'
 import { DecorativeElements } from '@/components/layout/DecorativeElements'
+import { AnimatedBackground } from '@/components/layout/AnimatedBackground'
+import { CustomCursor } from '@/components/layout/CustomCursor'
+import { FloatingFlowers } from '@/components/layout/FloatingFlowers'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 
 export function generateStaticParams() {
@@ -42,8 +45,11 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
+      <AnimatedBackground />
       <BackgroundLayers />
+      <FloatingFlowers />
       <DecorativeElements />
+      <CustomCursor />
       {children}
       <Toaster />
       <ClarityScript />
