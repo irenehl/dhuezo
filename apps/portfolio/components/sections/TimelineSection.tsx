@@ -82,7 +82,7 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
         title: exp.title,
         company: exp.company,
         period: formatPeriod(exp.start_date, exp.end_date, 'en'),
-        description: exp.long_description || exp.description,
+        description: exp.longDescription || exp.description,
         responsibilities,
         technologies: exp.technologies,
         type: exp.type as 'full-time' | 'freelance' | 'contract',
