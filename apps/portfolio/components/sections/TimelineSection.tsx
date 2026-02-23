@@ -141,10 +141,18 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
   const technologiesCount = Array.from(new Set(experiences.flatMap(e => e.technologies))).length
 
   return (
-    <section id="experience" className="py-24 bg-card scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+    <section id="experience" className="relative py-24 bg-card scroll-mt-20 overflow-hidden">
+      {/* Subtle texture overlay */}
+      <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
         {/* Section Header */}
-        <div className="mb-12">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="font-accent text-xl md:text-2xl text-primary mb-2">
             {t('experience.subtitle', { default: 'Career Journey' })}
           </div>
@@ -154,76 +162,140 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
           <p className="text-lg text-muted-foreground max-w-2xl">
             {t('experience.description', { default: 'Each chapter brought new lessons, challenges, and growth. From building systems to leading teams, here\'s the journey so far.' })}
           </p>
-        </div>
+        </motion.div>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-3 mb-12">
+        <motion.div
+          className="flex flex-wrap gap-3 mb-12"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           {filters.map((filter) => (
-            <button
+            <motion.button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
               className={cn(
-                'px-5 py-2.5 rounded-full text-sm font-medium transition-all',
+                'relative px-5 py-2.5 rounded-full text-sm font-medium transition-all overflow-hidden',
                 activeFilter === filter.id
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-transparent text-foreground border-2 border-border hover:bg-background hover:border-primary'
               )}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {filter.label}
-            </button>
+              {/* Active state shimmer */}
+              {activeFilter === filter.id && (
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  animate={{ x: ['-100%', '100%'] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                />
+              )}
+              <span className="relative z-10">{filter.label}</span>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Timeline */}
         <div className="flex flex-col">
           {filteredExperiences.map((exp, index) => (
             <motion.div
               key={exp.id}
-              className="py-8 md:py-4 border-b border-border/40 last:border-b-0 group"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="py-8 md:py-4 border-b border-border/40 last:border-b-0 group relative"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+              whileHover={{ x: 4 }}
             >
+              {/* Subtle glow on hover */}
+              <motion.div
+                className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{
+                  background: `linear-gradient(to bottom, hsl(var(--primary)), transparent)`,
+                }}
+              />
+              
               {/* Header Row */}
               <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 md:gap-4 mb-2">
                 <div className="flex items-center gap-3">
-                  <h3 className="text-xl md:text-2xl text-foreground font-semibold transition-colors group-hover:text-primary">
+                  <motion.h3
+                    className="text-xl md:text-2xl text-foreground font-semibold transition-colors group-hover:text-primary"
+                    whileHover={{ x: 4 }}
+                  >
                     {exp.company}
-                  </h3>
-                  <div className={cn("w-2 h-2 rounded-full bg-gradient-to-br", exp.eraStyle)} />
+                  </motion.h3>
+                  <motion.div
+                    className={cn("w-2 h-2 rounded-full bg-gradient-to-br", exp.eraStyle)}
+                    whileHover={{ scale: 1.5, rotate: 180 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  />
                 </div>
-                <div className="font-mono text-sm text-muted-foreground/80 md:text-right">
+                <motion.div
+                  className="font-mono text-sm text-muted-foreground/80 md:text-right"
+                  whileHover={{ scale: 1.05 }}
+                >
                   {exp.period}
-                </div>
+                </motion.div>
               </div>
 
               {/* Role Row */}
               <div className="flex items-center gap-3 mb-4">
-                <h4 className="text-lg text-foreground/80">
+                <h4 className="text-lg text-foreground/80 group-hover:text-foreground transition-colors">
                   {exp.title}
                 </h4>
-                <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground">
+                <motion.div
+                  className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                  initial={{ x: -10 }}
+                  whileHover={{ x: 0 }}
+                >
+                  <motion.span
+                    className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground"
+                    whileHover={{ scale: 1.1 }}
+                  >
                     {exp.type}
-                  </span>
+                  </motion.span>
                   {exp.featured && (
-                    <span className="text-xs px-2 py-0.5 rounded-md bg-primary/10 text-primary">
+                    <motion.span
+                      className="text-xs px-2 py-0.5 rounded-md bg-primary/10 text-primary"
+                      whileHover={{ scale: 1.1 }}
+                      animate={{
+                        boxShadow: [
+                          '0 0 0px rgba(var(--primary-rgb), 0)',
+                          '0 0 8px rgba(var(--primary-rgb), 0.3)',
+                          '0 0 0px rgba(var(--primary-rgb), 0)',
+                        ],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                      style={{ '--primary-rgb': '212, 165, 196' } as React.CSSProperties}
+                    >
                       leadership
-                    </span>
+                    </motion.span>
                   )}
-                </div>
+                </motion.div>
               </div>
 
               {/* Description */}
-              <p className="text-muted-foreground leading-relaxed max-w-4xl mb-4">
+              <motion.p
+                className="text-muted-foreground leading-relaxed max-w-4xl mb-4 group-hover:text-foreground/90 transition-colors"
+                whileHover={{ x: 4 }}
+              >
                 {exp.description}
-              </p>
+              </motion.p>
 
               {/* Technologies */}
-              <div className="font-mono text-sm text-muted-foreground/60 leading-relaxed">
+              <motion.div
+                className="font-mono text-sm text-muted-foreground/60 leading-relaxed group-hover:text-muted-foreground/80 transition-colors"
+                whileHover={{ x: 4 }}
+              >
                 {exp.technologies.join(', ')}
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -250,7 +322,7 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-6 bg-background rounded-2xl border-2 border-border group cursor-default transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
+              className="relative text-center p-6 bg-background rounded-2xl border-2 border-border group cursor-default overflow-hidden"
               variants={{
                 hidden: {
                   opacity: 0,
@@ -267,9 +339,18 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
                   },
                 },
               }}
+              whileHover={{ y: -4, borderColor: 'hsl(var(--primary))' }}
             >
+              {/* Subtle glow effect */}
               <motion.div
-                className="font-display text-4xl md:text-5xl text-primary mb-2"
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{
+                  background: `radial-gradient(circle at 50% 50%, hsl(var(--primary)) 0%, transparent 70%)`,
+                  filter: 'blur(20px)',
+                }}
+              />
+              <motion.div
+                className="font-display text-4xl md:text-5xl text-primary mb-2 relative z-10"
                 animate={
                   stat.isInfinity
                     ? {
@@ -291,7 +372,7 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
                 {stat.value}
               </motion.div>
               <motion.div
-                className="text-sm text-muted-foreground"
+                className="text-sm text-muted-foreground relative z-10"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}

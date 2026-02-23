@@ -1,32 +1,49 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 export function HeroSection() {
   const t = useTranslations()
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  })
+  
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   return (
-    <header className="relative min-h-screen flex items-center px-6 lg:px-16 pt-32 pb-16">
+    <header ref={ref} className="relative min-h-screen flex items-center px-6 lg:px-16 pt-32 pb-16 overflow-hidden">
+      {/* Subtle texture overlay */}
+      <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left Column - Content */}
           <div className="space-y-6">
             {/* Status Badge */}
-            <a
+            <motion.a
               href="https://calendar.app.google/JzJiUGJo3TFqB3pX8"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-card border-2 border-border rounded-full text-sm font-medium transition-all hover:border-primary cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-card border-2 border-border rounded-full text-sm font-medium transition-all hover:border-primary cursor-pointer group"
               aria-label={t('hero.ambassador')}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ scale: 1.05, y: -2 }}
             >
-              <img
+              <motion.img
                 src="/cursor.svg"
                 alt=""
                 className="size-7 rounded-full"
+                whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                transition={{ duration: 0.5 }}
               />
-              <span>{t('hero.ambassador')}</span>
-            </a>
+              <span className="group-hover:text-primary transition-colors">{t('hero.ambassador')}</span>
+            </motion.a>
 
             {/* Main Headline */}
             <motion.h1
@@ -76,7 +93,7 @@ export function HeroSection() {
                 data-secret={t('hero.bio.debuggingTooltip')}
               >
                 {t('hero.bio.debugging')}
-                <span className="absolute bottom-full left-0 right-0 w-full -translate-y-2 bg-background/95 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-lg text-sm font-body whitespace-normal shadow-lg border-2 border-border z-50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none">
+                <span className="absolute bottom-full left-0 w-[32rem] max-w-[calc(100vw-3rem)] -translate-y-2 bg-background/95 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-lg text-sm font-body whitespace-normal shadow-lg border-2 border-border z-50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none">
                   {t('hero.bio.debuggingTooltip')}
                 </span>
               </span>
@@ -90,18 +107,42 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <a
+              <motion.a
                 href="#projects"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-base transition-all hover:bg-deep-rose hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+                className="group relative inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-base overflow-hidden"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                {t('hero.cta.viewProjects')}
-              </a>
-              <a
+                {/* Shimmer effect on hover */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.6 }}
+                />
+                <span className="relative z-10">{t('hero.cta.viewProjects')}</span>
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  initial={{ boxShadow: '0 0 0 0 rgba(var(--primary-rgb), 0)' }}
+                  whileHover={{ boxShadow: '0 8px 24px -4px rgba(var(--primary-rgb), 0.4)' }}
+                  style={{ '--primary-rgb': '212, 165, 196' } as React.CSSProperties}
+                />
+              </motion.a>
+              <motion.a
                 href="#contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-foreground border-2 border-border rounded-full font-semibold text-base transition-all hover:bg-card hover:border-secondary hover:-translate-y-0.5"
+                className="group relative inline-flex items-center justify-center px-8 py-4 bg-transparent text-foreground border-2 border-border rounded-full font-semibold text-base overflow-hidden"
+                whileHover={{ scale: 1.05, y: -2, borderColor: 'hsl(var(--secondary))' }}
+                whileTap={{ scale: 0.98 }}
               >
-                {t('hero.cta.contact', { default: "Let's Chat" })}
-              </a>
+                {/* Background fill on hover */}
+                <motion.div
+                  className="absolute inset-0 bg-card rounded-full"
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileHover={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <span className="relative z-10">{t('hero.cta.contact', { default: "Let's Chat" })}</span>
+              </motion.a>
             </motion.div>
           </div>
 
@@ -111,23 +152,45 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{ y, opacity }}
           >
-            {/* Main Visual */}
-            <div className="relative w-full max-w-[450px] aspect-square flex items-center justify-center animate-float">
-              {/* Outer soft glow layer */}
-              <div className="absolute inset-[-20%] bg-gradient-to-br from-dusty-rose/20 via-gentle-beige/30 to-burlap/40 rounded-full blur-3xl -z-20" />
+            {/* Main Visual - Cozy Design */}
+            <div className="relative w-full min-w-[700px] aspect-square flex items-center justify-center">
+              {/* Subtle background glow */}
+              <motion.div
+                className="absolute inset-0 rounded-full blur-3xl opacity-30"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.2, 0.35, 0.2],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  background: 'radial-gradient(circle, hsl(var(--dusty-rose)) 0%, transparent 70%)',
+                }}
+              />
               
-              {/* Inner brighter glow */}
-              <div className="absolute inset-[-5%] bg-gradient-to-br from-gentle-beige/40 to-burlap/50 rounded-full blur-2xl -z-10" />
-              
-              {/* Solid background card with shadow */}
-              <div className="absolute inset-0 bg-card dark:bg-card/40 rounded-[2rem] shadow-2xl z-0" />
-              
-              <img 
+              {/* Floating desk animation */}
+              <motion.img 
                 src="/hero-desk.svg" 
                 alt="Cozy workspace desk setup with coffee and laptop" 
                 className="w-full h-full object-contain relative z-10"
+                animate={{
+                  y: [0, -12, 0],
+                  rotate: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
+              
+              {/* Subtle texture overlay */}
+              <div className="absolute inset-0 bg-noise opacity-[0.02] pointer-events-none z-20" />
             </div>
 
           </motion.div>

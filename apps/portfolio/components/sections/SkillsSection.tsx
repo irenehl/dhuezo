@@ -56,8 +56,10 @@ export function SkillsSection() {
   ]
 
   return (
-    <section id="skills" className="py-24 bg-background scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+    <section id="skills" className="relative py-24 bg-background scroll-mt-20 overflow-hidden">
+      {/* Subtle texture overlay */}
+      <div className="absolute inset-0 bg-noise opacity-[0.01] pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
         {/* Section Header */}
         <AnimatedSection>
           <div className="mb-12">
@@ -103,7 +105,11 @@ export function SkillsSection() {
                       transition={{ delay: skillIndex * 0.05, duration: 0.3 }}
                     >
                       {/* Icon Container */}
-                      <div className="relative w-16 h-16 p-3 bg-background border-2 border-border rounded-2xl flex items-center justify-center transition-all group-hover/skill:border-primary group-hover/skill:bg-card/50 group-hover/skill:scale-110 group-hover/skill:shadow-lg">
+                      <motion.div
+                        className="relative w-16 h-16 p-3 bg-background border-2 border-border rounded-2xl flex items-center justify-center transition-all group-hover/skill:border-primary group-hover/skill:bg-card/50 group-hover/skill:shadow-lg overflow-hidden"
+                        whileHover={{ scale: 1.1, y: -4 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
                         <div className="relative w-full h-full">
                           <img
                             src={skill.isLocal ? skill.icon : `https://cdn.simpleicons.org/${skill.icon}`}
@@ -127,13 +133,21 @@ export function SkillsSection() {
                           />
                           {/* Subtle overlay to harmonize colors */}
                           <div 
-                            className="absolute inset-0 rounded-lg mix-blend-soft-light opacity-20 pointer-events-none"
+                            className="absolute inset-0 rounded-lg mix-blend-soft-light opacity-20 pointer-events-none group-hover/skill:opacity-30 transition-opacity"
                             style={{
                               background: 'linear-gradient(135deg, hsl(var(--dusty-rose)) 0%, hsl(var(--sage-blue)) 100%)',
                             }}
                           />
+                          
+                          {/* Shimmer effect on hover */}
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover/skill:opacity-100"
+                            initial={{ x: '-100%' }}
+                            whileHover={{ x: '100%' }}
+                            transition={{ duration: 0.6 }}
+                          />
                         </div>
-                      </div>
+                      </motion.div>
 
                       {/* Skill Name */}
                       <span className="text-xs text-center text-muted-foreground font-medium transition-colors group-hover/skill:text-foreground">
