@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "A quick note on Pasito's SEO — Daniela Huezo",
+  title: "A quick note on Pasito's SEO - Daniela Huezo",
   robots: {
     index: false,
     follow: false,
@@ -271,13 +271,13 @@ const auditHTML = `
 
 <h1>Pasito is ranking for<br/>who it <em>used to be,</em><br/>not who it is now.</h1>
 
-<p class="lead">I looked at pasito.ai after reading about your Series A. This isn't a pitch — it's something I noticed and thought was worth a few minutes of your time.</p>
+<p class="lead">I looked at pasito.ai after reading about your Series A. This isn't a pitch, just something I noticed.</p>
 
 <div class="tldr">
   <div class="tldr-title">TL;DR</div>
   <ul>
-    <li>Homepage title still says "Employee Benefits Education" — Google ranks you for the wrong keywords.</li>
-    <li>Series A backlinks are reinforcing old messaging. The window to fix this is closing.</li>
+    <li>Homepage title still says "Employee Benefits Education". Google ranks you for the wrong keywords.</li>
+    <li>Series A backlinks are reinforcing old messaging. You have a few weeks before that window closes.</li>
     <li>Three fixes: update meta tags, add crawlable content, build pillar pages for buyer-intent keywords.</li>
   </ul>
 </div>
@@ -296,12 +296,12 @@ const auditHTML = `
 
 <span class="label section" id="short-version">The short version</span>
 
-<p>Your homepage title still reads <span class="code">"Employee Benefits Education, Engagement and Support"</span> — that's the 2022 Pasito. Your press releases, your fundraise announcement, your partnerships with New York Life and Sun Life all describe something completely different: an AI-native workspace for carriers and brokers.</p>
+<p>Your homepage title still reads <span class="code">"Employee Benefits Education, Engagement and Support"</span>. That's the 2022 Pasito. Your press releases, your fundraise announcement, your partnerships with New York Life and Sun Life all describe something completely different: an AI-native workspace for carriers and brokers.</p>
 
 <p>Google indexed the old messaging. So when a benefits VP at a carrier searches "AI benefits platform" or "benefits automation for insurance," Pasito doesn't show up. You're invisible to the exact buyers you just raised $21M to reach.</p>
 
 <div class="note">
-  <p>The irony: the PR from your Series A generated backlinks from high-authority publications. Those links are a ranking gift — but the anchor texts are reinforcing the wrong keywords. That window is closing in the next few weeks.</p>
+  <p>The irony: the PR from your Series A generated backlinks from high-authority publications. Great for SEO, except the anchor texts are reinforcing the wrong keywords. You have a few weeks before that window closes.</p>
 </div>
 
 <hr class="divider"/>
@@ -313,28 +313,28 @@ const auditHTML = `
     <div class="finding-dot red"></div>
     <div>
       <div class="finding-title">Title tags and meta descriptions are misaligned with your product</div>
-      <p class="finding-desc">Every page title reflects your old positioning. Google ranks you for "benefits education" searches — not for "AI agents for insurance" or "benefits automation," which is what your buyers actually search.</p>
+      <p class="finding-desc">Every page title reflects your old positioning. Google ranks you for "benefits education" searches, not for "AI agents for insurance" or "benefits automation," which is what your buyers actually search.</p>
     </div>
   </div>
   <div class="finding">
     <div class="finding-dot red"></div>
     <div>
       <div class="finding-title">The homepage has ~180 words of text Google can read</div>
-      <p class="finding-desc">The rest is images. Google can't read images. Competitors in your space have 5–8x more indexable content on their homepages, which is part of why they outrank you for category terms.</p>
+      <p class="finding-desc">The rest is images. Google can't read images. Competitors in your space have 5-8x more indexable content on their homepages, which is part of why they outrank you for category terms.</p>
     </div>
   </div>
   <div class="finding">
     <div class="finding-dot red"></div>
     <div>
       <div class="finding-title">No structured data anywhere on the site</div>
-      <p class="finding-desc">No schema markup means no knowledge panel, no rich results, no FAQ snippets in Google. It's free visibility that your site isn't claiming.</p>
+      <p class="finding-desc">No schema markup means no knowledge panel, no rich results, no FAQ snippets in Google. Free visibility you're not using.</p>
     </div>
   </div>
   <div class="finding">
     <div class="finding-dot yellow"></div>
     <div>
       <div class="finding-title">Blog content doesn't target buyer-intent keywords</div>
-      <p class="finding-desc">The blog covers general HR topics. Nobody searching "RFP automation for carriers" or "insurance document AI" lands on a Pasito page — those searches go to competitors.</p>
+      <p class="finding-desc">The blog covers general HR topics. Nobody searching "RFP automation for carriers" or "insurance document AI" lands on a Pasito page. Those searches go to competitors..</p>
     </div>
   </div>
 </div>
@@ -355,7 +355,7 @@ const auditHTML = `
     <div class="swap-key">Title tag</div>
     <div class="swap-vals">
       <div class="swap-val before">"Pasito I Employee Benefits Education, Engagement and Support"</div>
-      <div class="swap-val after">"Pasito — AI Workspace for Insurance Carriers &amp; Brokers"</div>
+      <div class="swap-val after">"Pasito - AI Workspace for Insurance Carriers &amp; Brokers"</div>
     </div>
   </div>
   <div class="swap-row">
@@ -369,7 +369,7 @@ const auditHTML = `
     <div class="swap-key">Crawlable text</div>
     <div class="swap-vals">
       <div class="swap-val before">~180 words</div>
-      <div class="swap-val after">900–1,200 structured words</div>
+      <div class="swap-val after">900-1,200 structured words</div>
     </div>
   </div>
   <div class="swap-row">
@@ -383,7 +383,7 @@ const auditHTML = `
 
 <hr class="divider"/>
 
-<span class="label section" id="the-plan">The plan — 4 weeks, not 4 months</span>
+<span class="label section" id="the-plan">The plan: 4 weeks, not 4 months</span>
 
 <div class="plan-list">
   <div class="plan-item">
@@ -391,15 +391,15 @@ const auditHTML = `
     <div class="plan-body">
       <div class="plan-when">Week 1</div>
       <div class="plan-title">Fix the technical foundation</div>
-      <p class="plan-desc">Rewrite title tags and meta descriptions across all pages to match current positioning. Add schema markup. Fix image alt texts. Fast to implement, immediate signal to Google.</p>
+      <p class="plan-desc">Rewrite title tags and meta descriptions across all pages to match current positioning. Add schema markup. Fix image alt texts. Quick to implement, immediate signal to Google.</p>
     </div>
   </div>
   <div class="plan-item">
     <div class="plan-num">2</div>
     <div class="plan-body">
-      <div class="plan-when">Weeks 2–3</div>
+      <div class="plan-when">Weeks 2-3</div>
       <div class="plan-title">Add crawlable content to the homepage</div>
-      <p class="plan-desc">Structured text sections targeting carrier and broker search intent — without touching your existing design. Gives Google enough to rank you for the terms that matter.</p>
+      <p class="plan-desc">Structured text sections targeting carrier and broker search intent, without touching your existing design. Gives Google enough to rank you for the right terms.</p>
     </div>
   </div>
   <div class="plan-item">
@@ -407,7 +407,7 @@ const auditHTML = `
     <div class="plan-body">
       <div class="plan-when">Week 4</div>
       <div class="plan-title">Three pillar pages for mid-funnel buyers</div>
-      <p class="plan-desc">One page each for: AI agents for carriers, benefits automation for brokers, RFP management. These capture buyers doing research before they're ready to demo.</p>
+      <p class="plan-desc">One page each for: AI agents for carriers, benefits automation for brokers, RFP management. Catches buyers researching before they're ready to demo.</p>
     </div>
   </div>
 </div>
@@ -425,7 +425,7 @@ const auditHTML = `
   </div>
 </div>
 
-<p style="margin-top:56px;font-size:11px;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);padding-top:24px;">This document is intended solely for the person it was sent to. The findings are based on publicly available information from pasito.ai and do not reflect any confidential or proprietary data. This is not a formal audit — it's an observation shared in good faith. Please don't share it further without checking with me first.</p>
+<p style="margin-top:56px;font-size:11px;color:var(--muted);line-height:1.7;border-top:1px solid var(--border);padding-top:24px;">Based on publicly available info from pasito.ai. Not a formal audit, just observations. Don't share without checking with me first.</p>
 `
 
 export default function PasitoAuditPage() {
