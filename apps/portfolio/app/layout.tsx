@@ -32,12 +32,12 @@ export const metadata: Metadata = {
     default: 'Daniela Huezo',
     template: '%s | Daniela Huezo',
   },
-  description: 'Full Stack Developer building resilient systems and dramatic interfaces.',
+  description: 'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   keywords: [
-    'Full Stack Developer',
-    'Web Developer',
     'Software Engineer',
+    'Cursor Ambassador',
+    'Web Developer',
     'React',
     'Next.js',
     'TypeScript',
@@ -50,21 +50,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     siteName: 'Daniela Huezo',
-    title: 'Daniela Huezo - Full Stack Developer',
-    description: 'Full Stack Developer building resilient systems and dramatic interfaces.',
+    title: 'Daniela Huezo - Software Engineer | Cursor Ambassador',
+    description: 'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale.',
     images: [
       {
         url: '/og-image.png', // Static OG image - relative path resolved by metadataBase
         width: 1200,
         height: 630,
-        alt: 'Daniela Huezo - Full Stack Developer',
+        alt: 'Daniela Huezo - Software Engineer | Cursor Ambassador',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Daniela Huezo - Full Stack Developer',
-    description: 'Full Stack Developer building resilient systems and dramatic interfaces.',
+    title: 'Daniela Huezo - Software Engineer | Cursor Ambassador',
+    description: 'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale.',
     creator: '@irenehl26__',
     images: ['/og-image.png'], // Static OG image - relative path resolved by metadataBase
   },

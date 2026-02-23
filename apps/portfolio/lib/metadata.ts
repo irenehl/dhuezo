@@ -52,7 +52,7 @@ export function generateMetadata({
   const siteTitle = title || siteConfig.name
   const siteDescription =
     description ||
-    'Full Stack Developer building resilient systems and dramatic interfaces.'
+    'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale.'
   const siteUrl = url || `${siteConfig.url}/${locale}`
 
   // Use static OG images from /public directory

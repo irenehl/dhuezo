@@ -13,7 +13,7 @@ export function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
     name: siteConfig.name,
     url: siteUrl,
     description:
-      'Full Stack Developer building resilient systems and dramatic interfaces.',
+      'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale.',
     publisher: {
       '@type': 'Person',
       name: siteConfig.name,

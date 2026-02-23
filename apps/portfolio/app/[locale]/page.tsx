@@ -18,9 +18,9 @@ export async function generateMetadata({
   const { locale } = await params
   return generateSiteMetadata({
     locale,
-    title: 'Daniela Huezo - Full Stack Developer',
+    title: 'Daniela Huezo - Software Engineer | Cursor Ambassador',
     description:
-      'Full-stack engineer building resilient systems and dramatic interfaces. Explore my projects, talks, and experience.',
+      'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale. Explore my projects, talks, and experience.',
     image: '/og-image.png', // Use static OG image for home page
   })
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { Menu } from 'lucide-react'
@@ -42,9 +43,13 @@ export function SiteHeader(): JSX.Element {
             href="/"
             className="flex items-center gap-3 group"
           >
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-display font-bold text-lg">
-              D
-            </div>
+            <Image
+              src="/logo-with-bg.svg"
+              alt="Daniela Huezo"
+              width={40}
+              height={40}
+              className="w-10 h-10 rounded-full object-cover"
+            />
             <span className="font-display text-lg font-semibold text-foreground group-hover:text-primary transition-colors hidden sm:block">
               Daniela Huezo
             </span>
