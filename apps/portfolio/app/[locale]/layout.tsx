@@ -11,6 +11,7 @@ import { AnimatedBackground } from '@/components/layout/AnimatedBackground'
 import { CustomCursor } from '@/components/layout/CustomCursor'
 import { FloatingFlowers } from '@/components/layout/FloatingFlowers'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
+import type { Locale } from '@/i18n/config'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -34,13 +35,10 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
 
-  // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as Locale)) {
     notFound()
   }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages({ locale })
 
   return (

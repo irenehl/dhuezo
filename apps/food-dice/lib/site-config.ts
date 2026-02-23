@@ -6,6 +6,7 @@ export const siteConfig = {
     'Food Dice eliminates the endless "where should we eat?" conversation. Discover your next favorite restaurant with a random roll based on your cravings.',
   twitterHandle: undefined, // No Twitter handle for this app
   defaultOgImage: '/og-image.png',
+  icon: '/icon.png', // Update this path when icon is added to /public
   keywords: [
     'food',
     'restaurant finder',

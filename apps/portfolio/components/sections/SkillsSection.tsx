@@ -36,7 +36,7 @@ export function SkillsSection() {
         { name: 'MongoDB', icon: 'mongodb' },
         { name: 'PostgreSQL', icon: 'postgresql' },
         { name: 'Prisma', icon: 'prisma' },
-        { name: 'Convex', icon: '/convex-icon.svg', isLocal: true },
+        { name: 'Convex', icon: '/convex.webp', isLocal: true },
         { name: 'Supabase', icon: 'supabase' }
       ],
     },
@@ -72,7 +72,6 @@ export function SkillsSection() {
           </div>
         </AnimatedSection>
 
-        {/* Skills Grid */}
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" staggerDelay={0.1}>
           {skillCategories.map((category) => (
             <motion.div
@@ -80,10 +79,8 @@ export function SkillsSection() {
               variants={staggerItemVariants}
               className="group relative bg-card rounded-3xl border-2 border-border overflow-hidden transition-all hover:shadow-xl hover:shadow-pressed-brown/10 hover:-translate-y-1"
             >
-              {/* Gradient accent bar */}
               <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${category.gradient} opacity-60 group-hover:opacity-100 transition-opacity`} />
               
-              {/* Decorative corner element */}
               <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${category.gradient} opacity-5 group-hover:opacity-10 transition-opacity rounded-bl-full`} />
 
               <div className="p-8 relative z-10">
@@ -104,7 +101,6 @@ export function SkillsSection() {
                       viewport={{ once: true }}
                       transition={{ delay: skillIndex * 0.05, duration: 0.3 }}
                     >
-                      {/* Icon Container */}
                       <motion.div
                         className="relative w-16 h-16 p-3 bg-background border-2 border-border rounded-2xl flex items-center justify-center transition-all group-hover/skill:border-primary group-hover/skill:bg-card/50 group-hover/skill:shadow-lg overflow-hidden"
                         whileHover={{ scale: 1.1, y: -4 }}
@@ -116,30 +112,40 @@ export function SkillsSection() {
                             alt={skill.name}
                             className="w-full h-full object-contain transition-all"
                             style={{
-                              filter: skill.isLocal 
-                                ? 'sepia(0.3) hue-rotate(180deg) saturate(0.6) brightness(0.95) contrast(1.1)'
-                                : 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)',
+                              filter: skill.name === 'Convex'
+                                ? 'none'
+                                : skill.isLocal 
+                                  ? 'sepia(0.3) hue-rotate(180deg) saturate(0.6) brightness(0.95) contrast(1.1)'
+                                  : 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)',
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.filter = skill.isLocal
-                                ? 'sepia(0.2) hue-rotate(180deg) saturate(0.8) brightness(1.05) contrast(1.1)'
-                                : 'sepia(0.2) hue-rotate(15deg) saturate(0.7) brightness(1) contrast(1.1)'
+                              if (skill.name === 'Convex') {
+                                e.currentTarget.style.filter = 'brightness(1.05)'
+                              } else {
+                                e.currentTarget.style.filter = skill.isLocal
+                                  ? 'sepia(0.2) hue-rotate(180deg) saturate(0.8) brightness(1.05) contrast(1.1)'
+                                  : 'sepia(0.2) hue-rotate(15deg) saturate(0.7) brightness(1) contrast(1.1)'
+                              }
                             }}
                             onMouseLeave={(e) => {
-                              e.currentTarget.style.filter = skill.isLocal
-                                ? 'sepia(0.3) hue-rotate(180deg) saturate(0.6) brightness(0.95) contrast(1.1)'
-                                : 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)'
+                              if (skill.name === 'Convex') {
+                                e.currentTarget.style.filter = 'none'
+                              } else {
+                                e.currentTarget.style.filter = skill.isLocal
+                                  ? 'sepia(0.3) hue-rotate(180deg) saturate(0.6) brightness(0.95) contrast(1.1)'
+                                  : 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)'
+                              }
                             }}
                           />
-                          {/* Subtle overlay to harmonize colors */}
-                          <div 
-                            className="absolute inset-0 rounded-lg mix-blend-soft-light opacity-20 pointer-events-none group-hover/skill:opacity-30 transition-opacity"
-                            style={{
-                              background: 'linear-gradient(135deg, hsl(var(--dusty-rose)) 0%, hsl(var(--sage-blue)) 100%)',
-                            }}
-                          />
+                          {skill.name !== 'Convex' && (
+                            <div 
+                              className="absolute inset-0 rounded-lg mix-blend-soft-light opacity-20 pointer-events-none group-hover/skill:opacity-30 transition-opacity"
+                              style={{
+                                background: 'linear-gradient(135deg, hsl(var(--dusty-rose)) 0%, hsl(var(--sage-blue)) 100%)',
+                              }}
+                            />
+                          )}
                           
-                          {/* Shimmer effect on hover */}
                           <motion.div
                             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover/skill:opacity-100"
                             initial={{ x: '-100%' }}
@@ -149,7 +155,6 @@ export function SkillsSection() {
                         </div>
                       </motion.div>
 
-                      {/* Skill Name */}
                       <span className="text-xs text-center text-muted-foreground font-medium transition-colors group-hover/skill:text-foreground">
                         {skill.name}
                       </span>

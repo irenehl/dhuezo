@@ -23,7 +23,6 @@ interface StageSectionClientProps {
 export function StageSectionClient({ entries }: StageSectionClientProps) {
   const t = useTranslations()
 
-  // If no entries, show placeholder or empty state
   if (entries.length === 0) {
     return (
       <section id="stage" className="relative py-24 bg-background scroll-mt-20 overflow-hidden">
@@ -60,10 +59,8 @@ export function StageSectionClient({ entries }: StageSectionClientProps) {
 
   return (
     <section id="stage" className="relative py-24 bg-background scroll-mt-20 overflow-hidden">
-      {/* Subtle texture overlay */}
       <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
-        {/* Section Header */}
         <motion.div
           className="mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -82,7 +79,6 @@ export function StageSectionClient({ entries }: StageSectionClientProps) {
           </p>
         </motion.div>
 
-        {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {entries.map((entry, index) => (
             <motion.div
@@ -97,7 +93,6 @@ export function StageSectionClient({ entries }: StageSectionClientProps) {
                   href={entry.ctaUrl || '#'}
                   className="group relative block bg-card rounded-3xl overflow-hidden border-2 border-border transition-all hover:shadow-2xl hover:shadow-pressed-brown/20 hover:border-primary"
                 >
-                  {/* Subtle glow effect on hover */}
                   <motion.div
                     className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
@@ -106,38 +101,26 @@ export function StageSectionClient({ entries }: StageSectionClientProps) {
                     }}
                   />
                   
-                  {/* Image placeholder */}
                   <div className="w-full h-52 bg-gradient-to-br from-dusty-rose to-sage-blue border-b-2 border-border relative overflow-hidden">
-                    {/* Subtle texture overlay */}
                     <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none" />
                     
-                    {/* Animated gradient overlay */}
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     />
                     
-                    {/* Type badge */}
-                    <motion.div
-                      className="absolute top-4 left-4 z-10"
-                      initial={{ scale: 0, rotate: -180 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.3, type: "spring", stiffness: 200 }}
-                    >
-                      <motion.span
+                    <div className="absolute top-4 left-4 z-10">
+                      <span
                         className={cn(
                           'px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider inline-block',
                           entry.type === 'talk'
                             ? 'bg-pressed-brown text-warm-cream'
                             : 'bg-primary text-primary-foreground'
                         )}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
                       >
                         {t(`stage.type.${entry.type}`, { default: entry.type })}
-                      </motion.span>
-                    </motion.div>
+                      </span>
+                    </div>
                     
-                    {/* Shimmer effect */}
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100"
                       initial={{ x: '-100%' }}
@@ -146,7 +129,6 @@ export function StageSectionClient({ entries }: StageSectionClientProps) {
                     />
                   </div>
 
-                  {/* Content */}
                   <div className="p-6 space-y-3 relative z-10">
                     <motion.div
                       className="text-xs text-primary font-medium"

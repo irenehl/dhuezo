@@ -81,9 +81,7 @@ export function AboutSection() {
           </div>
         </AnimatedSection>
 
-        {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 lg:items-center">
-          {/* Left Column - About Text */}
           <AnimatedSection className="lg:col-span-2 space-y-6" direction="left">
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               {t('about.description1', {
@@ -96,15 +94,15 @@ export function AboutSection() {
               })}
             </p>
 
-            {/* Contact CTA */}
             <div className="pt-8">
               <motion.a
-                href={`mailto:${t('about.email', { default: 'hello@dhuezo.dev' })}`}
+                href="https://calendar.app.google/Q65Hgz9cCqa2m1Ei9"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-base overflow-hidden"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {/* Shimmer effect */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                   initial={{ x: '-100%' }}
@@ -122,7 +120,6 @@ export function AboutSection() {
               </motion.a>
             </div>
 
-            {/* Social Links */}
             <div className="flex gap-4 pt-4">
               {[
                 { href: t('about.social.github', { default: 'https://github.com/irenehl' }), icon: Github, label: 'GitHub' },
@@ -140,7 +137,6 @@ export function AboutSection() {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {/* Ripple effect */}
                   <motion.div
                     className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-20"
                     initial={{ scale: 0 }}
@@ -153,7 +149,6 @@ export function AboutSection() {
             </div>
           </AnimatedSection>
 
-          {/* Right Column - Currently Into */}
           <AnimatedSection className="bg-background p-8 rounded-3xl border-2 border-border" direction="right" delay={0.2}>
             <h3 className="font-display text-2xl text-foreground mb-6 text-center">
               {t('about.favorites.title', { default: 'Currently Into' })}

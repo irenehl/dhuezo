@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
-import Link from 'next/link'
 import { ArrowUpRight, ExternalLink, Github } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { animate, motion } from 'framer-motion'
 import { getFeaturedProjects, type ProjectConfig } from '@/lib/config/projects'
 import type { MarkdownProject } from '@/lib/markdown/types'
 import type { XArticle } from '@/lib/config/x-articles'
 import { AnimatedSection, StaggerContainer, staggerItemVariants } from '@/components/ui/AnimatedSection'
+import { Carousel } from '@/components/ui/carousel'
 import { cn } from '@/lib/utils'
 
 interface Project extends ProjectConfig {
@@ -30,13 +30,10 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
   const locale = useLocale()
   const [activeFilter, setActiveFilter] = useState<string>('all')
 
-  // Use Markdown projects if provided, otherwise fall back to config
   let projects: Project[]
 
   if (markdownProjects && markdownProjects.length > 0) {
-    // Map MarkdownProject to Project format
     projects = markdownProjects.map((project) => {
-      // Infer category from tags
       const tags = project.tags.map(tag => tag.toLowerCase())
       let category = 'web'
       if (tags.some(t => ['react native', 'expo', 'mobile'].includes(t))) category = 'mobile'
@@ -58,7 +55,6 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
       }
     })
   } else {
-    // Fallback to config-based projects
     const projectsConfig = getFeaturedProjects()
     projects = projectsConfig.map((config) => {
       const projectKey = `project${config.id}` as const
@@ -86,6 +82,18 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
     ? projects
     : projects.filter(p => p.category === activeFilter)
 
+  const getProjectEmoji = (projectId: string): string => {
+    const emojiMap: Record<string, string> = {
+      'cerebryx': '🧠',
+      'food-dice': '🎲',
+      'nameless-mindfulness-app': '🌸',
+      'travel-guide': '✈️',
+      'smart-resume': '📄',
+      'pixel-meet': '🎮',
+    }
+    return emojiMap[projectId] || '💼'
+  }
+
   const getGradientForIndex = (index: number) => {
     const gradients = [
       'from-sage-blue to-dusty-rose',
@@ -101,7 +109,6 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
-        {/* Section Header */}
         <AnimatedSection>
           <div className="mb-12">
             <div className="font-accent text-xl md:text-2xl text-primary mb-2">
@@ -116,7 +123,6 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
           </div>
         </AnimatedSection>
 
-        {/* Filters */}
         <div className="flex flex-wrap gap-3 mb-12">
           {filters.map((filter) => (
             <motion.button
@@ -131,7 +137,6 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {/* Active state shimmer */}
               {activeFilter === filter.id && (
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -144,36 +149,37 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" staggerDelay={0.15}>
+        <div className="mb-8">
+          <Carousel
+            slidesToShow={3}
+            autoPlay={true}
+            autoPlayInterval={5000}
+            showArrows={true}
+            showDots={true}
+            className="w-full"
+          >
           {filteredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              variants={staggerItemVariants}
-            >
+            <div key={project.id} className="px-4">
               <motion.div
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="h-full"
               >
-                <Link
-                  href={`/${locale}/projects/${project.id}`}
-                  className="group relative bg-background rounded-3xl overflow-hidden border-2 border-border transition-all hover:shadow-2xl hover:shadow-pressed-brown/20 hover:border-primary block"
+                <a
+                  href={project.deployedUrl || project.repoUrl || '#'}
+                  target={project.deployedUrl || project.repoUrl ? "_blank" : undefined}
+                  rel={project.deployedUrl || project.repoUrl ? "noopener noreferrer" : undefined}
+                  className="group relative bg-background rounded-3xl overflow-hidden border-2 border-border transition-shadow duration-300 hover:shadow-xl hover:shadow-primary/10 block h-full"
+                  style={{
+                    outline: 'none',
+                    WebkitTapHighlightColor: 'transparent',
+                  }}
+                  onFocus={(e) => e.currentTarget.blur()}
                 >
-                  {/* Subtle glow effect on hover */}
-                  <motion.div
-                    className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: `radial-gradient(circle at 50% 0%, hsl(var(--primary)) 0%, transparent 50%)`,
-                      filter: 'blur(20px)',
-                    }}
-                  />
-                  
-                  {/* Project Image/Visual */}
                   <div className={cn(
-                    'w-full h-48 bg-gradient-to-br flex items-center justify-center text-6xl border-b-2 border-border relative overflow-hidden',
+                    'w-full h-48 bg-gradient-to-br flex items-center justify-center text-6xl border-b-2 border-border relative overflow-hidden z-10',
                     getGradientForIndex(index)
                   )}>
-                    {/* Subtle texture overlay */}
                     <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none" />
                     
                     {project.featured && (
@@ -187,23 +193,20 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                       </motion.div>
                     )}
                     
-                    {/* Icon or emoji placeholder with subtle animation */}
                     <motion.span
                       className="opacity-90 relative z-10"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
-                      {index === 0 ? '🧠' : index === 1 ? '🎲' : index === 2 ? '🌸' : '🏥'}
+                      {getProjectEmoji(project.id)}
                     </motion.span>
                     
-                    {/* Gradient overlay on hover */}
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     />
                   </div>
 
-                  {/* Project Content */}
-                  <div className="p-6 space-y-4 relative z-10">
+                  <div className="p-6 space-y-4 relative z-10 bg-background">
                     <motion.h3
                       className="font-display text-2xl text-foreground group-hover:text-primary transition-colors"
                       whileHover={{ x: 4 }}
@@ -214,8 +217,7 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                       {project.description}
                     </p>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 pt-2">
+                    <div className="flex flex-wrap gap-2">
                       {project.tags.slice(0, 4).map((tag, tagIndex) => (
                         <motion.span
                           key={tag}
@@ -228,13 +230,13 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                       ))}
                     </div>
                   </div>
-                </Link>
+                </a>
               </motion.div>
-            </motion.div>
+            </div>
           ))}
-        </StaggerContainer>
+          </Carousel>
+        </div>
 
-        {/* View Archive Link */}
         <div className="flex justify-center pt-12">
           <a
             href="https://github.com/irenehl"

@@ -21,11 +21,9 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left Column - Content */}
           <div className="space-y-6">
-            {/* Status Badge */}
             <motion.a
-              href="https://calendar.app.google/JzJiUGJo3TFqB3pX8"
+              href="https://calendar.app.google/Q65Hgz9cCqa2m1Ei9"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-card border-2 border-border rounded-full text-sm font-medium transition-all hover:border-primary cursor-pointer group"
@@ -58,7 +56,6 @@ export function HeroSection() {
               </span>
             </motion.h1>
 
-            {/* Subtitle */}
             <motion.p
               className="text-xl md:text-2xl font-medium text-deep-rose"
               initial={{ opacity: 0, y: 20 }}
@@ -68,7 +65,6 @@ export function HeroSection() {
               {t('hero.description')}
             </motion.p>
 
-            {/* Description with Easter Eggs */}
             <motion.p
               className="relative text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg"
               initial={{ opacity: 0, y: 20 }}
@@ -100,7 +96,6 @@ export function HeroSection() {
               {t('hero.bio.ending')}
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
               className="flex flex-col sm:flex-row gap-4 pt-4"
               initial={{ opacity: 0, y: 20 }}
@@ -113,7 +108,6 @@ export function HeroSection() {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {/* Shimmer effect on hover */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                   initial={{ x: '-100%' }}
@@ -129,12 +123,13 @@ export function HeroSection() {
                 />
               </motion.a>
               <motion.a
-                href="#contact"
+                href="https://calendar.app.google/Q65Hgz9cCqa2m1Ei9"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center px-8 py-4 bg-transparent text-foreground border-2 border-border rounded-full font-semibold text-base overflow-hidden"
                 whileHover={{ scale: 1.05, y: -2, borderColor: 'hsl(var(--secondary))' }}
                 whileTap={{ scale: 0.98 }}
               >
-                {/* Background fill on hover */}
                 <motion.div
                   className="absolute inset-0 bg-card rounded-full"
                   initial={{ scale: 0, opacity: 0 }}
@@ -146,7 +141,6 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right Column - Visual */}
           <motion.div
             className="relative h-[400px] md:h-[500px] flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -154,9 +148,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             style={{ y, opacity }}
           >
-            {/* Main Visual - Cozy Design */}
             <div className="relative w-full min-w-[700px] aspect-square flex items-center justify-center">
-              {/* Subtle background glow */}
               <motion.div
                 className="absolute inset-0 rounded-full blur-3xl opacity-30"
                 animate={{
@@ -173,7 +165,6 @@ export function HeroSection() {
                 }}
               />
               
-              {/* Floating desk animation */}
               <motion.img 
                 src="/hero-desk.svg" 
                 alt="Cozy workspace desk setup with coffee and laptop" 
@@ -189,7 +180,6 @@ export function HeroSection() {
                 }}
               />
               
-              {/* Subtle texture overlay */}
               <div className="absolute inset-0 bg-noise opacity-[0.02] pointer-events-none z-20" />
             </div>
 

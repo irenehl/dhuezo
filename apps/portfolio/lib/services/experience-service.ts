@@ -85,8 +85,6 @@ async function parseMultipleExperiencesFromFile(
         })
       }
     } catch (error) {
-      // If parsing fails, skip this experience
-      console.warn(`Failed to parse experience in ${filePath}:`, error)
       continue
     }
   }
@@ -128,40 +126,34 @@ function mapMarkdownToExperience(
 }
 
 export const experienceService = {
-  // Get all experiences
   async getAllExperiences(locale: string): Promise<MarkdownExperience[]> {
     const files = await getMarkdownFilesInDir(CONTENT_DIR)
     const allExperiences: MarkdownExperience[] = []
 
     for (const filePath of files) {
       try {
-        // Try parsing as multiple experiences first (for files with multiple frontmatter blocks)
         const multipleExperiences = await parseMultipleExperiencesFromFile(filePath)
         
         if (multipleExperiences.length > 0) {
-          // File contains multiple experiences
           for (const parsed of multipleExperiences) {
             if (parsed.frontmatter.locale === locale) {
               allExperiences.push(mapMarkdownToExperience(parsed, filePath))
             }
           }
         } else {
-          // Fallback to single experience parsing
           const parsed = await parseMarkdownFile<ExperienceFrontmatter>(filePath)
           if (parsed.frontmatter.locale === locale) {
             allExperiences.push(mapMarkdownToExperience(parsed, filePath))
           }
         }
       } catch (error) {
-        console.error(`Error parsing experience file ${filePath}:`, error)
-        // Try fallback parsing
         try {
           const parsed = await parseMarkdownFile<ExperienceFrontmatter>(filePath)
           if (parsed.frontmatter.locale === locale) {
             allExperiences.push(mapMarkdownToExperience(parsed, filePath))
           }
         } catch (fallbackError) {
-          console.error(`Fallback parsing also failed for ${filePath}:`, fallbackError)
+          // Skip file if parsing fails
         }
       }
     }
