@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { XIcon } from '@/components/icons/XIcon'
+import { InstagramIcon } from '@/components/icons/InstagramIcon'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export function AboutSection() {
@@ -68,8 +69,8 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
         {/* Section Header */}
         <AnimatedSection>
-          <div className="mb-12">
-            <div className="font-accent text-xl md:text-2xl text-primary mb-2">
+          <div>
+            <div className="font-accent text-xl md:text-2xl text-primary">
               {t('about.subtitle', { default: 'Get to Know Me' })}
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground">
@@ -79,7 +80,7 @@ export function AboutSection() {
         </AnimatedSection>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 lg:items-center">
           {/* Left Column - About Text */}
           <AnimatedSection className="lg:col-span-2 space-y-6" direction="left">
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
@@ -90,11 +91,6 @@ export function AboutSection() {
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               {t('about.description2', {
                 default: "My approach combines technical expertise with strategic thinking. Whether I'm architecting a new platform, leading a development team, or optimizing existing systems, I focus on sustainable solutions that scale."
-              })}
-            </p>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              {t('about.description3', {
-                default: "Beyond code, I've built technical communities and helped women across Central America navigate tech through Academia Colmena. When I'm not at the keyboard, you'll find me exploring new restaurants, staying active, or unwinding with my favorite games."
               })}
             </p>
 
@@ -138,12 +134,21 @@ export function AboutSection() {
               >
                 <XIcon className="w-5 h-5" />
               </a>
+              <a
+                href={t('about.social.instagram', { default: 'https://instagram.com/irenehl__' })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 border-2 border-border rounded-full hover:bg-pressed-brown hover:text-warm-cream hover:border-pressed-brown transition-all"
+                aria-label="Instagram"
+              >
+                <InstagramIcon className="w-5 h-5" />
+              </a>
             </div>
           </AnimatedSection>
 
           {/* Right Column - Currently Into */}
-          <AnimatedSection className="bg-background p-8 rounded-3xl border-2 border-border h-fit" direction="right" delay={0.2}>
-            <h3 className="font-display text-2xl text-foreground mb-6">
+          <AnimatedSection className="bg-background p-8 rounded-3xl border-2 border-border" direction="right" delay={0.2}>
+            <h3 className="font-display text-2xl text-foreground mb-6 text-center">
               {t('about.favorites.title', { default: 'Currently Into' })}
             </h3>
             <div className="space-y-4">

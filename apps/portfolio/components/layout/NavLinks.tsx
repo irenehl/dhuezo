@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl'
 import { getNavItems } from '@/lib/navigation'
+import type { Locale } from '@/i18n/config'
 
 interface NavLinksProps {
   isMobile?: boolean
@@ -11,7 +12,7 @@ interface NavLinksProps {
 export function NavLinks({ isMobile = false, onLinkClick }: NavLinksProps) {
   const t = useTranslations()
   const locale = useLocale()
-  const navItems = getNavItems(t, locale as any)
+  const navItems = getNavItems(t, locale as Locale)
 
   const handleClick = () => {
     if (onLinkClick) {
@@ -26,9 +27,9 @@ export function NavLinks({ isMobile = false, onLinkClick }: NavLinksProps) {
           key={item.href}
           href={item.href}
           onClick={handleClick}
-          className={`block py-3 px-4 text-sm font-semibold tracking-widest uppercase transition-colors ${
+          className={`block py-3 px-4 text-sm font-medium transition-all ${
             isMobile
-              ? 'text-zinc-300 hover:text-white hover:bg-zinc-900 rounded-lg'
+              ? 'text-foreground hover:text-primary hover:bg-card rounded-full border-2 border-transparent hover:border-border'
               : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100'
           }`}
         >

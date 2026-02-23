@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+  <!-- Convex logo: Three curved segments forming a rounded triangle -->
+  <path d="M12 4C8.13 4 5 7.13 5 11C5 12.5 5.5 13.8 6.3 14.8L12 4Z" opacity="0.8"/>
+  <path d="M12 4C15.87 4 19 7.13 19 11C19 12.5 18.5 13.8 17.7 14.8L12 4Z" opacity="0.7"/>
+  <path d="M6.3 14.8C7.1 15.8 8.4 16.3 9.9 16.3C13.77 16.3 16.9 13.17 16.9 9.3C16.9 7.8 16.4 6.5 15.6 5.5L6.3 14.8Z" opacity="0.9"/>
+</svg>

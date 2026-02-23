@@ -15,16 +15,16 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1 border border-zinc-800 rounded-md p-1 dark:border-zinc-800">
+    <div className="flex items-center gap-1 border-2 border-border rounded-full p-1 bg-card">
       {locales.map((loc) => (
         <button
           key={loc}
           onClick={() => handleLocaleChange(loc)}
           className={cn(
-            'h-7 px-3 text-xs font-medium transition-colors uppercase tracking-wider',
+            'h-8 px-4 text-xs font-medium transition-all uppercase tracking-wider rounded-full',
             locale === loc
-              ? 'bg-zinc-800 text-zinc-100 dark:bg-zinc-800 dark:text-zinc-100'
-              : 'text-zinc-500 hover:text-zinc-100 dark:text-zinc-500 dark:hover:text-zinc-100'
+              ? 'bg-primary text-primary-foreground'
+              : 'text-muted-foreground hover:text-foreground'
           )}
         >
           {loc.toUpperCase()}

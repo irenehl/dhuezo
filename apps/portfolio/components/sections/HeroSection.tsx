@@ -18,13 +18,14 @@ export function HeroSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-card border-2 border-border rounded-full text-sm font-medium transition-all hover:border-primary cursor-pointer"
-              aria-label={t('hero.openToWork')}
+              aria-label={t('hero.ambassador')}
             >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-pulse-glow absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-600" />
-              </span>
-              <span>{t('hero.openToWork')}</span>
+              <img
+                src="/cursor.svg"
+                alt=""
+                className="size-7 rounded-full"
+              />
+              <span>{t('hero.ambassador')}</span>
             </a>
 
             {/* Main Headline */}
@@ -34,9 +35,9 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              Building things that{' '}
+              {t('hero.title')} {' '}
               <span className="font-accent text-6xl md:text-7xl lg:text-8xl text-primary">
-                just work
+                {t('hero.subtitle')}
               </span>
             </motion.h1>
 
@@ -47,39 +48,39 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              {t('hero.subtitle')}
+              {t('hero.description')}
             </motion.p>
 
             {/* Description with Easter Eggs */}
             <motion.p
-              className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg"
+              className="relative text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              I craft resilient systems and delightful interfaces. Currently leading teams at Agora Partnerships,{' '}
+              {t('hero.bio.intro')}{' '}
               <span
                 tabIndex={0}
-                className="relative group cursor-help border-b border-dotted border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
-                data-secret="powered by coffee & late-night coding sessions"
+                className="relative inline-block group cursor-help border-b border-dotted border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+                data-secret={t('hero.bio.shippingTooltip')}
               >
-                shipping platforms from scratch
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-2 bg-background/95 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-lg text-sm font-body whitespace-normal max-w-xs shadow-lg border-2 border-border z-50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none">
-                  powered by coffee & late-night coding sessions ☕
+                {t('hero.bio.shipping')}
+                <span className="absolute bottom-full left-0 right-0 w-full -translate-y-2 bg-background/95 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-lg text-sm font-body whitespace-normal shadow-lg border-2 border-border z-50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none">
+                  {t('hero.bio.shippingTooltip')}
                 </span>
               </span>
-              , and occasionally{' '}
+              {t('hero.bio.andOccasionally')}{' '}
               <span
                 tabIndex={0}
-                className="relative group cursor-help border-b border-dotted border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
-                data-secret="my island is called Serenity"
+                className="relative inline-block group cursor-help border-b border-dotted border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+                data-secret={t('hero.bio.debuggingTooltip')}
               >
-                debugging in my cozy corner
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 -translate-y-2 bg-background/95 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-lg text-sm font-body whitespace-normal max-w-xs shadow-lg border-2 border-border z-50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none">
-                  my island is called Serenity 🏝️
+                {t('hero.bio.debugging')}
+                <span className="absolute bottom-full left-0 right-0 w-full -translate-y-2 bg-background/95 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-lg text-sm font-body whitespace-normal shadow-lg border-2 border-border z-50 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none">
+                  {t('hero.bio.debuggingTooltip')}
                 </span>
               </span>
-              .
+              {t('hero.bio.ending')}
             </motion.p>
 
             {/* CTAs */}
@@ -104,55 +105,31 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right Column - Coffee Mug Visual */}
+          {/* Right Column - Visual */}
           <motion.div
-            className="relative h-[500px] md:h-[600px] flex items-center justify-center"
+            className="relative h-[400px] md:h-[500px] flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Coffee Mug */}
-            <div className="relative w-[280px] h-[320px] bg-gradient-to-br from-gentle-beige to-burlap rounded-b-[100px] border-8 border-pressed-brown shadow-2xl shadow-pressed-brown/20 animate-steam-rise">
-              {/* Mug Handle */}
-              <div className="absolute -right-[60px] top-1/2 -translate-y-1/2 w-[80px] h-[120px] border-8 border-pressed-brown border-l-0 rounded-r-[60px]" />
-
-              {/* Coffee Surface */}
-              <div className="absolute top-[40px] left-2 right-2 h-[60px] rounded-full overflow-hidden bg-gradient-to-br from-pressed-brown to-[#6b5845]">
-                {/* Latte Art */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] bg-gentle-beige rounded-full opacity-90"
-                  style={{ borderRadius: '50% 50% 50% 0', transform: 'translate(-50%, -50%) rotate(-45deg)' }}
-                />
-              </div>
-
-              {/* Steam */}
-              <div className="absolute bottom-full left-[50%] w-1 h-[60px] bg-gradient-to-t from-warm-cream/60 to-transparent rounded-full animate-steam" />
-              <div className="absolute bottom-full left-[40%] w-1 h-[60px] bg-gradient-to-t from-warm-cream/60 to-transparent rounded-full animate-steam [animation-delay:0.5s]" />
-              <div className="absolute bottom-full left-[60%] w-1 h-[60px] bg-gradient-to-t from-warm-cream/60 to-transparent rounded-full animate-steam [animation-delay:1s]" />
+            {/* Main Visual */}
+            <div className="relative w-full max-w-[450px] aspect-square flex items-center justify-center animate-float">
+              {/* Outer soft glow layer */}
+              <div className="absolute inset-[-20%] bg-gradient-to-br from-dusty-rose/20 via-gentle-beige/30 to-burlap/40 rounded-full blur-3xl -z-20" />
+              
+              {/* Inner brighter glow */}
+              <div className="absolute inset-[-5%] bg-gradient-to-br from-gentle-beige/40 to-burlap/50 rounded-full blur-2xl -z-10" />
+              
+              {/* Solid background card with shadow */}
+              <div className="absolute inset-0 bg-card dark:bg-card/40 rounded-[2rem] shadow-2xl z-0" />
+              
+              <img 
+                src="/hero-desk.svg" 
+                alt="Cozy workspace desk setup with coffee and laptop" 
+                className="w-full h-full object-contain relative z-10"
+              />
             </div>
 
-            {/* Floating Leaves */}
-            <svg
-              className="absolute top-[10%] right-[15%] w-10 h-10 opacity-30 animate-float"
-              viewBox="0 0 40 40"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M 20 5 Q 10 15, 15 30 Q 18 25, 20 35 Q 22 25, 25 30 Q 30 15, 20 5 Z"
-                fill="currentColor"
-                className="text-pressed-brown"
-              />
-            </svg>
-            <svg
-              className="absolute bottom-[20%] left-[10%] w-9 h-9 opacity-25 animate-float [animation-delay:2s]"
-              viewBox="0 0 40 40"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M 20 5 Q 10 15, 15 30 Q 18 25, 20 35 Q 22 25, 25 30 Q 30 15, 20 5 Z"
-                fill="currentColor"
-                className="text-pressed-brown"
-              />
-            </svg>
           </motion.div>
         </div>
       </div>

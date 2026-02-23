@@ -14,7 +14,7 @@ interface Experience {
   description: string
   responsibilities: string[]
   technologies: string[]
-  type: 'full-time' | 'freelance' | 'contract'
+  type: 'full-time' | 'freelance' | 'contract' | 'volunteer' | 'leadership' | undefined
   featured: boolean
   eraName: string
   eraStyle: string
@@ -64,6 +64,28 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
     'Foundation Era': 'from-burlap to-gentle-beige',
   }
 
+  // Normalize type values from markdown (handles both English and Spanish)
+  function normalizeType(type: string | undefined): 'full-time' | 'freelance' | 'contract' | 'volunteer' | 'leadership' | undefined {
+    if (!type) return undefined
+    
+    const normalized = type.toLowerCase().trim()
+    
+    // Handle Spanish type names
+    if (normalized === 'voluntario') return 'volunteer'
+    if (normalized === 'liderazgo') return 'leadership'
+    if (normalized === 'tiempo completo' || normalized === 'tiempo-completo') return 'full-time'
+    if (normalized === 'contrato') return 'contract'
+    
+    // Handle English type names
+    if (normalized === 'volunteer') return 'volunteer'
+    if (normalized === 'leadership') return 'leadership'
+    if (normalized === 'full-time' || normalized === 'fulltime') return 'full-time'
+    if (normalized === 'freelance') return 'freelance'
+    if (normalized === 'contract') return 'contract'
+    
+    return undefined
+  }
+
   let experiences: Experience[]
 
   if (markdownExperiences && markdownExperiences.length > 0) {
@@ -77,15 +99,17 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
             .filter(Boolean) || []
         : []
 
+      const normalizedType = normalizeType(exp.type)
+
       return {
         id: exp.id,
         title: exp.title,
         company: exp.company,
         period: formatPeriod(exp.start_date, exp.end_date, 'en'),
-        description: exp.longDescription || exp.description,
+        description: exp.description,
         responsibilities,
         technologies: exp.technologies,
-        type: exp.type as 'full-time' | 'freelance' | 'contract',
+        type: normalizedType || 'full-time',
         featured: exp.featured,
         eraName,
         eraStyle: eraStyles[eraName] || 'from-dusty-rose to-deep-rose',
@@ -100,6 +124,7 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
     { id: 'full-time', label: t('experience.filters.fullTime', { default: 'Full-Time' }) },
     { id: 'freelance', label: t('experience.filters.freelance', { default: 'Freelance' }) },
     { id: 'leadership', label: t('experience.filters.leadership', { default: 'Leadership' }) },
+    { id: 'volunteer', label: t('experience.filters.volunteer', { default: 'Volunteer' }) },
   ]
 
   const filteredExperiences = experiences.filter((exp) => {
@@ -150,73 +175,54 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
         </div>
 
         {/* Timeline */}
-        <div className="space-y-8">
+        <div className="flex flex-col">
           {filteredExperiences.map((exp, index) => (
             <motion.div
               key={exp.id}
-              className="group relative bg-background rounded-3xl p-8 border-2 border-border overflow-hidden transition-all hover:translate-x-2 hover:shadow-xl hover:shadow-pressed-brown/10"
-              initial={{ opacity: 0, y: 20 }}
+              className="py-8 md:py-4 border-b border-border/40 last:border-b-0 group"
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              {/* Colored left border that expands on hover */}
-              <div className={cn(
-                'absolute left-0 top-0 w-1.5 h-full bg-gradient-to-b transition-all group-hover:w-2.5',
-                exp.eraStyle
-              )} />
-
-              {/* Header */}
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4 pl-4">
-                <div className="flex-1">
-                  <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">
-                    {exp.eraName}
-                  </h3>
-                  <p className="text-lg font-semibold text-deep-rose mb-1">
+              {/* Header Row */}
+              <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 md:gap-4 mb-2">
+                <div className="flex items-center gap-3">
+                  <h3 className="text-xl md:text-2xl text-foreground font-semibold transition-colors group-hover:text-primary">
                     {exp.company}
-                  </p>
-                  <span className="inline-block px-3 py-1 bg-card text-muted-foreground text-xs rounded-full border border-border">
-                    {exp.type === 'full-time' ? 'Full-Time' : exp.type === 'freelance' ? 'Freelance' : 'Contract'}
-                    {exp.featured && ' • Leadership'}
-                  </span>
+                  </h3>
+                  <div className={cn("w-2 h-2 rounded-full bg-gradient-to-br", exp.eraStyle)} />
                 </div>
-                <div className="font-accent text-lg md:text-xl text-primary whitespace-nowrap">
+                <div className="font-mono text-sm text-muted-foreground/80 md:text-right">
                   {exp.period}
                 </div>
               </div>
 
+              {/* Role Row */}
+              <div className="flex items-center gap-3 mb-4">
+                <h4 className="text-lg text-foreground/80">
+                  {exp.title}
+                </h4>
+                <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground">
+                    {exp.type}
+                  </span>
+                  {exp.featured && (
+                    <span className="text-xs px-2 py-0.5 rounded-md bg-primary/10 text-primary">
+                      leadership
+                    </span>
+                  )}
+                </div>
+              </div>
+
               {/* Description */}
-              <p className="text-muted-foreground leading-relaxed mb-6 pl-4">
+              <p className="text-muted-foreground leading-relaxed max-w-4xl mb-4">
                 {exp.description}
               </p>
 
-              {/* Responsibilities */}
-              {exp.responsibilities.length > 0 && (
-                <div className="mb-6 pl-4">
-                  <h4 className="font-display text-base font-semibold text-foreground mb-3">
-                    {t('experience.responsibilities', { default: 'Key Responsibilities' })}
-                  </h4>
-                  <ul className="space-y-2">
-                    {exp.responsibilities.map((resp, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">→</span>
-                        <span>{resp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
               {/* Technologies */}
-              <div className="flex flex-wrap gap-2 pl-4">
-                {exp.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 bg-card text-deep-rose text-xs rounded-xl border border-border"
-                  >
-                    {tech}
-                  </span>
-                ))}
+              <div className="font-mono text-sm text-muted-foreground/60 leading-relaxed">
+                {exp.technologies.join(', ')}
               </div>
             </motion.div>
           ))}
@@ -224,7 +230,7 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
 
         {/* Stats Section */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-16 border-t-2 border-border"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-10 border-t-2 border-border"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
@@ -239,7 +245,7 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
           {[
             { value: `${yearsOfExperience}+`, label: t('experience.stats.years', { default: 'Years Experience' }) },
             { value: `${companiesCount}+`, label: t('experience.stats.companies', { default: 'Companies & Projects' }) },
-            { value: `${technologiesCount}+`, label: t('experience.stats.technologies', { default: 'Technologies Mastered' }) },
+            { value: `${technologiesCount}+`, label: t('experience.stats.technologies', { default: 'Technologies' }) },
             { value: '∞', label: t('experience.stats.problems', { default: 'Problems Solved' }), isInfinity: true },
           ].map((stat, index) => (
             <motion.div

@@ -6,7 +6,8 @@ import { AnimatedSection, StaggerContainer, staggerItemVariants } from '@/compon
 
 interface Skill {
   name: string
-  icon: string // Simple Icons slug
+  icon: string
+  isLocal?: boolean
 }
 
 export function SkillsSection() {
@@ -22,9 +23,7 @@ export function SkillsSection() {
         { name: 'TypeScript', icon: 'typescript' },
         { name: 'Tailwind CSS', icon: 'tailwindcss' },
         { name: 'JavaScript', icon: 'javascript' },
-        { name: 'HTML5', icon: 'html5' },
-        { name: 'CSS3', icon: 'css3' },
-        { name: 'Framer Motion', icon: 'framer' },
+        { name: 'Expo', icon: 'expo' }
       ],
     },
     {
@@ -37,8 +36,8 @@ export function SkillsSection() {
         { name: 'MongoDB', icon: 'mongodb' },
         { name: 'PostgreSQL', icon: 'postgresql' },
         { name: 'Prisma', icon: 'prisma' },
-        { name: 'GraphQL', icon: 'graphql' },
-        { name: 'Supabase', icon: 'supabase' },
+        { name: 'Convex', icon: '/convex-icon.svg', isLocal: true },
+        { name: 'Supabase', icon: 'supabase' }
       ],
     },
     {
@@ -47,12 +46,11 @@ export function SkillsSection() {
       skills: [
         { name: 'Git', icon: 'git' },
         { name: 'GitHub', icon: 'github' },
-        { name: 'VS Code', icon: 'visualstudiocode' },
+        { name: 'Cursor', icon: 'cursor' },
         { name: 'Figma', icon: 'figma' },
-        { name: 'Photoshop', icon: 'adobephotoshop' },
-        { name: 'Illustrator', icon: 'adobeillustrator' },
-        { name: 'Docker', icon: 'docker' },
         { name: 'Vercel', icon: 'vercel' },
+        { name: 'Claude Code', icon: 'claude' },
+        { name: 'Docker', icon: 'docker' }
       ],
     },
   ]
@@ -108,17 +106,23 @@ export function SkillsSection() {
                       <div className="relative w-16 h-16 p-3 bg-background border-2 border-border rounded-2xl flex items-center justify-center transition-all group-hover/skill:border-primary group-hover/skill:bg-card/50 group-hover/skill:scale-110 group-hover/skill:shadow-lg">
                         <div className="relative w-full h-full">
                           <img
-                            src={`https://cdn.simpleicons.org/${skill.icon}`}
+                            src={skill.isLocal ? skill.icon : `https://cdn.simpleicons.org/${skill.icon}`}
                             alt={skill.name}
                             className="w-full h-full object-contain transition-all"
                             style={{
-                              filter: 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)',
+                              filter: skill.isLocal 
+                                ? 'sepia(0.3) hue-rotate(180deg) saturate(0.6) brightness(0.95) contrast(1.1)'
+                                : 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)',
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.filter = 'sepia(0.2) hue-rotate(15deg) saturate(0.7) brightness(1) contrast(1.1)'
+                              e.currentTarget.style.filter = skill.isLocal
+                                ? 'sepia(0.2) hue-rotate(180deg) saturate(0.8) brightness(1.05) contrast(1.1)'
+                                : 'sepia(0.2) hue-rotate(15deg) saturate(0.7) brightness(1) contrast(1.1)'
                             }}
                             onMouseLeave={(e) => {
-                              e.currentTarget.style.filter = 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)'
+                              e.currentTarget.style.filter = skill.isLocal
+                                ? 'sepia(0.3) hue-rotate(180deg) saturate(0.6) brightness(0.95) contrast(1.1)'
+                                : 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)'
                             }}
                           />
                           {/* Subtle overlay to harmonize colors */}
