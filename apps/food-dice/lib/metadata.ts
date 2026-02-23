@@ -48,6 +48,11 @@ export function generateMetadata({
     description: siteDescription,
     keywords: siteConfig.keywords,
     metadataBase: new URL(siteConfig.url),
+    ...(siteConfig.icon && {
+      icons: {
+        icon: siteConfig.icon,
+      },
+    }),
     alternates: {
       canonical: siteUrl,
     },
@@ -64,6 +69,7 @@ export function generateMetadata({
           width: 1200,
           height: 630,
           alt: siteTitle,
+          type: siteImage.endsWith('.webp') ? 'image/webp' : 'image/png',
         },
       ],
       ...(publishedTime ? { publishedTime } : {}),

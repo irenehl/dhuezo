@@ -30,6 +30,7 @@ function getProjectOgImage(projectId?: string): string {
   }
 
   const projectOgImages: Record<string, string> = {
+    cerebryx: '/og-image-cerebryx.webp',
     'food-dice': '/og-image-food-dice.webp',
     'nameless-mindfulness-app': '/og-image-nameless.webp',
     // Add more project-specific OG images here as needed
@@ -67,17 +68,24 @@ export function generateMetadata({
 
   const isProd = isProduction()
 
-  // Generate language alternates for all supported locales
+  // Map locale codes to Open Graph locale formats
+  const ogLocaleMap: Record<string, string> = {
+    en: 'en_US',
+    es: 'es_ES',
+  }
+  const ogLocale = ogLocaleMap[locale] || 'en_US'
+
+  // Generate language alternates for all supported locales (including self)
   const languageAlternates: Record<string, string> = {}
   locales.forEach((loc) => {
-    if (loc !== locale) {
-      // Replace locale in URL if it exists, otherwise append
-      const alternateUrl = siteUrl.includes(`/${locale}`)
-        ? siteUrl.replace(`/${locale}`, `/${loc}`)
-        : `${siteConfig.url}/${loc}`
-      languageAlternates[loc] = alternateUrl
-    }
+    // Replace locale in URL if it exists, otherwise append
+    const alternateUrl = siteUrl.includes(`/${locale}`)
+      ? siteUrl.replace(`/${locale}`, `/${loc}`)
+      : `${siteConfig.url}/${loc}`
+    languageAlternates[loc] = alternateUrl
   })
+  // Add x-default pointing to default locale (English)
+  languageAlternates['x-default'] = `${siteConfig.url}/en`
 
   const metadata: Metadata = {
     title: siteTitle,
@@ -102,7 +110,7 @@ export function generateMetadata({
           type: siteImage.endsWith('.webp') ? 'image/webp' : 'image/png', // Set image type based on file extension
         },
       ],
-      locale: locale,
+      locale: ogLocale,
       ...(publishedTime && { publishedTime }),
       ...(modifiedTime && { modifiedTime }),
     },

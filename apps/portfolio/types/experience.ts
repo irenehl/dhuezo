@@ -10,7 +10,7 @@ export interface Experience {
   image_url: string | null
   company_logo: string | null
   location?: string
-  type?: 'full-time' | 'part-time' | 'contract' | 'freelance'
+  type?: 'full-time' | 'part-time' | 'contract' | 'freelance' | 'volunteer' | 'leadership'
   featured: boolean
   order_index: number
   created_at: string

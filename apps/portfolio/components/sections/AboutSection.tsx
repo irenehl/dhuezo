@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { XIcon } from '@/components/icons/XIcon'
+import { InstagramIcon } from '@/components/icons/InstagramIcon'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export function AboutSection() {
@@ -64,12 +65,14 @@ export function AboutSection() {
   ]
 
   return (
-    <section id="about" className="py-24 bg-card scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+    <section id="about" className="relative py-24 bg-card scroll-mt-20 overflow-hidden">
+      {/* Subtle texture overlay */}
+      <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
         {/* Section Header */}
         <AnimatedSection>
-          <div className="mb-12">
-            <div className="font-accent text-xl md:text-2xl text-primary mb-2">
+          <div>
+            <div className="font-accent text-xl md:text-2xl text-primary">
               {t('about.subtitle', { default: 'Get to Know Me' })}
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground">
@@ -78,9 +81,7 @@ export function AboutSection() {
           </div>
         </AnimatedSection>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          {/* Left Column - About Text */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 lg:items-center">
           <AnimatedSection className="lg:col-span-2 space-y-6" direction="left">
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               {t('about.description1', {
@@ -92,73 +93,88 @@ export function AboutSection() {
                 default: "My approach combines technical expertise with strategic thinking. Whether I'm architecting a new platform, leading a development team, or optimizing existing systems, I focus on sustainable solutions that scale."
               })}
             </p>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              {t('about.description3', {
-                default: "Beyond code, I've built technical communities and helped women across Central America navigate tech through Academia Colmena. When I'm not at the keyboard, you'll find me exploring new restaurants, staying active, or unwinding with my favorite games."
-              })}
-            </p>
 
-            {/* Contact CTA */}
             <div className="pt-8">
-              <a
-                href={`mailto:${t('about.email', { default: 'hello@dhuezo.dev' })}`}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-base transition-all hover:bg-deep-rose hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+              <motion.a
+                href="https://calendar.app.google/Q65Hgz9cCqa2m1Ei9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-base overflow-hidden"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <Mail className="w-5 h-5" />
-                {t('about.cta', { default: "Let's Connect" })}
-              </a>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.6 }}
+                />
+                <Mail className="w-5 h-5 relative z-10" />
+                <span className="relative z-10">{t('about.cta', { default: "Let's Connect" })}</span>
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  initial={{ boxShadow: '0 0 0 0 rgba(var(--primary-rgb), 0)' }}
+                  whileHover={{ boxShadow: '0 8px 24px -4px rgba(var(--primary-rgb), 0.4)' }}
+                  style={{ '--primary-rgb': '212, 165, 196' } as React.CSSProperties}
+                />
+              </motion.a>
             </div>
 
-            {/* Social Links */}
             <div className="flex gap-4 pt-4">
-              <a
-                href={t('about.social.github', { default: 'https://github.com/irenehl' })}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 border-2 border-border rounded-full hover:bg-pressed-brown hover:text-warm-cream hover:border-pressed-brown transition-all"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href={t('about.social.linkedin', { default: 'https://linkedin.com/in/danielahuezo' })}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 border-2 border-border rounded-full hover:bg-pressed-brown hover:text-warm-cream hover:border-pressed-brown transition-all"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href={t('about.social.x', { default: 'https://x.com/irenehl26__' })}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 border-2 border-border rounded-full hover:bg-pressed-brown hover:text-warm-cream hover:border-pressed-brown transition-all"
-                aria-label="X"
-              >
-                <XIcon className="w-5 h-5" />
-              </a>
+              {[
+                { href: t('about.social.github', { default: 'https://github.com/irenehl' }), icon: Github, label: 'GitHub' },
+                { href: t('about.social.linkedin', { default: 'https://linkedin.com/in/danielahuezo' }), icon: Linkedin, label: 'LinkedIn' },
+                { href: t('about.social.x', { default: 'https://x.com/irenehl26__' }), icon: XIcon, label: 'X' },
+                { href: t('about.social.instagram', { default: 'https://instagram.com/irenehl__' }), icon: InstagramIcon, label: 'Instagram' },
+              ].map(({ href, icon: Icon, label }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-3 border-2 border-border rounded-full hover:bg-pressed-brown hover:text-warm-cream hover:border-pressed-brown transition-all overflow-hidden"
+                  aria-label={label}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-20"
+                    initial={{ scale: 0 }}
+                    whileHover={{ scale: 1.5 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                  <Icon className="w-5 h-5 relative z-10" />
+                </motion.a>
+              ))}
             </div>
           </AnimatedSection>
 
-          {/* Right Column - Currently Into */}
-          <AnimatedSection className="bg-background p-8 rounded-3xl border-2 border-border h-fit" direction="right" delay={0.2}>
-            <h3 className="font-display text-2xl text-foreground mb-6">
+          <AnimatedSection className="bg-background p-8 rounded-3xl border-2 border-border" direction="right" delay={0.2}>
+            <h3 className="font-display text-2xl text-foreground mb-6 text-center">
               {t('about.favorites.title', { default: 'Currently Into' })}
             </h3>
             <div className="space-y-4">
               {favorites.map((favorite, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="flex items-center gap-4 p-3 rounded-2xl transition-all hover:bg-card hover:translate-x-1"
+                  className="group/item flex items-center gap-4 p-3 rounded-2xl transition-all hover:bg-card cursor-pointer"
+                  whileHover={{ x: 4, scale: 1.02 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  <div className="text-primary flex-shrink-0">
+                  <motion.div
+                    className="text-primary flex-shrink-0"
+                    whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     {favorite.icon}
-                  </div>
-                  <span className="text-foreground font-medium">
+                  </motion.div>
+                  <span className="text-foreground font-medium group-hover/item:text-primary transition-colors">
                     {favorite.name}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </AnimatedSection>

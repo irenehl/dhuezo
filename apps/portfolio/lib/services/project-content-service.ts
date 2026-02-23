@@ -1,4 +1,6 @@
 import path from 'path'
+import fs from 'fs/promises'
+import matter from 'gray-matter'
 import type { Project } from '@/types/project'
 import {
   parseMarkdownFile,
@@ -37,14 +39,10 @@ function normalizeImageUrl(url: string | undefined): string {
 }
 
 function mapMarkdownToProject(
-  parsed: {
-    frontmatter: ProjectFrontmatter
-    content: string
-    contentHtml: string
-  },
-  filePath: string
+  frontmatter: ProjectFrontmatter,
+  content: string = '',
+  contentHtml: string = ''
 ): MarkdownProject {
-  const { frontmatter, contentHtml } = parsed
   const now = new Date().toISOString()
 
   // Generate a stable ID from projectId and locale
@@ -65,62 +63,85 @@ function mapMarkdownToProject(
     created_at: now,
     updated_at: now,
     contentHtml,
-    content: parsed.content,
+    content,
   }
 }
 
+async function parseConsolidatedProjectsFile(
+  filePath: string,
+  locale: string
+): Promise<MarkdownProject[]> {
+  const fileContents = await fs.readFile(filePath, 'utf-8')
+  const blocks = fileContents.split(/\n---\n/).filter(block => block.trim())
+  
+  const projects: MarkdownProject[] = []
+  
+  for (const block of blocks) {
+    if (!block.trim().startsWith('---')) {
+      continue
+    }
+    
+    const { data, content } = matter(block)
+    
+    if (data.locale === locale) {
+      projects.push(
+        mapMarkdownToProject(
+          data as ProjectFrontmatter,
+          content.trim(),
+          ''
+        )
+      )
+    }
+  }
+  
+  return projects
+}
+
 export const projectContentService = {
-  // Get all projects
   async getAllProjects(locale: string): Promise<MarkdownProject[]> {
+    const consolidatedFile = path.join(CONTENT_DIR, `projects.${locale}.md`)
+    
+    try {
+      const projects = await parseConsolidatedProjectsFile(consolidatedFile, locale)
+      
+      if (projects.length > 0) {
+        return projects.sort((a, b) => a.order_index - b.order_index)
+      }
+    } catch (error) {
+      // Fallback to individual files
+    }
+    
     const files = await getMarkdownFilesInDir(CONTENT_DIR)
     const projects = await Promise.all(
-      files.map(async (filePath) => {
-        const parsed = await parseMarkdownFile<ProjectFrontmatter>(filePath)
-        return mapMarkdownToProject(parsed, filePath)
-      })
+      files
+        .filter(filePath => {
+          const fileName = path.basename(filePath)
+          return !fileName.startsWith('projects.')
+        })
+        .map(async (filePath) => {
+          const parsed = await parseMarkdownFile<ProjectFrontmatter>(filePath)
+          return mapMarkdownToProject(parsed.frontmatter, parsed.content, parsed.contentHtml)
+        })
     )
 
-    // Filter by locale
     const filtered = projects.filter(
       (project) => project.locale === locale
     )
 
-    // Sort by orderIndex
     return filtered.sort((a, b) => a.order_index - b.order_index)
   },
 
-  // Get featured projects
   async getFeaturedProjects(locale: string): Promise<MarkdownProject[]> {
     const allProjects = await this.getAllProjects(locale)
     return allProjects.filter((project) => project.featured)
   },
 
-  // Get project by ID
   async getProjectById(
     projectId: string,
     locale: string
   ): Promise<MarkdownProject | null> {
-    const files = await getMarkdownFilesInDir(CONTENT_DIR)
-    
-    // Find file matching projectId and locale
-    const matchingFile = files.find((filePath) => {
-      const fileName = path.basename(filePath, '.md')
-      // Check if filename matches projectId pattern (e.g., "project-1.en.md")
-      return fileName.startsWith(`${projectId}.`) && fileName.endsWith(`.${locale}`)
-    })
-
-    if (!matchingFile) {
-      return null
-    }
-
-    const parsed = await parseMarkdownFile<ProjectFrontmatter>(matchingFile)
-    
-    // Verify projectId and locale match
-    if (parsed.frontmatter.projectId !== projectId || parsed.frontmatter.locale !== locale) {
-      return null
-    }
-
-    return mapMarkdownToProject(parsed, matchingFile)
+    const allProjects = await this.getAllProjects(locale)
+    return allProjects.find(p => p.project_id === projectId) || null
   },
 }
 

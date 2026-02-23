@@ -14,7 +14,7 @@ interface Experience {
   description: string
   responsibilities: string[]
   technologies: string[]
-  type: 'full-time' | 'freelance' | 'contract'
+  type: 'full-time' | 'freelance' | 'contract' | 'volunteer' | 'leadership' | undefined
   featured: boolean
   eraName: string
   eraStyle: string
@@ -64,6 +64,28 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
     'Foundation Era': 'from-burlap to-gentle-beige',
   }
 
+  // Normalize type values from markdown (handles both English and Spanish)
+  function normalizeType(type: string | undefined): 'full-time' | 'freelance' | 'contract' | 'volunteer' | 'leadership' | undefined {
+    if (!type) return undefined
+    
+    const normalized = type.toLowerCase().trim()
+    
+    // Handle Spanish type names
+    if (normalized === 'voluntario') return 'volunteer'
+    if (normalized === 'liderazgo') return 'leadership'
+    if (normalized === 'tiempo completo' || normalized === 'tiempo-completo') return 'full-time'
+    if (normalized === 'contrato') return 'contract'
+    
+    // Handle English type names
+    if (normalized === 'volunteer') return 'volunteer'
+    if (normalized === 'leadership') return 'leadership'
+    if (normalized === 'full-time' || normalized === 'fulltime') return 'full-time'
+    if (normalized === 'freelance') return 'freelance'
+    if (normalized === 'contract') return 'contract'
+    
+    return undefined
+  }
+
   let experiences: Experience[]
 
   if (markdownExperiences && markdownExperiences.length > 0) {
@@ -77,15 +99,17 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
             .filter(Boolean) || []
         : []
 
+      const normalizedType = normalizeType(exp.type)
+
       return {
         id: exp.id,
         title: exp.title,
         company: exp.company,
         period: formatPeriod(exp.start_date, exp.end_date, 'en'),
-        description: exp.longDescription || exp.description,
+        description: exp.description,
         responsibilities,
         technologies: exp.technologies,
-        type: exp.type as 'full-time' | 'freelance' | 'contract',
+        type: normalizedType || 'full-time',
         featured: exp.featured,
         eraName,
         eraStyle: eraStyles[eraName] || 'from-dusty-rose to-deep-rose',
@@ -100,6 +124,7 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
     { id: 'full-time', label: t('experience.filters.fullTime', { default: 'Full-Time' }) },
     { id: 'freelance', label: t('experience.filters.freelance', { default: 'Freelance' }) },
     { id: 'leadership', label: t('experience.filters.leadership', { default: 'Leadership' }) },
+    { id: 'volunteer', label: t('experience.filters.volunteer', { default: 'Volunteer' }) },
   ]
 
   const filteredExperiences = experiences.filter((exp) => {
@@ -116,10 +141,18 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
   const technologiesCount = Array.from(new Set(experiences.flatMap(e => e.technologies))).length
 
   return (
-    <section id="experience" className="py-24 bg-card scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+    <section id="experience" className="relative py-24 bg-card scroll-mt-20 overflow-hidden">
+      {/* Subtle texture overlay */}
+      <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
         {/* Section Header */}
-        <div className="mb-12">
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="font-accent text-xl md:text-2xl text-primary mb-2">
             {t('experience.subtitle', { default: 'Career Journey' })}
           </div>
@@ -129,102 +162,147 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
           <p className="text-lg text-muted-foreground max-w-2xl">
             {t('experience.description', { default: 'Each chapter brought new lessons, challenges, and growth. From building systems to leading teams, here\'s the journey so far.' })}
           </p>
-        </div>
+        </motion.div>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-3 mb-12">
+        <motion.div
+          className="flex flex-wrap gap-3 mb-12"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           {filters.map((filter) => (
-            <button
+            <motion.button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
               className={cn(
-                'px-5 py-2.5 rounded-full text-sm font-medium transition-all',
+                'relative px-5 py-2.5 rounded-full text-sm font-medium transition-all overflow-hidden',
                 activeFilter === filter.id
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-transparent text-foreground border-2 border-border hover:bg-background hover:border-primary'
               )}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {filter.label}
-            </button>
+              {/* Active state shimmer */}
+              {activeFilter === filter.id && (
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  animate={{ x: ['-100%', '100%'] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                />
+              )}
+              <span className="relative z-10">{filter.label}</span>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Timeline */}
-        <div className="space-y-8">
+        <div className="flex flex-col">
           {filteredExperiences.map((exp, index) => (
             <motion.div
               key={exp.id}
-              className="group relative bg-background rounded-3xl p-8 border-2 border-border overflow-hidden transition-all hover:translate-x-2 hover:shadow-xl hover:shadow-pressed-brown/10"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="py-8 md:py-4 border-b border-border/40 last:border-b-0 group relative"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+              whileHover={{ x: 4 }}
             >
-              {/* Colored left border that expands on hover */}
-              <div className={cn(
-                'absolute left-0 top-0 w-1.5 h-full bg-gradient-to-b transition-all group-hover:w-2.5',
-                exp.eraStyle
-              )} />
-
-              {/* Header */}
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4 pl-4">
-                <div className="flex-1">
-                  <h3 className="font-display text-2xl md:text-3xl text-foreground mb-2">
-                    {exp.eraName}
-                  </h3>
-                  <p className="text-lg font-semibold text-deep-rose mb-1">
+              {/* Subtle glow on hover */}
+              <motion.div
+                className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{
+                  background: `linear-gradient(to bottom, hsl(var(--primary)), transparent)`,
+                }}
+              />
+              
+              {/* Header Row */}
+              <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 md:gap-4 mb-2">
+                <div className="flex items-center gap-3">
+                  <motion.h3
+                    className="text-xl md:text-2xl text-foreground font-semibold transition-colors group-hover:text-primary"
+                    whileHover={{ x: 4 }}
+                  >
                     {exp.company}
-                  </p>
-                  <span className="inline-block px-3 py-1 bg-card text-muted-foreground text-xs rounded-full border border-border">
-                    {exp.type === 'full-time' ? 'Full-Time' : exp.type === 'freelance' ? 'Freelance' : 'Contract'}
-                    {exp.featured && ' • Leadership'}
-                  </span>
+                  </motion.h3>
+                  <motion.div
+                    className={cn("w-2 h-2 rounded-full bg-gradient-to-br", exp.eraStyle)}
+                    whileHover={{ scale: 1.5, rotate: 180 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  />
                 </div>
-                <div className="font-accent text-lg md:text-xl text-primary whitespace-nowrap">
+                <motion.div
+                  className="font-mono text-sm text-muted-foreground/80 md:text-right"
+                  whileHover={{ scale: 1.05 }}
+                >
                   {exp.period}
-                </div>
+                </motion.div>
+              </div>
+
+              {/* Role Row */}
+              <div className="flex items-center gap-3 mb-4">
+                <h4 className="text-lg text-foreground/80 group-hover:text-foreground transition-colors">
+                  {exp.title}
+                </h4>
+                <motion.div
+                  className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                  initial={{ x: -10 }}
+                  whileHover={{ x: 0 }}
+                >
+                  <motion.span
+                    className="text-xs px-2 py-0.5 rounded-md bg-muted text-muted-foreground"
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    {exp.type}
+                  </motion.span>
+                  {exp.featured && (
+                    <motion.span
+                      className="text-xs px-2 py-0.5 rounded-md bg-primary/10 text-primary"
+                      whileHover={{ scale: 1.1 }}
+                      animate={{
+                        boxShadow: [
+                          '0 0 0px rgba(var(--primary-rgb), 0)',
+                          '0 0 8px rgba(var(--primary-rgb), 0.3)',
+                          '0 0 0px rgba(var(--primary-rgb), 0)',
+                        ],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                      style={{ '--primary-rgb': '212, 165, 196' } as React.CSSProperties}
+                    >
+                      leadership
+                    </motion.span>
+                  )}
+                </motion.div>
               </div>
 
               {/* Description */}
-              <p className="text-muted-foreground leading-relaxed mb-6 pl-4">
+              <motion.p
+                className="text-muted-foreground leading-relaxed max-w-4xl mb-4 group-hover:text-foreground/90 transition-colors"
+                whileHover={{ x: 4 }}
+              >
                 {exp.description}
-              </p>
-
-              {/* Responsibilities */}
-              {exp.responsibilities.length > 0 && (
-                <div className="mb-6 pl-4">
-                  <h4 className="font-display text-base font-semibold text-foreground mb-3">
-                    {t('experience.responsibilities', { default: 'Key Responsibilities' })}
-                  </h4>
-                  <ul className="space-y-2">
-                    {exp.responsibilities.map((resp, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">→</span>
-                        <span>{resp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              </motion.p>
 
               {/* Technologies */}
-              <div className="flex flex-wrap gap-2 pl-4">
-                {exp.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 bg-card text-deep-rose text-xs rounded-xl border border-border"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <motion.div
+                className="font-mono text-sm text-muted-foreground/60 leading-relaxed group-hover:text-muted-foreground/80 transition-colors"
+                whileHover={{ x: 4 }}
+              >
+                {exp.technologies.join(', ')}
+              </motion.div>
             </motion.div>
           ))}
         </div>
 
         {/* Stats Section */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-16 border-t-2 border-border"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-10 border-t-2 border-border"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
@@ -239,12 +317,12 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
           {[
             { value: `${yearsOfExperience}+`, label: t('experience.stats.years', { default: 'Years Experience' }) },
             { value: `${companiesCount}+`, label: t('experience.stats.companies', { default: 'Companies & Projects' }) },
-            { value: `${technologiesCount}+`, label: t('experience.stats.technologies', { default: 'Technologies Mastered' }) },
+            { value: `${technologiesCount}+`, label: t('experience.stats.technologies', { default: 'Technologies' }) },
             { value: '∞', label: t('experience.stats.problems', { default: 'Problems Solved' }), isInfinity: true },
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center p-6 bg-background rounded-2xl border-2 border-border group cursor-default transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
+              className="relative text-center p-6 bg-background rounded-2xl border-2 border-border group cursor-default overflow-hidden"
               variants={{
                 hidden: {
                   opacity: 0,
@@ -261,9 +339,18 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
                   },
                 },
               }}
+              whileHover={{ y: -4, borderColor: 'hsl(var(--primary))' }}
             >
+              {/* Subtle glow effect */}
               <motion.div
-                className="font-display text-4xl md:text-5xl text-primary mb-2"
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{
+                  background: `radial-gradient(circle at 50% 50%, hsl(var(--primary)) 0%, transparent 70%)`,
+                  filter: 'blur(20px)',
+                }}
+              />
+              <motion.div
+                className="font-display text-4xl md:text-5xl text-primary mb-2 relative z-10"
                 animate={
                   stat.isInfinity
                     ? {
@@ -285,7 +372,7 @@ export function TimelineSection({ experiences: markdownExperiences }: TimelineSe
                 {stat.value}
               </motion.div>
               <motion.div
-                className="text-sm text-muted-foreground"
+                className="text-sm text-muted-foreground relative z-10"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}

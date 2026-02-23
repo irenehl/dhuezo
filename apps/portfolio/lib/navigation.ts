@@ -21,7 +21,7 @@ export function getNavItems(t: (key: string) => string, locale: Locale): NavItem
     },
     {
       label: t('navigation.timeline'),
-      href: `/${locale}#timeline`,
+      href: `/${locale}#experience`,
       isAnchor: true,
     },
     {

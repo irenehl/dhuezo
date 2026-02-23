@@ -45,8 +45,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const postUrl = `${siteConfig.url}/${locale}/blog/${slug}`
   const description = post.description || `Read ${post.title}`
-  
-  // Use featured image if available, otherwise let the helper generate dynamic OG image
   const image = post.featured_image_url || undefined
 
   return generateSiteMetadata({
@@ -57,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     type: 'article',
     publishedTime: post.created_at,
     modifiedTime: post.updated_at,
-    image, // Will use dynamic OG if undefined
+    image,
   })
 }
 
@@ -71,7 +69,6 @@ export default async function BlogPostPage({ params }: Props) {
     notFound()
   }
 
-  // Get enriched post with tags and reading time
   const allPosts = await getPublishedPostsWithMeta(localeValue, 100)
   const enrichedPost = allPosts.find((p) => p.slug === slug)
 
@@ -80,13 +77,13 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
-      <main className="flex-1 max-w-4xl mx-auto px-6 pt-20 pb-12 w-full">
+      <main className="flex-1 max-w-4xl mx-auto px-6 pt-48 pb-12 w-full">
         <article className="space-y-10 animate-in fade-in-50 duration-500" id="blog-post">
           <header className="space-y-4">
             <div className="flex items-center justify-between">
               <Link
                 className="inline-block font-mono text-accent text-xs transition-colors hover:text-accent/80"
-                href={`/${locale}/blog`}
+                href={`/${locale}#stage`}
               >
                 {t('backToBlog')}
               </Link>
@@ -142,7 +139,7 @@ export default async function BlogPostPage({ params }: Props) {
           <footer className="border-border/60 border-t pt-8">
             <Link
               className="inline-block font-mono text-accent text-xs transition-colors hover:text-accent/80"
-              href={`/${locale}/blog`}
+              href={`/${locale}#stage`}
             >
               {t('backToBlogFooter')}
             </Link>

@@ -4,16 +4,13 @@ import { TimelineSection } from './TimelineSection'
 export async function TimelineSectionServer({ locale }: { locale: string }) {
   try {
     const experiences = await experienceService.getAllExperiences(locale)
-    // Only use Markdown experiences if we have any
     if (experiences.length > 0) {
       return <TimelineSection experiences={experiences} />
     }
   } catch (error) {
-    // If Markdown service fails, fall back to translation-based
-    console.error('Failed to load Markdown experiences:', error)
+    // Fallback to translation-based experiences
   }
   
-  // Fallback to translation-based experiences
   return <TimelineSection />
 }
 

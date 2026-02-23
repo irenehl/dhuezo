@@ -10,11 +10,12 @@ import { LocaleToggle } from './LocaleToggle'
 import { ThemeToggle } from './ThemeToggle'
 import { MobileMenu } from './MobileMenu'
 import { getNavItems } from '@/lib/navigation'
+import type { Locale } from '@/i18n/config'
 
 export function SiteHeader(): JSX.Element {
   const t = useTranslations()
   const locale = useLocale()
-  const navItems = getNavItems(t, locale as any)
+  const navItems = getNavItems(t, locale as Locale)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { scrollY } = useScroll()
   const [isScrolled, setIsScrolled] = useState(false)

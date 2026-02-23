@@ -24,7 +24,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-background/60 backdrop-blur-sm z-40"
           />
 
           {/* Menu Panel */}
@@ -32,27 +32,29 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 20 }}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-black border-l border-zinc-900 z-50 p-4 sm:p-6 overflow-y-auto"
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-background/95 backdrop-blur-xl border-l-2 border-border z-50 p-6 overflow-y-auto"
           >
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 hover:bg-zinc-900 rounded-lg transition-colors text-zinc-400 hover:text-white"
+              className="absolute top-6 right-6 p-2 hover:bg-card rounded-full transition-all text-muted-foreground hover:text-foreground border-2 border-transparent hover:border-border"
               aria-label={t('common.openMenu')}
             >
-              <X size={24} />
+              <X size={20} />
             </button>
 
             {/* Navigation */}
-            <nav className="mt-12 space-y-1">
+            <nav className="mt-16 space-y-2">
               <NavLinks isMobile onLinkClick={onClose} />
             </nav>
 
             {/* Theme Toggle & Language Switcher */}
-            <div className="mt-8 flex items-center justify-center gap-4">
-              <LanguageSwitcher />
-              <ThemeToggle />
+            <div className="mt-12 flex flex-col items-center gap-4 pt-8 border-t-2 border-border">
+              <div className="flex items-center gap-4">
+                <LanguageSwitcher />
+                <ThemeToggle />
+              </div>
             </div>
           </motion.div>
         </>
