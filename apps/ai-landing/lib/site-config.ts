@@ -6,6 +6,7 @@ export const siteConfig = {
     'Interactive mindfulness activities designed to help you settle your mind. No pressure. No streaks. Just a quiet space to breathe.',
   twitterHandle: undefined, // No Twitter handle for this app
   defaultOgImage: '/og-image.png',
+  icon: '/icon.png', // Update this path when icon is added to /public
   keywords: [
     'mindfulness',
     'meditation',

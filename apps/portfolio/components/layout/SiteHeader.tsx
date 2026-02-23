@@ -9,11 +9,12 @@ import { LocaleToggle } from './LocaleToggle'
 import { ThemeToggle } from './ThemeToggle'
 import { MobileMenu } from './MobileMenu'
 import { getNavItems } from '@/lib/navigation'
+import type { Locale } from '@/i18n/config'
 
 export function SiteHeader(): JSX.Element {
   const t = useTranslations()
   const locale = useLocale()
-  const navItems = getNavItems(t, locale as any)
+  const navItems = getNavItems(t, locale as Locale)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { scrollY } = useScroll()
   const [isScrolled, setIsScrolled] = useState(false)
@@ -42,9 +43,11 @@ export function SiteHeader(): JSX.Element {
             href="/"
             className="flex items-center gap-3 group"
           >
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-display font-bold text-lg">
-              D
-            </div>
+            <img
+              src="/logo-with-bg.svg"
+              alt="Daniela Huezo"
+              className="w-10 h-10 rounded-full"
+            />
             <span className="font-display text-lg font-semibold text-foreground group-hover:text-primary transition-colors hidden sm:block">
               Daniela Huezo
             </span>

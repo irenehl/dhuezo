@@ -66,7 +66,7 @@ export interface ExperienceFrontmatter {
   imageUrl?: string | null
   companyLogo?: string | null
   location?: string
-  type?: 'full-time' | 'part-time' | 'contract' | 'freelance'
+  type?: 'full-time' | 'part-time' | 'contract' | 'freelance' | 'volunteer' | 'leadership'
   featured: boolean
   orderIndex: number
 }

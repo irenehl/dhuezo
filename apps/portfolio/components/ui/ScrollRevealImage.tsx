@@ -19,28 +19,18 @@ export function ScrollRevealImage({ className, alt, ...props }: ScrollRevealImag
 
       const rect = containerRef.current.getBoundingClientRect()
       const windowHeight = window.innerHeight
-      
-      // Image position relative to viewport
       const imageTop = rect.top
       const imageHeight = rect.height
       const imageCenter = imageTop + imageHeight / 2
       const windowCenter = windowHeight / 2
-      
-      // Start revealing when image center enters the bottom 20% of viewport
-      // This means when imageCenter reaches windowHeight * 0.8
       const revealStart = windowHeight * 0.8
-      // Complete reveal when image center reaches viewport center
       const revealEnd = windowCenter
       
-      // Calculate progress based on image center position
       if (imageCenter >= revealStart) {
-        // Image center hasn't reached reveal start - fully grayscale
         setRevealProgress(0)
       } else if (imageCenter <= revealEnd) {
-        // Image center has passed reveal end - fully colored
         setRevealProgress(1)
       } else {
-        // Image center is between revealStart and revealEnd - calculate progress
         const totalRange = revealStart - revealEnd
         const distanceFromStart = revealStart - imageCenter
         const progress = Math.max(0, Math.min(1, distanceFromStart / totalRange))
@@ -48,7 +38,6 @@ export function ScrollRevealImage({ className, alt, ...props }: ScrollRevealImag
       }
     }
 
-    // Initial check
     handleScroll()
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -59,7 +48,6 @@ export function ScrollRevealImage({ className, alt, ...props }: ScrollRevealImag
     }
   }, [])
 
-  // Extract className from props if it exists
   const { className: imageClassName, ...imageProps } = props as ImageProps & { className?: string }
 
   const grayscaleValue = 100 - revealProgress * 100
