@@ -18,6 +18,37 @@ import type {
 
 const CONTENT_DIR = path.join(process.cwd(), 'content/blog')
 
+function sanitizeExternalUrl(url: string | null | undefined): string | null {
+  if (!url) return null
+
+  const trimmedUrl = url.trim()
+  if (!trimmedUrl) return null
+
+  try {
+    const parsed = new URL(trimmedUrl)
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+      return parsed.toString()
+    }
+  } catch {
+    return null
+  }
+
+  return null
+}
+
+function sanitizeImageUrl(url: string | null | undefined): string | null {
+  if (!url) return null
+
+  const trimmedUrl = url.trim()
+  if (!trimmedUrl) return null
+
+  if (trimmedUrl.startsWith('/')) {
+    return trimmedUrl
+  }
+
+  return sanitizeExternalUrl(trimmedUrl)
+}
+
 function mapMarkdownToBlogPost(
   parsed: {
     frontmatter: BlogPostFrontmatter
@@ -39,7 +70,7 @@ function mapMarkdownToBlogPost(
     title: frontmatter.title,
     description: frontmatter.description,
     content: contentHtml, // Store HTML content
-    featured_image_url: frontmatter.featuredImageUrl || null,
+    featured_image_url: sanitizeImageUrl(frontmatter.featuredImageUrl),
     pdf_url: null,
     pdf_preview_images: [],
     images: [],
@@ -52,7 +83,7 @@ function mapMarkdownToBlogPost(
     event_location: frontmatter.eventLocation || null,
     event_date: frontmatter.eventDate || null,
     cta_label: frontmatter.ctaLabel || null,
-    cta_url: frontmatter.ctaUrl || null,
+    cta_url: sanitizeExternalUrl(frontmatter.ctaUrl),
     categories: [],
   }
 }

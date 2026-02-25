@@ -2,6 +2,7 @@ import fs from 'fs/promises'
 import path from 'path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
+import rehypeSanitize from 'rehype-sanitize'
 import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
@@ -13,22 +14,14 @@ export interface ParsedMarkdown<TFrontmatter = Record<string, unknown>> {
   contentHtml: string
 }
 
-/**
- * Parse a Markdown file and return frontmatter and HTML content
- */
-export async function parseMarkdownFile<TFrontmatter = Record<string, unknown>>(
-  filePath: string
-): Promise<ParsedMarkdown<TFrontmatter>> {
-  const fileContents = await fs.readFile(filePath, 'utf-8')
-  const { data, content } = matter(fileContents)
+const markdownProcessor = remark()
+  .use(remarkGfm)
+  .use(remarkRehype)
+  .use(rehypeSanitize)
+  .use(rehypeStringify)
 
-  // Convert Markdown to HTML using remark/rehype
-  const processor = remark().use(remarkGfm).use(remarkRehype).use(rehypeStringify)
-  const result = await processor.process(content)
-  let contentHtml = String(result)
-
-  // Add IDs to headings (server-side, using regex)
-  contentHtml = contentHtml.replace(
+const addHeadingIds = (contentHtml: string): string =>
+  contentHtml.replace(
     /<h([1-6])([^>]*)>(.*?)<\/h[1-6]>/gi,
     (match, level, attrs, text) => {
       // Extract text content, removing HTML tags
@@ -39,15 +32,31 @@ export async function parseMarkdownFile<TFrontmatter = Record<string, unknown>>(
         .replace(/[^a-z0-9-]/g, '')
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '')
-      
+
       // Check if id already exists in attributes
       if (attrs && attrs.includes('id=')) {
         return match
       }
-      
+
       return `<h${level}${attrs} id="${id}">${text}</h${level}>`
     }
   )
+
+export async function renderMarkdownToHtml(markdown: string): Promise<string> {
+  const result = await markdownProcessor.process(markdown)
+  return addHeadingIds(String(result))
+}
+
+/**
+ * Parse a Markdown file and return frontmatter and HTML content
+ */
+export async function parseMarkdownFile<TFrontmatter = Record<string, unknown>>(
+  filePath: string
+): Promise<ParsedMarkdown<TFrontmatter>> {
+  const fileContents = await fs.readFile(filePath, 'utf-8')
+  const { data, content } = matter(fileContents)
+
+  const contentHtml = await renderMarkdownToHtml(content)
 
   return {
     frontmatter: data as TFrontmatter,
