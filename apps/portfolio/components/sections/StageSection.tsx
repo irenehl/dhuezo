@@ -1,5 +1,5 @@
 import { StageSectionClient } from './StageSectionClient'
-import { getPostsByStageType } from '@/lib/services/blog-helpers'
+import { getPublishedPostsWithMeta } from '@/lib/services/blog-helpers'
 import { formatDate } from '@/lib/blog'
 
 interface StageEntry {
@@ -14,16 +14,17 @@ interface StageEntry {
 }
 
 export async function StageSection({ locale }: { locale: string }) {
-  
-  // Get all stage types of posts
-  const talks = await getPostsByStageType(locale, 'talk')
-  const articles = await getPostsByStageType(locale, 'article')
-  const slides = await getPostsByStageType(locale, 'slide')
-  
-  // Combine and sort by date
-  const allStagePosts = [...talks, ...articles, ...slides].sort(
-    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  )
+  const allPublishedPosts = await getPublishedPostsWithMeta(locale, 100)
+
+  // Filter stage entries in a single pass to avoid repeated markdown parsing
+  const allStagePosts = allPublishedPosts
+    .filter(
+      (post) =>
+        post.stage_type === 'talk' ||
+        post.stage_type === 'article' ||
+        post.stage_type === 'slide',
+    )
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
   // Map to StageEntry format
   const stageEntries: StageEntry[] = allStagePosts.map((post) => ({
