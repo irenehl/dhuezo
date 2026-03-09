@@ -18,31 +18,56 @@ export async function getPublishedPostsWithMeta(
   locale: string,
   limit = 10
 ): Promise<BlogPostWithMeta[]> {
-  const posts = await blogService.getPublishedPosts(locale, limit)
-  
-  // Enrich posts with tags and reading time from frontmatter
-  const enrichedPosts = await Promise.all(
+  const [posts, files] = await Promise.all([
+    blogService.getPublishedPosts(locale, limit),
+    getMarkdownFilesInDir(CONTENT_DIR),
+  ])
+
+  const fileBySlugLocale = new Map<string, string>()
+  for (const filePath of files) {
+    const fileName = path.basename(filePath, '.md')
+    const fileParts = fileName.split('.')
+    if (fileParts.length < 2) continue
+
+    const fileLocale = fileParts[fileParts.length - 1]
+    const fileSlug = fileParts.slice(0, -1).join('.')
+    fileBySlugLocale.set(`${fileSlug}::${fileLocale}`, filePath)
+  }
+
+  const metaBySlugLocale = new Map<
+    string,
+    { tags: string[]; readingTimeText: string | undefined }
+  >()
+
+  await Promise.all(
     posts.map(async (post) => {
-      const files = await getMarkdownFilesInDir(CONTENT_DIR)
-      const matchingFile = files.find((filePath) => {
-        const fileName = path.basename(filePath, '.md')
-        return fileName.startsWith(`${post.slug}.`) && fileName.endsWith(`.${post.locale}`)
-      })
+      const key = `${post.slug}::${post.locale}`
+      const matchingFile = fileBySlugLocale.get(key)
 
       if (!matchingFile) {
-        return { ...post, tags: [], readingTimeText: undefined }
+        return
       }
 
       const parsed = await parseMarkdownFile<BlogPostFrontmatter>(matchingFile)
-      const readingTimeText = parsed.frontmatter.readingTimeText || calculateReadingTime(parsed.content)
-
-      return {
-        ...post,
+      metaBySlugLocale.set(key, {
         tags: parsed.frontmatter.tags || [],
-        readingTimeText,
-      }
+        readingTimeText:
+          parsed.frontmatter.readingTimeText ||
+          calculateReadingTime(parsed.content),
+      })
     })
   )
+
+  const enrichedPosts = posts.map((post) => {
+    const key = `${post.slug}::${post.locale}`
+    const meta = metaBySlugLocale.get(key)
+
+    return {
+      ...post,
+      tags: meta?.tags || [],
+      readingTimeText: meta?.readingTimeText,
+    }
+  })
 
   return enrichedPosts
 }
