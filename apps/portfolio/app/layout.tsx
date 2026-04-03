@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Lora, DM_Sans, Caveat } from 'next/font/google'
 
 import './globals.css'
@@ -6,18 +6,12 @@ import { routing } from '@/i18n/routing'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 
-function isProduction(): boolean {
-  return (
-    process.env.VERCEL_ENV === 'production' ||
-    (process.env.VERCEL_ENV === undefined && process.env.NODE_ENV === 'production')
-  )
-}
-
 // Display/Headers font
 const lora = Lora({
   subsets: ['latin'],
   variable: '--font-lora',
   weight: ['400', '500', '600', '700'],
+  display: 'swap',
 })
 
 // Body font (300 unused in UI; dropping it saves one font file on first load)
@@ -25,18 +19,25 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
   weight: ['400', '500', '600', '700'],
+  display: 'swap',
 })
 
 // Accent/Cursive font
 const caveat = Caveat({
   subsets: ['latin'],
   variable: '--font-caveat',
-  weight: ['400', '600'],
+  weight: ['400'],
+  display: 'swap',
 })
 
 // Root layout metadata - fallback defaults
 // Actual page metadata is generated in [locale]/layout.tsx
-const isProd = isProduction()
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
+
 export const metadata: Metadata = {
   ...generateSiteMetadata({
     locale: routing.defaultLocale,
@@ -47,15 +48,6 @@ export const metadata: Metadata = {
   icons: {
     icon: '/logo.svg',
   },
-  keywords: [
-    'Software Engineer',
-    'Cursor Ambassador',
-    'Web Developer',
-    'React',
-    'Next.js',
-    'TypeScript',
-    'Daniela Huezo',
-  ],
   authors: [{ name: 'Daniela Huezo' }],
   creator: 'Daniela Huezo',
 }

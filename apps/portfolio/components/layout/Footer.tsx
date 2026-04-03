@@ -4,22 +4,23 @@ import { useTranslations } from 'next-intl'
 import { siteConfig } from '@/lib/config'
 
 export const Footer = (): JSX.Element => {
-  const tCommon = useTranslations('common')
   const tFooter = useTranslations('footer')
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t-2 border-border bg-card py-16">
-      <div className="max-w-7xl mx-auto px-6 lg:px-16">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer className="relative overflow-hidden border-t border-border/50 bg-card pt-16 pb-[max(4rem,env(safe-area-inset-bottom,0px))]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_50%_100%,hsl(var(--primary)/0.06),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-noise opacity-[0.006] md:opacity-[0.012]" />
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-16">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           {/* Left Side - Cozy Message */}
-          <div className="font-accent text-lg md:text-xl text-muted-foreground text-center md:text-left">
+          <div className="text-center font-accent text-lg text-muted-foreground md:text-left md:text-xl">
             {tFooter('cozyMessage', { default: 'Built with coffee, flowers, and way too many Taylor Swift songs' })}
           </div>
 
           {/* Right Side - Links */}
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <a href="#hero" className="hover:text-primary transition-colors">
+            <a href="#intro" className="transition-colors hover:text-primary">
               {tFooter('top', { default: 'Top' })}
             </a>
             <span>•</span>

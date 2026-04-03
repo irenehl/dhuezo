@@ -7,13 +7,11 @@ export async function ProjectsSectionServer({ locale }: { locale: string }) {
   
   try {
     const projects = await projectContentService.getAllProjects(locale)
-    if (projects.length > 0) {
-      return <ProjectsSection projects={projects} xArticles={xArticles} />
-    }
-  } catch (error) {
-    // Fallback to config-based projects
+    return <ProjectsSection projects={projects} xArticles={xArticles} />
+  } catch {
+    // Fallback to config-based projects when markdown is missing or invalid
   }
-  
+
   return <ProjectsSection xArticles={xArticles} />
 }
 

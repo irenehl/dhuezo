@@ -1,15 +1,50 @@
 {
   "site": {
     "name": "Daniela Huezo",
-    "description": "Desarrolladora Full Stack"
+    "description": "Tech Lead senior e ingeniera de software",
+    "homeTitle": "Daniela Huezo - Tech Lead senior e ingeniera de software | Embajadora de Cursor",
+    "homeDescription": "Tech lead senior y full stack. Arquitectura, entrega y liderazgo de la estrategia a producción — proyectos, escritura y trayectoria.",
+    "keywords": [
+      "Daniela Huezo",
+      "Tech lead senior",
+      "Ingeniera de software",
+      "Full stack",
+      "Embajadora de Cursor",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Desarrollo web",
+      "El Salvador",
+      "Remoto",
+      "Liderazgo técnico"
+    ],
+    "jsonLdJobTitle": "Tech lead senior e ingeniera de software",
+    "jsonLdKnowsAbout": [
+      "Ingeniería de software",
+      "Liderazgo técnico",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Arquitectura de sistemas",
+      "Entrega de producto"
+    ]
   },
   "hero": {
-    "title": "Construyendo cosas que",
-    "subtitle": "simplemente funcionan.",
-    "description": "Tech Lead & Ingeniera de Software",
+    "eyebrow": "Tech lead · Full stack · Obsesión por producción",
+    "backdropWord": "ENTREGA",
+    "proof1": "Estrategia → prod",
+    "proof2": "Equipos y sistemas",
+    "proof3": "LatAm · Remoto",
+    "title": "Daniela Huezo",
+    "subtitle": "Ingeniera de software - tech lead",
+    "description": "Tech lead senior y full stack — arquitectura, entrega y resultados, de la estrategia a producción.",
+    "meta": "El Salvador · UTC−6",
+    "scrollHint": "Desplázate para explorar",
+    "deskImageAlt": "Ilustración de un escritorio acogedor con portátil y café",
     "ambassador": "Embajadora de Cursor",
     "bio": {
-      "intro": "Construyo cosas que funcionan. Paso mis días",
+      "intro": "Lidero ingeniería que se entrega. Paso mis días",
       "shipping": "desarrollando plataformas desde cero",
       "shippingTooltip": "impulsado por café y sesiones de código nocturnas ☕",
       "andOccasionally": ", y a veces",
@@ -31,10 +66,42 @@
   "common": {
     "openMenu": "Abrir menú"
   },
+  "scrollRail": {
+    "ariaLabel": "Secciones de esta página",
+    "sections": {
+      "intro": "Inicio",
+      "projects": "Trabajo",
+      "skills": "Stack",
+      "experience": "Trayectoria",
+      "stage": "Escritura",
+      "spec": "Lab",
+      "about": "Acerca"
+    }
+  },
+  "sections": {
+    "chapter": {
+      "projects": "Trabajo seleccionado",
+      "skills": "Experiencia",
+      "experience": "Trayectoria",
+      "stage": "El escenario",
+      "about": "Conectar"
+    }
+  },
   "projects": {
     "title": "Proyectos",
     "subtitle": "Trabajos Seleccionados",
-    "description": "Una colección de proyectos que he construido, desde plataformas impulsadas por IA hasta aplicaciones móviles y sistemas full-stack.",
+    "description": "Cada tarjeta es un trabajo entregado — qué lideré, qué salió a producción y dónde puedes comprobarlo en vivo.",
+    "filtersAria": "Filtrar proyectos por categoría",
+    "featuredBadge": "Destacado",
+    "filters": {
+      "all": "Todos",
+      "web": "Web",
+      "mobile": "Móvil",
+      "ai": "IA/ML"
+    },
+    "emptyState": "Ningún proyecto coincide con este filtro. Prueba otra categoría o vuelve tras el próximo deploy.",
+    "liveLink": "En vivo",
+    "sourceLink": "Código",
     "viewArchive": "Ver Más Proyectos",
     "project1": {
       "title": "Obsidian CMS",
@@ -59,6 +126,9 @@
     "title": "Escritura",
     "subtitle": "Últimos Pensamientos",
     "description": "Perspectivas sobre desarrollo, liderazgo y lecciones aprendidas en el camino.",
+    "featured": "Destacado",
+    "moreLabel": "Del archivo",
+    "archiveAria": "Más artículos y charlas",
     "empty": "Aún no hay publicaciones. ¡Vuelve pronto!",
     "type": {
       "talk": "Charla",
@@ -69,7 +139,26 @@
   "experience": {
     "title": "Las Eras",
     "subtitle": "Trayectoria Profesional",
-    "description": "Cada capítulo trajo nuevas lecciones, desafíos y crecimiento. Desde construir sistemas hasta liderar equipos, aquí está el viaje hasta ahora.",
+    "description": "De builder a tech lead: ownership de sistemas, liderazgo de equipo y las lecciones que vienen con la seniority.",
+    "filtersAria": "Filtrar experiencia por tipo",
+    "expandDetails": "Ver responsabilidades",
+    "collapseDetails": "Ocultar detalles",
+    "viewMore": "Ver más experiencias",
+    "viewLess": "Ver menos",
+    "statsAria": "Resumen de trayectoria",
+    "leadershipBadge": "Liderazgo",
+    "eraNames": {
+      "1": "Era Tech Lead",
+      "2": "Era Rendimiento",
+      "3": "E-Commerce",
+      "4": "Civic Tech",
+      "5": "Automatización",
+      "6": "Arquitectura API",
+      "7": "Dominio de React",
+      "8": "Innovación",
+      "9": "Seguridad y rendimiento",
+      "10": "Cimientos"
+    },
     "filters": {
       "all": "Todas las Eras",
       "fullTime": "Tiempo Completo",
@@ -87,8 +176,12 @@
   "about": {
     "title": "Acerca de",
     "subtitle": "Conóceme",
-    "description1": "Cuando no estoy resolviendo problemas técnicos, estoy construyendo comunidades y ayudando a más mujeres en Centroamérica a encontrar su lugar en la tecnología.",
-    "description2": "Fuera del código: explorando nuevos restaurantes, manteniéndome activa, o perdiendo horas en Animal Crossing y Pokémon Go.",
+    "pullQuote": "«Sistemas que aguantan carga real — y comunidades que abren espacio a más voces en tecnología.»",
+    "connectLabel": "Saluda",
+    "socialLabel": "En otros sitios",
+    "description1": "Desde El Salvador — lidero iniciativas técnicas y entrego sistemas que aguantan carga real. Creo en código que simplifica la vida, no en complicarla.",
+    "description2": "Cuando no estoy resolviendo problemas técnicos, construyo comunidades y ayudo a más mujeres en Centroamérica a encontrar su lugar en la tecnología.",
+    "description3": "Fuera del código: explorando restaurantes, ejercicio, Animal Crossing y Pokémon.",
     "cta": "Conectémonos",
     "email": "hello@dhuezo.dev",
     "social": {
@@ -110,6 +203,7 @@
   "skills": {
     "title": "Habilidades",
     "subtitle": "Experiencia Técnica",
+    "description": "Stack con el que diseño, reviso código y llevo sistemas a producción con equipos.",
     "frontend": {
       "title": "Desarrollo Frontend"
     },
@@ -119,6 +213,31 @@
     "tools": {
       "title": "Herramientas y Diseño"
     }
+  },
+  "spec": {
+    "chapter": "Notas de laboratorio",
+    "title": "DH-1 · modelo de portafolio",
+    "abstract": "Presentamos DH-1, un sitio personal de peso abierto optimizado para credibilidad, café y la escapada ocasional a la isla. Los benchmarks usan equipos reales, fechas reales y al menos una playlist.",
+    "gravitas": "En el resto del sitio, accesibilidad, diseño responsive y criterios de producción van primero: el humor es opcional; la disciplina de ingeniería, no.",
+    "footnote": "* Sin revisión por pares. Sin certificación ISO. Sátira para humanos; los datos serios están en el resto del sitio.",
+    "tableScrollHint": "Desliza horizontalmente para ver todas las columnas en pantallas pequeñas.",
+    "tableCaption": "Niveles de despliegue (ilustrativo)",
+    "colTier": "Nivel",
+    "colShip": "Ship",
+    "colShipPlus": "Ship+",
+    "colShipMax": "Ship Pro Max",
+    "rowCoffee": "Presupuesto café",
+    "rowTests": "Pruebas",
+    "rowVibe": "Vibe por defecto",
+    "cellCoffee1": "Razonable",
+    "cellCoffee2": "Con inversión",
+    "cellCoffee3": "N/A",
+    "cellTests1": "A veces",
+    "cellTests2": "Sí",
+    "cellTests3": "Producción es la prueba",
+    "cellVibe1": "Calma",
+    "cellVibe2": "Enfocada",
+    "cellVibe3": "Protagonista"
   },
   "footer": {
     "cozyMessage": "Construido con café, flores y demasiadas canciones de Taylor Swift",

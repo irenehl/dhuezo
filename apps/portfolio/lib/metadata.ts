@@ -11,6 +11,7 @@ interface GenerateMetadataOptions {
   type?: 'website' | 'article'
   publishedTime?: string
   modifiedTime?: string
+  keywords?: string[]
 }
 
 function isProduction(): boolean {
@@ -49,6 +50,7 @@ export function generateMetadata({
   publishedTime,
   modifiedTime,
   projectId,
+  keywords,
 }: GenerateMetadataOptions & { projectId?: string } = {}): Metadata {
   const siteTitle = title || siteConfig.name
   const siteDescription =
@@ -90,6 +92,7 @@ export function generateMetadata({
   const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
+    ...(keywords && keywords.length > 0 ? { keywords } : {}),
     metadataBase: new URL(siteConfig.url),
     alternates: {
       canonical: siteUrl,

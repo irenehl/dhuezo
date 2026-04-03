@@ -33,7 +33,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-background/95 backdrop-blur-xl border-l-2 border-border z-50 p-6 overflow-y-auto"
+            className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm overflow-y-auto border-l-2 border-border bg-background/95 p-6 pt-[max(1.5rem,env(safe-area-inset-top,0px))] pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] backdrop-blur-xl"
           >
             {/* Close Button */}
             <button

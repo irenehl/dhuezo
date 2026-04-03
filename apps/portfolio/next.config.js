@@ -21,6 +21,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.simpleicons.org',
+      },
     ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
