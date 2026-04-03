@@ -5,7 +5,8 @@ import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { Menu } from 'lucide-react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils'
 import { LocaleToggle } from './LocaleToggle'
 import { ThemeToggle } from './ThemeToggle'
 import { MobileMenu } from './MobileMenu'
@@ -17,25 +18,34 @@ export function SiteHeader(): JSX.Element {
   const locale = useLocale()
   const navItems = getNavItems(t, locale as Locale)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { scrollY } = useScroll()
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    const unsubscribe = scrollY.on('change', (latest) => {
-      setIsScrolled(latest > 50)
-    })
-    return () => unsubscribe()
-  }, [scrollY])
+    let ticking = false
+    const update = (): void => {
+      setIsScrolled(window.scrollY > 50)
+      ticking = false
+    }
+    const onScroll = (): void => {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(update)
+      }
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <>
       <motion.nav
-        className="fixed top-0 w-full z-40 border-b-2 border-border bg-background/85 backdrop-blur-xl transition-all"
+        className={cn(
+          'fixed top-0 w-full z-40 border-b-2 border-border backdrop-blur-xl transition-colors duration-300',
+          isScrolled ? 'bg-background/95' : 'bg-background/85',
+        )}
         initial={{ y: -100 }}
-        animate={{
-          y: 0,
-          backgroundColor: isScrolled ? 'hsl(var(--background) / 0.95)' : 'hsl(var(--background) / 0.85)',
-        }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.3 }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-16 h-20 flex items-center justify-between">

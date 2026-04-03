@@ -27,7 +27,7 @@ export function StageSectionClient({ entries }: StageSectionClientProps) {
     return (
       <section id="stage" className="relative py-24 bg-background scroll-mt-20 overflow-hidden">
         {/* Subtle texture overlay */}
-        <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
+        <div className="absolute inset-0 bg-noise opacity-[0.006] md:opacity-[0.015] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
           <motion.div
             className="mb-12"
@@ -59,7 +59,7 @@ export function StageSectionClient({ entries }: StageSectionClientProps) {
 
   return (
     <section id="stage" className="relative py-24 bg-background scroll-mt-20 overflow-hidden">
-      <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
+      <div className="absolute inset-0 bg-noise opacity-[0.006] md:opacity-[0.015] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
         <motion.div
           className="mb-12"
@@ -102,7 +102,7 @@ export function StageSectionClient({ entries }: StageSectionClientProps) {
                   />
                   
                   <div className="w-full h-52 bg-gradient-to-br from-dusty-rose to-sage-blue border-b-2 border-border relative overflow-hidden">
-                    <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none" />
+                    <div className="absolute inset-0 bg-noise opacity-[0.012] md:opacity-[0.03] pointer-events-none" />
                     
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"

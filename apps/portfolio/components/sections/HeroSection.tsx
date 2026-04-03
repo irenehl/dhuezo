@@ -18,7 +18,7 @@ export function HeroSection() {
   return (
     <header ref={ref} className="relative min-h-screen flex items-center px-6 lg:px-16 pt-32 pb-16 overflow-hidden">
       {/* Subtle texture overlay */}
-      <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
+      <div className="absolute inset-0 bg-noise opacity-[0.006] md:opacity-[0.015] pointer-events-none" />
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div className="space-y-6">
@@ -180,7 +180,7 @@ export function HeroSection() {
                 }}
               />
               
-              <div className="absolute inset-0 bg-noise opacity-[0.02] pointer-events-none z-20" />
+              <div className="absolute inset-0 bg-noise opacity-[0.01] md:opacity-[0.02] pointer-events-none z-20" />
             </div>
 
           </motion.div>

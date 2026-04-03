@@ -18,14 +18,13 @@ const lora = Lora({
   subsets: ['latin'],
   variable: '--font-lora',
   weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
 })
 
-// Body font
+// Body font (300 unused in UI; dropping it saves one font file on first load)
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
 })
 
 // Accent/Cursive font

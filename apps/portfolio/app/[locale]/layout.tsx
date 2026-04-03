@@ -6,10 +6,9 @@ import { routing } from '@/i18n/routing'
 import { Toaster } from '@/components/ui/toaster'
 import { ClarityScript } from '@/components/analytics/ClarityScript'
 import { BackgroundLayers } from '@/components/layout/BackgroundLayers'
+import { DecorativeDevConsole } from '@/components/layout/DecorativeDevConsole'
 import { DecorativeElements } from '@/components/layout/DecorativeElements'
-import { AnimatedBackground } from '@/components/layout/AnimatedBackground'
-import { CustomCursor } from '@/components/layout/CustomCursor'
-import { FloatingFlowers } from '@/components/layout/FloatingFlowers'
+import { SiteChromeEffects } from '@/components/layout/SiteChromeEffects'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 import type { Locale } from '@/i18n/config'
 
@@ -43,11 +42,10 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      <AnimatedBackground />
+      <SiteChromeEffects />
       <BackgroundLayers />
-      <FloatingFlowers />
       <DecorativeElements />
-      <CustomCursor />
+      {process.env.NODE_ENV === 'development' ? <DecorativeDevConsole /> : null}
       {children}
       <Toaster />
       <ClarityScript />

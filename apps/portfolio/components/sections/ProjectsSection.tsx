@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations, useLocale } from 'next-intl'
-import { ArrowUpRight, ExternalLink, Github } from 'lucide-react'
-import { animate, motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
+import { ArrowUpRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { getFeaturedProjects, type ProjectConfig } from '@/lib/config/projects'
 import type { MarkdownProject } from '@/lib/markdown/types'
 import type { XArticle } from '@/lib/config/x-articles'
-import { AnimatedSection, StaggerContainer, staggerItemVariants } from '@/components/ui/AnimatedSection'
+import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { Carousel } from '@/components/ui/carousel'
 import { cn } from '@/lib/utils'
 
@@ -27,7 +27,6 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: ProjectsSectionProps = {}) {
   const t = useTranslations()
-  const locale = useLocale()
   const [activeFilter, setActiveFilter] = useState<string>('all')
 
   let projects: Project[]
@@ -105,34 +104,34 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
   }
 
   return (
-    <section id="projects" className="relative py-24 bg-card scroll-mt-20 overflow-hidden">
+    <section id="projects" className="relative scroll-mt-20 bg-card py-24">
       {/* Subtle texture overlay */}
-      <div className="absolute inset-0 bg-noise opacity-[0.015] pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
+      <div className="pointer-events-none absolute inset-0 bg-noise opacity-[0.006] md:opacity-[0.015]" />
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-16">
         <AnimatedSection>
           <div className="mb-12">
-            <div className="font-accent text-xl md:text-2xl text-primary mb-2">
+            <div className="mb-2 font-accent text-xl text-primary md:text-2xl">
               {t('projects.subtitle', { default: 'Selected Work' })}
             </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
+            <h2 className="mb-4 font-display text-4xl text-foreground md:text-5xl lg:text-6xl">
               {t('projects.title')}
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl">
+            <p className="max-w-2xl text-lg text-muted-foreground">
               {t('projects.description', { default: 'A collection of projects I\'ve built, from AI-powered platforms to mobile apps and full-stack systems.' })}
             </p>
           </div>
         </AnimatedSection>
 
-        <div className="flex flex-wrap gap-3 mb-12">
+        <div className="mb-12 flex flex-wrap gap-3">
           {filters.map((filter) => (
             <motion.button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
               className={cn(
-                'relative px-5 py-2.5 rounded-full text-sm font-medium transition-all overflow-hidden',
+                'relative overflow-hidden rounded-full px-5 py-2.5 text-sm font-medium transition-all',
                 activeFilter === filter.id
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-transparent text-foreground border-2 border-border hover:bg-card hover:border-primary'
+                  : 'border-2 border-border bg-transparent text-foreground hover:border-primary hover:bg-card',
               )}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -148,18 +147,21 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
             </motion.button>
           ))}
         </div>
+      </div>
 
-        <div className="mb-8">
-          <Carousel
-            slidesToShow={3}
-            autoPlay={true}
-            autoPlayInterval={5000}
-            showArrows={true}
-            showDots={true}
-            className="w-full"
-          >
+      <div className="relative z-10 mb-8 w-full">
+        <Carousel
+          key={activeFilter}
+          layout="strip"
+          slidesToShow={3}
+          autoPlay={true}
+          autoPlayInterval={5000}
+          showArrows={true}
+          showDots={true}
+          className="w-full"
+        >
           {filteredProjects.map((project, index) => (
-            <div key={project.id} className="px-4">
+            <div key={project.id}>
               <motion.div
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -180,7 +182,7 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
                     'w-full h-48 bg-gradient-to-br flex items-center justify-center text-6xl border-b-2 border-border relative overflow-hidden z-10',
                     getGradientForIndex(index)
                   )}>
-                    <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none" />
+                    <div className="absolute inset-0 bg-noise opacity-[0.012] md:opacity-[0.03] pointer-events-none" />
                     
                     {project.featured && (
                       <motion.div
@@ -234,20 +236,19 @@ export function ProjectsSection({ projects: markdownProjects, xArticles = [] }: 
               </motion.div>
             </div>
           ))}
-          </Carousel>
-        </div>
+        </Carousel>
+      </div>
 
-        <div className="flex justify-center pt-12">
-          <a
-            href="https://github.com/irenehl"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
-          >
-            {t('projects.viewArchive', { default: 'View More Projects' })}
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
-        </div>
+      <div className="relative z-10 mx-auto flex max-w-7xl justify-center px-6 pt-12 lg:px-16">
+        <a
+          href="https://github.com/irenehl"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
+        >
+          {t('projects.viewArchive', { default: 'View More Projects' })}
+          <ArrowUpRight className="h-4 w-4" />
+        </a>
       </div>
     </section>
   )

@@ -1,7 +1,13 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { Footer } from '@/components/layout/Footer'
 import { HeroSection } from '@/components/sections/HeroSection'
+import {
+  ProjectsSectionSkeleton,
+  StageSectionSkeleton,
+  TimelineSectionSkeleton,
+} from '@/components/sections/HomePageSkeletons'
 import { ProjectsSectionServer } from '@/components/sections/ProjectsSectionServer'
 import { SkillsSection } from '@/components/sections/SkillsSection'
 import { StageSection } from '@/components/sections/StageSection'
@@ -37,10 +43,16 @@ export default async function Home({
       <SiteJsonLd locale={locale} />
       <SiteHeader />
       <HeroSection />
-      <ProjectsSectionServer locale={locale} />
+      <Suspense fallback={<ProjectsSectionSkeleton />}>
+        <ProjectsSectionServer locale={locale} />
+      </Suspense>
       <SkillsSection />
-      <TimelineSectionServer locale={locale} />
-      <StageSection locale={locale} />
+      <Suspense fallback={<TimelineSectionSkeleton />}>
+        <TimelineSectionServer locale={locale} />
+      </Suspense>
+      <Suspense fallback={<StageSectionSkeleton />}>
+        <StageSection locale={locale} />
+      </Suspense>
       <AboutSection />
       <Footer />
     </>

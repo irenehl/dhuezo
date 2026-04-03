@@ -58,7 +58,7 @@ export function SkillsSection() {
   return (
     <section id="skills" className="relative py-24 bg-background scroll-mt-20 overflow-hidden">
       {/* Subtle texture overlay */}
-      <div className="absolute inset-0 bg-noise opacity-[0.01] pointer-events-none" />
+      <div className="absolute inset-0 bg-noise opacity-[0.004] md:opacity-[0.01] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
         {/* Section Header */}
         <AnimatedSection>
