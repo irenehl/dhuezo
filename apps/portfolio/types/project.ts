@@ -10,6 +10,12 @@ export interface Project {
   title: string
   description: string
   tags: string[]
+  /** Short ownership / scope line (e.g. role on the work). */
+  role?: string | null
+  /** One-line outcome or what shipped. */
+  outcome?: string | null
+  /** Optional constraint or tradeoff worth naming. */
+  constraint?: string | null
   created_at: string
   updated_at: string
 }

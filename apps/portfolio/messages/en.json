@@ -1,15 +1,50 @@
 {
   "site": {
     "name": "Daniela Huezo",
-    "description": "Full Stack Developer"
+    "description": "Senior Tech Lead & Software Engineer",
+    "homeTitle": "Daniela Huezo - Senior Tech Lead & Software Engineer | Cursor Ambassador",
+    "homeDescription": "Senior tech lead and full-stack engineer. Architecture, delivery, and leadership from strategy to production — projects, writing, and experience.",
+    "keywords": [
+      "Daniela Huezo",
+      "Senior Tech Lead",
+      "Software Engineer",
+      "Full-Stack Engineer",
+      "Cursor Ambassador",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Web Development",
+      "El Salvador",
+      "Remote",
+      "Tech Leadership"
+    ],
+    "jsonLdJobTitle": "Senior Tech Lead & Software Engineer",
+    "jsonLdKnowsAbout": [
+      "Software Engineering",
+      "Tech Leadership",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "System Architecture",
+      "Product Delivery"
+    ]
   },
   "hero": {
-    "title": "Building things that",
-    "subtitle": "just work.",
-    "description": "Tech Lead & Software Engineer",
+    "eyebrow": "Tech lead · Full-stack · Production-obsessed",
+    "backdropWord": "SHIP",
+    "proof1": "Strategy → prod",
+    "proof2": "Teams & systems",
+    "proof3": "LatAm · Remote",
+    "title": "Daniela Huezo",
+    "subtitle": "Software Engineer - tech lead",
+    "description": "Senior tech lead and full-stack engineer — I own architecture, delivery, and outcomes from strategy through production.",
+    "meta": "El Salvador · UTC−6",
+    "scrollHint": "Scroll to explore",
+    "deskImageAlt": "Illustration of a cozy desk with laptop and coffee",
     "ambassador": "Cursor Ambassador",
     "bio": {
-      "intro": "I build things that work. I spend my days",
+      "intro": "I lead engineering that ships. I spend my days",
       "shipping": "shipping platforms from scratch",
       "shippingTooltip": "powered by coffee & late-night coding sessions ☕",
       "andOccasionally": ", and sometimes",
@@ -31,10 +66,42 @@
   "common": {
     "openMenu": "Open menu"
   },
+  "scrollRail": {
+    "ariaLabel": "Sections on this page",
+    "sections": {
+      "intro": "Intro",
+      "projects": "Work",
+      "skills": "Stack",
+      "experience": "Path",
+      "stage": "Writing",
+      "spec": "Lab",
+      "about": "About"
+    }
+  },
+  "sections": {
+    "chapter": {
+      "projects": "Selected work",
+      "skills": "Expertise",
+      "experience": "Journey",
+      "stage": "The stage",
+      "about": "Connect"
+    }
+  },
   "projects": {
     "title": "Projects",
     "subtitle": "Selected Work",
-    "description": "A collection of projects I've built, from AI-powered platforms to mobile apps and full-stack systems.",
+    "description": "Each card is a shipped slice of work — what I owned, what we shipped, and where you can verify it live.",
+    "filtersAria": "Filter projects by category",
+    "featuredBadge": "Featured",
+    "filters": {
+      "all": "All",
+      "web": "Web",
+      "mobile": "Mobile",
+      "ai": "AI/ML"
+    },
+    "emptyState": "No projects match this filter right now. Try another category or check back after the next deploy.",
+    "liveLink": "Live",
+    "sourceLink": "Source",
     "viewArchive": "View More Projects",
     "project1": {
       "title": "Obsidian CMS",
@@ -59,6 +126,9 @@
     "title": "Writing",
     "subtitle": "Latest Thoughts",
     "description": "Insights on development, leadership, and lessons learned along the way.",
+    "featured": "Spotlight",
+    "moreLabel": "From the archive",
+    "archiveAria": "More articles and talks",
     "empty": "No posts yet. Check back soon!",
     "type": {
       "talk": "Talk",
@@ -69,7 +139,26 @@
   "experience": {
     "title": "The Eras",
     "subtitle": "Career Journey",
-    "description": "Each chapter brought new lessons, challenges, and growth. From building systems to leading teams, here's the journey so far.",
+    "description": "From hands-on builder to tech lead: systems ownership, team leadership, and the lessons that come with seniority.",
+    "filtersAria": "Filter experience by type",
+    "expandDetails": "Show responsibilities",
+    "collapseDetails": "Hide details",
+    "viewMore": "View more roles",
+    "viewLess": "Show less",
+    "statsAria": "Career highlights at a glance",
+    "leadershipBadge": "Leadership",
+    "eraNames": {
+      "1": "Tech Lead Era",
+      "2": "Performance Era",
+      "3": "E-Commerce Era",
+      "4": "Civic Tech Era",
+      "5": "Automation Era",
+      "6": "API Architecture Era",
+      "7": "React Mastery Era",
+      "8": "Innovation Era",
+      "9": "Security & Performance Era",
+      "10": "Foundation Era"
+    },
     "filters": {
       "all": "All Eras",
       "fullTime": "Full-Time",
@@ -87,7 +176,10 @@
   "about": {
     "title": "About",
     "subtitle": "Get to Know Me",
-    "description1": "From El Salvador, building systems that actually work. I believe in code that makes life easier, not more complicated.",
+    "pullQuote": "“Systems that survive real load — and communities that make room for more voices in tech.”",
+    "connectLabel": "Say hello",
+    "socialLabel": "Elsewhere",
+    "description1": "From El Salvador — I lead technical initiatives and ship systems that hold up under real load. I believe in code that makes life easier, not more complicated.",
     "description2": "When I'm not solving technical problems, I'm building communities and helping more women across Central America find their place in tech.",
     "description3": "Outside of code: exploring new restaurants, staying active, or losing hours to Animal Crossing and Pokémon.",
     "cta": "Let's Connect",
@@ -111,6 +203,7 @@
   "skills": {
     "title": "Skills",
     "subtitle": "Technical Expertise",
+    "description": "The stack I use to design, review, and ship production systems with teams.",
     "frontend": {
       "title": "Frontend Development"
     },
@@ -120,6 +213,31 @@
     "tools": {
       "title": "Tools & Design"
     }
+  },
+  "spec": {
+    "chapter": "Lab notes",
+    "title": "DH-1 · portfolio model",
+    "abstract": "We release DH-1, an open-weight personal site optimized for credibility, coffee, and the occasional island getaway. Benchmarks are conducted on real teams, real deadlines, and at least one playlist.",
+    "gravitas": "Elsewhere on this site, accessibility, responsive layouts, and production-minded defaults are first-class — the jokes are optional; the engineering discipline is not.",
+    "footnote": "* Not peer-reviewed. Not ISO certified. Satire for humans; facts elsewhere on this site.",
+    "tableScrollHint": "Swipe or scroll sideways to see all columns on small screens.",
+    "tableCaption": "Deployment tiers (illustrative)",
+    "colTier": "Tier",
+    "colShip": "Ship",
+    "colShipPlus": "Ship+",
+    "colShipMax": "Ship Pro Max",
+    "rowCoffee": "Coffee budget",
+    "rowTests": "Tests",
+    "rowVibe": "Default vibe",
+    "cellCoffee1": "Reasonable",
+    "cellCoffee2": "Venture-backed",
+    "cellCoffee3": "N/A",
+    "cellTests1": "Sometimes",
+    "cellTests2": "Yes",
+    "cellTests3": "Production is the test",
+    "cellVibe1": "Calm",
+    "cellVibe2": "Focused",
+    "cellVibe3": "Main character"
   },
   "footer": {
     "cozyMessage": "Built with coffee, flowers, and way too many Taylor Swift songs",

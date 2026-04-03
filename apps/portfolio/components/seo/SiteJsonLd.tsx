@@ -1,29 +1,49 @@
+import { getTranslations } from 'next-intl/server'
+
 import { siteConfig } from '@/lib/config'
 
 interface SiteJsonLdProps {
   locale?: string
 }
 
-export function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
+export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
   const siteUrl = `${siteConfig.url}/${locale}`
+  const t = await getTranslations({ locale, namespace: 'site' })
+  const jobTitle = t('jsonLdJobTitle')
+  const rawKnows = t.raw('jsonLdKnowsAbout')
+  const knowsAbout = Array.isArray(rawKnows)
+    ? rawKnows.filter((k): k is string => typeof k === 'string')
+    : []
+
+  const personId = `${siteConfig.url}/#person`
+  const websiteId = `${siteUrl}/#website`
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: siteConfig.name,
-    url: siteUrl,
-    description:
-      'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale.',
-    publisher: {
-      '@type': 'Person',
-      name: siteConfig.name,
-      url: siteConfig.url,
-      sameAs: [
-        siteConfig.links.github,
-        siteConfig.links.linkedin,
-        siteConfig.links.x,
-      ],
-    },
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': personId,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        jobTitle,
+        ...(knowsAbout.length > 0 ? { knowsAbout } : {}),
+        sameAs: [
+          siteConfig.links.github,
+          siteConfig.links.linkedin,
+          siteConfig.links.x,
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': websiteId,
+        name: siteConfig.name,
+        url: siteUrl,
+        description: t('homeDescription'),
+        inLanguage: locale,
+        publisher: { '@id': personId },
+      },
+    ],
   }
 
   return (

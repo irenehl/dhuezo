@@ -1,8 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { motion } from 'framer-motion'
 import { AnimatedSection, StaggerContainer, staggerItemVariants } from '@/components/ui/AnimatedSection'
+import { SectionChapter } from '@/components/ui/SectionChapter'
 
 interface Skill {
   name: string
@@ -56,20 +58,23 @@ export function SkillsSection() {
   ]
 
   return (
-    <section id="skills" className="relative py-24 bg-background scroll-mt-20 overflow-hidden">
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 bg-noise opacity-[0.004] md:opacity-[0.01] pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
-        {/* Section Header */}
+    <section
+      id="skills"
+      className="relative scroll-mt-header overflow-hidden border-t border-border/50 bg-background py-24"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_45%_at_85%_15%,hsl(var(--primary)/0.1),transparent_52%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-noise opacity-[0.006] md:opacity-[0.014]" />
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-16">
         <AnimatedSection>
-          <div className="mb-12">
-            <div className="font-accent text-xl md:text-2xl text-primary mb-2">
-              {t('skills.subtitle', { default: 'Technical Expertise' })}
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground">
-              {t('skills.title', { default: 'Skills' })}
-            </h2>
-          </div>
+          <SectionChapter
+            variant="immersive"
+            sceneIndex="03"
+            label={t('sections.chapter.skills')}
+            title={t('skills.title', { default: 'Skills' })}
+            description={t('skills.description', {
+              default: 'Languages, frameworks, and tools I use to ship reliable products.',
+            })}
+          />
         </AnimatedSection>
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" staggerDelay={0.1}>
@@ -77,7 +82,7 @@ export function SkillsSection() {
             <motion.div
               key={category.title}
               variants={staggerItemVariants}
-              className="group relative bg-card rounded-3xl border-2 border-border overflow-hidden transition-all hover:shadow-xl hover:shadow-pressed-brown/10 hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card/75 shadow-[0_12px_40px_-20px_hsl(var(--pressed-brown)/0.12)] backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_18px_48px_-22px_hsl(var(--pressed-brown)/0.16)] dark:bg-card/60"
             >
               <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${category.gradient} opacity-60 group-hover:opacity-100 transition-opacity`} />
               
@@ -91,7 +96,7 @@ export function SkillsSection() {
                   </h3>
                 </div>
 
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 sm:gap-4">
                   {category.skills.map((skill, skillIndex) => (
                     <motion.div
                       key={skill.name}
@@ -102,21 +107,29 @@ export function SkillsSection() {
                       transition={{ delay: skillIndex * 0.05, duration: 0.3 }}
                     >
                       <motion.div
-                        className="relative w-16 h-16 p-3 bg-background border-2 border-border rounded-2xl flex items-center justify-center transition-all group-hover/skill:border-primary group-hover/skill:bg-card/50 group-hover/skill:shadow-lg overflow-hidden"
+                        className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-2.5 transition-all group-hover/skill:border-primary/60 group-hover/skill:bg-card/50 group-hover/skill:shadow-lg sm:h-16 sm:w-16 sm:p-3"
                         whileHover={{ scale: 1.1, y: -4 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
-                        <div className="relative w-full h-full">
-                          <img
-                            src={skill.isLocal ? skill.icon : `https://cdn.simpleicons.org/${skill.icon}`}
+                        <div className="relative h-full w-full">
+                          <Image
+                            src={
+                              skill.isLocal
+                                ? skill.icon
+                                : `https://cdn.simpleicons.org/${skill.icon}`
+                            }
                             alt={skill.name}
-                            className="w-full h-full object-contain transition-all"
+                            width={64}
+                            height={64}
+                            unoptimized={!skill.isLocal}
+                            className="h-full w-full object-contain transition-all"
                             style={{
-                              filter: skill.name === 'Convex'
-                                ? 'none'
-                                : skill.isLocal 
-                                  ? 'sepia(0.3) hue-rotate(180deg) saturate(0.6) brightness(0.95) contrast(1.1)'
-                                  : 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)',
+                              filter:
+                                skill.name === 'Convex'
+                                  ? 'none'
+                                  : skill.isLocal
+                                    ? 'sepia(0.3) hue-rotate(180deg) saturate(0.6) brightness(0.95) contrast(1.1)'
+                                    : 'sepia(0.4) hue-rotate(15deg) saturate(0.5) brightness(0.9) contrast(1.1)',
                             }}
                             onMouseEnter={(e) => {
                               if (skill.name === 'Convex') {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getLocale, getTranslations } from 'next-intl/server'
@@ -123,10 +124,13 @@ export default async function BlogPostPage({ params }: Props) {
 
           {post.featured_image_url && (
             <div className="group relative aspect-video w-full overflow-hidden rounded-lg">
-              <img
+              <Image
                 src={post.featured_image_url}
                 alt={post.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, 896px"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                priority
               />
             </div>
           )}
@@ -166,9 +170,14 @@ export default async function BlogPostPage({ params }: Props) {
               url: siteConfig.url,
             },
             publisher: {
-              '@type': 'Organization',
+              '@type': 'Person',
               name: siteConfig.name,
               url: siteConfig.url,
+              sameAs: [
+                siteConfig.links.github,
+                siteConfig.links.linkedin,
+                siteConfig.links.x,
+              ],
             },
             mainEntityOfPage: {
               '@type': 'WebPage',

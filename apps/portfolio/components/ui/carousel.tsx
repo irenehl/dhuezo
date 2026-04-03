@@ -12,6 +12,8 @@ interface CarouselProps {
   className?: string
   autoPlay?: boolean
   autoPlayInterval?: number
+  /** When true, autoplay pauses while the pointer is over the carousel. Disable for full-bleed strips where the cursor is usually inside the viewport. @default true */
+  pauseOnHover?: boolean
   showArrows?: boolean
   showDots?: boolean
   slidesToShow?: number
@@ -25,6 +27,7 @@ export function Carousel({
   className,
   autoPlay = true,
   autoPlayInterval = 5000,
+  pauseOnHover = true,
   showArrows = true,
   showDots = true,
   slidesToShow = 3,
@@ -112,6 +115,14 @@ export function Carousel({
     measureStrip()
   }, [layout, measureStrip, totalSlides])
 
+  React.useEffect(() => {
+    if (layout !== 'strip') return
+    const id = window.setTimeout(() => {
+      measureStrip()
+    }, 150)
+    return () => window.clearTimeout(id)
+  }, [layout, measureStrip, totalSlides])
+
   React.useLayoutEffect(() => {
     if (layout !== 'strip') return
     const vp = viewportRef.current
@@ -171,8 +182,12 @@ export function Carousel({
     }
   }, [effectiveAutoPlay, autoPlayInterval, isPaused, maxIndex])
 
-  const handleMouseEnter = (): void => setIsPaused(true)
-  const handleMouseLeave = (): void => setIsPaused(false)
+  const handleMouseEnter = (): void => {
+    if (pauseOnHover) setIsPaused(true)
+  }
+  const handleMouseLeave = (): void => {
+    if (pauseOnHover) setIsPaused(false)
+  }
 
   const showNav = maxIndex > 0
 

@@ -9,6 +9,7 @@ import { BackgroundLayers } from '@/components/layout/BackgroundLayers'
 import { DecorativeDevConsole } from '@/components/layout/DecorativeDevConsole'
 import { DecorativeElements } from '@/components/layout/DecorativeElements'
 import { SiteChromeEffects } from '@/components/layout/SiteChromeEffects'
+import { getTranslations } from 'next-intl/server'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 import type { Locale } from '@/i18n/config'
 
@@ -22,7 +23,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await params
-  return generateSiteMetadata({ locale })
+  const t = await getTranslations({ locale, namespace: 'site' })
+  const rawKeywords = t.raw('keywords')
+  const keywords = Array.isArray(rawKeywords)
+    ? rawKeywords.filter((k): k is string => typeof k === 'string')
+    : undefined
+  return generateSiteMetadata({ locale, keywords })
 }
 
 export default async function LocaleLayout({

@@ -13,7 +13,14 @@ import { MobileMenu } from './MobileMenu'
 import { getNavItems } from '@/lib/navigation'
 import type { Locale } from '@/i18n/config'
 
-export function SiteHeader(): JSX.Element {
+export interface SiteHeaderProps {
+  /** Home: hide desktop links; rely on scroll rail + mobile menu. */
+  variant?: 'default' | 'minimal'
+}
+
+export function SiteHeader({
+  variant = 'default',
+}: SiteHeaderProps): JSX.Element {
   const t = useTranslations()
   const locale = useLocale()
   const navItems = getNavItems(t, locale as Locale)
@@ -41,7 +48,7 @@ export function SiteHeader(): JSX.Element {
     <>
       <motion.nav
         className={cn(
-          'fixed top-0 w-full z-40 border-b-2 border-border backdrop-blur-xl transition-colors duration-300',
+          'fixed top-0 z-40 w-full border-b border-border/50 pt-[env(safe-area-inset-top,0px)] backdrop-blur-xl transition-colors duration-300',
           isScrolled ? 'bg-background/95' : 'bg-background/85',
         )}
         initial={{ y: -100 }}
@@ -66,19 +73,21 @@ export function SiteHeader(): JSX.Element {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors relative group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-              </a>
-            ))}
-          </div>
+          {/* Desktop Navigation (full header only; home uses scroll rail) */}
+          {variant === 'default' ? (
+            <div className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors relative group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+                </a>
+              ))}
+            </div>
+          ) : null}
 
           {/* Right Side Controls */}
           <div className="flex items-center gap-3">

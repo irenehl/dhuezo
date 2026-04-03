@@ -71,6 +71,13 @@
   }
 }
 
+@layer utilities {
+  /** Matches fixed header height (5rem) plus iOS safe-area inset for anchor scrolling */
+  .scroll-mt-header {
+    scroll-margin-top: calc(5rem + env(safe-area-inset-top, 0px));
+  }
+}
+
 /* Custom Font Assignments */
 .font-display {
   font-family: var(--font-lora), serif;

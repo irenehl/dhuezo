@@ -45,6 +45,10 @@ export interface ProjectFrontmatter {
   title: string
   description: string
   tags: string[]
+  /** Ownership / scope (shown on project cards when set). */
+  role?: string
+  outcome?: string
+  constraint?: string
 }
 
 export interface MarkdownProject extends Omit<Project, 'description'> {
