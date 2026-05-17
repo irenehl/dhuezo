@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { PostBody } from '@/components/blog/PostBody'
-import { Footer } from '@/components/layout/Footer'
-import { SiteHeader } from '@/components/layout/SiteHeader'
+import { PostBody } from '@/components/blog/post-body'
+import { Footer } from '@/components/layout/footer'
+import { SiteHeader } from '@/components/layout/site-header'
 import { siteConfig } from '@/lib/config'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 import { projectContentService } from '@/lib/services/project-content-service'
@@ -141,7 +141,11 @@ export default async function ProjectPage({ params }: Props) {
           </footer>
         </article>
       </main>
-      <Footer />
+      <div className="max-w-4xl mx-auto px-6 pb-12 w-full">
+        <div className="border-t border-border/40 pt-8">
+          <Footer />
+        </div>
+      </div>
 
       <script
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data requires dangerouslySetInnerHTML
@@ -149,11 +153,19 @@ export default async function ProjectPage({ params }: Props) {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'CreativeWork',
+            '@id': projectUrl,
             name: project.title,
             description: project.description,
             url: projectUrl,
-            ...(project.deployed_url && { url: project.deployed_url }),
-            ...(project.repo_url && { codeRepository: project.repo_url }),
+            ...(project.repo_url ? { codeRepository: project.repo_url } : {}),
+            ...(project.deployed_url
+              ? {
+                  potentialAction: {
+                    '@type': 'ViewAction',
+                    target: project.deployed_url,
+                  },
+                }
+              : {}),
             creator: {
               '@type': 'Person',
               name: siteConfig.name,

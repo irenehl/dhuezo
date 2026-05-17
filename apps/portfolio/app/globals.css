@@ -200,17 +200,6 @@ html {
   }
 }
 
-/* Hide default cursor on desktop */
-@media (min-width: 768px) {
-  * {
-    cursor: none !important;
-  }
-
-  a, button, input, textarea, select {
-    cursor: none !important;
-  }
-}
-
 /* Stroke Text Effect for Light Mode Only */
 .stroke-text {
   -webkit-text-stroke: 1px #18181b;

@@ -43,6 +43,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     })
 
+    entries.push({
+      url: `${baseUrl}/${locale}/about`,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    })
+    entries.push({
+      url: `${baseUrl}/${locale}/projects`,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    })
+
     const latestPostDate =
       posts.length > 0
         ? new Date(

@@ -27,6 +27,7 @@ export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
         name: siteConfig.name,
         url: siteConfig.url,
         jobTitle,
+        description: t('homeDescription'),
         ...(knowsAbout.length > 0 ? { knowsAbout } : {}),
         sameAs: [
           siteConfig.links.github,

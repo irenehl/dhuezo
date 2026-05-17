@@ -2,23 +2,28 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 
-import { Footer } from '@/components/layout/Footer'
-import { SiteHeader } from '@/components/layout/SiteHeader'
+import { Footer } from '@/components/layout/footer'
+import { SiteHeader } from '@/components/layout/site-header'
 import { formatDate } from '@/lib/blog'
-import { getPublishedPostsWithMeta } from '@/lib/services/blog-helpers'
-import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/lib/config'
+import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
+import { getPublishedPostsWithMeta } from '@/lib/services/blog-helpers'
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale()
+  const t = await getTranslations({ locale, namespace: 'site' })
+  const rawKeywords = t.raw('keywords')
+  const keywords = Array.isArray(rawKeywords)
+    ? rawKeywords.filter((k): k is string => typeof k === 'string')
+    : undefined
   const blogUrl = `${siteConfig.url}/${locale}/blog`
-  
+
   return generateSiteMetadata({
     locale,
-    title: 'Blog - Daniela Huezo',
-    description:
-      'Architecture notes, post-mortems, and essays from real projects. Read this if you\'re deciding whether to trust me with the hard problems.',
+    title: t('blogIndexTitle'),
+    description: t('blogIndexDescription'),
     url: blogUrl,
+    ...(keywords && keywords.length > 0 ? { keywords } : {}),
   })
 }
 
@@ -140,7 +145,11 @@ export default async function BlogPage(): Promise<JSX.Element> {
           )}
         </div>
       </main>
-      <Footer />
+      <div className="max-w-4xl mx-auto px-6 pb-12 w-full">
+        <div className="border-t border-border/40 pt-8">
+          <Footer />
+        </div>
+      </div>
     </div>
   )
 }

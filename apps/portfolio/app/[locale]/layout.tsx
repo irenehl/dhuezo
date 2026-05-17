@@ -1,17 +1,16 @@
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import { routing } from '@/i18n/routing'
+
+import { ClarityScript } from '@/components/analytics/clarity-script'
+import { CommandPalette } from '@/components/layout/command-palette'
 import { Toaster } from '@/components/ui/toaster'
-import { ClarityScript } from '@/components/analytics/ClarityScript'
-import { BackgroundLayers } from '@/components/layout/BackgroundLayers'
-import { DecorativeDevConsole } from '@/components/layout/DecorativeDevConsole'
-import { DecorativeElements } from '@/components/layout/DecorativeElements'
-import { SiteChromeEffects } from '@/components/layout/SiteChromeEffects'
-import { getTranslations } from 'next-intl/server'
-import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 import type { Locale } from '@/i18n/config'
+import { routing } from '@/i18n/routing'
+import { getCommandPaletteItems } from '@/lib/command-palette-items'
+import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
+import { FloatingFlowers } from '@/components/layout/floating-flowers'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -45,17 +44,15 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages({ locale })
+  const commandPaletteItems = await getCommandPaletteItems(locale)
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      <SiteChromeEffects />
-      <BackgroundLayers />
-      <DecorativeElements />
-      {process.env.NODE_ENV === 'development' ? <DecorativeDevConsole /> : null}
+      <CommandPalette items={commandPaletteItems} />
+      <FloatingFlowers />
       {children}
       <Toaster />
       <ClarityScript />
     </NextIntlClientProvider>
   )
 }
-

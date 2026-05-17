@@ -2,7 +2,7 @@
   "site": {
     "name": "Daniela Huezo",
     "description": "Tech Lead senior e ingeniera de software",
-    "homeTitle": "Daniela Huezo - Tech Lead senior e ingeniera de software | Embajadora de Cursor",
+    "homeTitle": "Daniela Huezo · Tech lead senior e ingeniera de software | El Salvador · Embajadora de Cursor",
     "homeDescription": "Tech lead senior y full stack. Arquitectura, entrega y liderazgo de la estrategia a producción — proyectos, escritura y trayectoria.",
     "keywords": [
       "Daniela Huezo",
@@ -28,7 +28,15 @@
       "Node.js",
       "Arquitectura de sistemas",
       "Entrega de producto"
-    ]
+    ],
+    "aboutTitle": "Acerca de — Daniela Huezo | Tech lead senior e ingeniera de software",
+    "aboutDescription": "Cómo trabajo, mi trayectoria y en qué me enfoco al liderar ingeniería que llega a producción.",
+    "stackTitle": "Stack y herramientas — Daniela Huezo",
+    "stackDescription": "Lenguajes, frameworks e infraestructura que uso para diseñar, construir y operar productos fiables.",
+    "projectsIndexTitle": "Proyectos — Daniela Huezo | Trabajos destacados",
+    "projectsIndexDescription": "Casos y builds: arquitectura, entrega y resultados de la estrategia a producción.",
+    "blogIndexTitle": "Blog — Daniela Huezo",
+    "blogIndexDescription": "Notas de arquitectura, post-mortems y ensayos desde proyectos reales, para equipos que toman decisiones técnicas difíciles."
   },
   "hero": {
     "eyebrow": "Tech lead · Full stack · Obsesión por producción",
@@ -59,12 +67,39 @@
   },
   "navigation": {
     "projects": "Proyectos",
-    "stage": "El Escenario",
-    "timeline": "Línea de Tiempo",
+    "skills": "Stack",
+    "stage": "Escritura",
+    "timeline": "Experiencia",
+    "blog": "Blog",
     "about": "Acerca de"
   },
   "common": {
     "openMenu": "Abrir menú"
+  },
+  "commandPalette": {
+    "label": "Buscar y navegar",
+    "placeholder": "Busca páginas, proyectos y publicaciones…",
+    "empty": "Sin resultados.",
+    "footerHint": "Navega y busca en el sitio. Flechas para moverte, Enter para abrir.",
+    "openAria": "Abrir paleta de comandos",
+    "navHint": "Sección",
+    "blogHint": "Archivo",
+    "openProject": "Abrir proyecto",
+    "openPost": "Abrir publicación",
+    "group": {
+      "navigate": "Navegar",
+      "projects": "Proyectos",
+      "posts": "Escritura"
+    },
+    "nav": {
+      "intro": "Inicio",
+      "projects": "Proyectos",
+      "skills": "Stack",
+      "experience": "Experiencia",
+      "writing": "Última escritura",
+      "about": "Acerca de",
+      "blogArchive": "Archivo del blog"
+    }
   },
   "scrollRail": {
     "ariaLabel": "Secciones de esta página",
@@ -91,6 +126,7 @@
     "title": "Proyectos",
     "subtitle": "Trabajos Seleccionados",
     "description": "Cada tarjeta es un trabajo entregado — qué lideré, qué salió a producción y dónde puedes comprobarlo en vivo.",
+    "listEmpty": "Los proyectos aparecerán aquí cuando el contenido esté publicado.",
     "filtersAria": "Filtrar proyectos por categoría",
     "featuredBadge": "Destacado",
     "filters": {
@@ -125,6 +161,7 @@
   "stage": {
     "title": "Escritura",
     "subtitle": "Últimos Pensamientos",
+    "viewAll": "Ver todo →",
     "description": "Perspectivas sobre desarrollo, liderazgo y lecciones aprendidas en el camino.",
     "featured": "Destacado",
     "moreLabel": "Del archivo",
@@ -137,8 +174,9 @@
     }
   },
   "experience": {
-    "title": "Las Eras",
-    "subtitle": "Trayectoria Profesional",
+    "title": "Experiencia",
+    "subtitle": "Trayectoria",
+    "empty": "La experiencia aparecerá aquí cuando el contenido esté publicado.",
     "description": "De builder a tech lead: ownership de sistemas, liderazgo de equipo y las lecciones que vienen con la seniority.",
     "filtersAria": "Filtrar experiencia por tipo",
     "expandDetails": "Ver responsabilidades",
@@ -240,6 +278,7 @@
     "cellVibe3": "Protagonista"
   },
   "footer": {
+    "tagline": "Daniela Huezo — tech lead senior e ingeniera de software, El Salvador · remoto.",
     "cozyMessage": "Construido con café, flores y demasiadas canciones de Taylor Swift",
     "top": "Arriba",
     "toggleTheme": "Cambiar Tema"

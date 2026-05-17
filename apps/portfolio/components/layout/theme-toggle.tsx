@@ -24,7 +24,7 @@ export function ThemeToggle(): JSX.Element {
     <button
       type="button"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="hidden md:flex items-center justify-center w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-400 transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:border-zinc-600"
+      className="flex items-center justify-center w-9 h-9 rounded-full border border-border/60 bg-card/40 text-foreground hover:bg-card hover:border-border/80 transition-all shadow-sm backdrop-blur-sm"
       onClick={handleToggle}
     >
       {isDark ? (
@@ -35,5 +35,3 @@ export function ThemeToggle(): JSX.Element {
     </button>
   )
 }
-
-

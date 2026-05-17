@@ -2,7 +2,7 @@
   "site": {
     "name": "Daniela Huezo",
     "description": "Senior Tech Lead & Software Engineer",
-    "homeTitle": "Daniela Huezo - Senior Tech Lead & Software Engineer | Cursor Ambassador",
+    "homeTitle": "Daniela Huezo · Senior Tech Lead & Software Engineer | El Salvador · Cursor Ambassador",
     "homeDescription": "Senior tech lead and full-stack engineer. Architecture, delivery, and leadership from strategy to production — projects, writing, and experience.",
     "keywords": [
       "Daniela Huezo",
@@ -28,7 +28,15 @@
       "Node.js",
       "System Architecture",
       "Product Delivery"
-    ]
+    ],
+    "aboutTitle": "About — Daniela Huezo | Senior Tech Lead & Software Engineer",
+    "aboutDescription": "How I work, my background, and what I focus on as a tech lead shipping production systems.",
+    "stackTitle": "Stack & tools — Daniela Huezo",
+    "stackDescription": "Languages, frameworks, and infrastructure I use to design, build, and operate reliable products.",
+    "projectsIndexTitle": "Projects — Daniela Huezo | Selected work",
+    "projectsIndexDescription": "Case studies and builds: architecture, delivery, and outcomes from strategy through production.",
+    "blogIndexTitle": "Blog — Daniela Huezo",
+    "blogIndexDescription": "Architecture notes, post-mortems, and essays from real projects—written for teams making hard technical decisions."
   },
   "hero": {
     "eyebrow": "Tech lead · Full-stack · Production-obsessed",
@@ -59,12 +67,39 @@
   },
   "navigation": {
     "projects": "Projects",
-    "stage": "The Stage",
-    "timeline": "Timeline",
+    "skills": "Stack",
+    "stage": "Writing",
+    "timeline": "Experience",
+    "blog": "Blog",
     "about": "About"
   },
   "common": {
     "openMenu": "Open menu"
+  },
+  "commandPalette": {
+    "label": "Search and navigate",
+    "placeholder": "Search pages, projects, and posts…",
+    "empty": "No matches.",
+    "footerHint": "Navigate and search across the site. Use arrow keys to move, Enter to open.",
+    "openAria": "Open command palette",
+    "navHint": "Section",
+    "blogHint": "Archive",
+    "openProject": "Open project",
+    "openPost": "Open post",
+    "group": {
+      "navigate": "Navigate",
+      "projects": "Projects",
+      "posts": "Writing"
+    },
+    "nav": {
+      "intro": "Home / Intro",
+      "projects": "Projects",
+      "skills": "Stack",
+      "experience": "Experience",
+      "writing": "Latest writing",
+      "about": "About",
+      "blogArchive": "Blog archive"
+    }
   },
   "scrollRail": {
     "ariaLabel": "Sections on this page",
@@ -91,6 +126,7 @@
     "title": "Projects",
     "subtitle": "Selected Work",
     "description": "Each card is a shipped slice of work — what I owned, what we shipped, and where you can verify it live.",
+    "listEmpty": "Shipped work will appear here when project content is published.",
     "filtersAria": "Filter projects by category",
     "featuredBadge": "Featured",
     "filters": {
@@ -125,6 +161,7 @@
   "stage": {
     "title": "Writing",
     "subtitle": "Latest Thoughts",
+    "viewAll": "View all →",
     "description": "Insights on development, leadership, and lessons learned along the way.",
     "featured": "Spotlight",
     "moreLabel": "From the archive",
@@ -137,8 +174,9 @@
     }
   },
   "experience": {
-    "title": "The Eras",
+    "title": "Experience",
     "subtitle": "Career Journey",
+    "empty": "Experience will appear here once content is published.",
     "description": "From hands-on builder to tech lead: systems ownership, team leadership, and the lessons that come with seniority.",
     "filtersAria": "Filter experience by type",
     "expandDetails": "Show responsibilities",
@@ -240,6 +278,7 @@
     "cellVibe3": "Main character"
   },
   "footer": {
+    "tagline": "Daniela Huezo — senior tech lead & software engineer, El Salvador · remote.",
     "cozyMessage": "Built with coffee, flowers, and way too many Taylor Swift songs",
     "top": "Top",
     "toggleTheme": "Toggle Theme"

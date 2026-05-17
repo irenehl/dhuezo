@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getLocale, getTranslations } from 'next-intl/server'
 
-import { PostBody } from '@/components/blog/PostBody'
-import { PostToc } from '@/components/blog/PostToc'
-import { Footer } from '@/components/layout/Footer'
-import { SiteHeader } from '@/components/layout/SiteHeader'
+import { PostBody } from '@/components/blog/post-body'
+import { PostToc } from '@/components/blog/post-toc'
+import { Footer } from '@/components/layout/footer'
+import { SiteHeader } from '@/components/layout/site-header'
 import { formatDate, getAllPosts, getPostBySlug } from '@/lib/blog'
 import { siteConfig } from '@/lib/config'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
@@ -151,7 +151,11 @@ export default async function BlogPostPage({ params }: Props) {
         </article>
       </main>
       <PostToc contentHtml={post.content} />
-      <Footer />
+      <div className="max-w-4xl mx-auto px-6 pb-12 w-full">
+        <div className="border-t border-border/40 pt-8">
+          <Footer />
+        </div>
+      </div>
 
       <script
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data requires dangerouslySetInnerHTML

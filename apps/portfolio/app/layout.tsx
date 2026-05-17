@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import { Lora, DM_Sans, Caveat } from 'next/font/google'
+import { headers } from 'next/headers'
 
 import './globals.css'
 import { routing } from '@/i18n/routing'
-import { ThemeProvider } from '@/components/layout/ThemeProvider'
+import { ThemeProvider } from '@/components/layout/theme-provider'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 
 // Display/Headers font
@@ -52,14 +53,17 @@ export const metadata: Metadata = {
   creator: 'Daniela Huezo',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const headersList = await headers()
+  const locale = headersList.get('x-site-locale') ?? routing.defaultLocale
+
   return (
     <html
-      lang={routing.defaultLocale}
+      lang={locale}
       className="scroll-smooth"
       suppressHydrationWarning
     >
