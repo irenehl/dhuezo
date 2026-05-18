@@ -78,12 +78,18 @@ export async function getCommandPaletteItems(
     )
     const sorted = [...projects].sort((a, b) => a.order_index - b.order_index)
     for (const p of sorted) {
+      const href =
+        p.skip_detail_page && p.deployed_url
+          ? p.deployed_url
+          : p.skip_detail_page && p.repo_url
+            ? p.repo_url
+            : `/${locale}/projects/${p.project_id}`
       items.push({
         id: `project-${p.project_id}`,
         group: 'project',
         label: p.title,
         hint: t('openProject'),
-        href: `/${locale}/projects/${p.project_id}`,
+        href,
         keywords: [...(p.tags ?? [])],
       })
     }

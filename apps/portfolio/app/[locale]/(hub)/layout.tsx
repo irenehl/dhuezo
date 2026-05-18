@@ -20,8 +20,8 @@ export default async function HubLayout({
         <main id="main-content" className="mt-12 md:mt-16">
           <PageTransition>{children}</PageTransition>
         </main>
-        <div className="mt-16 border-t border-border/40 pt-8">
-          <Footer />
+        <div className="mt-16">
+          <Footer locale={locale} />
         </div>
       </div>
     </>

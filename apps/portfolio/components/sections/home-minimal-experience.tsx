@@ -5,23 +5,20 @@ import { formatExperiencePeriod } from '@/lib/format-experience-period'
 import { FadeUp, FadeUpStagger, FadeUpItem } from '@/components/ui/fade-up'
 
 const skills = [
+  'Cursor',
+  'GitHub',
   'TypeScript',
   'React',
   'Next.js',
   'Tailwind CSS',
   'Node.js',
   'NestJS',
-  '.NET',
   'PostgreSQL',
   'MongoDB',
-  'SQL Server',
   'Prisma',
   'Docker',
   'AWS',
-  'Azure',
-  'Vercel',
-  'OpenAI',
-  'Cursor',
+  'Vercel'
 ]
 
 export async function HomeMinimalExperience({
@@ -49,30 +46,15 @@ export async function HomeMinimalExperience({
         </FadeUp>
 
         <FadeUpStagger className="flex flex-wrap gap-2">
-          {skills.map((skill, index) => {
-            // Create a subtle fade effect for the last few items to match the reference image's aesthetic
-            const isFaded = index >= skills.length - 4
-            const isVeryFaded = index >= skills.length - 2
-            
-            return (
-              <FadeUpItem key={skill}>
-                <span 
-                  className={`
-                    inline-flex items-center justify-center rounded-full border px-4 py-1.5 text-sm font-mono transition-all duration-300
-                    hover:scale-105 hover:border-foreground/40 hover:text-foreground hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:bg-foreground/5
-                    ${isVeryFaded 
-                      ? 'border-border/20 text-foreground/30' 
-                      : isFaded 
-                        ? 'border-border/40 text-foreground/50' 
-                        : 'border-border/60 text-foreground/80'
-                    }
-                  `}
-                >
-                  {skill}
-                </span>
-              </FadeUpItem>
-            )
-          })}
+          {skills.map((skill) => (
+            <FadeUpItem key={skill}>
+              <span
+                className="inline-flex items-center justify-center rounded-full border border-border/38 px-4 py-1.5 text-sm font-mono text-foreground/80 transition-all duration-300 hover:scale-105 hover:border-foreground/28 hover:bg-foreground/5 hover:text-foreground hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+              >
+                {skill}
+              </span>
+            </FadeUpItem>
+          ))}
         </FadeUpStagger>
       </div>
 
@@ -94,7 +76,7 @@ export async function HomeMinimalExperience({
               {experiences.map((exp, index) => (
                 <FadeUpItem key={exp.id}>
                   {/* Container has padding and bottom border, except for the last item */}
-                  <div className={`flex flex-col gap-2 py-6 ${index !== experiences.length - 1 ? 'border-b border-border/40' : ''}`}>
+                  <div className={`flex flex-col gap-2 py-6 ${index !== experiences.length - 1 ? 'border-b border-border/26' : ''}`}>
                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                       <h3 className="text-lg font-medium text-foreground flex items-center gap-2">
                         {exp.company}

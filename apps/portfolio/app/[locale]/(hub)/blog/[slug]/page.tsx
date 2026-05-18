@@ -1,13 +1,11 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 
 import { PostBody } from '@/components/blog/post-body'
 import { PostToc } from '@/components/blog/post-toc'
-import { Footer } from '@/components/layout/footer'
-import { SiteHeader } from '@/components/layout/site-header'
+import { Link } from '@/i18n/routing'
 import { formatDate, getAllPosts, getPostBySlug } from '@/lib/blog'
 import { siteConfig } from '@/lib/config'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
@@ -20,7 +18,7 @@ type Props = {
 export async function generateStaticParams() {
   const postsEn = await getAllPosts('en')
   const postsEs = await getAllPosts('es')
-  
+
   return [
     ...postsEn.map((post) => ({
       slug: post.slug,
@@ -60,10 +58,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function HubBlogPostPage({ params }: Props) {
   const { slug, locale } = await params
   const localeValue = locale as 'en' | 'es'
-  const t = await getTranslations('blog.post')
+  const t = await getTranslations({ locale: localeValue, namespace: 'blog' })
   const post = await getPostBySlug(slug, localeValue)
 
   if (!post) {
@@ -76,43 +74,41 @@ export default async function BlogPostPage({ params }: Props) {
   const postUrl = `${siteConfig.url}/${locale}/blog/${slug}`
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <SiteHeader />
-      <main className="flex-1 max-w-4xl mx-auto px-6 pt-48 pb-12 w-full">
-        <article className="space-y-10 animate-in fade-in-50 duration-500" id="blog-post">
-          <header className="space-y-4">
-            <div className="flex items-center justify-between">
+    <>
+      <div className="w-full animate-in fade-in-50 duration-500 xl:grid xl:grid-cols-[minmax(0,1fr)_11.5rem] xl:gap-12 xl:items-start">
+        <article className="min-w-0 space-y-10" id="blog-post">
+          <header className="space-y-5">
+            <div>
               <Link
-                className="inline-block font-mono text-accent text-xs transition-colors hover:text-accent/80"
-                href={`/${locale}#stage`}
+                href="/blog"
+                className="inline-block font-mono text-xs text-muted-foreground transition-colors hover:text-accent"
               >
-                {t('backToBlog')}
+                {t('post.backToBlog')}
               </Link>
             </div>
-            <h1 className="font-display font-semibold text-3xl text-foreground tracking-tight sm:text-4xl">
+            <h1 className="font-header text-[2rem] font-normal leading-tight tracking-tight text-foreground text-balance sm:text-4xl lg:text-[2.55rem]">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-3">
-              <time className="font-mono text-muted-foreground text-xs">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-muted-foreground text-xs">
+              <time dateTime={post.created_at}>
                 {formatDate(post.created_at, locale)}
               </time>
               {enrichedPost?.readingTimeText && (
                 <>
-                  <span className="h-3 w-px bg-border" />
-                  <span className="font-mono text-muted-foreground text-xs">
-                    {enrichedPost.readingTimeText}
+                  <span aria-hidden className="text-muted-foreground/35">
+                    |
                   </span>
+                  <span>{enrichedPost.readingTimeText}</span>
                 </>
               )}
               {enrichedPost?.tags && enrichedPost.tags.length > 0 && (
                 <>
-                  <span className="h-3 w-px bg-border" />
-                  <div className="flex gap-2">
+                  <span aria-hidden className="text-muted-foreground/35">
+                    |
+                  </span>
+                  <div className="flex flex-wrap gap-x-2 gap-y-1">
                     {enrichedPost.tags.map((tag) => (
-                      <span
-                        className="font-mono text-accent/70 text-xs"
-                        key={tag}
-                      >
+                      <span className="text-muted-foreground/90" key={tag}>
                         #{tag}
                       </span>
                     ))}
@@ -135,26 +131,19 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           )}
 
-          <PostBody
-            contentHtml={post.content}
-            className="animate-in fade-in-50 duration-500"
-          />
+          <PostBody contentHtml={post.content} />
 
-          <footer className="border-border/60 border-t pt-8">
+          <footer className="border-border/30 border-t pt-8">
             <Link
-              className="inline-block font-mono text-accent text-xs transition-colors hover:text-accent/80"
-              href={`/${locale}#stage`}
+              href="/blog"
+              className="inline-block font-mono text-xs text-muted-foreground transition-colors hover:text-accent"
             >
-              {t('backToBlogFooter')}
+              {t('post.backToBlogFooter')}
             </Link>
           </footer>
         </article>
-      </main>
-      <PostToc contentHtml={post.content} />
-      <div className="max-w-4xl mx-auto px-6 pb-12 w-full">
-        <div className="border-t border-border/40 pt-8">
-          <Footer />
-        </div>
+
+        <PostToc contentHtml={post.content} />
       </div>
 
       <script
@@ -180,6 +169,7 @@ export default async function BlogPostPage({ params }: Props) {
               sameAs: [
                 siteConfig.links.github,
                 siteConfig.links.linkedin,
+                siteConfig.links.luma,
                 siteConfig.links.x,
               ],
             },
@@ -191,7 +181,6 @@ export default async function BlogPostPage({ params }: Props) {
         }}
         type="application/ld+json"
       />
-    </div>
+    </>
   )
 }
-

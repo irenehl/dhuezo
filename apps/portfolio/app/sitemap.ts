@@ -79,6 +79,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     for (const project of projects) {
+      if (project.skip_detail_page) {
+        continue
+      }
       entries.push({
         url: `${baseUrl}/${locale}/projects/${project.project_id}`,
         lastModified: new Date(project.updated_at || project.created_at),

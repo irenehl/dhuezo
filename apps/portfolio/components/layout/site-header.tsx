@@ -27,7 +27,7 @@ export function SiteHeader(): JSX.Element {
     <nav className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
       {/* Left side: Navigation Links Pill */}
       <div className="flex w-full overflow-x-auto custom-scroll sm:w-auto sm:overflow-visible pb-2 sm:pb-0">
-        <div className="flex items-center rounded-full bg-card/40 border border-border/60 p-1.5 backdrop-blur-sm shadow-sm relative">
+        <div className="flex items-center rounded-full bg-card/40 border border-border/22 p-1.5 backdrop-blur-sm shadow-sm relative">
           {navItems.map((item) => {
             // For the root path, we need an exact match to avoid highlighting it on every route
             const isRootPath = item.pathPattern === '/'
@@ -46,14 +46,13 @@ export function SiteHeader(): JSX.Element {
                 {isActive && (
                   <motion.div
                     layoutId="activeNavIndicator"
-                    className="absolute inset-0 rounded-full bg-background shadow-sm border border-border/40"
+                    className="absolute bottom-0 left-1/2 h-[2px] w-4 -translate-x-1/2 rounded-full bg-foreground"
                     initial={false}
                     transition={{
                       type: 'spring',
                       stiffness: 500,
                       damping: 35,
                     }}
-                    style={{ zIndex: -1 }}
                   />
                 )}
                 {item.label}
@@ -68,7 +67,7 @@ export function SiteHeader(): JSX.Element {
         <button
           type="button"
           onClick={openPalette}
-          className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/40 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-border/80 hover:text-foreground hover:bg-card shadow-sm backdrop-blur-sm"
+          className="inline-flex items-center gap-2 rounded-full border border-border/22 bg-card/40 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-border/32 hover:text-foreground hover:bg-card shadow-sm backdrop-blur-sm"
           aria-label={tPalette('openAria')}
         >
           <Search className="size-4" aria-hidden />

@@ -49,6 +49,8 @@ export interface ProjectFrontmatter {
   role?: string
   outcome?: string
   constraint?: string
+  /** If true, skip the portfolio case-study route and link out to deployed/repo only. */
+  skipDetailPage?: boolean
 }
 
 export interface MarkdownProject extends Omit<Project, 'description'> {

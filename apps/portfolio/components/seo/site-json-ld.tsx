@@ -17,6 +17,7 @@ export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
 
   const personId = `${siteConfig.url}/#person`
   const websiteId = `${siteUrl}/#website`
+  const photoUrl = new URL('/me.jpeg', `${siteConfig.url}/`).href
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -26,12 +27,14 @@ export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
         '@id': personId,
         name: siteConfig.name,
         url: siteConfig.url,
+        image: photoUrl,
         jobTitle,
         description: t('homeDescription'),
         ...(knowsAbout.length > 0 ? { knowsAbout } : {}),
         sameAs: [
           siteConfig.links.github,
           siteConfig.links.linkedin,
+          siteConfig.links.luma,
           siteConfig.links.x,
         ],
       },

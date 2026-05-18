@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { CalendarDays, Github, Linkedin, Mail } from 'lucide-react'
 
 import { siteConfig } from '@/lib/config'
 import { XIcon } from '@/components/icons/x-icon'
@@ -24,13 +24,20 @@ export async function MinimalHeroSection({
     },
     {
       href: tAbout('social.linkedin', {
-        default: 'https://linkedin.com/in/danielahuezo',
+        default: 'https://linkedin.com/in/irenehl',
       }),
       Icon: Linkedin,
       label: 'LinkedIn',
     },
     {
-      href: tAbout('social.x', { default: 'https://x.com/irenehl26__' }),
+      href: tAbout('social.luma', {
+        default: 'https://luma.com/user/irenehl',
+      }),
+      Icon: CalendarDays,
+      label: 'Luma',
+    },
+    {
+      href: tAbout('social.x', { default: 'https://x.com/irenehl__' }),
       Icon: XIcon,
       label: 'X',
     },
@@ -91,11 +98,12 @@ export async function MinimalHeroSection({
 
         <FadeUp delay={0.1} className="shrink-0">
           <Image
-            src="/logo-with-bg.svg"
+            src="/me.jpeg"
             alt="Daniela Huezo"
-            width={80}
-            height={80}
-            className="size-16 sm:size-20 rounded-full object-cover shadow-sm ring-1 ring-border/50"
+            width={320}
+            height={400}
+            priority
+            className="size-16 sm:size-20 rounded-full object-cover shadow-sm ring-1 ring-border/28"
           />
         </FadeUp>
       </div>
@@ -105,7 +113,7 @@ export async function MinimalHeroSection({
       </FadeUp>
 
       <FadeUp delay={0.3} className="pt-6">
-        <div className="relative flex overflow-hidden border-y border-border/40 bg-muted/20 py-3">
+        <div className="relative flex overflow-hidden border-y border-border/26 bg-muted/20 py-3">
           <div className="animate-marquee flex whitespace-nowrap">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="flex items-center gap-8 px-4 text-[11px] font-mono tracking-[0.2em] uppercase text-muted-foreground/80">

@@ -48,6 +48,10 @@ export function CommandPalette({ items }: CommandPaletteProps): JSX.Element {
   const navigate = useCallback(
     (href: string) => {
       setOpen(false)
+      if (href.startsWith('http://') || href.startsWith('https://')) {
+        window.location.assign(href)
+        return
+      }
       router.push(href)
     },
     [router],
@@ -85,7 +89,7 @@ export function CommandPalette({ items }: CommandPaletteProps): JSX.Element {
           className="flex max-h-[min(75vh,520px)] flex-col overflow-hidden bg-card text-card-foreground"
           shouldFilter
         >
-          <div className="flex items-center gap-2 border-b border-border px-3">
+          <div className="flex items-center gap-2 border-b border-border/25 px-3">
             <Search
               className="size-4 shrink-0 text-muted-foreground"
               aria-hidden
@@ -177,7 +181,7 @@ export function CommandPalette({ items }: CommandPaletteProps): JSX.Element {
               </Command.Group>
             ) : null}
           </Command.List>
-          <div className="border-t border-border px-3 py-2 text-xs text-muted-foreground">
+          <div className="border-t border-border/25 px-3 py-2 text-xs text-muted-foreground">
             {t('footerHint')}
           </div>
         </Command>

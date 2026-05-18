@@ -31,7 +31,6 @@ function getProjectOgImage(projectId?: string): string {
   }
 
   const projectOgImages: Record<string, string> = {
-    cerebryx: '/og-image-cerebryx.webp',
     'food-dice': '/og-image-food-dice.webp',
     'nameless-mindfulness-app': '/og-image-nameless.webp',
     // Add more project-specific OG images here as needed
@@ -55,7 +54,7 @@ export function generateMetadata({
   const siteTitle = title || siteConfig.name
   const siteDescription =
     description ||
-    'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale.'
+    'Senior tech lead and full-stack engineer: architecture, tech leadership, and delivery from strategy to production. Based in El Salvador—remote-friendly engagements for teams and founders.'
   const siteUrl = url || `${siteConfig.url}/${locale}`
 
   // Use static OG images from /public directory
@@ -122,7 +121,7 @@ export function generateMetadata({
       title: siteTitle,
       description: siteDescription,
       images: [siteImage],
-      creator: '@irenehl26__',
+      creator: '@irenehl__',
     },
     robots: {
       index: isProd,

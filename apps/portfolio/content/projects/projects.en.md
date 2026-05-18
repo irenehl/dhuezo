@@ -2,7 +2,7 @@
 projectId: cerebryx
 locale: en
 orderIndex: 1
-previewImageUrl: /og-image-cerebryx.webp
+skipDetailPage: true
 deployedUrl: https://cerebryx.vercel.app/
 repoUrl: https://github.com/irenehl/cerebryx
 featured: true

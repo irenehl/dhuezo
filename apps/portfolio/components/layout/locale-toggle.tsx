@@ -23,7 +23,7 @@ export function LocaleToggle(): JSX.Element {
       href={href}
       locale={targetLocale}
       aria-label={`Switch language to ${targetLocale.toUpperCase()}`}
-      className="flex items-center justify-center w-9 h-9 rounded-full border border-border/60 bg-card/40 text-xs font-medium text-foreground hover:bg-card hover:border-border/80 transition-all shadow-sm backdrop-blur-sm uppercase"
+      className="flex items-center justify-center w-9 h-9 rounded-full border border-border/22 bg-card/40 text-xs font-medium text-foreground hover:bg-card hover:border-border/32 transition-all shadow-sm backdrop-blur-sm uppercase"
     >
       {targetLocale}
     </Link>

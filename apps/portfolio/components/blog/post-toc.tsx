@@ -58,12 +58,15 @@ export function PostToc({ contentHtml }: { contentHtml: string }) {
   if (tocItems.length === 0) return null
 
   return (
-    <aside className="hidden xl:block fixed right-8 top-1/2 -translate-y-1/2 w-48 max-h-[80vh] overflow-y-auto animate-in fade-in-50 duration-500">
-      <nav className="space-y-2">
-        <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+    <aside
+      className="hidden w-full min-w-0 xl:block xl:sticky xl:top-28 xl:max-h-[calc(100vh-7rem)] xl:overflow-y-auto xl:pl-1 animate-in fade-in-50 duration-500"
+      aria-label="Table of contents"
+    >
+      <nav className="border-border/28 border-l pl-4">
+        <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Content
         </h3>
-        <ul className="space-y-1">
+        <ul className="space-y-1.5">
           {tocItems.map((item) => (
             <li key={item.id}>
               <a
@@ -75,12 +78,14 @@ export function PostToc({ contentHtml }: { contentHtml: string }) {
                     element.scrollIntoView({ behavior: 'smooth', block: 'start' })
                   }
                 }}
-                className={`block text-xs transition-colors truncate ${
+                className={`block truncate text-xs transition-colors ${
                   activeId === item.id
-                    ? 'text-foreground font-medium'
+                    ? 'font-medium text-foreground'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
-                style={{ paddingLeft: `${(item.level - 2) * 0.75}rem` }}
+                style={{
+                  paddingLeft: `${Math.max(0, item.level - 2) * 0.75}rem`,
+                }}
               >
                 {item.text}
               </a>

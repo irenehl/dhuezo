@@ -1,7 +1,15 @@
 import { getTranslations } from 'next-intl/server'
-import { projectContentService } from '@/lib/services/project-content-service'
+
+import { GithubContributionPanel } from '@/components/github/github-contribution-panel'
 import { FadeUp, FadeUpStagger, FadeUpItem } from '@/components/ui/fade-up'
-import { ProjectCard } from '@/components/ui/project-card'
+import { ProjectListEntry } from '@/components/ui/project-list-entry'
+import { siteConfig } from '@/lib/config'
+import {
+  buildContributionWeekGrid,
+  fetchGithubContributions,
+  githubLoginFromProfileUrl,
+} from '@/lib/github-contributions'
+import { projectContentService } from '@/lib/services/project-content-service'
 
 export async function HomeMinimalProjects({
   locale,
@@ -19,36 +27,129 @@ export async function HomeMinimalProjects({
     projects = []
   }
 
+  const entryTranslations = {
+    liveAriaLabel: t('liveAriaLabel', { default: 'Live deployment' }),
+    repoAriaLabel: t('repoAriaLabel', { default: 'Repository on GitHub' }),
+  }
+
+  const githubUsername = githubLoginFromProfileUrl(siteConfig.links.github)
+  const githubData =
+    githubUsername !== null
+      ? await fetchGithubContributions(githubUsername)
+      : null
+  const githubGrid =
+    githubData !== null ? buildContributionWeekGrid(githubData.contributions) : null
+
   return (
-    <section id="projects">
-      <div>
+    <section id="projects" className="scroll-mt-header">
+      <div className="space-y-8">
         <FadeUp>
-          {/* Using a smaller, uppercase header matching the reference */}
-          <h2 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase mb-6">
-            {t('title', { default: 'Projects' })}
-          </h2>
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground">
+                {t('activityEyebrow', { default: 'Cadence' })}
+              </p>
+              <p className="max-w-xl text-sm leading-relaxed text-muted-foreground/80">
+                {t('activityCaption', {
+                  default:
+                    'Rolling year of public GitHub activity (live). Private and client work is not shown here.',
+                })}
+              </p>
+            </div>
+            {githubData !== null &&
+            githubGrid !== null &&
+            githubGrid.weeks.length > 0 &&
+            githubUsername !== null ? (
+              <GithubContributionPanel
+                weeks={githubGrid.weeks}
+                profileUrl={siteConfig.links.github}
+                locale={locale}
+                labels={{
+                  totalLine: t('activityTotal', {
+                    count: githubData.total.lastYear,
+                    default:
+                      '{count, number} contributions in the last year',
+                  }),
+                  viewProfile: t('activityViewProfile', {
+                    default: 'Open GitHub profile',
+                  }),
+                  less: t('activityLess', { default: 'Less' }),
+                  more: t('activityMore', { default: 'More' }),
+                  gridAriaLabel: t('activityGridAriaLabel', {
+                    count: githubData.total.lastYear,
+                    default:
+                      'GitHub contribution heatmap: {count, number} contributions in the last year',
+                  }),
+                  cellTitle: (count, formattedDate) =>
+                    count === 0
+                      ? t('activityCellTitleNone', {
+                          date: formattedDate,
+                          default: 'No contributions on {date}',
+                        })
+                      : t('activityCellTitle', {
+                          count,
+                          date: formattedDate,
+                          default:
+                            '{count, number} contributions on {date}',
+                        }),
+                }}
+              />
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                {t('activityLoadError', {
+                  default:
+                    'Could not load GitHub activity right now. You can still open your profile:',
+                })}{' '}
+                <a
+                  href={siteConfig.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  {t('activityViewProfile', { default: 'Open GitHub profile' })}
+                </a>
+              </p>
+            )}
+          </div>
+        </FadeUp>
+
+        {/* Section header */}
+        <FadeUp delay={0.05}>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+            <div className="space-y-1">
+              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground">
+                {t('title', { default: 'Projects' })}
+              </p>
+              <h2 className="font-display text-xl font-medium tracking-tight text-foreground sm:text-2xl">
+                {t('subtitle', { default: 'Work' })}
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground/80 sm:text-right">
+              {t('description', {
+                default:
+                  'Shipped work. Titles open the live app or case study; GitHub when available.',
+              })}
+            </p>
+          </div>
         </FadeUp>
 
         {projects.length === 0 ? (
           <FadeUp delay={0.1}>
-            <p className="mt-8 text-sm text-muted-foreground">{t('listEmpty')}</p>
+            <p className="text-sm text-muted-foreground">{t('listEmpty')}</p>
           </FadeUp>
         ) : (
-          <div className="mt-6 border-t border-border/40">
-            <FadeUpStagger className="flex flex-col">
-              {projects.map((p) => (
-                <FadeUpItem key={p.project_id}>
-                  <ProjectCard 
-                    project={p}
-                    translations={{
-                      liveLink: t('liveLink', { default: 'Live' }),
-                      sourceLink: t('sourceLink', { default: 'Code' })
-                    }}
-                  />
-                </FadeUpItem>
-              ))}
-            </FadeUpStagger>
-          </div>
+          <FadeUpStagger>
+            {projects.map((project, i) => (
+              <FadeUpItem key={project.project_id}>
+                <ProjectListEntry
+                  locale={locale}
+                  project={project}
+                  index={i + 1}
+                  translations={entryTranslations}
+                />
+              </FadeUpItem>
+            ))}
+          </FadeUpStagger>
         )}
       </div>
     </section>

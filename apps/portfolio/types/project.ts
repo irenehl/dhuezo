@@ -16,6 +16,8 @@ export interface Project {
   outcome?: string | null
   /** Optional constraint or tradeoff worth naming. */
   constraint?: string | null
+  /** When true, no local /projects/[id] page — use live URL and repo only. */
+  skip_detail_page?: boolean
   created_at: string
   updated_at: string
 }

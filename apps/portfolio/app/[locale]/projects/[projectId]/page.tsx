@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
 import { PostBody } from '@/components/blog/post-body'
@@ -18,12 +18,15 @@ export async function generateStaticParams() {
   const projectsEn = await projectContentService.getAllProjects('en')
   const projectsEs = await projectContentService.getAllProjects('es')
   
+  const withDetailPage = (projects: typeof projectsEn) =>
+    projects.filter((p) => !p.skip_detail_page)
+
   return [
-    ...projectsEn.map((project) => ({
+    ...withDetailPage(projectsEn).map((project) => ({
       projectId: project.project_id,
       locale: 'en',
     })),
-    ...projectsEs.map((project) => ({
+    ...withDetailPage(projectsEs).map((project) => ({
       projectId: project.project_id,
       locale: 'es',
     })),
@@ -62,6 +65,16 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!project) {
     notFound()
+  }
+
+  if (project.skip_detail_page) {
+    if (project.deployed_url) {
+      redirect(project.deployed_url)
+    }
+    if (project.repo_url) {
+      redirect(project.repo_url)
+    }
+    redirect(`/${locale}#projects`)
   }
 
   const projectUrl = `${siteConfig.url}/${locale}/projects/${projectId}`
@@ -131,7 +144,7 @@ export default async function ProjectPage({ params }: Props) {
             className="animate-in fade-in-50 duration-500"
           />
 
-          <footer className="border-border/60 border-t pt-8">
+          <footer className="border-border/30 border-t pt-8">
             <Link
               className="inline-block font-mono text-accent text-xs transition-colors hover:text-accent/80"
               href={`/${locale}#projects`}
@@ -142,9 +155,7 @@ export default async function ProjectPage({ params }: Props) {
         </article>
       </main>
       <div className="max-w-4xl mx-auto px-6 pb-12 w-full">
-        <div className="border-t border-border/40 pt-8">
-          <Footer />
-        </div>
+        <Footer locale={locale} />
       </div>
 
       <script

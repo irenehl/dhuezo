@@ -24,7 +24,7 @@ export const xArticlesConfig: XArticle[] = [
   {
     id: 'x-article-1',
     locale: 'en',
-    url: 'https://x.com/irenehl26__/status/2010750606428791027?s=20',
+    url: 'https://x.com/irenehl__/status/2010750606428791027?s=20',
     title: 'Microsoft Clarity + Taylor Swift + Sourdough bread',
     description: "ok… but why are these three in the same sentence? This isn't a post about Taylor Swift. Or sourdough bread. Or analytics. It's about what happens when you stop guessing and start watching.",
     date: '2025-12-01',
@@ -33,7 +33,7 @@ export const xArticlesConfig: XArticle[] = [
   {
     id: 'x-article-1',
     locale: 'es',
-    url: 'https://x.com/irenehl26__/status/2010750606428791027?s=20',
+    url: 'https://x.com/irenehl__/status/2010750606428791027?s=20',
     title: 'Microsoft Clarity + Taylor Swift + Pan de masa madre',
     description: "ok… pero ¿por qué están estos tres en la misma oración? Esto no es una publicación sobre Taylor Swift. O pan de masa madre. O análisis. Se trata de lo que sucede cuando dejas de adivinar y empiezas a observar.",
     date: '2025-12-01',

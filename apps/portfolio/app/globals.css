@@ -32,10 +32,17 @@
     --accent-foreground: var(--warm-cream);
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-    --border: 28 25% 45% / 0.15;
-    --input: 28 25% 45% / 0.15;
+    --border: 28 25% 45%;
+    --input: 28 25% 45%;
     --ring: var(--dusty-rose);
     --radius: 1.25rem;
+
+    /* GitHub-style contribution heat — cozy palette (light) */
+    --contrib-0: 42 32% 88%;
+    --contrib-1: 182 18% 78%;
+    --contrib-2: 182 22% 62%;
+    --contrib-3: 310 30% 68%;
+    --contrib-4: 343 28% 52%;
   }
 
   .dark {
@@ -56,15 +63,44 @@
     --accent-foreground: var(--warm-cream);
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 39 44% 93% / 0.15;
-    --input: 39 44% 93% / 0.15;
+    --border: 39 44% 93%;
+    --input: 39 44% 93%;
     --ring: var(--dusty-rose);
+
+    /* Contribution heat — same hues, tuned for dark UI */
+    --contrib-0: 26 14% 22%;
+    --contrib-1: 182 16% 30%;
+    --contrib-2: 182 22% 42%;
+    --contrib-3: 310 28% 55%;
+    --contrib-4: 310 36% 68%;
+  }
+}
+
+@layer components {
+  .contrib-cell[data-contrib-level='0'] {
+    background-color: hsl(var(--contrib-0));
+  }
+
+  .contrib-cell[data-contrib-level='1'] {
+    background-color: hsl(var(--contrib-1));
+  }
+
+  .contrib-cell[data-contrib-level='2'] {
+    background-color: hsl(var(--contrib-2));
+  }
+
+  .contrib-cell[data-contrib-level='3'] {
+    background-color: hsl(var(--contrib-3));
+  }
+
+  .contrib-cell[data-contrib-level='4'] {
+    background-color: hsl(var(--contrib-4));
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border/15;
   }
   body {
     @apply bg-background text-foreground;

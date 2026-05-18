@@ -18,7 +18,7 @@ const css = `
   --rose-pale:  #FAEAE8;
   --brown:      #3D2E22;
   --muted:      #9B8A7A;
-  --border:     #DDD5C8;
+  --border:     hsla(28, 25%, 45%, 0.09);
   --white:      #FDFAF6;
   --text:       #4A3828;
 }

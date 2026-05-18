@@ -4,7 +4,8 @@ export const siteConfig = {
   links: {
     github: "https://github.com/irenehl",
     linkedin: "https://www.linkedin.com/in/irenehl",
-    x: "https://x.com/irenehl26__",
+    luma: "https://luma.com/user/irenehl",
+    x: "https://x.com/irenehl__",
     email: "dhuezodev26@gmail.com",
   },
   calendarLink: "https://calendar.app.google/jmaEeJNsbMWnj6jcA", // Para el CTA de reunión

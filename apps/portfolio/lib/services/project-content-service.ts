@@ -63,6 +63,7 @@ function mapMarkdownToProject(
     role: frontmatter.role ?? null,
     outcome: frontmatter.outcome ?? null,
     constraint: frontmatter.constraint ?? null,
+    skip_detail_page: frontmatter.skipDetailPage === true,
     created_at: now,
     updated_at: now,
     contentHtml,

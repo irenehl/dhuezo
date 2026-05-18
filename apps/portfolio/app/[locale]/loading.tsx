@@ -1,7 +1,7 @@
 export default function LocaleLoading(): JSX.Element {
   return (
     <div className="min-h-screen bg-background" aria-busy="true" aria-label="Loading">
-      <div className="fixed top-0 w-full z-40 border-b-2 border-border bg-background/90 backdrop-blur-xl">
+      <div className="fixed top-0 w-full z-40 border-b border-border/22 bg-background/90 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 lg:px-16 h-20 flex items-center justify-between animate-pulse">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-muted" />

@@ -43,7 +43,8 @@ export const metadata: Metadata = {
   ...generateSiteMetadata({
     locale: routing.defaultLocale,
     title: 'Daniela Huezo',
-    description: 'Software Engineer and Cursor Ambassador. Crafting resilient systems and delightful interfaces for products that scale.',
+    description:
+      'Senior tech lead and full-stack engineer: architecture, tech leadership, and delivery from strategy to production. Based in El Salvador—remote-friendly engagements for teams and founders.',
     image: '/og-image.png',
   }),
   icons: {
