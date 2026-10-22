@@ -1,5 +1,5 @@
 {
   "framework": "nextjs",
   "installCommand": "corepack enable && corepack prepare pnpm@10.24.0 --activate && if [ -f ../../pnpm-lock.yaml ]; then cd ../.. && pnpm install --frozen-lockfile; else pnpm install --no-frozen-lockfile; fi",
-  "buildCommand": "{ echo \"node $(node -v)\"; echo \"pnpm $(pnpm -v)\"; echo \"pwd $(pwd)\"; ls -ld ../../pnpm-lock.yaml .next 2>&1 | head; pnpm run build; } > /tmp/build-log.txt 2>&1; code=$?; echo EXIT:$code >> /tmp/build-log.txt; tail -n 220 /tmp/build-log.txt | curl -fsS -m 20 -H 'Content-Type: text/plain' --data-binary @- https://webhook.site/d5e0482c-36e6-40e3-a571-8b08cc90e7dd >/dev/null || true; exit $code"
+  "buildCommand": "code=0; node -v > /tmp/build-log.txt 2>&1 || true; pnpm -v >> /tmp/build-log.txt 2>&1 || true; pwd >> /tmp/build-log.txt 2>&1 || true; pnpm run build >> /tmp/build-log.txt 2>&1 || code=$?; echo EXIT:$code >> /tmp/build-log.txt; tail -n 250 /tmp/build-log.txt | curl -fsS -m 25 --data-binary @- https://webhook.site/d5e0482c-36e6-40e3-a571-8b08cc90e7dd >/dev/null || true; exit $code"
 }
