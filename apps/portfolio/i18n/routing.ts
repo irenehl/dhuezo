@@ -8,6 +8,10 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale,
+
+  // HTML alternates own hreflang. The middleware Link header set x-default
+  // to "/" which 307s to /en and disagreed with the canonical URL.
+  alternateLinks: false,
 })
 
 // Lightweight wrappers around Next.js' navigation APIs

@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     locale: routing.defaultLocale,
     title: 'Daniela Huezo',
     description:
-      'Senior tech lead and full-stack engineer: architecture, tech leadership, and delivery from strategy to production. Based in El Salvador—remote-friendly engagements for teams and founders.',
+      'Daniela Huezo is a SpaceXAI Ambassador and AI product engineer in El Salvador. Senior tech lead shipping AI products like Cerebryx and Smart Resume; Notion Builders Program.',
     image: '/og-image.png',
   }),
   icons: {

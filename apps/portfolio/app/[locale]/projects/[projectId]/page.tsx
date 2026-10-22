@@ -179,6 +179,7 @@ export default async function ProjectPage({ params }: Props) {
               : {}),
             creator: {
               '@type': 'Person',
+              '@id': `${siteConfig.url}/#person`,
               name: siteConfig.name,
               url: siteConfig.url,
             },

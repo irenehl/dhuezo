@@ -1,11 +1,18 @@
+function resolveSiteUrl(value: string | undefined): string {
+  const trimmed = value?.trim()
+  const raw = trimmed && trimmed.length > 0 ? trimmed : 'http://localhost:3000'
+  return raw.replace(/\/+$/, '')
+}
+
 export const siteConfig = {
   name: "Daniela Huezo",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   links: {
     github: "https://github.com/irenehl",
     linkedin: "https://www.linkedin.com/in/irenehl",
     luma: "https://luma.com/user/irenehl",
     x: "https://x.com/irenehl__",
+    instagram: "https://instagram.com/irenehl__",
     email: "dhuezodev26@gmail.com",
   },
   calendarLink: "https://calendar.app.google/jmaEeJNsbMWnj6jcA", // Para el CTA de reunión

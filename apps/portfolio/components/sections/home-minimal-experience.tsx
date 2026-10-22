@@ -5,7 +5,7 @@ import { formatExperiencePeriod } from '@/lib/format-experience-period'
 import { FadeUp, FadeUpStagger, FadeUpItem } from '@/components/ui/fade-up'
 
 const skills = [
-  'Cursor',
+  'SpaceXAI',
   'GitHub',
   'TypeScript',
   'React',

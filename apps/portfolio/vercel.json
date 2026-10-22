@@ -1,5 +1,6 @@
 {
   "framework": "nextjs",
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm run build"
+  "installCommand": "corepack enable && corepack prepare pnpm@10.24.0 --activate && if [ -f ../../pnpm-lock.yaml ]; then cd ../.. && pnpm install --frozen-lockfile; else pnpm install --no-frozen-lockfile; fi",
+  "buildCommand": "pnpm run build",
+  "outputDirectory": ".next"
 }

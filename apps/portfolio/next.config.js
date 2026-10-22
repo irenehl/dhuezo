@@ -1,3 +1,17 @@
+const path = require('path')
+const Module = require('module')
+
+// next-intl loads @parcel/watcher and @swc/core from inside its own
+// package. Vercel does not install those optional native builds, so the
+// copies declared on this app have to be visible before the plugin loads.
+process.env.NODE_PATH = [
+  path.join(__dirname, 'node_modules'),
+  process.env.NODE_PATH,
+]
+  .filter(Boolean)
+  .join(path.delimiter)
+Module._initPaths()
+
 const createNextIntlPlugin = require('next-intl/plugin')
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
