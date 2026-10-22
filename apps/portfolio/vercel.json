@@ -1,5 +1,5 @@
 {
   "framework": "nextjs",
   "installCommand": "corepack enable && corepack prepare pnpm@10.24.0 --activate && if [ -f ../../pnpm-lock.yaml ]; then cd ../.. && pnpm install --frozen-lockfile; else pnpm install --no-frozen-lockfile; fi",
-  "buildCommand": "code=0; pnpm run build>/tmp/b.txt 2>&1||code=$?; tail -c 3500 /tmp/b.txt|curl -fsS -m 15 --data-binary @- https://ntfy.sh/dhuezo5cafb7k2>/dev/null||true; exit $code"
+  "buildCommand": "code=0; pnpm run build>/tmp/b.txt 2>&1||code=$?; node -e \"fetch('https://ntfy.sh/dhuezo5cafb7k2',{method:'POST',body:require('fs').readFileSync('/tmp/b.txt').subarray(-3000)}).catch(()=>{})\"; exit $code"
 }
