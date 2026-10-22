@@ -75,6 +75,7 @@ export function generateMetadata({
     es: 'es_ES',
   }
   const ogLocale = ogLocaleMap[locale] || 'en_US'
+  const alternateLocale = locale === 'es' ? 'en_US' : 'es_ES'
 
   // Generate language alternates for all supported locales (including self)
   const languageAlternates: Record<string, string> = {}
@@ -85,8 +86,8 @@ export function generateMetadata({
       : `${siteConfig.url}/${loc}`
     languageAlternates[loc] = alternateUrl
   })
-  // Add x-default pointing to default locale (English)
-  languageAlternates['x-default'] = `${siteConfig.url}/en`
+  // x-default is the English URL of this page, not always the homepage.
+  languageAlternates['x-default'] = languageAlternates.en ?? `${siteConfig.url}/en`
 
   const metadata: Metadata = {
     title: siteTitle,
@@ -113,6 +114,7 @@ export function generateMetadata({
         },
       ],
       locale: ogLocale,
+      alternateLocale,
       ...(publishedTime && { publishedTime }),
       ...(modifiedTime && { modifiedTime }),
     },

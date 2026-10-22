@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 
 import { HomeMinimalExperience } from '@/components/sections/home-minimal-experience'
+import { ProfilePageJsonLd } from '@/components/seo/site-json-ld'
 import { generateMetadata as generateSiteMetadata } from '@/lib/metadata'
 
 function SectionFallback(): JSX.Element {
@@ -44,8 +45,11 @@ export default async function HubExperiencePage({
   const { locale } = await params
 
   return (
-    <Suspense fallback={<SectionFallback />}>
-      <HomeMinimalExperience locale={locale} />
-    </Suspense>
+    <>
+      <ProfilePageJsonLd locale={locale} />
+      <Suspense fallback={<SectionFallback />}>
+        <HomeMinimalExperience locale={locale} />
+      </Suspense>
+    </>
   )
 }
