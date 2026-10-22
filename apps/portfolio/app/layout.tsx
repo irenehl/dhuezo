@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     locale: routing.defaultLocale,
     title: 'Daniela Huezo',
     description:
-      'Daniela Huezo is a Cursor Ambassador and AI product engineer in El Salvador. Senior tech lead shipping AI products like Cerebryx and Smart Resume; Notion Builders Program.',
+      'Daniela Huezo is a SpaceXAI Ambassador and AI product engineer in El Salvador. Senior tech lead shipping AI products like Cerebryx and Smart Resume; Notion Builders Program.',
     image: '/og-image.png',
   }),
   icons: {

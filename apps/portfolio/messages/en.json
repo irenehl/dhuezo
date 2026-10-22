@@ -1,9 +1,9 @@
 {
   "site": {
     "name": "Daniela Huezo",
-    "description": "Cursor Ambassador and AI product engineer in El Salvador — senior tech lead, Notion Builders Program",
-    "homeTitle": "Daniela Huezo | Cursor Ambassador in El Salvador",
-    "homeDescription": "Daniela Huezo is a Cursor Ambassador and AI product engineer in El Salvador. She ships AI products such as Cerebryx and Smart Resume, and is in the Notion Builders Program.",
+    "description": "SpaceXAI Ambassador and AI product engineer in El Salvador — senior tech lead, Notion Builders Program",
+    "homeTitle": "Daniela Huezo | SpaceXAI Ambassador in El Salvador",
+    "homeDescription": "Daniela Huezo is a SpaceXAI Ambassador and AI product engineer in El Salvador. She ships AI products such as Cerebryx and Smart Resume, and is in the Notion Builders Program.",
     "keywords": [
       "Daniela Huezo",
       "Senior Tech Lead",
@@ -11,8 +11,8 @@
       "product engineer",
       "AI product engineer",
       "Full-Stack Engineer",
-      "Cursor Ambassador",
-      "Cursor El Salvador",
+      "SpaceXAI Ambassador",
+      "SpaceXAI El Salvador",
       "Technical Leadership",
       "Engineering Leadership",
       "SaaS Engineering",
@@ -27,14 +27,14 @@
       "LATAM",
       "Remote Teams"
     ],
-    "jsonLdJobTitle": "Cursor Ambassador and Senior Tech Lead",
+    "jsonLdJobTitle": "SpaceXAI Ambassador and Senior Tech Lead",
     "jsonLdKnowsAbout": [
       "Software Engineering",
       "Tech Leadership",
       "Technical Advisory",
       "SaaS Product Development",
       "AI product development",
-      "Cursor",
+      "SpaceXAI",
       "React",
       "Next.js",
       "TypeScript",
@@ -42,8 +42,8 @@
       "System Architecture",
       "Product Delivery"
     ],
-    "aboutTitle": "About Daniela Huezo | Cursor Ambassador in El Salvador",
-    "aboutDescription": "Daniela Huezo is a senior tech lead, Cursor Ambassador, and AI product engineer in El Salvador. AI products include Cerebryx and Smart Resume; Notion Builders Program.",
+    "aboutTitle": "About Daniela Huezo | SpaceXAI Ambassador in El Salvador",
+    "aboutDescription": "Daniela Huezo is a senior tech lead, SpaceXAI Ambassador, and AI product engineer in El Salvador. AI products include Cerebryx and Smart Resume; Notion Builders Program.",
     "stackTitle": "Stack & tools — Daniela Huezo",
     "stackDescription": "Languages, frameworks, and infrastructure I use to design, build, and operate reliable products.",
     "projectsIndexTitle": "Projects — Daniela Huezo | Work & Architecture",
@@ -60,17 +60,17 @@
     "title": "Daniela Huezo",
     "subtitle": "Software Engineer - tech lead",
     "description": "Senior tech lead and product engineer in El Salvador. I ship AI products end to end — Cerebryx and Smart Resume — and I'm part of the Notion Builders Program.",
-    "roleLine": "Cursor Ambassador and AI product engineer in El Salvador",
+    "roleLine": "SpaceXAI Ambassador and AI product engineer in El Salvador",
     "meta": "El Salvador · UTC−6",
     "marquee": [
-      "Cursor Ambassador · El Salvador",
+      "SpaceXAI Ambassador · El Salvador",
       "Co-founder Ai/abs",
       "Notion Builders Program",
       "Software Engineer"
     ],
     "scrollHint": "Scroll to explore",
     "deskImageAlt": "Illustration of a cozy desk with laptop and coffee",
-    "ambassador": "Cursor Ambassador",
+    "ambassador": "SpaceXAI Ambassador",
     "bio": {
       "intro": "I lead engineering that ships. I spend my days",
       "shipping": "shipping platforms from scratch",
@@ -258,7 +258,7 @@
     "pullQuote": "“I engineer systems designed to survive reality — and build communities designed to leave no one behind.”",
     "connectLabel": "Say hello",
     "socialLabel": "Elsewhere",
-    "description1": "Most code breaks when reality hits. As a senior tech lead and AI product engineer based in El Salvador, I take ownership of the hardest architectural challenges—turning complex problems into clean, scalable systems that actually ship. I'm a Cursor Ambassador, I build AI products end to end (Cerebryx and Smart Resume), and I'm part of the Notion Builders Program.",
+    "description1": "Most code breaks when reality hits. As a senior tech lead and AI product engineer based in El Salvador, I take ownership of the hardest architectural challenges—turning complex problems into clean, scalable systems that actually ship. I'm a SpaceXAI Ambassador, I build AI products end to end (Cerebryx and Smart Resume), and I'm part of the Notion Builders Program.",
     "description2": "But tech is only half the equation. Our industry's biggest bottleneck isn't bandwidth—it's access. That's why I spend my time off the clock building communities to help more women across Central America break into tech.",
     "description3": "When I'm not architecting systems or organizing events, you'll probably find me hunting for the best ramen in town, staying active, or losing track of time in Animal Crossing and Pokémon.",
     "cta": "Let's Connect",
@@ -320,7 +320,7 @@
     "cellVibe3": "Main character"
   },
   "footer": {
-    "tagline": "Cursor Ambassador and senior tech lead in El Salvador",
+    "tagline": "SpaceXAI Ambassador and senior tech lead in El Salvador",
     "cozyMessage": "Built with coffee, flowers, and way too many Taylor Swift songs",
     "top": "Back to top",
     "socialsAria": "Social profiles",

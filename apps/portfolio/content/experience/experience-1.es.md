@@ -1,9 +1,9 @@
 ---
 id: experience-1
 locale: es
-title: Embajadora de Cursor
-company: Cursor Community
-description: Ayudo a hacer crecer la comunidad de Cursor desde El Salvador, compartiendo conocimientos, consejos y conectando usuarios con el equipo para desbloquear el potencial completo de Cursor.
+title: Embajadora de SpaceXAI
+company: SpaceXAI Community
+description: Ayudo a hacer crecer la comunidad de SpaceXAI desde El Salvador, compartiendo conocimientos, consejos y conectando usuarios con el equipo para desbloquear el potencial completo de SpaceXAI.
 technologies: []
 startDate: 2026-02-02
 endDate: null

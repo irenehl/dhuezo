@@ -24,6 +24,12 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@dhuezo/ui": [
+        "../../packages/ui/src"
+      ],
+      "@dhuezo/core": [
+        "../../packages/core/src"
       ]
     },
     "target": "ES2017"

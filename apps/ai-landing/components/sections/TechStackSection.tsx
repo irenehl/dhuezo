@@ -10,7 +10,7 @@ export const TechStackSection = () => {
             <span className="text-slate-600 dark:text-slate-400 text-sm font-medium">React</span>
             <span className="text-slate-600 dark:text-slate-400 text-sm font-medium">Expo</span>
             <span className="text-slate-600 dark:text-slate-400 text-sm font-medium">TypeScript</span>
-            <span className="text-slate-600 dark:text-slate-400 text-sm font-medium">Cursor</span>
+            <span className="text-slate-600 dark:text-slate-400 text-sm font-medium">SpaceXAI</span>
           </div>
         </div>
         <p className="text-xs text-slate-400 dark:text-slate-500 max-w-sm text-center md:text-right">

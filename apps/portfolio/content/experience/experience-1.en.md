@@ -1,9 +1,9 @@
 ---
 id: experience-1
 locale: en
-title: Cursor Ambassador
-company: Cursor Community
-description: I help grow the Cursor community from El Salvador by sharing insights, tips, and connecting users with the team to unlock Cursor's full potential.
+title: SpaceXAI Ambassador
+company: SpaceXAI Community
+description: I help grow the SpaceXAI community from El Salvador by sharing insights, tips, and connecting users with the team to unlock SpaceXAI's full potential.
 technologies: []
 startDate: 2026-02-02
 endDate: null
