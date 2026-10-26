@@ -3,7 +3,7 @@
     "name": "Daniela Huezo",
     "description": "Experta en IA y embajadora de SpaceXAI en El Salvador. Cofundadora de Ai Labs, embajadora de ElevenLabs y Notion Builder.",
     "homeTitle": "Daniela Huezo | Experta en IA y embajadora de SpaceXAI en El Salvador",
-    "homeDescription": "Daniela Huezo es experta en IA y cofundadora de Ai Labs. Es embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder.",
+    "homeDescription": "Daniela Huezo es experta en IA y cofundadora de Ai Labs. Es embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program.",
     "keywords": [
       "Daniela Huezo",
       "Tech lead senior",
@@ -14,6 +14,7 @@
       "embajadora de SpaceXAI en El Salvador",
       "SpaceXAI El Salvador",
       "experta en IA",
+      "consultoría de IA",
       "Embajadora de ElevenLabs",
       "Notion Builder",
       "cofundadora de Ai Labs",
@@ -38,7 +39,7 @@
     "jsonLdJobTitle": "Experta en IA",
     "jsonLdJobTitles": [
       "Experta en IA",
-      "Embajadora de SpaceXAI",
+      "Embajadora de SpaceXAI en El Salvador",
       "Embajadora de ElevenLabs",
       "Notion Builder",
       "Cofundadora de Ai Labs"
@@ -119,7 +120,8 @@
     "stage": "Escritura",
     "timeline": "Experiencia",
     "blog": "Blog",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "consulting": "Consultoría de IA"
   },
   "common": {
     "openMenu": "Abrir menú"
@@ -146,7 +148,8 @@
       "experience": "Experiencia",
       "writing": "Última escritura",
       "about": "Acerca de",
-      "blogArchive": "Archivo del blog"
+      "blogArchive": "Archivo del blog",
+      "consulting": "Consultoría de IA"
     }
   },
   "scrollRail": {
@@ -426,5 +429,14 @@
         "answer": "Sí. Daniela Huezo es cofundadora de Ai Labs."
       }
     ]
+  },
+  "consulting": {
+    "keyword": "consultoría de IA",
+    "title": "Consultoría de IA | Daniela Huezo",
+    "question": "¿Qué es la consultoría de IA de Daniela Huezo?",
+    "answer": "La consultoría de IA de Daniela Huezo es el asesoramiento técnico y la consultoría de ingeniería que ya publica, la masterclass del 20 de octubre de 2025 en la Universidad Don Bosco para diseñadores gráficos sobre SEO, analíticas y herramientas de IA, y los productos con IA Cerebryx y Smart Resume.",
+    "masterclassLink": "Masterclass, 2025-10-20, Universidad Don Bosco",
+    "smartResumeLink": "Smart Resume",
+    "cerebryxLink": "Cerebryx, en la página de proyectos"
   }
 }

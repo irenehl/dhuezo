@@ -3,7 +3,7 @@
     "name": "Daniela Huezo",
     "description": "AI expert and SpaceXAI Ambassador in El Salvador. Co-founder of Ai Labs, ElevenLabs Ambassador, and Notion Builder.",
     "homeTitle": "Daniela Huezo | AI expert and SpaceXAI Ambassador in El Salvador",
-    "homeDescription": "Daniela Huezo is an AI expert and co-founder of Ai Labs. She is a SpaceXAI Ambassador in El Salvador, an ElevenLabs Ambassador, and a Notion Builder.",
+    "homeDescription": "Daniela Huezo is an AI expert and co-founder of Ai Labs. She is a SpaceXAI Ambassador in El Salvador, an ElevenLabs Ambassador, and a Notion Builder in the Notion Builders Program.",
     "keywords": [
       "Daniela Huezo",
       "Senior Tech Lead",
@@ -15,6 +15,7 @@
       "SpaceXAI Ambassador in El Salvador",
       "SpaceXAI El Salvador",
       "AI expert",
+      "consultoría de IA",
       "ElevenLabs Ambassador",
       "Notion Builder",
       "co-founder of Ai Labs",
@@ -36,7 +37,7 @@
     "jsonLdJobTitle": "AI expert",
     "jsonLdJobTitles": [
       "AI expert",
-      "SpaceXAI Ambassador",
+      "SpaceXAI Ambassador in El Salvador",
       "ElevenLabs Ambassador",
       "Notion Builder",
       "Co-founder of Ai Labs"
@@ -117,7 +118,8 @@
     "stage": "Writing",
     "timeline": "Experience",
     "blog": "Blog",
-    "about": "About"
+    "about": "About",
+    "consulting": "Consultoría de IA"
   },
   "common": {
     "openMenu": "Open menu"
@@ -144,7 +146,8 @@
       "experience": "Experience",
       "writing": "Latest writing",
       "about": "About",
-      "blogArchive": "Blog archive"
+      "blogArchive": "Blog archive",
+      "consulting": "Consultoría de IA"
     }
   },
   "scrollRail": {
@@ -424,6 +427,15 @@
         "answer": "Yes. Daniela Huezo is co-founder of Ai Labs."
       }
     ]
+  },
+  "consulting": {
+    "keyword": "consultoría de IA",
+    "title": "Consultoría de IA | Daniela Huezo",
+    "question": "What is Daniela Huezo’s consultoría de IA?",
+    "answer": "Daniela Huezo’s consultoría de IA is the technical advisory she already publishes, together with asesoramiento técnico and consultoría de ingeniería, the 20 October 2025 masterclass at Universidad Don Bosco for graphic designers on SEO, analytics, and AI tools, and the AI products Cerebryx and Smart Resume.",
+    "masterclassLink": "Masterclass, 2025-10-20, Universidad Don Bosco",
+    "smartResumeLink": "Smart Resume",
+    "cerebryxLink": "Cerebryx, on the projects page"
   }
 }
 
