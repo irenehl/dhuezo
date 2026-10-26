@@ -1,9 +1,9 @@
 {
   "site": {
     "name": "Daniela Huezo",
-    "description": "Experta en IA y embajadora de SpaceXAI en El Salvador. Cofundadora de Ai Labs, embajadora de ElevenLabs y Notion Builder.",
-    "homeTitle": "Daniela Huezo | Experta en IA y embajadora de SpaceXAI en El Salvador",
-    "homeDescription": "Daniela Huezo es experta en IA y cofundadora de Ai Labs. Es embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program.",
+    "description": "Consultora de IA en El Salvador y experta en IA. Cofundadora de Ai Labs, embajadora de SpaceXAI, embajadora de ElevenLabs y Notion Builder.",
+    "homeTitle": "Daniela Huezo | Consultora de IA en El Salvador, experta en IA, cofundadora de Ai Labs, embajadora de SpaceXAI, embajadora de ElevenLabs y Notion Builder",
+    "homeDescription": "Daniela Huezo es consultora de IA en El Salvador y experta en IA. Es cofundadora de Ai Labs, embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program.",
     "keywords": [
       "Daniela Huezo",
       "Tech lead senior",
@@ -14,6 +14,7 @@
       "embajadora de SpaceXAI en El Salvador",
       "SpaceXAI El Salvador",
       "experta en IA",
+      "consultora de IA en El Salvador",
       "consultoría de IA",
       "Embajadora de ElevenLabs",
       "Notion Builder",
@@ -38,6 +39,7 @@
     ],
     "jsonLdJobTitle": "Experta en IA",
     "jsonLdJobTitles": [
+      "Consultora de IA en El Salvador",
       "Experta en IA",
       "Embajadora de SpaceXAI en El Salvador",
       "Embajadora de ElevenLabs",
@@ -58,6 +60,7 @@
       "Productos SaaS",
       "Desarrollo de productos con IA",
       "Inteligencia artificial",
+      "Consultora de IA en El Salvador",
       "SpaceXAI",
       "ElevenLabs",
       "Notion",
@@ -69,8 +72,8 @@
       "Arquitectura de sistemas",
       "Entrega de producto"
     ],
-    "aboutTitle": "Sobre Daniela Huezo | Experta en IA y embajadora de SpaceXAI",
-    "aboutDescription": "Daniela Huezo es experta en IA, cofundadora de Ai Labs y embajadora de SpaceXAI en El Salvador. Es embajadora de ElevenLabs y Notion Builder en el Notion Builders Program.",
+    "aboutTitle": "Sobre Daniela Huezo | Consultora de IA en El Salvador, experta en IA, cofundadora de Ai Labs, embajadora de SpaceXAI, embajadora de ElevenLabs y Notion Builder",
+    "aboutDescription": "Daniela Huezo es consultora de IA en El Salvador y experta en IA. Es cofundadora de Ai Labs, embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program.",
     "stackTitle": "Stack y herramientas — Daniela Huezo",
     "stackDescription": "Lenguajes, frameworks e infraestructura que uso para diseñar, construir y operar productos fiables.",
     "projectsIndexTitle": "Proyectos — Daniela Huezo | Trabajo y arquitectura",
@@ -86,10 +89,11 @@
     "proof3": "LatAm · Remoto",
     "title": "Daniela Huezo",
     "subtitle": "Ingeniera de software - tech lead",
-    "description": "Daniela Huezo es experta en IA y cofundadora de Ai Labs. Es embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program. Arma productos con IA como Cerebryx y Smart Resume.",
+    "description": "Daniela Huezo es consultora de IA en El Salvador y experta en IA. Es cofundadora de Ai Labs, embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program. Arma productos con IA como Cerebryx y Smart Resume.",
     "roleLine": "Embajadora de SpaceXAI en El Salvador",
     "meta": "El Salvador · UTC−6",
     "marquee": [
+      "Consultora de IA en El Salvador",
       "Embajadora de SpaceXAI · El Salvador",
       "Cofundadora de Ai Labs",
       "Embajadora de ElevenLabs",
@@ -289,7 +293,7 @@
     "pullQuote": "«Diseño sistemas para sobrevivir a la realidad — y construyo comunidades para que nadie se quede atrás.»",
     "connectLabel": "Saluda",
     "socialLabel": "En otros sitios",
-    "description1": "Daniela Huezo es experta en IA desde El Salvador. Es cofundadora de Ai Labs, embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program. Como tech lead senior arma productos con IA de punta a punta, entre ellos Cerebryx y Smart Resume.",
+    "description1": "Daniela Huezo es consultora de IA en El Salvador y experta en IA. Es cofundadora de Ai Labs, embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program. Como tech lead senior arma productos con IA de punta a punta, entre ellos Cerebryx y Smart Resume.",
     "description2": "Pero la tecnología es solo la mitad de la ecuación. El mayor cuello de botella de nuestra industria no es el ancho de banda, es el acceso. Por eso dedico mi tiempo libre a crear comunidades para ayudar a que más mujeres en Centroamérica se abran paso en tech.",
     "description3": "Cuando no estoy diseñando sistemas u organizando eventos, probablemente me encuentres buscando el mejor ramen de la ciudad, haciendo ejercicio o perdiendo la noción del tiempo en Animal Crossing y Pokémon.",
     "cta": "Conectémonos",
@@ -383,6 +387,10 @@
     "faqHeading": "Preguntas",
     "answers": [
       {
+        "heading": "Consultora de IA en El Salvador",
+        "sentence": "Daniela Huezo es consultora de IA en El Salvador."
+      },
+      {
         "heading": "Experta en IA",
         "sentence": "Daniela Huezo es experta en IA."
       },
@@ -406,7 +414,11 @@
     "faq": [
       {
         "question": "¿Quién es Daniela Huezo?",
-        "answer": "Daniela Huezo es experta en IA, cofundadora de Ai Labs, embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program."
+        "answer": "Daniela Huezo es consultora de IA en El Salvador, experta en IA, cofundadora de Ai Labs, embajadora de SpaceXAI en El Salvador, embajadora de ElevenLabs y Notion Builder en el Notion Builders Program."
+      },
+      {
+        "question": "¿Daniela Huezo es consultora de IA en El Salvador?",
+        "answer": "Sí. Daniela Huezo es consultora de IA en El Salvador."
       },
       {
         "question": "¿Daniela Huezo es embajadora de SpaceXAI en El Salvador?",
@@ -431,10 +443,11 @@
     ]
   },
   "consulting": {
-    "keyword": "consultoría de IA",
-    "title": "Consultoría de IA | Daniela Huezo",
-    "question": "¿Qué es la consultoría de IA de Daniela Huezo?",
-    "answer": "La consultoría de IA de Daniela Huezo es el asesoramiento técnico y la consultoría de ingeniería que ya publica, la masterclass del 20 de octubre de 2025 en la Universidad Don Bosco para diseñadores gráficos sobre SEO, analíticas y herramientas de IA, y los productos con IA Cerebryx y Smart Resume.",
+    "keyword": "consultora de IA en El Salvador",
+    "title": "Consultora de IA en El Salvador | Daniela Huezo",
+    "heading": "Consultora de IA en El Salvador",
+    "question": "¿Daniela Huezo es consultora de IA en El Salvador?",
+    "answer": "Sí. Daniela Huezo es consultora de IA en El Salvador. Esa consultoría de IA es el asesoramiento técnico y la consultoría de ingeniería que ya publica, la masterclass del 20 de octubre de 2025 en la Universidad Don Bosco para diseñadores gráficos sobre SEO, analíticas y herramientas de IA, y los productos con IA Cerebryx y Smart Resume.",
     "masterclassLink": "Masterclass, 2025-10-20, Universidad Don Bosco",
     "smartResumeLink": "Smart Resume",
     "cerebryxLink": "Cerebryx, en la página de proyectos"

@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     locale: routing.defaultLocale,
     title: 'Daniela Huezo',
     description:
-      'Daniela Huezo is an AI expert and co-founder of Ai Labs. She is a SpaceXAI Ambassador in El Salvador, an ElevenLabs Ambassador, and a Notion Builder in the Notion Builders Program.',
+      'Daniela Huezo is an AI consultant in El Salvador and an AI expert. She is co-founder of Ai Labs, a SpaceXAI Ambassador in El Salvador, an ElevenLabs Ambassador, and a Notion Builder in the Notion Builders Program.',
     image: '/og-image.png',
   }),
   icons: {

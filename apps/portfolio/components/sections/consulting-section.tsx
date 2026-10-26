@@ -28,11 +28,12 @@ export async function ConsultingSection({
     <article id="consultoria-de-ia" className="space-y-8">
       <div>
         <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-          {t('question')}
+          {t('heading')}
         </h2>
         <p className="mt-6 text-base leading-relaxed text-muted-foreground">
           {t('answer')}
         </p>
+        <h3 className="mt-8 text-base font-medium text-foreground">{t('question')}</h3>
       </div>
       <ul className="space-y-3 text-base leading-relaxed text-muted-foreground">
         <li>
