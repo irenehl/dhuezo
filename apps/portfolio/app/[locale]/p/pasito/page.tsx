@@ -416,7 +416,7 @@ const auditHTML = `
   <div class="signoff-left">
     <p>Happy to talk through any of this.</p>
     <span class="name">Daniela Huezo</span>
-    <p style="font-size:13px;">Cursor Ambassador · Tech Lead · El Salvador</p>
+    <p style="font-size:13px;">SpaceXAI Ambassador · Tech Lead · El Salvador</p>
   </div>
   <div class="signoff-links">
     <a href="mailto:hello@dhuezo.dev">hello@dhuezo.dev</a>

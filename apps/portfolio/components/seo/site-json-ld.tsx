@@ -9,7 +9,17 @@ interface SiteJsonLdProps {
 export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
   const siteUrl = `${siteConfig.url}/${locale}`
   const t = await getTranslations({ locale, namespace: 'site' })
-  const jobTitle = t('jsonLdJobTitle')
+  const rawTitles = t.raw('jsonLdJobTitles')
+  const jobTitles = Array.isArray(rawTitles)
+    ? rawTitles.filter((item): item is string => typeof item === 'string')
+    : []
+  const jobTitle = jobTitles.length > 0 ? jobTitles : t('jsonLdJobTitle')
+  const rawAffiliations = t.raw('jsonLdAffiliations')
+  const affiliation = Array.isArray(rawAffiliations)
+    ? rawAffiliations
+        .filter((item): item is string => typeof item === 'string')
+        .map((name) => ({ '@type': 'Organization' as const, name }))
+    : []
   const rawKnows = t.raw('jsonLdKnowsAbout')
   const knowsAbout = Array.isArray(rawKnows)
     ? rawKnows.filter((k): k is string => typeof k === 'string')
@@ -29,13 +39,27 @@ export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
         url: siteConfig.url,
         image: photoUrl,
         jobTitle,
+        worksFor: {
+          '@type': 'Organization',
+          name: t('jsonLdWorksFor'),
+        },
+        ...(affiliation.length > 0 ? { affiliation } : {}),
         description: t('homeDescription'),
+        homeLocation: {
+          '@type': 'Place',
+          name: 'El Salvador',
+          address: {
+            '@type': 'PostalAddress',
+            addressCountry: 'SV',
+          },
+        },
         ...(knowsAbout.length > 0 ? { knowsAbout } : {}),
         sameAs: [
           siteConfig.links.github,
           siteConfig.links.linkedin,
           siteConfig.links.luma,
           siteConfig.links.x,
+          siteConfig.links.instagram,
         ],
       },
       {
@@ -48,6 +72,30 @@ export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
         publisher: { '@id': personId },
       },
     ],
+  }
+
+  return (
+    <script
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data requires dangerouslySetInnerHTML
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      type="application/ld+json"
+    />
+  )
+}
+
+export function ProfilePageJsonLd({ locale = 'en' }: SiteJsonLdProps): JSX.Element {
+  const siteUrl = `${siteConfig.url}/${locale}`
+  const personId = `${siteConfig.url}/#person`
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${siteUrl}/#profile`,
+    url: siteUrl,
+    name: siteConfig.name,
+    inLanguage: locale,
+    mainEntity: { '@id': personId },
+    about: { '@id': personId },
+    isPartOf: { '@id': `${siteUrl}/#website` },
   }
 
   return (

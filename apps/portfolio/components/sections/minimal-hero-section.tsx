@@ -15,6 +15,10 @@ export async function MinimalHeroSection({
 }): Promise<JSX.Element> {
   const t = await getTranslations({ locale, namespace: 'hero' })
   const tAbout = await getTranslations({ locale, namespace: 'about' })
+  const rawMarquee = t.raw('marquee')
+  const marquee = Array.isArray(rawMarquee)
+    ? rawMarquee.filter((item): item is string => typeof item === 'string')
+    : []
 
   const socialLinks = [
     {
@@ -59,6 +63,12 @@ export async function MinimalHeroSection({
               Daniela{' '}
               <span className="text-primary">Huezo</span>
             </h1>
+          </FadeUpItem>
+
+          <FadeUpItem>
+            <h2 className="font-medium text-base text-foreground sm:text-lg">
+              {t('roleLine')}
+            </h2>
           </FadeUpItem>
 
           <FadeUpItem>
@@ -115,16 +125,18 @@ export async function MinimalHeroSection({
       <FadeUp delay={0.3} className="pt-6">
         <div className="relative flex overflow-hidden border-y border-border/26 bg-muted/20 py-3">
           <div className="animate-marquee flex whitespace-nowrap">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="flex items-center gap-8 px-4 text-[11px] font-mono tracking-[0.2em] uppercase text-muted-foreground/80">
-                <span>Cursor Ambassador</span>
-                <span className="text-accent/50">✦</span>
-                <span>Co-founder Ai/abs</span>
-                <span className="text-accent/50">✦</span>
-                <span>Notion Builders Program</span>
-                <span className="text-accent/50">✦</span>
-                <span>Software Engineer</span>
-                <span className="text-accent/50">✦</span>
+            {[0, 1, 2, 3].map((copy) => (
+              <div key={copy} className="flex items-center gap-8 px-4 text-[11px] font-mono tracking-[0.2em] uppercase text-muted-foreground/80">
+                {marquee.map((item, index) => (
+                  <span key={`${copy}-${item}`} className="contents">
+                    {index > 0 ? (
+                      <span className="text-accent/50" aria-hidden="true">
+                        ✦
+                      </span>
+                    ) : null}
+                    <span>{item}</span>
+                  </span>
+                ))}
               </div>
             ))}
           </div>

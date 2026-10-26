@@ -159,19 +159,15 @@ export default async function HubBlogPostPage({ params }: Props) {
             dateModified: post.updated_at,
             author: {
               '@type': 'Person',
+              '@id': `${siteConfig.url}/#person`,
               name: siteConfig.name,
               url: siteConfig.url,
             },
             publisher: {
               '@type': 'Person',
+              '@id': `${siteConfig.url}/#person`,
               name: siteConfig.name,
               url: siteConfig.url,
-              sameAs: [
-                siteConfig.links.github,
-                siteConfig.links.linkedin,
-                siteConfig.links.luma,
-                siteConfig.links.x,
-              ],
             },
             mainEntityOfPage: {
               '@type': 'WebPage',
