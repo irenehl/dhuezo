@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 
+import { RolePositioning } from '@/components/seo/role-positioning'
 import { experienceService } from '@/lib/services/experience-service'
 import { formatExperiencePeriod } from '@/lib/format-experience-period'
 import { FadeUp, FadeUpStagger, FadeUpItem } from '@/components/ui/fade-up'
@@ -37,6 +38,7 @@ export async function HomeMinimalExperience({
 
   return (
     <section id="experience" className="space-y-16">
+      <RolePositioning locale={locale} />
       {/* Tech DNA / Skills Section */}
       <div>
         <FadeUp>

@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { Mail } from 'lucide-react'
 
+import { RolePositioning } from '@/components/seo/role-positioning'
 import { siteConfig } from '@/lib/config'
 
 export async function AboutSectionMinimal({
@@ -28,6 +29,10 @@ export async function AboutSectionMinimal({
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
           {t('description2')}
         </p>
+
+        <div className="mt-10">
+          <RolePositioning locale={locale} />
+        </div>
 
         <div className="mt-8">
           <p className="text-sm font-medium text-foreground">

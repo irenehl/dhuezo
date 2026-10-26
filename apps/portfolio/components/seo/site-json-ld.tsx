@@ -9,7 +9,17 @@ interface SiteJsonLdProps {
 export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
   const siteUrl = `${siteConfig.url}/${locale}`
   const t = await getTranslations({ locale, namespace: 'site' })
-  const jobTitle = t('jsonLdJobTitle')
+  const rawTitles = t.raw('jsonLdJobTitles')
+  const jobTitles = Array.isArray(rawTitles)
+    ? rawTitles.filter((item): item is string => typeof item === 'string')
+    : []
+  const jobTitle = jobTitles.length > 0 ? jobTitles : t('jsonLdJobTitle')
+  const rawAffiliations = t.raw('jsonLdAffiliations')
+  const affiliation = Array.isArray(rawAffiliations)
+    ? rawAffiliations
+        .filter((item): item is string => typeof item === 'string')
+        .map((name) => ({ '@type': 'Organization' as const, name }))
+    : []
   const rawKnows = t.raw('jsonLdKnowsAbout')
   const knowsAbout = Array.isArray(rawKnows)
     ? rawKnows.filter((k): k is string => typeof k === 'string')
@@ -29,6 +39,11 @@ export async function SiteJsonLd({ locale = 'en' }: SiteJsonLdProps) {
         url: siteConfig.url,
         image: photoUrl,
         jobTitle,
+        worksFor: {
+          '@type': 'Organization',
+          name: t('jsonLdWorksFor'),
+        },
+        ...(affiliation.length > 0 ? { affiliation } : {}),
         description: t('homeDescription'),
         homeLocation: {
           '@type': 'Place',
