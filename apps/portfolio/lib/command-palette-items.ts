@@ -68,6 +68,14 @@ export async function getCommandPaletteItems(
       href: `/${locale}/blog`,
       keywords: ['posts', 'writing', 'archive'],
     },
+    {
+      id: 'nav-consulting',
+      group: 'nav',
+      label: t('nav.consulting'),
+      hint: t('navHint'),
+      href: `/${locale}/consultoria-de-ia`,
+      keywords: ['consultoría de IA', 'consultoria de ia', 'AI consulting'],
+    },
   ]
 
   const items: CommandPaletteItem[] = [...nav]

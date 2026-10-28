@@ -49,6 +49,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
     })
     entries.push({
+      url: `${baseUrl}/${locale}/consultoria-de-ia`,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    })
+    entries.push({
       url: `${baseUrl}/${locale}/projects`,
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -90,6 +95,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
     }
   }
+
+  entries.push({
+    url: `${baseUrl}/llms.txt`,
+    changeFrequency: 'monthly',
+    priority: 0.4,
+  })
 
   return entries
 }

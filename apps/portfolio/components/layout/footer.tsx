@@ -116,6 +116,12 @@ export async function Footer({
           <span className="text-muted-foreground/40" aria-hidden>
             ·
           </span>
+          <a href="/llms.txt" className="hover:text-foreground">
+            llms.txt
+          </a>
+          <span className="text-muted-foreground/40" aria-hidden>
+            ·
+          </span>
           <span>{tHero('meta', { default: 'El Salvador · UTC−6' })}</span>
         </div>
 

@@ -34,5 +34,10 @@ export function getNavItems(t: MessageTranslator): NavItem[] {
       href: '/about',
       pathPattern: '/about',
     },
+    {
+      label: t('navigation.consulting', { default: 'Consultoría de IA' }),
+      href: '/consultoria-de-ia',
+      pathPattern: '/consultoria-de-ia',
+    },
   ]
 }
